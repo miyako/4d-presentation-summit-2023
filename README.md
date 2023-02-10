@@ -5,9 +5,18 @@ Repository for Topic D - SystemWorker, Go, PDF and more
 
 * https://github.com/signintech/gopdf
 
-#### How to create a CLI with Go
+#### How to install Go
 
-* https://go.dev/dl/
+if you use the official install from https://go.dev/dl/ on macOS, you would need to uninstall via `rm`
+
+```sh
+sudo rm -rf /usr/local/g
+sudo rm -rf /etc/paths.d/go
+```
+
+it is easier to manage if you install from https://formulae.brew.sh/formula/go
+
+#### How to create a CLI with Go
 
 * hello-world.go
 
