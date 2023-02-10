@@ -5,6 +5,21 @@ Repository for Topic D - SystemWorker, Go, PDF and more
 
 * https://github.com/signintech/gopdf
 
+#### How to install Go
+
+if you use the official macos installer from https://go.dev/dl/ on macOS, you would need to uninstall via `rm`
+
+```sh
+sudo rm -rf /usr/local/g
+sudo rm -rf /etc/paths.d/go
+```
+
+it is easier to manage if you install with [brew](https://formulae.brew.sh/formula/go)
+
+the official windows installer is somewhat better in that you can uninstall go from the control panel
+
+still, to manage packages, it may make sense to install with [choco](https://chocolatey.org)
+
 #### How to create a CLI with Go
 
 * hello-world.go
