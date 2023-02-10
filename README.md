@@ -16,7 +16,7 @@ sudo rm -rf /etc/paths.d/go
 
 it is easier to manage if you install with [brew](https://formulae.brew.sh/formula/go)
 
-the official windows installer is somewhat better in that you can uninstall go from the control panel.
+the official windows installer is somewhat better in that you can uninstall go from the control panel
 
 still, to manage packages, it may make sense to install with [choco](https://chocolatey.org)
 
