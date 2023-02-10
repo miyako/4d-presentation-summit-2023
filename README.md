@@ -7,6 +7,8 @@ Repository for Topic D - SystemWorker, Go, PDF and more
 
 #### How to create a CLI with Go
 
+* https://go.dev/dl/
+
 * hello-world.go
 
 ```go
