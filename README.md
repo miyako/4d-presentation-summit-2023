@@ -32,10 +32,16 @@ func main() {
 }
 ```
 
-* compile Universal Binary 
+* build Universal Binary 
 
 ```
 GOOS=darwin GOARCH=amd64 go build -o hello-world_amd64 hello-world.go
 GOOS=darwin GOARCH=arm64 go build -o hello-world_arm64 hello-world.go
 lipo -create -output hello-world hello-world_amd64 hello-world_arm64
+```
+
+* build Windows
+
+```
+build hello-world.go
 ```
