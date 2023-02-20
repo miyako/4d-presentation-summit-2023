@@ -71,8 +71,8 @@ Regardless of the algorithm selected, the file created is always a `.zip` file, 
 `XZ` is an implementation of the `LZMA2` compression algorithm, created for the `.xz` file format.
 Since 4D uses the algorithm to create a `.zip` file, the difference in performance should be negligible, although depending on the file content or compression level, one could be slightly faster than the other. Likewise, both algorithms would generate archives that are similar in size. Note that `XZ` is designed to potentially take advantage of multiple cores, this feature is disabled in 4D. Therefore, its advantages over `LZMA` are quite limited. 
 
-## Office Encryption
+### Can I protect Office documents with the API?
 
-Office documents (`.docx` `.xlsx` `.pptx`) are password protected using a scheme different to the standard zip encryption. You can **NOT** use zip encryption to password protect Office documents.
+No. Office documents (`.docx` `.xlsx` `.pptx`) are password protected using a [scheme different to the standard zip encryption](https://learn.microsoft.com/en-us/openspecs/office_file_formats/ms-offcrypto/3c34d72a-1a61-4b52-a893-196f9157f083). You can **NOT** use zip encryption to password protect Office documents.
 
-https://learn.microsoft.com/en-us/openspecs/office_file_formats/ms-offcrypto/3c34d72a-1a61-4b52-a893-196f9157f083
+
