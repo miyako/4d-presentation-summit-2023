@@ -78,3 +78,18 @@ Most archive utilities, including those embedded in the operating system, can de
 ### Can I protect Office documents with the API?
 
 No. Office documents (`.docx` `.xlsx` `.pptx`) are password protected using a [scheme different to the standard zip encryption](https://learn.microsoft.com/en-us/openspecs/office_file_formats/ms-offcrypto/3c34d72a-1a61-4b52-a893-196f9157f083). You can **NOT** use zip encryption to password protect Office documents.
+
+## Conclusion 
+
+* If you are using `4D.ZipArchive` to create Office documents, continue with `DEFLATE`.
+* If you need to share the archive with password protection, continue with `DEFLATE`.
+* If you are using `4D.ZipArchive` to create large archives for storage, switch to the new algorithms.
+* If the encrypted file only needs to be decompressed with 4D, you may switch to the new algorithms.
+* If you need to process  `.7z` or `.xz` file formats, you need to look for alternative solutions.
+
+## References
+
+Blog: https://blog.4d.com/lzma-the-new-compression-algorithm/
+Doc Center: N/A
+Documentation: https://developer.4d.com/docs/API/ZipArchiveClass/
+Availability: v20 (v19 R3)
