@@ -89,7 +89,7 @@ No. Office documents (`.docx` `.xlsx` `.pptx`) are password protected using a [s
 
 ## References
 
-Blog: https://blog.4d.com/lzma-the-new-compression-algorithm/
-Doc Center: N/A
-Documentation: https://developer.4d.com/docs/API/ZipArchiveClass/
-Availability: v20 (v19 R3)
+* Blog: https://blog.4d.com/lzma-the-new-compression-algorithm/
+* Doc Center: N/A
+* Documentation: https://developer.4d.com/docs/API/ZipArchiveClass/
+* Availability: v20 (v19 R3)
