@@ -45,3 +45,28 @@ lipo -create -output hello-world hello-world_amd64 hello-world_arm64
 ```
 build hello-world.go
 ```
+
+---
+
+# New Archive Algorithms
+
+## Synopsis
+
+The `4D.ZipArchive` class supports `3` compression algorithms: `DEFLATE` `LZMA` `XZ`.
+
+The alternative algorithms create smaller files but takes more time to compress or decompress.
+
+* Important
+
+Regardless of the algorithm selected, the file created is always a `.zip` file, with the magic number `50 4B 03 04`. It is **NOT** an `.lzma` or `.7z` or `.gz` or `.xz` file. 4D can **NOT** create or process these files types. 
+
+### Which Algorithms Should I Use?
+
+* Where speed is essential, or you need to create Office documents, use `DEFLATE`. 
+
+* Where size is more important than speed, consider `LZMA` or `XZ`.
+
+### Which is better, `LZMA` or `XZ`?
+
+`XZ` is an implementation of the `LZMA2` compression algorithm, created for the `.xz` file format.
+Since 4D uses the algorithm to create a `.zip` file, the difference in performance should be negligible, although depending on the file content or compression level, one could be slightly faster than the other. Likewise, both algorithms would generate archives that are similar in size. Note that `XZ` is designed to potentially take advantage of multiple cores, this feature is disabled in 4D. Therefore, its advantages over `LZMA` are quite limited. 
