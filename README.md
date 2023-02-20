@@ -56,7 +56,7 @@ The `4D.ZipArchive` class supports `3` compression algorithms: `DEFLATE` `LZMA` 
 
 The alternative algorithms create smaller files but takes more time to compress or decompress.
 
-* Important
+### Important
 
 Regardless of the algorithm selected, the file created is always a `.zip` file, with the magic number `50 4B 03 04`. It is **NOT** an `.lzma` or `.7z` or `.gz` or `.xz` file. 4D can **NOT** create or process these files types. 
 
