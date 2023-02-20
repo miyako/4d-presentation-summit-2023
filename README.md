@@ -71,7 +71,7 @@ Regardless of the algorithm selected, the file created is always a `.zip` file, 
 `XZ` is an implementation of the `LZMA2` compression algorithm, created for the `.xz` file format.
 Since 4D uses the algorithm to create a `.zip` file, the difference in performance should be negligible, although depending on the file content or compression level, one could be slightly faster than the other. Likewise, both algorithms would generate archives that are similar in size. Note that `XZ` is designed to potentially take advantage of multiple cores, this feature is disabled in 4D. Therefore, its advantages over `LZMA` are quite limited. 
 
-## Encryption
+### Encryption
 
 Most archive utilities, including those embedded in the operating system, can decompress `.zip` files created using alternative algorithms. However, only the `DEFLATE` algorithm might be supported for password protection.
 
