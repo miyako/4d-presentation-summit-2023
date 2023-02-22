@@ -1,6 +1,6 @@
 # 4d-presentation-summit-2023
 
-This repository is the home of my preparation work
+Repository for Summit 2023 Presentation Material
 
 ### [Go Places with SystemWorkers!](https://github.com/miyako/4d-presentation-summit-2023/tree/main/Go%20Places%20with%20SystemWorkers!)
 
