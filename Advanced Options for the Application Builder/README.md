@@ -116,4 +116,14 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 |v20|ServerEmbedsProjectDirectoryFile||✓||
 |v20|UseStandardZipFormat||✓|generates scrambled and encrypted .4DZ|
 
+## Branding
+
+#### Legacy Instructions
+
+The 4D logo on the user login dialog can be replaced by an image file named *LoginImage.png*[^loginimage] placed in the project folder.
+
+---
+
 [^hybrid]: An app merged with *4D Volume Desktop* that intially launches as a desktop app instead of a client app that automatically connecting to a peer server. The startup project can execute with or without a local database. (v18 or later)
+
+[^loginimage]: [4D Design Reference > Users and groups > Access system overview](https://doc.4d.com/4Dv19/4D/19/Access-system-overview.300-5416896.en.html)
