@@ -18,7 +18,6 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
-||BuildApplicationName|✓|✓||
 ||BuildCompiled|✓|✓|generates .4DC or .4DZ|
 ||BuildComponent|✓|✓||
 ||BuildApplicationSerialized|✓|✓|generates desktop app|
@@ -70,6 +69,7 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
+||BuildApplicationName|✓|✓||
 ||ServerIconxxxPath||✓||
 ||ClientxxxIconForxxxPath||✓||
 ||RuntimeVLIconxxxPath||✓||
