@@ -35,6 +35,9 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||DataFilePath||✓|relative or absolute patform path|
 ||IPAddress||✓||
 ||PortNumber||✓||
+|v18|DatabaseToEmbedInClientxxxFolder ||✓||
+|v20|MacCompiledDatabaseToWinIncludeIt|✓|✓||
+|v20|MacCompiledDatabaseToWin|✓|✓||
 
 #### Packaging
 
@@ -46,17 +49,16 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||IncludeAssociatedFolders|✓|✓|removes Plugins, Resources, Components, Extras|
 |v20|ArrayExcludedModuleName|✓|✓|removes CEF, MeCab, PHP, SpellChecker, 4D Updater|
 
+#### Installation
+
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
-|v20|ClientUserPreferencesFolderByPath||✓||
 |v16|LastDataPathLookup|✓|✓||
 |v18|ClientWinSingleInstance||✓||
 |v19|ServerStructureFolderName||✓||
 |v19|ClientServerSystemFolderName||✓||
-|v20|MacCompiledDatabaseToWinIncludeIt|✓|✓||
-|v20|MacCompiledDatabaseToWin|✓|✓||
 |v20|ShareLocalResourcesOnWindowsClient||✓||
-|v18|DatabaseToEmbedInClientxxxFolder ||✓||
+|v20|ClientUserPreferencesFolderByPath||✓||
 
 #### Client Auto Update
 
@@ -65,7 +67,7 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||CurrentVers|✓|✓||
 ||RangeVersMin||✓||
 ||RangeVersMax||✓||
-|v14|StartElevated||✓|request admin privileges for auto-update|
+|v14|StartElevated||✓|request admin privileges|
 
 #### Miscellaneous
 
