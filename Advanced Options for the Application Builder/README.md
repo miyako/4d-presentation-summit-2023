@@ -63,11 +63,16 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||RuntimeVLxxxFolder|✓|✓||
 ||ClientxxxIncludeIt|✓|✓||
 ||ClientxxxFolderToxxx|✓|✓||
+|v18|DatabaseToEmbedInClientxxxFolder ||✓||
+||IsOEM||✓||
+
+#### Branding
+
+| Version | Key | Tool | Command | Remarks |
+|:-------:|:---|:----:|:-------:|:-------|
 ||ServerIconxxxPath||✓||
 ||ClientxxxIconForxxxPath||✓||
 ||RuntimeVLIconxxxPath||✓||
-|v18|DatabaseToEmbedInClientxxxFolder ||✓||
-||IsOEM||✓||
 ||xxxxxVersion||✓||
 ||xxxxxCopyright||✓||
 ||xxxxxCreator||✓||
