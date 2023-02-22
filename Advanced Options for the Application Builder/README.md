@@ -10,7 +10,7 @@ Show some of the powerful options that adds value to the product or enhances the
 
 ### Tool vs Command
 
-The [Build Application](https://developer.4d.com/docs/Desktop/building/) tool allows the developer to quickly configure their build project with the most essential options. The tool generates a corresponding *BuildApp.xml* project file and internally calls the [`BUILD APPLICATION`](https://doc.4d.com/4Dv19/4D/19.5/BUILD-APPLICATION.301-6137056.en.html) command.
+The [Build Application](https://developer.4d.com/docs/Desktop/building/) tool allows the developer to quickly configure their build project with basic parameters. The tool automatically generates a *BuildApp.xml* project file and internally calls the [`BUILD APPLICATION`](https://doc.4d.com/4Dv19/4D/19.5/BUILD-APPLICATION.301-6137056.en.html) command.
 
 
 
