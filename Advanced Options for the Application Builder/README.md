@@ -120,10 +120,14 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
 #### Legacy Instructions
 
-The 4D logo on the user login dialog can be replaced by an image file named *LoginImage.png*[^loginimage] placed in the project folder. The log must be a PNG image and its size must be `80x80`.
+The 4D logo on the user login dialog can be replaced by an image file named *LoginImage.png*[^loginimage] placed in the project folder. The file must be a `.png` image and its size must be `80x80`.
+
+The 4D application icon[^loginimage] can be replaced by an icon file named after the structure file or project name. The file must be a `.icns` image on Mac or `.ico` on Windows.
 
 ---
 
 [^hybrid]: An app merged with *4D Volume Desktop* that intially launches as a desktop app instead of a client app that automatically connecting to a peer server. The startup project can execute with or without a local database. (v18 or later)
 
 [^loginimage]: [4D Design Reference > Users and groups > Access system overview](https://doc.4d.com/4Dv19/4D/19/Access-system-overview.300-5416896.en.html)
+
+[^CustomIcon]: [4D Design Reference > Finalizing and deploying final applications > Customizing a stand-alone application icon](https://doc.4d.com/4Dv19/4D/19/Customizing-a-stand-alone-application-icon.300-5416835.en.html)
