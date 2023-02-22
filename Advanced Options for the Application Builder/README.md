@@ -30,7 +30,7 @@ xxx = Mac/Win
 ||ArrayExcludedComponentName|✓|✓||
 |v20|ArrayExcludedModuleName|✓|✓|removes CEF, MeCab, PHP, SpellChecker, 4D Updater|
 |v19|PackProject||✓|generates alterable project|
-|v19|UseStandardZipFormat||✓|generates scrambled and encrypted .4DZ|
+|v20|UseStandardZipFormat||✓|generates scrambled and encrypted .4DZ|
 
 
 
