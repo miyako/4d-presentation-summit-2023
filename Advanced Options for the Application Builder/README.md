@@ -120,13 +120,21 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
 #### Legacy Instructions
 
-The 4D logo on the user login dialog can be replaced by an image file named *LoginImage.png*[^loginimage] placed in the project folder. The file must be a `.png` image and its size must be `80x80`.
+* The 4D logo on the user login dialog can be replaced by a custom icon file[^loginimage]. The file must be a `.png` image and its size must be `80x80`.
 
-The 4D application icon[^CustomIcon] can be replaced by an icon file named after the structure file or project name. The file format must be `.icns`[^icns] on Mac and `.ico`[^ico] on Windows.
+**Name**: *LoginImage.png*
+**Location**: Adjacent to the project folder.
+**Size**: `80x80`
+
+* The 4D application icon[^CustomIcon] can be replaced by a custom icon file. The file format must be `.icns`[^icns] on Mac and `.ico`[^ico] on Windows. 
+
+**Name**: Same as the project file. 
+**Location**: Adjacent to the project folder.
+**Size**: According to platform requirements.
 
 #### Support High Resolution
 
-It is recommended to use specialised tools to create a multi-resolution icon file with an alpha channel. If you use a drawing application or image converter to export your icon file, make sure the generate file contains multiple resolutions.
+It is recommended to use specialised tools to create a multi-resolution icon file with an alpha channel. If you use a paint application or image converter to export your icon file, make sure the generate file contains multiple resolutions.
 
 * For Mac, the standard tool is `iconutil`[^iconutil]. 
 
