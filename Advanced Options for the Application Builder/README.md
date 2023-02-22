@@ -16,20 +16,20 @@ The table below shows how the options available in the tool are just a subset of
 
 xxx = Mac/Win
 
-| Key | Tool | Command | Remarks |
-|:---|:----:|:-------:|:-------|
-|BuildApplicationName|✓|✓||
-|BuildxxxDestFolder|✓|✓|relative or absolute patform path|
-|DataFilePath||✓|relative or absolute patform path|
-|BuildCompiled|✓|✓|generates .4DC or .4DZ|
-|BuildApplicationSerialized|✓|✓|generates desktop app|
-|ArrayExcludedPluginName|✓|✓|for 3rd party plugins|
-|ArrayExcludedPluginID|✓|✓|for 4D authored plugins|
-|IncludeAssociatedFolders|✓|✓||
-|BuildComponent|✓|✓||
-|ArrayExcludedComponentName|✓|✓||
-|ArrayExcludedModuleName|✓|✓|v20|
-|PackProject||✓|v19|
+| Version | Key | Tool | Command | Remarks |
+|:-------:|:---|:----:|:-------:|:-------|
+||BuildApplicationName|✓|✓||
+||BuildxxxDestFolder|✓|✓|relative or absolute patform path|
+||DataFilePath||✓|relative or absolute patform path|
+||BuildCompiled|✓|✓|generates .4DC or .4DZ|
+||BuildApplicationSerialized|✓|✓|generates desktop app|
+||ArrayExcludedPluginName|✓|✓|for 3rd party plugins|
+||ArrayExcludedPluginID|✓|✓|for 4D authored plugins|
+||IncludeAssociatedFolders|✓|✓||
+||BuildComponent|✓|✓||
+||ArrayExcludedComponentName|✓|✓||
+|v20|ArrayExcludedModuleName|✓|✓||
+|v19|PackProject||✓||
 
 
 
