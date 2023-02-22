@@ -19,16 +19,37 @@ xxx = Mac/Win
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
 ||BuildApplicationName|✓|✓||
+||BuildCompiled|✓|✓|generates .4DC or .4DZ|
+||BuildComponent|✓|✓||
+||BuildApplicationSerialized|✓|✓|generates desktop app|
+||BuildCSUpgradeable|✓|✓||
+||BuildServerApplication|✓|✓||
 ||BuildxxxDestFolder|✓|✓|relative or absolute patform path|
 ||DataFilePath||✓|relative or absolute patform path|
-||BuildApplicationSerialized|✓|✓|generates desktop app|
 ||ArrayExcludedComponentName|✓|✓||
 |v20|ArrayExcludedModuleName|✓|✓|removes CEF, MeCab, PHP, SpellChecker, 4D Updater|
 ||ArrayExcludedPluginID|✓|✓|for 4D authored plugins|
 ||ArrayExcludedPluginName|✓|✓|for 3rd party plugins|
 ||IncludeAssociatedFolders|✓|✓||
-||BuildCompiled|✓|✓|generates .4DC or .4DZ|
-||BuildComponent|✓|✓||
+|v20|ClientUserPreferencesFolderByPath||✓||
+|v20|HideDataExplorerMenuItem||✓||
+|v20|HideRuntimeExplorerMenuItem||✓||
+||IPAddress||✓||
+||PortNumber||✓||
+||HardLink||✓||
+||RangeVersMin||✓||
+||RangeVersMax||✓||
+||CurrentVers|✓|✓||
+|v16|LastDataPathLookup|✓|✓||
+|v16|ServerSelectionAllowed||✓||
+|v18|ClientWinSingleInstance||✓||
+|v19|ServerStructureFolderName||✓||
+|v19|ClientServerSystemFolderName||✓||
+|v20|MacCompiledDatabaseToWinIncludeIt|✓|✓||
+|v20|MacCompiledDatabaseToWin|✓|✓||
+|v20|ServerEmbedsProjectDirectoryFile||✓||
+|v20|ShareLocalResourcesOnWindowsClient||✓||
+|v20|ServerDataCollection||✓||
 |v19|PackProject||✓|generates alterable project|
 |v20|UseStandardZipFormat||✓|generates scrambled and encrypted .4DZ|
 |v14|StartElevated||✓|request admin privileges for auto-update|
