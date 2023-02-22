@@ -1,5 +1,9 @@
 # Advanced Options for the Application Builder
 
+## Teaser Message
+
+Do you build your 4D app? Do you have an XML project to make sure your app is configured exactly how it ought to be? In this training session, Keisuke will explain the benefits of building your production app and how to make the most out of the various advanced build options.
+
 ## Synopsis 
 
 Present the benefits of building a server, client, desktop, or *hybrid*[^hybrid] app.
