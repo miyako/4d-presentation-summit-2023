@@ -17,7 +17,7 @@ The table below shows how the options available in the tool are just a subset of
 xxx = Mac/Win
 
 | Key | Tool | Command | Remarks |
-|:---:|:----:|:-------:|:-------:|
+|:---:|:----:|:-------:|:-------|
 |BuildApplicationName|✓|✓||
 |BuildxxxDestFolder|✓|✓|relative or absolute patform path|
 |DataFilePath||✓|relative or absolute patform path|
