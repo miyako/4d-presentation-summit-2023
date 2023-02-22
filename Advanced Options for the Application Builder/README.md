@@ -132,11 +132,6 @@ It is recommended to use specialised tools to create a multi-resolution icon fil
 
 * For Windows, there are various tools and online services designed to create composite `.ico` files.
 
-[^iconutil]: [Optimizing for High Resolution](https://developer.apple.com/library/archive/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Optimizing/Optimizing.html)
-
-
-
-
 
 
 [^hybrid]: An app merged with *4D Volume Desktop* that intially launches as a desktop app instead of a client app that automatically connecting to a peer server. The startup project can execute with or without a local database. (v18 or later)
@@ -144,3 +139,5 @@ It is recommended to use specialised tools to create a multi-resolution icon fil
 [^loginimage]: [4D Design Reference > Users and groups > Access system overview](https://doc.4d.com/4Dv19/4D/19/Access-system-overview.300-5416896.en.html)
 
 [^CustomIcon]: [4D Design Reference > Finalizing and deploying final applications > Customizing a stand-alone application icon](https://doc.4d.com/4Dv19/4D/19/Customizing-a-stand-alone-application-icon.300-5416835.en.html)
+
+[^iconutil]: [Optimizing for High Resolution](https://developer.apple.com/library/archive/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Optimizing/Optimizing.html)
