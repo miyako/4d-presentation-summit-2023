@@ -14,11 +14,15 @@ The [Build Application](https://developer.4d.com/docs/Desktop/building/) tool al
 
 The table below shows how the options available in the tool are just a subset of what is acutally defined in the specification.
 
+xxx = Mac/Win
+
 | Key | Tool | Command | Remarks |
 |:---:|:----:|:-------:|:-------:|
-|||||
-
-
+|BuildApplicationName|✓|✓||
+|BuildxxxDestFolder|✓|✓|relative or absolute patform path|
+|DataFilePath||✓|relative or absolute patform path|
+|BuildCompiled|✓|✓|generates .4DC or .4DZ|
+|BuildApplicationSerialized|✓|✓|generates desktop app|
 
 
 
