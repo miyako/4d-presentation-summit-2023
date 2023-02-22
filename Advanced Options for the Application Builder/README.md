@@ -136,9 +136,9 @@ The 4D application icon[^CustomIcon] can be replaced by a custom icon file. The 
 
 It is recommended to use specialised tools to create a multi-resolution icon file with an alpha channel. If you use a paint application or image converter to export your icon file, make sure the generate file contains multiple resolutions.
 
-* For Mac, the standard tool is `iconutil`[^iconutil]. 
+* For Mac, the standard tool is `iconutil`[^iconutil]
 
-* For Windows, there are various 3rd party tools and online services that can create composite `.ico` files.
+* For Windows, there are various 3rd party tools and online services to create composite `.ico` files
 
 
 
