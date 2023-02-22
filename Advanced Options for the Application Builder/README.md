@@ -16,7 +16,7 @@ The table below shows how the options available in the tool are just a subset of
 
 xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
-* Setup
+#### Setup
 
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
@@ -36,25 +36,20 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||IPAddress||✓||
 ||PortNumber||✓||
 
-* Licensing
-
-| Version | Key | Tool | Command | Remarks |
-|:-------:|:---|:----:|:-------:|:-------|
-||ArrayLicensexxx|✓|✓||
-||IsOEM||✓||
-
-* Other
+#### Packaging
 
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
 ||ArrayExcludedComponentName|✓|✓|removes 4D SVG, 4D Progress, 4D ViewPro, 4D NetKit, 4D WritePro Interface, 4D Mobile App Server, 4D Widgets, 3rd party components|
 |v20|ArrayExcludedModuleName|✓|✓|removes CEF, MeCab, PHP, SpellChecker, 4D Updater|
-||ArrayExcludedPluginID|✓|✓|for 4D authored plugins|
-||ArrayExcludedPluginName|✓|✓|for 3rd party plugins|
-||IncludeAssociatedFolders|✓|✓||
+||ArrayExcludedPluginID|✓|✓|removes 4D authored plugins|
+||ArrayExcludedPluginName|✓|✓|removes 3rd party plugins|
+||IncludeAssociatedFolders|✓|✓|removes Plugins, Resources, Components, Extras|
+
+| Version | Key | Tool | Command | Remarks |
+|:-------:|:---|:----:|:-------:|:-------|
 |v20|ClientUserPreferencesFolderByPath||✓||
 |v16|LastDataPathLookup|✓|✓||
-|v16|ServerSelectionAllowed||✓||
 |v18|ClientWinSingleInstance||✓||
 |v19|ServerStructureFolderName||✓||
 |v19|ClientServerSystemFolderName||✓||
@@ -72,12 +67,18 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||RangeVersMax||✓||
 |v14|StartElevated||✓|request admin privileges for auto-update|
 
-
 #### Miscellaneous
 
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
 |v20|ServerDataCollection||✓||
+
+#### Licensing
+
+| Version | Key | Tool | Command | Remarks |
+|:-------:|:---|:----:|:-------:|:-------|
+||ArrayLicensexxx|✓|✓||
+||IsOEM||✓||
 
 #### Security
 
@@ -86,6 +87,7 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||HardLink||✓||
 |v14|MacSignature|✓|✓||
 |v14|MacCertificate|✓|✓||
+|v16|ServerSelectionAllowed||✓||
 |v19|AdHocSign|✓|✓||
 |v19|PackProject||✓|generates alterable project|
 |v20|HideDataExplorerMenuItem||✓||
