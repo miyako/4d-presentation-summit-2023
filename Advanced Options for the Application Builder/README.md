@@ -150,7 +150,7 @@ It is recommended to use specialised tools to create a multi-resolution icon fil
 
 #### Benefits of Using Advanced Options
 
-With the easy configuration your server, client and desktop apps will all share the same icon. XML keys allow you to better manage your app's profile.
+With the easy configuration your server, client and desktop apps will all share the same icon. XML keys allow you to better manage your app's public profile.
 
 ## Sidebar: Hi-DPI support 
 
