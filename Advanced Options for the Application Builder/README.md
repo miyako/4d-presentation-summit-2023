@@ -120,7 +120,7 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
 #### Legacy Instructions
 
-The 4D logo on the user login dialog can be replaced by an image file named *LoginImage.png*[^loginimage] placed in the project folder.
+The 4D logo on the user login dialog can be replaced by an image file named *LoginImage.png*[^loginimage] placed in the project folder. The log must be a PNG image and its size must be `80x80`.
 
 ---
 
