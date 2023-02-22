@@ -140,7 +140,9 @@ It is recommended to use specialised tools to create a multi-resolution icon fil
 
 * For Windows, there are various 3rd party tools and online services that can create composite `.ico` files
 
+#### Benefits of Using Advanced Options
 
+With the easy configuration your server, client and desktop apps will all share the same icon. XML keys allows you to better manage your app's profile.
 
 [^hybrid]: An app merged with *4D Volume Desktop* that intially launches as a desktop app instead of a client app that automatically connecting to a peer server. The startup project can execute with or without a local database. (v18 or later)
 
