@@ -35,13 +35,18 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||DataFilePath||✓|relative or absolute patform path|
 ||IPAddress||✓||
 ||PortNumber||✓||
+
+* Licensing
+
+| Version | Key | Tool | Command | Remarks |
+|:-------:|:---|:----:|:-------:|:-------|
+||ArrayLicensexxx|✓|✓||
 ||IsOEM||✓||
 
 * Other
 
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
-||ArrayLicensexxx|✓|✓||
 ||ArrayExcludedComponentName|✓|✓||
 |v20|ArrayExcludedModuleName|✓|✓|removes CEF, MeCab, PHP, SpellChecker, 4D Updater|
 ||ArrayExcludedPluginID|✓|✓|for 4D authored plugins|
