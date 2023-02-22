@@ -16,6 +16,8 @@ The table below shows how the options available in the tool are just a subset of
 
 xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
+* Setup
+
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
 ||BuildCompiled|✓|✓|generates .4DC or .4DZ|
@@ -24,7 +26,21 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||BuildCSUpgradeable|✓|✓||
 ||BuildServerApplication|✓|✓||
 ||BuildxxxDestFolder|✓|✓|relative or absolute patform path|
+||ServerIncludeIt|✓|✓||
+||RuntimeVLIncludeIt|✓|✓||
+||ServerxxxFolder|✓|✓||
+||RuntimeVLxxxFolder|✓|✓||
+||ClientxxxIncludeIt|✓|✓||
+||ClientxxxFolderToxxx|✓|✓||
 ||DataFilePath||✓|relative or absolute patform path|
+||IPAddress||✓||
+||PortNumber||✓||
+||IsOEM||✓||
+
+* Other
+
+| Version | Key | Tool | Command | Remarks |
+|:-------:|:---|:----:|:-------:|:-------|
 ||ArrayLicensexxx|✓|✓||
 ||ArrayExcludedComponentName|✓|✓||
 |v20|ArrayExcludedModuleName|✓|✓|removes CEF, MeCab, PHP, SpellChecker, 4D Updater|
@@ -32,8 +48,6 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||ArrayExcludedPluginName|✓|✓|for 3rd party plugins|
 ||IncludeAssociatedFolders|✓|✓||
 |v20|ClientUserPreferencesFolderByPath||✓||
-||IPAddress||✓||
-||PortNumber||✓||
 ||HardLink||✓||
 ||RangeVersMin||✓||
 ||RangeVersMax||✓||
@@ -48,14 +62,7 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 |v20|ShareLocalResourcesOnWindowsClient||✓||
 |v20|ServerDataCollection||✓||
 |v14|StartElevated||✓|request admin privileges for auto-update|
-||ServerIncludeIt|✓|✓||
-||RuntimeVLIncludeIt|✓|✓||
-||ServerxxxFolder|✓|✓||
-||RuntimeVLxxxFolder|✓|✓||
-||ClientxxxIncludeIt|✓|✓||
-||ClientxxxFolderToxxx|✓|✓||
 |v18|DatabaseToEmbedInClientxxxFolder ||✓||
-||IsOEM||✓||
 
 #### Security
 
