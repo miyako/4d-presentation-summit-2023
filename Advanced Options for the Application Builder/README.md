@@ -29,7 +29,7 @@ xxx = Mac/Win
 ||BuildComponent|✓|✓||
 ||ArrayExcludedComponentName|✓|✓||
 |v20|ArrayExcludedModuleName|✓|✓|CEF, MeCab, PHP, SpellChecker, 4D Updater|
-|v19|PackProject||✓||
+|v19|PackProject||✓|generate alterable project|
 
 
 
