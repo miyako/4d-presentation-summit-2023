@@ -124,11 +124,13 @@ The 4D logo on the user login dialog can be replaced by an image file named *Log
 
 The 4D application icon[^CustomIcon] can be replaced by an icon file named after the structure file or project name. The file must be an `.icns` image on Mac or `.ico` on Windows.
 
-It is recommended to use specialised tools to create a multi-resolution icon file with an alpha channel. 
+#### Support High Resolution
 
-For Mac, the standard tool is `iconutil`[^iconutil]. This tool is also incorporated in the *4D Go Mobile* project editor.
+It is recommended to use specialised tools to create a multi-resolution icon file with an alpha channel. If you use a drawing application or image converter to export your icon file, make sure the generate file contains multiple resolutions.
 
-For Windows, there are various tools and online services designed to create composite `.ico` files.
+* For Mac, the standard tool is `iconutil`[^iconutil]. This tool is also incorporated in the *4D Go Mobile* project editor.
+
+* For Windows, there are various tools and online services designed to create composite `.ico` files.
 
 [^iconutil]: [Optimizing for High Resolution](https://developer.apple.com/library/archive/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Optimizing/Optimizing.html)
 
