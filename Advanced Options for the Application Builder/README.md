@@ -45,10 +45,8 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 |v19|ClientServerSystemFolderName||✓||
 |v20|MacCompiledDatabaseToWinIncludeIt|✓|✓||
 |v20|MacCompiledDatabaseToWin|✓|✓||
-|v20|ServerEmbedsProjectDirectoryFile||✓||
 |v20|ShareLocalResourcesOnWindowsClient||✓||
 |v20|ServerDataCollection||✓||
-|v20|UseStandardZipFormat||✓|generates scrambled and encrypted .4DZ|
 |v14|StartElevated||✓|request admin privileges for auto-update|
 ||ServerIncludeIt|✓|✓||
 ||RuntimeVLIncludeIt|✓|✓||
@@ -69,6 +67,8 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 |v19|PackProject||✓|generates alterable project|
 |v20|HideDataExplorerMenuItem||✓||
 |v20|HideRuntimeExplorerMenuItem||✓||
+|v20|ServerEmbedsProjectDirectoryFile||✓||
+|v20|UseStandardZipFormat||✓|generates scrambled and encrypted .4DZ|
 
 #### Branding
 
