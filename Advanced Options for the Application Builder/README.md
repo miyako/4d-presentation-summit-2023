@@ -2,4 +2,4 @@
 
 ## Synopsis 
 
-Present the benefits of building a server, client, desktop, or hybrid-desktop application
+Present the benefits of building a server, client, desktop, or *hybrid-desktop* application
