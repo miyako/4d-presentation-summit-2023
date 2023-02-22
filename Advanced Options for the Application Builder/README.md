@@ -4,4 +4,4 @@
 
 Present the benefits of building a server, client, desktop, or *hybrid-desktop*[^hybrid-desktop] app.
 
-[^hybrid-desktop]: An app merged with *4D Volume Desktop* that intially launches as a standalone desktop app instead of automatically connecting to its peer server. The startup project can execute with or without a local database. (v18 or later)
+[^hybrid-desktop]: An app merged with *4D Volume Desktop* that intially launches as a standalone desktop app instead of automatically connecting to a peer server. The startup project can execute with or without a local database. (v18 or later)
