@@ -32,17 +32,12 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||ArrayExcludedPluginName|✓|✓|for 3rd party plugins|
 ||IncludeAssociatedFolders|✓|✓||
 |v20|ClientUserPreferencesFolderByPath||✓||
-|v20|HideDataExplorerMenuItem||✓||
-|v20|HideRuntimeExplorerMenuItem||✓||
 ||IPAddress||✓||
 ||PortNumber||✓||
 ||HardLink||✓||
 ||RangeVersMin||✓||
 ||RangeVersMax||✓||
 ||CurrentVers|✓|✓||
-|v14|MacSignature|✓|✓||
-|v14|MacCertificate|✓|✓||
-|v19|AdHocSign|✓|✓||
 |v16|LastDataPathLookup|✓|✓||
 |v16|ServerSelectionAllowed||✓||
 |v18|ClientWinSingleInstance||✓||
@@ -53,7 +48,6 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 |v20|ServerEmbedsProjectDirectoryFile||✓||
 |v20|ShareLocalResourcesOnWindowsClient||✓||
 |v20|ServerDataCollection||✓||
-|v19|PackProject||✓|generates alterable project|
 |v20|UseStandardZipFormat||✓|generates scrambled and encrypted .4DZ|
 |v14|StartElevated||✓|request admin privileges for auto-update|
 ||ServerIncludeIt|✓|✓||
@@ -64,6 +58,17 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||ClientxxxFolderToxxx|✓|✓||
 |v18|DatabaseToEmbedInClientxxxFolder ||✓||
 ||IsOEM||✓||
+
+#### Security
+
+| Version | Key | Tool | Command | Remarks |
+|:-------:|:---|:----:|:-------:|:-------|
+|v20|HideDataExplorerMenuItem||✓||
+|v20|HideRuntimeExplorerMenuItem||✓||
+|v14|MacSignature|✓|✓||
+|v14|MacCertificate|✓|✓||
+|v19|AdHocSign|✓|✓||
+|v19|PackProject||✓|generates alterable project|
 
 #### Branding
 
