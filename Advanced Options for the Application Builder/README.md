@@ -26,6 +26,7 @@ xxx = Mac/Win
 ||BuildServerApplication|✓|✓||
 ||BuildxxxDestFolder|✓|✓|relative or absolute patform path|
 ||DataFilePath||✓|relative or absolute patform path|
+||ArrayLicensexxx|✓|✓||
 ||ArrayExcludedComponentName|✓|✓||
 |v20|ArrayExcludedModuleName|✓|✓|removes CEF, MeCab, PHP, SpellChecker, 4D Updater|
 ||ArrayExcludedPluginID|✓|✓|for 4D authored plugins|
@@ -40,6 +41,9 @@ xxx = Mac/Win
 ||RangeVersMin||✓||
 ||RangeVersMax||✓||
 ||CurrentVers|✓|✓||
+|v14|MacSignature|✓|✓||
+|v14|MacCertificate|✓|✓||
+|v19|AdHocSign|✓|✓||
 |v16|LastDataPathLookup|✓|✓||
 |v16|ServerSelectionAllowed||✓||
 |v18|ClientWinSingleInstance||✓||
