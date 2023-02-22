@@ -63,12 +63,12 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
-|v20|HideDataExplorerMenuItem||✓||
-|v20|HideRuntimeExplorerMenuItem||✓||
 |v14|MacSignature|✓|✓||
 |v14|MacCertificate|✓|✓||
 |v19|AdHocSign|✓|✓||
 |v19|PackProject||✓|generates alterable project|
+|v20|HideDataExplorerMenuItem||✓||
+|v20|HideRuntimeExplorerMenuItem||✓||
 
 #### Branding
 
