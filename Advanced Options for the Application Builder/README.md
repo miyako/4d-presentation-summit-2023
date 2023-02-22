@@ -14,7 +14,7 @@ The [Build Application](https://developer.4d.com/docs/Desktop/building/) tool al
 
 The table below shows how the options available in the tool are just a subset of what is acutally defined in the specification.
 
-xxx = Mac/Win
+xxx = Mac/Win yyy=Client/Common/RuntimeVL/Server
 
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
@@ -57,7 +57,26 @@ xxx = Mac/Win
 |v19|PackProject||✓|generates alterable project|
 |v20|UseStandardZipFormat||✓|generates scrambled and encrypted .4DZ|
 |v14|StartElevated||✓|request admin privileges for auto-update|
-
-
+||ServerIncludeIt|✓|✓||
+||RuntimeVLIncludeIt|✓|✓||
+||ServerxxxFolder|✓|✓||
+||RuntimeVLxxxFolder|✓|✓||
+||ClientxxxIncludeIt|✓|✓||
+||ClientxxxFolderToxxx|✓|✓||
+||ServerIconxxxPath||✓||
+||ClientxxxIconForxxxPath||✓||
+||RuntimeVLIconxxxPath||✓||
+|v18|DatabaseToEmbedInClientxxxFolder ||✓||
+||IsOEM||✓||
+||yyyVersion||✓||
+||yyyCopyright||✓||
+||yyyCreator||✓||
+||yyyComment||✓||
+||yyyCompanyName||✓||
+||yyyFileDescription||✓||
+||yyyInternalName||✓||
+||yyyLegalTrademark||✓||
+||yyyPrivateBuild||✓||
+||yyySpecialBuild||✓||
 
 [^hybrid]: An app merged with *4D Volume Desktop* that intially launches as a desktop app instead of a client app that automatically connecting to a peer server. The startup project can execute with or without a local database. (v18 or later)
