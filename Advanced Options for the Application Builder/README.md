@@ -47,7 +47,7 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
-||ArrayExcludedComponentName|✓|✓||
+||ArrayExcludedComponentName|✓|✓|removes 4D SVG, 4D Progress, 4D ViewPro, 4D NetKit, 4D WritePro Interface, 4D Mobile App Server, 4D Widgets, 3rd party components|
 |v20|ArrayExcludedModuleName|✓|✓|removes CEF, MeCab, PHP, SpellChecker, 4D Updater|
 ||ArrayExcludedPluginID|✓|✓|for 4D authored plugins|
 ||ArrayExcludedPluginName|✓|✓|for 3rd party plugins|
