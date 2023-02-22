@@ -24,7 +24,7 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||BuildComponent|✓|✓||
 ||BuildApplicationSerialized|✓|✓|build desktop app|
 ||BuildCSUpgradeable|✓|✓||
-||BuildServerApplication|✓|✓|build server app|
+||BuildServerApplication|✓|✓|build server and/or client app|
 ||BuildxxxDestFolder|✓|✓|relative or absolute patform path|
 ||ServerIncludeIt|✓|✓||
 ||ClientxxxIncludeIt|✓|✓||
