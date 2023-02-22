@@ -28,8 +28,8 @@ xxx = Mac/Win
 ||IncludeAssociatedFolders|✓|✓||
 ||BuildComponent|✓|✓||
 ||ArrayExcludedComponentName|✓|✓||
-|v20|ArrayExcludedModuleName|✓|✓|CEF, MeCab, PHP, SpellChecker, 4D Updater|
-|v19|PackProject||✓|generate alterable project|
+|v20|ArrayExcludedModuleName|✓|✓|removes CEF, MeCab, PHP, SpellChecker, 4D Updater|
+|v19|PackProject||✓|generates alterable project|
 
 
 
