@@ -4,6 +4,6 @@
 
 Present the benefits of building a server, client, desktop, or *hybrid*[^hybrid] app.
 
-Explain how the basic options available in the [Build Application](https://developer.4d.com/docs/Desktop/building/) tool are just a subset of what is possible using the more advanced [`BUILD APPLICATION`](https://doc.4d.com/4Dv19/4D/19.5/BUILD-APPLICATION.301-6137056.en.html) command.
+Explain how the basic options available in the [Build Application](https://developer.4d.com/docs/Desktop/building/) tool are just a subset of what is actually possible using the more advanced [`BUILD APPLICATION`](https://doc.4d.com/4Dv19/4D/19.5/BUILD-APPLICATION.301-6137056.en.html) command.
 
 [^hybrid]: An app merged with *4D Volume Desktop* that intially launches as a desktop app instead of a client app that automatically connecting to a peer server. The startup project can execute with or without a local database. (v18 or later)
