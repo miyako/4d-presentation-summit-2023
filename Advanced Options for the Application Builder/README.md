@@ -27,11 +27,11 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||BuildServerApplication|✓|✓||
 ||BuildxxxDestFolder|✓|✓|relative or absolute patform path|
 ||ServerIncludeIt|✓|✓||
+||ClientxxxIncludeIt|✓|✓||
 ||RuntimeVLIncludeIt|✓|✓||
 ||ServerxxxFolder|✓|✓||
-||RuntimeVLxxxFolder|✓|✓||
-||ClientxxxIncludeIt|✓|✓||
 ||ClientxxxFolderToxxx|✓|✓||
+||RuntimeVLxxxFolder|✓|✓||
 ||DataFilePath||✓|relative or absolute patform path|
 ||IPAddress||✓||
 ||PortNumber||✓||
