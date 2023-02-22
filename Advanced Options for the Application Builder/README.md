@@ -152,6 +152,16 @@ It is recommended to use specialised tools to create a multi-resolution icon fil
 
 With the easy configuration your server, client and desktop apps will all share the same icon. XML keys allow you to better manage your app's profile.
 
+## Sidebar: Hi-DPI support 
+
+T.B.C.
+
+
+
+
+
+
+
 [^hybrid]: An app merged with *4D Volume Desktop* that intially launches as a desktop app instead of a client app that automatically connecting to a peer server. The startup project can execute with or without a local database. (v18 or later)
 
 [^loginimage]: [4D Design Reference > Users and groups > Access system overview](https://doc.4d.com/4Dv19/4D/19/Access-system-overview.300-5416896.en.html)
