@@ -67,9 +67,9 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
+||CurrentVers|✓|✓||
 ||RangeVersMin||✓||
 ||RangeVersMax||✓||
-||CurrentVers|✓|✓||
 |v14|StartElevated||✓|request admin privileges for auto-update|
 
 
