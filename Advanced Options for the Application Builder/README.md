@@ -122,7 +122,7 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
 The 4D logo on the user login dialog can be replaced by an image file named *LoginImage.png*[^loginimage] placed in the project folder. The file must be a `.png` image and its size must be `80x80`.
 
-The 4D application icon[^CustomIcon] can be replaced by an icon file named after the structure file or project name. The file must be an `.icns` image on Mac or `.ico`[^ico] on Windows.
+The 4D application icon[^CustomIcon] can be replaced by an icon file named after the structure file or project name. The file format must be `.icns`[^icns] on Mac and `.ico`[^ico] on Windows.
 
 #### Support High Resolution
 
