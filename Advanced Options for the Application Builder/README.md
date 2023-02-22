@@ -20,11 +20,11 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
-||BuildCompiled|✓|✓|generates .4DC or .4DZ|
+||BuildCompiled|✓|✓|build .4DC or .4DZ|
 ||BuildComponent|✓|✓||
-||BuildApplicationSerialized|✓|✓|generates desktop app|
+||BuildApplicationSerialized|✓|✓|build desktop app|
 ||BuildCSUpgradeable|✓|✓||
-||BuildServerApplication|✓|✓||
+||BuildServerApplication|✓|✓|build server|
 ||BuildxxxDestFolder|✓|✓|relative or absolute patform path|
 ||ServerIncludeIt|✓|✓||
 ||ClientxxxIncludeIt|✓|✓||
