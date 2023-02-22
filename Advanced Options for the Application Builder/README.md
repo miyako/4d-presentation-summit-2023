@@ -41,6 +41,7 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
 ||ArrayLicensexxx|✓|✓||
+||HardLink||✓||
 ||IsOEM||✓||
 
 * Other
@@ -53,10 +54,6 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||ArrayExcludedPluginName|✓|✓|for 3rd party plugins|
 ||IncludeAssociatedFolders|✓|✓||
 |v20|ClientUserPreferencesFolderByPath||✓||
-||HardLink||✓||
-||RangeVersMin||✓||
-||RangeVersMax||✓||
-||CurrentVers|✓|✓||
 |v16|LastDataPathLookup|✓|✓||
 |v16|ServerSelectionAllowed||✓||
 |v18|ClientWinSingleInstance||✓||
@@ -65,9 +62,23 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 |v20|MacCompiledDatabaseToWinIncludeIt|✓|✓||
 |v20|MacCompiledDatabaseToWin|✓|✓||
 |v20|ShareLocalResourcesOnWindowsClient||✓||
-|v20|ServerDataCollection||✓||
-|v14|StartElevated||✓|request admin privileges for auto-update|
 |v18|DatabaseToEmbedInClientxxxFolder ||✓||
+
+#### Client Auto Update
+
+| Version | Key | Tool | Command | Remarks |
+|:-------:|:---|:----:|:-------:|:-------|
+||RangeVersMin||✓||
+||RangeVersMax||✓||
+||CurrentVers|✓|✓||
+|v14|StartElevated||✓|request admin privileges for auto-update|
+
+
+#### Miscellaneous
+
+| Version | Key | Tool | Command | Remarks |
+|:-------:|:---|:----:|:-------:|:-------|
+|v20|ServerDataCollection||✓||
 
 #### Security
 
