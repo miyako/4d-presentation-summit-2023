@@ -6,7 +6,7 @@ Keisuke would be the last person to accept that the days of 4D plugins are numbe
 
 ## Synopsis 
 
-Present the benefits of SystemWorkers, compared to [`LAUNCH EXTERNAL PROCESS`]() [`PHP Execute`]() or even plugins.
+Present the benefits of SystemWorkers, compared to [`LAUNCH EXTERNAL PROCESS`](https://doc.4d.com/4Dv19/4D/19.5/LAUNCH-EXTERNAL-PROCESS.301-6137469.en.html) [`PHP Execute`](https://doc.4d.com/4Dv19/4D/19.5/PHP-Execute.301-6137576.en.html) or even plugins.
 
 Explain how Go is the ideal programming language for a cross-platform, deployment-ready utility executable.
 
