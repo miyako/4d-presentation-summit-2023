@@ -41,7 +41,6 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
 ||ArrayLicensexxx|✓|✓||
-||HardLink||✓||
 ||IsOEM||✓||
 
 * Other
@@ -84,6 +83,7 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
+||HardLink||✓||
 |v14|MacSignature|✓|✓||
 |v14|MacCertificate|✓|✓||
 |v19|AdHocSign|✓|✓||
