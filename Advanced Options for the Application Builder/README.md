@@ -23,6 +23,13 @@ xxx = Mac/Win
 |DataFilePath||✓|relative or absolute patform path|
 |BuildCompiled|✓|✓|generates .4DC or .4DZ|
 |BuildApplicationSerialized|✓|✓|generates desktop app|
+|ArrayExcludedPluginName|✓|✓|for 3rd party plugins|
+|ArrayExcludedPluginID|✓|✓|for 4D authored plugins|
+|IncludeAssociatedFolders|✓|✓||
+|BuildComponent|✓|✓||
+|ArrayExcludedComponentName|✓|✓||
+|ArrayExcludedModuleName|✓|✓|v20|
+|PackProject||✓|v19|
 
 
 
