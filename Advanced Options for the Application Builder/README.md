@@ -28,7 +28,7 @@ xxx = Mac/Win
 ||IncludeAssociatedFolders|✓|✓||
 ||BuildComponent|✓|✓||
 ||ArrayExcludedComponentName|✓|✓||
-|v20|ArrayExcludedModuleName|✓|✓||
+|v20|ArrayExcludedModuleName|✓|✓|CEF, MeCab, PHP, SpellChecker, 4D Updater|
 |v19|PackProject||✓||
 
 
