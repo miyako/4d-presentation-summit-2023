@@ -142,4 +142,6 @@ It is recommended to use specialised tools to create a multi-resolution icon fil
 
 [^iconutil]: [Optimizing for High Resolution](https://developer.apple.com/library/archive/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Optimizing/Optimizing.html)
 
+[^icns]: [Foundations > Design > App icons](https://developer.apple.com/design/human-interface-guidelines/foundations/app-icons)
+
 [^ico]: [Win32 > Design > Icons](https://learn.microsoft.com/en-us/windows/win32/uxguide/vis-icons)
