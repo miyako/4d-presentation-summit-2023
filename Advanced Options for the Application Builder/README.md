@@ -21,17 +21,17 @@ xxx = Mac/Win
 ||BuildApplicationName|✓|✓||
 ||BuildxxxDestFolder|✓|✓|relative or absolute patform path|
 ||DataFilePath||✓|relative or absolute patform path|
-||BuildCompiled|✓|✓|generates .4DC or .4DZ|
 ||BuildApplicationSerialized|✓|✓|generates desktop app|
-||ArrayExcludedPluginName|✓|✓|for 3rd party plugins|
-||ArrayExcludedPluginID|✓|✓|for 4D authored plugins|
-||IncludeAssociatedFolders|✓|✓||
-||BuildComponent|✓|✓||
 ||ArrayExcludedComponentName|✓|✓||
 |v20|ArrayExcludedModuleName|✓|✓|removes CEF, MeCab, PHP, SpellChecker, 4D Updater|
+||ArrayExcludedPluginID|✓|✓|for 4D authored plugins|
+||ArrayExcludedPluginName|✓|✓|for 3rd party plugins|
+||IncludeAssociatedFolders|✓|✓||
+||BuildCompiled|✓|✓|generates .4DC or .4DZ|
+||BuildComponent|✓|✓||
 |v19|PackProject||✓|generates alterable project|
 |v20|UseStandardZipFormat||✓|generates scrambled and encrypted .4DZ|
-
+|v14|StartElevated||✓|request admin privileges for auto-update|
 
 
 
