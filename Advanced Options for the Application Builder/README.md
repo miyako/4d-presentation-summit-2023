@@ -16,6 +16,25 @@ The table below shows how the options available in the tool are just a subset of
 
 xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
+#### Branding
+
+| Version | Key | Tool | Command | Remarks |
+|:-------:|:---|:----:|:-------:|:-------|
+||BuildApplicationName|✓|✓||
+||ServerIconxxxPath||✓||
+||ClientxxxIconForxxxPath||✓||
+||RuntimeVLIconxxxPath||✓||
+||xxxxxVersion||✓||
+||xxxxxCopyright||✓||
+||xxxxxCreator||✓||
+||xxxxxComment||✓||
+||xxxxxCompanyName||✓||
+||xxxxxFileDescription||✓||
+||xxxxxInternalName||✓||
+||xxxxxLegalTrademark||✓||
+||xxxxxPrivateBuild||✓||
+||xxxxxSpecialBuild||✓||
+
 #### Setup
 
 | Version | Key | Tool | Command | Remarks |
@@ -96,24 +115,5 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 |v20|HideRuntimeExplorerMenuItem||✓||
 |v20|ServerEmbedsProjectDirectoryFile||✓||
 |v20|UseStandardZipFormat||✓|generates scrambled and encrypted .4DZ|
-
-#### Branding
-
-| Version | Key | Tool | Command | Remarks |
-|:-------:|:---|:----:|:-------:|:-------|
-||BuildApplicationName|✓|✓||
-||ServerIconxxxPath||✓||
-||ClientxxxIconForxxxPath||✓||
-||RuntimeVLIconxxxPath||✓||
-||xxxxxVersion||✓||
-||xxxxxCopyright||✓||
-||xxxxxCreator||✓||
-||xxxxxComment||✓||
-||xxxxxCompanyName||✓||
-||xxxxxFileDescription||✓||
-||xxxxxInternalName||✓||
-||xxxxxLegalTrademark||✓||
-||xxxxxPrivateBuild||✓||
-||xxxxxSpecialBuild||✓||
 
 [^hybrid]: An app merged with *4D Volume Desktop* that intially launches as a desktop app instead of a client app that automatically connecting to a peer server. The startup project can execute with or without a local database. (v18 or later)
