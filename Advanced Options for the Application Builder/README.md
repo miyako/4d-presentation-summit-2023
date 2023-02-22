@@ -2,7 +2,7 @@
 
 ## Teaser Message
 
-Do you build your 4D app? Do you have an XML project to ensure that your production app is configured exactly how it ought to be? In this training session, Keisuke will explain the benefits of building your 4D app and how to take advantage the various advanced build settings.
+Do you build your 4D app? Do you have an XML project to make sure that your production app is configured exactly how it ought to be? In this training session, Keisuke will explain the benefits of building your 4D app and how to take advantage the various advanced build settings.
 
 ## Synopsis 
 
