@@ -1,4 +1,12 @@
-# 4d-presentation-summit-2023
+# Go Places with SystemWorkers!
+
+## Teaser Message
+
+Keisuke would be the last person on Earth to accept that the days of 4D plugins are numbered...but it's 2023 and SystemWorkers are here! In this landmark session, see how the new architecture changes everything, with a bonus primer ｌｅｃｔｕｒｅ
+
+---
+
+# memo
 
 #### PDF resources for SystemWorker
 
