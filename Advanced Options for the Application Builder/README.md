@@ -156,9 +156,15 @@ With the easy configuration your server, client and desktop apps will all share 
 
 T.B.C.
 
+## Sidebar: Name vs Indentifiler on Mac
 
+T.B.C.
 
+## The Sponsor Message 
 
+![PoweredBy4D-v19](https://user-images.githubusercontent.com/1725068/220621767-fa600ec1-df01-4e50-b75d-cbbf7789db4f.png)
+
+T.B.C.
 
 
 
