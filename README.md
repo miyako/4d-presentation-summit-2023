@@ -1,5 +1,7 @@
 # 4d-presentation-summit-2023
 
-## [Go Places with SystemWorkers!](https://github.com/miyako/4d-presentation-summit-2023/tree/main/Go%20Places%20with%20SystemWorkers!)
+This repository is the home of my preparation work
 
-## [Advanced Options for the Application Builder](https://github.com/miyako/4d-presentation-summit-2023/tree/main/Advanced%20Options%20for%20the%20Application%20Builder)
+### [Go Places with SystemWorkers!](https://github.com/miyako/4d-presentation-summit-2023/tree/main/Go%20Places%20with%20SystemWorkers!)
+
+### [Advanced Options for the Application Builder](https://github.com/miyako/4d-presentation-summit-2023/tree/main/Advanced%20Options%20for%20the%20Application%20Builder)
