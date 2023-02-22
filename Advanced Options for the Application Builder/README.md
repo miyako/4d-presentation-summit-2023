@@ -124,7 +124,12 @@ The 4D logo on the user login dialog can be replaced by an image file named *Log
 
 The 4D application icon[^CustomIcon] can be replaced by an icon file named after the structure file or project name. The file must be a `.icns` image on Mac or `.ico` on Windows.
 
----
+
+
+
+
+
+
 
 [^hybrid]: An app merged with *4D Volume Desktop* that intially launches as a desktop app instead of a client app that automatically connecting to a peer server. The startup project can execute with or without a local database. (v18 or later)
 
