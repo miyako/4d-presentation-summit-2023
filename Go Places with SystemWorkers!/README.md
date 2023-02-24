@@ -153,6 +153,10 @@ AI can also be used to perform mundane work such as
 
 The results get better the more you give specific instructions, such as naming conventions and arbitrary rules. You are not talking to an actual person, you should be as persistent and blunt as you need to be until you get a satisfactory answer.
 
+## Processing PDF
+
+* https://github.com/signintech/gopdf
+
 #### More Examples
 
 There are no built-in triggers in 4D to execute scheduled tasks other than [`BACKUP`](https://doc.4d.com/4Dv19/4D/19.5/BACKUP.301-6137640.en.html). A cron[^gocron] job might be something interesting to implement with Go.
