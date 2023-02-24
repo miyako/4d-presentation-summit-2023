@@ -140,4 +140,4 @@ func main() {
 
 > In this code, we use `os.Stdin` to read CSV input from standard input. We parse the input using the `csv.NewReader` function and loop over the CSV records to convert them to a slice of maps. Finally, we use the `json.MarshalIndent` function to convert the data to JSON format and write it to standard output using the `fmt.Println` function.
 
-Does the code work? I don't know. But given the cmmonality of the problem to solve, the answer should not be too far off the mark. Also, you can refine your requests in context to get a more precise example.
+Does the code work? I don't know. But given the commonality of the problem to solve, the answer should not be too far off the mark. Also, you can refine your requests in context to get a more precise example.
