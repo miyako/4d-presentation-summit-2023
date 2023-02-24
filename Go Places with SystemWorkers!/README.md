@@ -79,3 +79,5 @@ func main() {
     fmt.Println(string(jsonDataBytes))
 }
 ```
+
+> This code reads a CSV file named `data.csv` in the same directory as the Go file. It skips the first row (which is assumed to be the header row), and then converts each subsequent row into a map with keys from the header row and values from the corresponding cell in the data row. Finally, it encodes the resulting JSON array and prints it to the console.
