@@ -14,11 +14,11 @@ Show some practical examples that adds value to the product or enhances the user
 
 ## Examples
 
-4D is not partculary versitle when it comes to processing proprietary data formats. For example, it doesn't have a robust CSV converter. 
+4D is not partculary versitle when it comes to processing proprietary data formats. For example, it doesn't have a robust CSV converter. On the other hand, there are standard libraries for CSV[^golangcsv] in Go. You might want to look for ready-to-go solutions.
 
 * https://gosamples.dev/csv-to-json/
 
-## Sidebar: GitHub Copilot and ChatGPT
+## GitHub Copilot and ChatGPT
 
 The Go programming language has the tendancy to produce formulaic code. Add to that the large population of programmers who actively work with the language, it makes an ideal candidate for AI assisted coding. 
 
@@ -141,3 +141,6 @@ func main() {
 > In this code, we use `os.Stdin` to read CSV input from standard input. We parse the input using the `csv.NewReader` function and loop over the CSV records to convert them to a slice of maps. Finally, we use the `json.MarshalIndent` function to convert the data to JSON format and write it to standard output using the `fmt.Println` function.
 
 Does the code work? I don't know. Given the commonality of the problem, you could have searched the web the traditional way. Still, as long as the request is well defined, the answer should not be too far off the mark. Also, you can keep refining your requests to get a better answer. The AI takes context into account.
+
+
+[^golangcsv]: [encoding > csv](https://pkg.go.dev/encoding/csv)
