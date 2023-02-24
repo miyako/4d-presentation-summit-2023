@@ -20,4 +20,4 @@ Show some practical examples that adds value to the product or enhances the user
 
 ## Sidebar: GitHub Copilot
 
-The Go programming language has the tendancy to produce formulaic code. Add to that the large population of programmers who develop using the language, it makes an ideal candidate for AI assisted coding. 
+The Go programming language has the tendancy to produce formulaic code. Add to that the large population of programmers who actively work with the language, it makes an ideal candidate for AI assisted coding. 
