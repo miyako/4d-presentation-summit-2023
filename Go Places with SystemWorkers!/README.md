@@ -12,7 +12,7 @@ Explain how Go is the ideal programming language for a cross-platform, deploymen
 
 Show some practical examples that adds value to the product or enhances the user experience.
 
-## Examples
+## An Example
 
 4D is not partculary versitle when it comes to processing proprietary data formats. For example, it doesn't have a robust CSV converter. On the other hand, there are standard libraries for CSV[^golangcsv], XML[^golangxml] and JSON[^golangjson] in Go. You can probably find ready-to-go solutions in no time.
 
@@ -152,6 +152,21 @@ AI can also be used to perform mundane work such as
 * Ask for refactoring with an explanation of why one is better than the other 
 
 The results get better the more you give specific instructions, such as naming conventions and arbitrary rules. You are not talking to an actual person, you should be as persistent and blunt as you need to be until you get a satisfactory answer.
+
+#### More Examples
+
+There are no built-in triggers in 4D to execute scheduled task other than [`BACKUP`](https://doc.4d.com/4Dv19/4D/19.5/BACKUP.301-6137640.en.html). It might be interesting to use Go.
+
+* [go-co-op > goron](github.com/go-co-op/gocron)
+
+A common task that often required a plugin in the before times was to read and write `.xlsx` spreadsheets. 
+
+* [tealeg > xlsx](https://pkg.go.dev/github.com/tealeg/xlsx)
+* [360EntSecGroup-Skylar > excelize](https://pkg.go.dev/github.com/360EntSecGroup-Skylar/excelize)
+
+Likewise, there are tools designed to extract text from complex documents, which could be useful for indexing.
+
+* [code.sajari.com > docconv](https://pkg.go.dev/code.sajari.com/docconv)
 
 [^golangcsv]: [standard library > encoding >csv](https://pkg.go.dev/encoding/csv)
 [^golangxml]: [standard library > encoding > xml](https://pkg.go.dev/encoding/xml)
