@@ -159,9 +159,12 @@ There are no built-in triggers in 4D to execute scheduled tasks other than [`BAC
 
 Another common task that often called for 3rd party tools such as a plugin is to read and write `.xlsx` spreadsheets. Depending on the need, you may consider a simple[^xlsx] or more comprehensive[^excelize] library.
 
+Likewise, tools to extract[^docconv] plain text from `.doc` `.docx` or `.pdf` could be useful to build indexes.   
+
 [^golangcsv]: [standard library > encoding >csv](https://pkg.go.dev/encoding/csv)
 [^golangxml]: [standard library > encoding > xml](https://pkg.go.dev/encoding/xml)
 [^golangjson]: [standard library > encoding > json](https://pkg.go.dev/encoding/json)
 [^gocron]: [go-co-op > gocron](github.com/go-co-op/gocron)
 [^xlsx]: [tealeg > xlsx](https://pkg.go.dev/github.com/tealeg/xlsx)
 [^excelize]: [360EntSecGroup-Skylar > excelize](https://pkg.go.dev/github.com/360EntSecGroup-Skylar/excelize)
+[^docconv]: [code.sajari.com > docconv](https://pkg.go.dev/code.sajari.com/docconv)
