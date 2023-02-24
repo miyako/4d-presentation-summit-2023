@@ -24,11 +24,11 @@ The Go programming language has the tendancy to produce formulaic code. Add to t
 
 For example, if you ask ChatGPT
 
-<span style="box-sizing: border-box; display: block;"><img src="https://user-images.githubusercontent.com/1725068/221110469-affa9680-08a5-4880-bcab-c9a798bfd65b.png" width="32px" />write me code in go that converts csv to json</span>
+> write me code in go that converts csv to json</span>
 
 you might get something like
 
-<span style="display:inline-block;text-align: center;"><img src="https://user-images.githubusercontent.com/1725068/221112159-307c841f-2659-4f9d-8ad5-e488bff4d70c.png" width="32px" /> Sure, here's an example code in Go that reads a CSV file and converts its contents into a JSON array:</span>
+> Sure, here's an example code in Go that reads a CSV file and converts its contents into a JSON array:
 
 ```go
 package main
