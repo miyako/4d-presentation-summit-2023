@@ -20,7 +20,7 @@ Show some practical examples that adds value to the product or enhances the user
 
 ## GitHub Copilot and ChatGPT
 
-The Go programming language has the tendancy to produce formulaic code. Add to that the large population of programmers who actively work with the language, it makes an ideal candidate for AI assisted coding. 
+The Go programming language has the tendancy to result in pretty formulaic code. Add to that the large population of programmers who actively work with the language, it makes an ideal candidate for AI assisted coding. 
 
 For example, if you ask ChatGPT
 
