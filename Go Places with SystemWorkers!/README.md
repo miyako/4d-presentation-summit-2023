@@ -24,7 +24,7 @@ The Go programming language has the tendancy to produce formulaic code. Add to t
 
 For example, if you ask ChatGPT
 
-<img src="https://user-images.githubusercontent.com/1725068/221110469-affa9680-08a5-4880-bcab-c9a798bfd65b.png" width="80" /> `write me code in go that converts csv to json`
+<img src="https://user-images.githubusercontent.com/1725068/221110469-affa9680-08a5-4880-bcab-c9a798bfd65b.png" width="32px" /> `write me code in go that converts csv to json`
 
 you might get something like
 
