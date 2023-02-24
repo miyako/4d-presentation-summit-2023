@@ -166,6 +166,12 @@ T.B.C.
 
 T.B.C.
 
+## Hybrid Client
+
+Some ideas:
+
+* Clear Local Cache before connecting to server
+
 
 
 [^hybrid]: An app merged with *4D Volume Desktop* that intially launches as a desktop app instead of a client app that automatically connecting to a peer server. The startup project can execute with or without a local database. (v18 or later)
