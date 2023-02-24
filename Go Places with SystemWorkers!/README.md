@@ -26,7 +26,7 @@ For example, if you ask ChatGPT
 
 > write me code in go that converts csv to json</span>
 
-you might get something like
+you may get something like
 
 > Sure, here's an example code in Go that reads a CSV file and converts its contents into a JSON array:
 
