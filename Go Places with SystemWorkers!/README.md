@@ -61,7 +61,26 @@ func main() {
 	headers := records[0]
 	for _, row := range records[1:] {
 		record := make(map[string]string)
+		for i, value := range row {
+			record[headers[i]] = value
+		}
+		data = append(data, record)
+	}
 
+	// Convert data to JSON
+	jsonData, err := json.MarshalIndent(data, "", "    ")
+	if err != nil {
+		panic(err)
+	}
+
+	// Write JSON data to file
+	err = ioutil.WriteFile("output.json", jsonData, 0644)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("CSV converted to JSON successfully.")
+}
 ```
 
 > In this code, we first open the CSV file using the `os.Open` function and parse it using the `csv.NewReader` function. We then loop over the CSV records and convert them to a slice of maps. Finally, we use the `json.MarshalIndent` function to convert the data to JSON format and write it to a file using the `ioutil.WriteFile` function.
@@ -120,3 +139,5 @@ func main() {
 ```
 
 > In this code, we use `os.Stdin` to read CSV input from standard input. We parse the input using the `csv.NewReader` function and loop over the CSV records to convert them to a slice of maps. Finally, we use the `json.MarshalIndent` function to convert the data to JSON format and write it to standard output using the `fmt.Println` function.
+
+Does the code work? I don't know. But given the cmmonality of the problem to solve, the answer should not be too far off the mark. Also, you can refine your requests in context to get a more precise example.
