@@ -18,6 +18,64 @@ Show some practical examples that adds value to the product or enhances the user
 
 * https://gosamples.dev/csv-to-json/
 
-## Sidebar: GitHub Copilot
+## Sidebar: GitHub Copilot and ChatGPT
 
 The Go programming language has the tendancy to produce formulaic code. Add to that the large population of programmers who actively work with the language, it makes an ideal candidate for AI assisted coding. 
+
+For example, if you ask ChatGPT
+
+![](https://user-images.githubusercontent.com/1725068/221110469-affa9680-08a5-4880-bcab-c9a798bfd65b.png) `write me code in go that converts csv to json`
+
+you might get something like
+
+`Sure, here's an example code in Go that reads a CSV file and converts its contents into a JSON array:`
+
+```go
+package main
+
+import (
+    "encoding/csv"
+    "encoding/json"
+    "fmt"
+    "os"
+)
+
+func main() {
+    // Open the CSV file
+    file, err := os.Open("data.csv")
+    if err != nil {
+        fmt.Println("Error:", err)
+        return
+    }
+    defer file.Close()
+
+    // Read the CSV data
+    reader := csv.NewReader(file)
+    lines, err := reader.ReadAll()
+    if err != nil {
+        fmt.Println("Error:", err)
+        return
+    }
+
+    // Convert the CSV data to a JSON array
+    var jsonData []map[string]string
+    for i, line := range lines {
+        if i == 0 {
+            continue // skip header row
+        }
+        data := make(map[string]string)
+        for j, value := range line {
+            data[lines[0][j]] = value
+        }
+        jsonData = append(jsonData, data)
+    }
+
+    // Encode the JSON data and print it
+    jsonDataBytes, err := json.Marshal(jsonData)
+    if err != nil {
+        fmt.Println("Error:", err)
+        return
+    }
+    fmt.Println(string(jsonDataBytes))
+}
+```
