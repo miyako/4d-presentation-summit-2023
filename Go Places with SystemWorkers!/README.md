@@ -12,3 +12,12 @@ Explain how Go is the ideal programming language for a cross-platform, deploymen
 
 Show some practical examples that adds value to the product or enhances the user experience.
 
+## Examples
+
+4D is not partculary versitle when it comes to processing proprietary data formats. For example, it doesn't have a robust CSV converter. 
+
+* https://gosamples.dev/csv-to-json/
+
+## Sidebar: GitHub Copilot
+
+The Go programming language has the tendancy to produce formulaic code. Add to that the large population of programmers who develop using the language, it makes an ideal candidate for AI assisted coding. 
