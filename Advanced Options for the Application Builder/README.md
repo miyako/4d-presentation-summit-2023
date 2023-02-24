@@ -124,7 +124,17 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
 #### Legacy Instructions
 
+* Standard
+
 <img width="360" alt="" src="https://user-images.githubusercontent.com/1725068/220619223-492a0df4-fdda-4040-a7d9-a14c8dd4ae23.png">
+
+* No List
+
+<img width="360" alt="" src="https://user-images.githubusercontent.com/1725068/221106408-a7b8cba1-bcc6-4895-88b2-11863085d139.png">
+
+* No Edit
+
+<img width="360" alt="" src="https://user-images.githubusercontent.com/1725068/221106422-970ba3c0-6dec-4cad-beb0-2d60f8a00b5b.png">
 
 The 4D logo on the user login dialog can be replaced by a custom icon file[^loginimage]. The file format must be `.png`.
 
