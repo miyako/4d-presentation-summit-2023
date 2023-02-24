@@ -157,7 +157,7 @@ The results get better the more you give specific instructions, such as naming c
 
 * https://github.com/signintech/gopdf
 
-#### More Examples
+## More Examples
 
 There are no built-in triggers in 4D to execute scheduled tasks other than [`BACKUP`](https://doc.4d.com/4Dv19/4D/19.5/BACKUP.301-6137640.en.html). A cron[^gocron] job might be something interesting to implement with Go.
 
