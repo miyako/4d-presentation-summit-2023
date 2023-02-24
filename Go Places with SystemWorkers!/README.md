@@ -165,6 +165,10 @@ Another common task that often called for 3rd party tools such as a plugin is to
 
 Likewise, tools to extract[^docconv] plain text from `.doc` `.docx` or `.pdf` could be useful to build indexes.   
 
+## For Fun
+
+* https://docs.football-data.org/general/v4/index.html
+
 [^golangcsv]: [standard library > encoding >csv](https://pkg.go.dev/encoding/csv)
 [^golangxml]: [standard library > encoding > xml](https://pkg.go.dev/encoding/xml)
 [^golangjson]: [standard library > encoding > json](https://pkg.go.dev/encoding/json)
