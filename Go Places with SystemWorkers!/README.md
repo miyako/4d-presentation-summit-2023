@@ -169,4 +169,4 @@ Likewise, there are tools designed to extract text from complex documents, which
 [^golangcsv]: [standard library > encoding >csv](https://pkg.go.dev/encoding/csv)
 [^golangxml]: [standard library > encoding > xml](https://pkg.go.dev/encoding/xml)
 [^golangjson]: [standard library > encoding > json](https://pkg.go.dev/encoding/json)
-[^gocron]: [go-co-op > goron](github.com/go-co-op/gocron)
+[^gocron]: [go-co-op > gocron](github.com/go-co-op/gocron)
