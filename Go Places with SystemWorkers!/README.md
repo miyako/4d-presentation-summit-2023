@@ -14,7 +14,7 @@ Show some practical examples that adds value to the product or enhances the user
 
 ## Examples
 
-4D is not partculary versitle when it comes to processing proprietary data formats. For example, it doesn't have a robust CSV converter. On the other hand, there are standard libraries for CSV[^golangcsv] in Go. You might want to look for ready-to-go solutions.
+4D is not partculary versitle when it comes to processing proprietary data formats. For example, it doesn't have a robust CSV converter. On the other hand, there are standard libraries for CSV[^golangcsv], XML[^golangxml] and JSON[^golangjson] in Go. You can probably find ready-to-go solutions in no time.
 
 * https://gosamples.dev/csv-to-json/
 
@@ -144,3 +144,5 @@ Does the code work? I don't know. Given the commonality of the problem, you coul
 
 
 [^golangcsv]: [encoding > csv](https://pkg.go.dev/encoding/csv)
+[^golangxml]: [encoding > xml](https://pkg.go.dev/encoding/xml)
+[^golangjson]: [encoding > json](https://pkg.go.dev/encoding/json)
