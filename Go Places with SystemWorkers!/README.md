@@ -157,16 +157,11 @@ The results get better the more you give specific instructions, such as naming c
 
 There are no built-in triggers in 4D to execute scheduled tasks other than [`BACKUP`](https://doc.4d.com/4Dv19/4D/19.5/BACKUP.301-6137640.en.html). A cron[^gocron] job might be something interesting to implement with Go.
 
-Another common task that often called for 3rd party tools such as a plugin is to read and write `.xlsx` spreadsheets. 
-
-* [tealeg > xlsx](https://pkg.go.dev/github.com/tealeg/xlsx)
-* [360EntSecGroup-Skylar > excelize](https://pkg.go.dev/github.com/360EntSecGroup-Skylar/excelize)
-
-Likewise, there are tools designed to extract text from complex documents, which could be useful for indexing.
-
-* [code.sajari.com > docconv](https://pkg.go.dev/code.sajari.com/docconv)
+Another common task that often called for 3rd party tools such as a plugin is to read and write `.xlsx` spreadsheets. Depending on the need, you may consider a simple[^xlsx] or more comprehensive[^excelize] library.
 
 [^golangcsv]: [standard library > encoding >csv](https://pkg.go.dev/encoding/csv)
 [^golangxml]: [standard library > encoding > xml](https://pkg.go.dev/encoding/xml)
 [^golangjson]: [standard library > encoding > json](https://pkg.go.dev/encoding/json)
 [^gocron]: [go-co-op > gocron](github.com/go-co-op/gocron)
+[^xlsx]: [tealeg > xlsx](https://pkg.go.dev/github.com/tealeg/xlsx)
+[^excelize]: [360EntSecGroup-Skylar > excelize](https://pkg.go.dev/github.com/360EntSecGroup-Skylar/excelize)
