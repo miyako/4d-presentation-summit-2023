@@ -142,7 +142,17 @@ func main() {
 
 Does the code work? I don't know. Given the commonality of the problem, you could have searched the web the traditional way. Still, as long as the request is well defined, the answer should not be too far off the mark. Also, you can keep refining your requests to get a better answer. The AI takes context into account.
 
+AI can also be used to perform mundane work such as 
 
-[^golangcsv]: [encoding > csv](https://pkg.go.dev/encoding/csv)
-[^golangxml]: [encoding > xml](https://pkg.go.dev/encoding/xml)
-[^golangjson]: [encoding > json](https://pkg.go.dev/encoding/json)
+* Generate variable or function names matching task description
+* Generate sample dataset
+* Ask what a code fragment is doing; insert comments
+* Ask why a specific error message would be thrown
+* Ask about common pitfalls related to a programming challenge
+* Ask for refactoring with an explanation of why one is better than the other 
+
+The results get better the more you give specific instructions, such as naming conventions and arbitrary rules. You are not talking to an actual person, you should be as persistent and blunt as you need to be until you get a satisfactory answer.
+
+[^golangcsv]: [standard library > encoding >csv](https://pkg.go.dev/encoding/csv)
+[^golangxml]: [standard library > encoding > xml](https://pkg.go.dev/encoding/xml)
+[^golangjson]: [standard library > encoding > json](https://pkg.go.dev/encoding/json)
