@@ -155,11 +155,9 @@ The results get better the more you give specific instructions, such as naming c
 
 #### More Examples
 
-There are no built-in triggers in 4D to execute scheduled task other than [`BACKUP`](https://doc.4d.com/4Dv19/4D/19.5/BACKUP.301-6137640.en.html). It might be interesting to use Go.
+There are no built-in triggers in 4D to execute scheduled tasks other than [`BACKUP`](https://doc.4d.com/4Dv19/4D/19.5/BACKUP.301-6137640.en.html). A cron[^gocron] job might be something interesting to implement with Go.
 
-* [go-co-op > goron](github.com/go-co-op/gocron)
-
-A common task that often required a plugin in the before times was to read and write `.xlsx` spreadsheets. 
+Another common task that often called for 3rd party tools such as a plugin is to read and write `.xlsx` spreadsheets. 
 
 * [tealeg > xlsx](https://pkg.go.dev/github.com/tealeg/xlsx)
 * [360EntSecGroup-Skylar > excelize](https://pkg.go.dev/github.com/360EntSecGroup-Skylar/excelize)
@@ -171,3 +169,4 @@ Likewise, there are tools designed to extract text from complex documents, which
 [^golangcsv]: [standard library > encoding >csv](https://pkg.go.dev/encoding/csv)
 [^golangxml]: [standard library > encoding > xml](https://pkg.go.dev/encoding/xml)
 [^golangjson]: [standard library > encoding > json](https://pkg.go.dev/encoding/json)
+[^gocron]: [go-co-op > goron](github.com/go-co-op/gocron)
