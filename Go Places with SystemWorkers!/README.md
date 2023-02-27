@@ -12,6 +12,51 @@ Explain how Go is the ideal programming language for a cross-platform, deploymen
 
 Show some practical examples that adds value to the product or enhances the user experience.
 
+## Getting Started with Go
+
+#### macOS: official installer or Homebrew
+
+If you use the [official installer](https://go.dev/dl/), you would have to execute `rm` when you need to remove it:
+
+```sh
+sudo rm -rf /usr/local/g
+sudo rm -rf /etc/paths.d/go
+```
+
+The advantage of [Homebrew](https://formulae.brew.sh/formula/go) distribution is its ease of managing updates.
+
+#### Windows: official installer or Chocolatey
+
+The official installer is somewhat better on Windows in that you can uninstall Go from the control panel.
+
+Still, it may make sense to install with [Chocolatey](https://chocolatey.org) for its ease of managing updates.
+
+#### How to create a CLI with Go
+
+* hello-world.go
+
+```go
+package main
+
+func main() {
+    print("Hello world!")
+}
+```
+
+* Build Universal Binary 
+
+```
+GOOS=darwin GOARCH=amd64 go build -o hello-world_amd64 hello-world.go
+GOOS=darwin GOARCH=arm64 go build -o hello-world_arm64 hello-world.go
+lipo -create -output hello-world hello-world_amd64 hello-world_arm64
+```
+
+* Build Windows
+
+```
+build hello-world.go
+```
+
 ## An Example
 
 4D is not partculary versitle when it comes to processing proprietary data formats. For example, it doesn't have a robust CSV converter. On the other hand, there are standard libraries for CSV[^golangcsv], XML[^golangxml] and JSON[^golangjson] in Go. You can probably find ready-to-go solutions in no time.
