@@ -121,16 +121,16 @@ Likewise, to set a custom version code and bundle identifier:
 $plist:=New object("CFBundleShortVersionString"; This.versionString; "CFBundleIdentifier"; $identifier)
 ```
 
-**Note**: The version code can also be set using the build XML versioning key. However the bundle identifer is automatically set by the `BUILD APPLICATION`. In the specific case of signing an auto-update client you must be pay attention to when you modify the *Info.plist* file:
+**Note**: The version code can also be set using the build XML versioning key. However the bundle identifer is automatically set by the [`BUILD APPLICATION`](https://doc.4d.com/4Dv19/4D/19.6/BUILD-APPLICATION.301-6270031.en.html). In the specific case of signing an auto-update client you must be pay attention to when you modify the *Info.plist* file:
 
 1. Clone 4D Volume Desktop.app.
-1. Customize *Info.plist* (if necessary) but **don't change the version string**. If you change the version string before you call the build command, `BUILD APPLICATION` will fail.
-1. **Sign the rumtime with additional entilements** (if necessary). You need to sign the runtime before you call `BUILD APPLICATION` because the command will immediately archive it to be embedded in the server. Due to the way `BUILD APPLICATION` signs the created app, any components of the runtime that are already signed will not be signed with lesser entitlements.
+1. Customize *Info.plist* (if necessary) but **don't change the version string**. If you change the version string before you call the build command, [`BUILD APPLICATION`](https://doc.4d.com/4Dv19/4D/19.6/BUILD-APPLICATION.301-6270031.en.html) will fail.
+1. **Sign the rumtime with additional entilements** (if necessary). You need to sign the runtime before you call [`BUILD APPLICATION`](https://doc.4d.com/4Dv19/4D/19.6/BUILD-APPLICATION.301-6270031.en.html) because the command will immediately archive it to be embedded in the server. Due to the way [`BUILD APPLICATION`](https://doc.4d.com/4Dv19/4D/19.6/BUILD-APPLICATION.301-6270031.en.html) signs the created app, any components of the runtime that are already signed will not be signed with lesser entitlements.
 1. Build and sign the server with embedded auto-update client.
 
 ## Customizing the bundle identifier
 
-Apps are identified in the Mac ecosystem by their unique bundle identifier. By default, `BUILD APPLICATION` automatically assigns an identifer in the style of `4d.com.{your app name}.app`. You can change this by modifying the *Info.plist* before you sign the app. 
+Apps are identified in the Mac ecosystem by their unique bundle identifier. By default, [`BUILD APPLICATION`](https://doc.4d.com/4Dv19/4D/19.6/BUILD-APPLICATION.301-6270031.en.html) automatically assigns an identifer in the style of `4d.com.{your app name}.app`. You can change this by modifying the *Info.plist* before you sign the app. 
 
 Although not required for 4D, apps that perform inter-process communication (4D and the CEF web area does this) are advised to share a common prefix in their bundle identifer. This has the effect of indicating to the system that they are part of an app group and not spying on each other. Read more on my forum post: [sandboxing a desktop application](https://discuss.4d.com/t/understanding-cef-crash-and-sandboxing/24884 ).   
 
@@ -138,7 +138,7 @@ Although not required for 4D, apps that perform inter-process communication (4D 
 
 Your app must be given explicit entitlements during the signing process in order to access certain system features. 
 
-By default, the `BUILD APPLICATION` give your app the following entitlements: 
+By default, the [`BUILD APPLICATION`](https://doc.4d.com/4Dv19/4D/19.6/BUILD-APPLICATION.301-6270031.en.html) give your app the following entitlements: 
 
 * com.apple.security.automation.apple-events
 * com.apple.security.cs.allow-dyld-environment-variables
