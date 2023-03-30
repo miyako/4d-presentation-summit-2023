@@ -2,7 +2,7 @@
 
 ## Teaser Message
 
-Do you build your 4D app? Do you have an XML project to configure your application exactly how it ought to be deployed? This session will explain the benefits of building your 4D app and how to take full advantage of the various build options, most of which are not exposed in the standard application build tool.
+Do you build your 4D app? Do you have an XML project to configure your application exactly how it ought to be deployed? This session will explain the benefits of building your 4D app and how to take full advantage of various build options, most of which are not exposed in the standard application build tool.
 
 ## Synopsis 
 
