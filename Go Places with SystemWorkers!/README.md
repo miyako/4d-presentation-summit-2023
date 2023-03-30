@@ -2,7 +2,7 @@
 
 ## Teaser Message
 
-SystemWorkers are here! In this session, learn how this new feature opens the door to infinite possibilities, its strengths and advantages compared to LAUNCH EXTERNAL PROCESS or PHP Execute, with a bonus primer on the ubiquitous Go programming language.
+SystemWorkers are here! In this session, learn how this feature opens the door to new possibilities, its strengths and advantages compared to `LAUNCH EXTERNAL PROCESS` or `PHP Execute`, with a bonus primer on the ubiquitous Go programming language.
 
 ## Synopsis 
 
