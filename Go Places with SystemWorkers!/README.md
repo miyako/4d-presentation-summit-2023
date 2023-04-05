@@ -2,7 +2,7 @@
 
 ## Teaser Message
 
-Keisuke would be the last person to accept that the days of 4D plugins are numbered...but it's the year 2023 and SystemWorkers are here! In this landmark session, learn how the new feature changes everything, with a bonus primer on the ubiquitous Go programming language.
+SystemWorkers are here! In this session, learn how this feature opens the door to new possibilities, its strengths and advantages compared to `LAUNCH EXTERNAL PROCESS` or `PHP Execute`, with a bonus primer on the ubiquitous Go programming language.
 
 ## Synopsis 
 
