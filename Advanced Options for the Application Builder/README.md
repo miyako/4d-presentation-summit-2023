@@ -38,6 +38,8 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||xxxxxLegalTrademark||✓||
 ||xxxxxPrivateBuild||✓||
 ||xxxxxSpecialBuild||✓||
+|v19|ServerStructureFolderName||✓||
+|v19|ClientServerSystemFolderName||✓||
 
 #### Setup
 
@@ -78,8 +80,6 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 |:-------:|:---|:----:|:-------:|:-------|
 |v16|LastDataPathLookup|✓|✓||
 |v18|ClientWinSingleInstance||✓||
-|v19|ServerStructureFolderName||✓||
-|v19|ClientServerSystemFolderName||✓||
 |v20|ShareLocalResourcesOnWindowsClient||✓||
 |v20|ClientUserPreferencesFolderByPath||✓||
 
