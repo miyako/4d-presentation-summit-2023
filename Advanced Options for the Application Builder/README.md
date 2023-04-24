@@ -176,7 +176,7 @@ T.B.C.
 
 T.B.C.
 
-## Hybrid Client
+## Hybrid Desktop
 
 Some ideas:
 
