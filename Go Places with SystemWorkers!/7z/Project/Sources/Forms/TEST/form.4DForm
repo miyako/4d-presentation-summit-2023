@@ -1,0 +1,233 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"events": [
+		"onLoad",
+		"onUnload"
+	],
+	"windowTitle": "",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {}
+		},
+		{
+			"objects": {
+				"button^TEST": {
+					"type": "button",
+					"text": "run",
+					"top": 29,
+					"left": 24,
+					"width": 108,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/button^TEST.4dm",
+					"focusable": false
+				},
+				"title^onResponse": {
+					"type": "text",
+					"text": "onResponse:",
+					"top": 29,
+					"left": 167,
+					"width": 98,
+					"height": 16,
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"count^onResponseCount": {
+					"type": "input",
+					"left": 273,
+					"top": 29,
+					"width": 51,
+					"height": 17,
+					"enterable": false,
+					"contextMenu": "none",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"textAlign": "right",
+					"dataSourceTypeHint": "integer",
+					"dataSource": "Form:C1466.onResponseCount"
+				},
+				"title^onData": {
+					"type": "text",
+					"text": "onData:",
+					"top": 49,
+					"left": 167,
+					"width": 98,
+					"height": 16,
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"count^onDataCount": {
+					"type": "input",
+					"left": 273,
+					"top": 49,
+					"width": 51,
+					"height": 17,
+					"enterable": false,
+					"contextMenu": "none",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"textAlign": "right",
+					"dataSourceTypeHint": "integer",
+					"dataSource": "Form:C1466.onDataCount"
+				},
+				"title^onDataError": {
+					"type": "text",
+					"text": "onDataError:",
+					"top": 69,
+					"left": 167,
+					"width": 98,
+					"height": 16,
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"count^onDataError": {
+					"type": "input",
+					"left": 273,
+					"top": 69,
+					"width": 51,
+					"height": 17,
+					"enterable": false,
+					"contextMenu": "none",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"textAlign": "right",
+					"dataSourceTypeHint": "integer",
+					"dataSource": "Form:C1466.onDataErrorCount"
+				},
+				"title^onTerminate": {
+					"type": "text",
+					"text": "onTerminate:",
+					"top": 89,
+					"left": 167,
+					"width": 98,
+					"height": 16,
+					"textAlign": "right",
+					"fontWeight": "bold"
+				},
+				"count^onTerminate": {
+					"type": "input",
+					"left": 273,
+					"top": 89,
+					"width": 51,
+					"height": 17,
+					"enterable": false,
+					"contextMenu": "none",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"textAlign": "right",
+					"dataSourceTypeHint": "integer",
+					"dataSource": "Form:C1466.onTerminateCount"
+				},
+				"button^stop": {
+					"type": "button",
+					"text": "stop",
+					"top": 64,
+					"left": 24,
+					"width": 108,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/button^stop.4dm",
+					"focusable": false
+				},
+				"thermo^progress": {
+					"type": "progress",
+					"left": 24,
+					"top": 112,
+					"width": 300,
+					"height": 20,
+					"max": 100,
+					"dataSource": "Form:C1466.progress"
+				},
+				"input^stdErr": {
+					"type": "input",
+					"left": 24,
+					"top": 143,
+					"width": 492,
+					"height": 33,
+					"dataSource": "Form:C1466.stdErr",
+					"enterable": false
+				},
+				"input^stdOut": {
+					"type": "input",
+					"left": 24,
+					"top": 183,
+					"width": 492,
+					"height": 33,
+					"dataSource": "Form:C1466.stdOut",
+					"enterable": false
+				},
+				"title^complete response": {
+					"type": "text",
+					"text": "complete response",
+					"top": 29,
+					"left": 347,
+					"width": 158,
+					"height": 16,
+					"textAlign": "left",
+					"fontWeight": "bold",
+					"stroke": "#808080"
+				},
+				"title^output stream": {
+					"type": "text",
+					"text": "output stream",
+					"top": 49,
+					"left": 347,
+					"width": 118,
+					"height": 16,
+					"textAlign": "left",
+					"fontWeight": "bold",
+					"stroke": "#008000",
+					"textDecoration": "underline"
+				},
+				"title^error stream": {
+					"type": "text",
+					"text": "error stream",
+					"top": 69,
+					"left": 347,
+					"width": 118,
+					"height": 16,
+					"textAlign": "left",
+					"fontWeight": "bold",
+					"stroke": "#ff0000",
+					"textDecoration": "underline"
+				},
+				"title^complete execution": {
+					"type": "text",
+					"text": "complete execution",
+					"top": 89,
+					"left": 347,
+					"width": 138,
+					"height": 16,
+					"textAlign": "left",
+					"fontWeight": "bold",
+					"stroke": "#808080"
+				}
+			}
+		}
+	],
+	"geometryStamp": 138,
+	"method": "method.4dm",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
+}
