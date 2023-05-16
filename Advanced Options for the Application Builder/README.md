@@ -61,8 +61,8 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||IPAddress||✓||
 ||PortNumber||✓||
 |v18|DatabaseToEmbedInClientxxxFolder ||✓||
-|v20|MacCompiledDatabaseToWinIncludeIt|✓|✓||
-|v20|MacCompiledDatabaseToWin|✓|✓||
+|v20|[MacCompiledDatabaseToWinIncludeIt](https://doc.4d.com/4Dv20/4D/20/MacCompiledDatabaseToWinIncludeIt.300-6335771.en.html)|✓|✓||
+|v20|[MacCompiledDatabaseToWin](https://doc.4d.com/4Dv20/4D/20/MacCompiledDatabaseToWin.300-6335772.en.html)|✓|✓||
 
 #### Packaging
 
@@ -72,7 +72,7 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||ArrayExcludedPluginID|✓|✓|removes 4D authored plugins|
 ||ArrayExcludedPluginName|✓|✓|removes 3rd party plugins|
 ||IncludeAssociatedFolders|✓|✓|removes Plugins, Resources, Components, Extras|
-|v20|ArrayExcludedModuleName|✓|✓|removes CEF, MeCab, PHP, SpellChecker, 4D Updater|
+|v20|[ArrayExcludedModuleName](https://doc.4d.com/4Dv20/4D/20/ArrayExcludedModuleName.300-6335787.en.html)|✓|✓|removes CEF, MeCab, PHP, SpellChecker, 4D Updater|
 
 #### Installation
 
@@ -80,8 +80,8 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 |:-------:|:---|:----:|:-------:|:-------|
 |v16|LastDataPathLookup|✓|✓||
 |v18|ClientWinSingleInstance||✓||
-|v20|ShareLocalResourcesOnWindowsClient||✓||
-|v20|ClientUserPreferencesFolderByPath||✓||
+|v20|[ShareLocalResourcesOnWindowsClient](https://doc.4d.com/4Dv20/4D/20/ShareLocalResourcesOnWindowsClient.300-6335754.en.html)||✓||
+|v20|[ClientUserPreferencesFolderByPath](https://doc.4d.com/4Dv20/4D/20/ClientUserPreferencesFolderByPath.300-6335755.en.html)||✓||
 
 #### Client Auto Update
 
@@ -96,7 +96,7 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
-|v20|ServerDataCollection||✓||
+|v20|[ServerDataCollection](https://doc.4d.com/4Dv20/4D/20/ServerDataCollection.300-6335775.en.html)||✓||
 
 #### Licensing
 
@@ -115,10 +115,10 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 |v16|ServerSelectionAllowed||✓||
 |v19|AdHocSign|✓|✓||
 |v19|PackProject||✓|generates alterable project|
-|v20|HideDataExplorerMenuItem||✓||
-|v20|HideRuntimeExplorerMenuItem||✓||
-|v20|ServerEmbedsProjectDirectoryFile||✓||
-|v20|UseStandardZipFormat||✓|generates scrambled and encrypted .4DZ|
+|v20|[HideDataExplorerMenuItem](https://doc.4d.com/4Dv20/4D/20/HideDataExplorerMenuItem.300-6335756.en.html)||✓||
+|v20|[HideRuntimeExplorerMenuItem](https://doc.4d.com/4Dv20/4D/20/HideRuntimeExplorerMenuItem.300-6335774.en.html)||✓||
+|v20|[ServerEmbedsProjectDirectoryFile](https://doc.4d.com/4Dv20/4D/20/ServerEmbedsProjectDirectoryFile.300-6335773.en.html)||✓||
+|v20|[UseStandardZipFormat](https://doc.4d.com/4Dv20/4D/20/UseStandardZipFormat.300-6335800.en.html)||✓|generates scrambled and encrypted .4DZ|
 |v20|[HideAdministrationMenuItem](https://doc.4d.com/4Dv20/4D/20/HideAdministrationMenuItem.300-6336259.en.html)||✓|[disable server admin](https://blog.4d.com/integrate-your-own-administration-window-for-4d-server/)|
 
 ## Branding
