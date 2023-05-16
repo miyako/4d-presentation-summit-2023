@@ -127,15 +127,21 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
 * Standard
 
-<img width="360" alt="" src="https://user-images.githubusercontent.com/1725068/220619223-492a0df4-fdda-4040-a7d9-a14c8dd4ae23.png">
+<!-- <img width="360" alt="" src="https://user-images.githubusercontent.com/1725068/220619223-492a0df4-fdda-4040-a7d9-a14c8dd4ae23.png" /> -->
+
+<img width="360" alt="" src="https://github.com/miyako/4d-presentation-summit-2023/assets/1725068/e5bf04ed-a32e-4ec6-9519-89b636f6b438" />
 
 * No List
 
-<img width="360" alt="" src="https://user-images.githubusercontent.com/1725068/221106408-a7b8cba1-bcc6-4895-88b2-11863085d139.png">
+<!-- <img width="360" alt="" src="https://user-images.githubusercontent.com/1725068/221106408-a7b8cba1-bcc6-4895-88b2-11863085d139.png"> -->
+
+<img width="360" alt="" src="https://github.com/miyako/4d-presentation-summit-2023/assets/1725068/79e6cdc5-5e14-4632-8912-230cf7ce0af0" />
 
 * No Edit
 
 <img width="360" alt="" src="https://user-images.githubusercontent.com/1725068/221106422-970ba3c0-6dec-4cad-beb0-2d60f8a00b5b.png">
+
+<img width="360" alt="" src="https://github.com/miyako/4d-presentation-summit-2023/assets/1725068/53f8daa5-77ac-4941-9691-1694cf790a40" />
 
 The 4D logo on the user login dialog can be replaced by a custom icon file[^loginimage]. The file format must be `.png`.
 
@@ -143,7 +149,7 @@ The 4D logo on the user login dialog can be replaced by a custom icon file[^logi
 * Location: Adjacent to the project folder  
 * Size: `80x80`  
 
-<img width="64" alt="icon" src="https://user-images.githubusercontent.com/1725068/220619757-ba13915a-904a-4b1e-ae2d-772ad1d3d182.png" />
+<!-- <img width="64" alt="icon" src="https://user-images.githubusercontent.com/1725068/220619757-ba13915a-904a-4b1e-ae2d-772ad1d3d182.png" /> -->
 
 <img width="64" alt="icon" src="https://github.com/miyako/4d-presentation-summit-2023/assets/1725068/85763d0e-eef3-44f0-a96e-d8238c2fde36" />
 
