@@ -119,6 +119,7 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 |v20|HideRuntimeExplorerMenuItem||✓||
 |v20|ServerEmbedsProjectDirectoryFile||✓||
 |v20|UseStandardZipFormat||✓|generates scrambled and encrypted .4DZ|
+|v20|HideAdministrationMenuItem||✓|disable server admin|
 
 ## Branding
 
