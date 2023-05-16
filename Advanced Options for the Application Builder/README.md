@@ -119,7 +119,7 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 |v20|HideRuntimeExplorerMenuItem||✓||
 |v20|ServerEmbedsProjectDirectoryFile||✓||
 |v20|UseStandardZipFormat||✓|generates scrambled and encrypted .4DZ|
-|v20|HideAdministrationMenuItem||✓|disable server admin|
+|v20|[HideAdministrationMenuItem](https://doc.4d.com/4Dv20/4D/20/HideAdministrationMenuItem.300-6336259.en.html)||✓|[disable server admin](https://blog.4d.com/integrate-your-own-administration-window-for-4d-server/)|
 
 ## Branding
 
