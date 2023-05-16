@@ -143,7 +143,9 @@ The 4D logo on the user login dialog can be replaced by a custom icon file[^logi
 * Location: Adjacent to the project folder  
 * Size: `80x80`  
 
-<img width="64" alt="icon" src="https://user-images.githubusercontent.com/1725068/220619757-ba13915a-904a-4b1e-ae2d-772ad1d3d182.png">
+<img width="64" alt="icon" src="https://user-images.githubusercontent.com/1725068/220619757-ba13915a-904a-4b1e-ae2d-772ad1d3d182.png" />
+
+<img width="64" alt="icon" src="https://github.com/miyako/4d-presentation-summit-2023/assets/1725068/85763d0e-eef3-44f0-a96e-d8238c2fde36" />
 
 The 4D application icon[^CustomIcon] can be replaced by a custom icon file. The file format must be `.icns`[^icns] on Mac and `.ico`[^ico] on Windows. 
 
