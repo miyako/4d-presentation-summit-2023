@@ -139,7 +139,7 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
 * No Edit
 
-<img width="360" alt="" src="https://user-images.githubusercontent.com/1725068/221106422-970ba3c0-6dec-4cad-beb0-2d60f8a00b5b.png">
+<!-- <img width="360" alt="" src="https://user-images.githubusercontent.com/1725068/221106422-970ba3c0-6dec-4cad-beb0-2d60f8a00b5b.png"> -->
 
 <img width="360" alt="" src="https://github.com/miyako/4d-presentation-summit-2023/assets/1725068/53f8daa5-77ac-4941-9691-1694cf790a40" />
 
