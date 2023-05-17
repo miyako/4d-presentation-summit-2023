@@ -61,8 +61,8 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||IPAddress||✓||
 ||PortNumber||✓||
 |v18|DatabaseToEmbedInClientxxxFolder ||✓||
-|v20|MacCompiledDatabaseToWinIncludeIt|✓|✓||
-|v20|MacCompiledDatabaseToWin|✓|✓||
+|v20|[MacCompiledDatabaseToWinIncludeIt](https://doc.4d.com/4Dv20/4D/20/MacCompiledDatabaseToWinIncludeIt.300-6335771.en.html)|✓|✓||
+|v20|[MacCompiledDatabaseToWin](https://doc.4d.com/4Dv20/4D/20/MacCompiledDatabaseToWin.300-6335772.en.html)|✓|✓||
 
 #### Packaging
 
@@ -72,7 +72,7 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 ||ArrayExcludedPluginID|✓|✓|removes 4D authored plugins|
 ||ArrayExcludedPluginName|✓|✓|removes 3rd party plugins|
 ||IncludeAssociatedFolders|✓|✓|removes Plugins, Resources, Components, Extras|
-|v20|ArrayExcludedModuleName|✓|✓|removes CEF, MeCab, PHP, SpellChecker, 4D Updater|
+|v20|[ArrayExcludedModuleName](https://doc.4d.com/4Dv20/4D/20/ArrayExcludedModuleName.300-6335787.en.html)|✓|✓|removes CEF, MeCab, PHP, SpellChecker, 4D Updater|
 
 #### Installation
 
@@ -80,8 +80,8 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 |:-------:|:---|:----:|:-------:|:-------|
 |v16|LastDataPathLookup|✓|✓||
 |v18|ClientWinSingleInstance||✓||
-|v20|ShareLocalResourcesOnWindowsClient||✓||
-|v20|ClientUserPreferencesFolderByPath||✓||
+|v20|[ShareLocalResourcesOnWindowsClient](https://doc.4d.com/4Dv20/4D/20/ShareLocalResourcesOnWindowsClient.300-6335754.en.html)||✓||
+|v20|[ClientUserPreferencesFolderByPath](https://doc.4d.com/4Dv20/4D/20/ClientUserPreferencesFolderByPath.300-6335755.en.html)||✓||
 
 #### Client Auto Update
 
@@ -96,7 +96,7 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
 | Version | Key | Tool | Command | Remarks |
 |:-------:|:---|:----:|:-------:|:-------|
-|v20|ServerDataCollection||✓||
+|v20|[ServerDataCollection](https://doc.4d.com/4Dv20/4D/20/ServerDataCollection.300-6335775.en.html)||✓||
 
 #### Licensing
 
@@ -115,10 +115,11 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 |v16|ServerSelectionAllowed||✓||
 |v19|AdHocSign|✓|✓||
 |v19|PackProject||✓|generates alterable project|
-|v20|HideDataExplorerMenuItem||✓||
-|v20|HideRuntimeExplorerMenuItem||✓||
-|v20|ServerEmbedsProjectDirectoryFile||✓||
-|v20|UseStandardZipFormat||✓|generates scrambled and encrypted .4DZ|
+|v20|[HideDataExplorerMenuItem](https://doc.4d.com/4Dv20/4D/20/HideDataExplorerMenuItem.300-6335756.en.html)||✓||
+|v20|[HideRuntimeExplorerMenuItem](https://doc.4d.com/4Dv20/4D/20/HideRuntimeExplorerMenuItem.300-6335774.en.html)||✓||
+|v20|[ServerEmbedsProjectDirectoryFile](https://doc.4d.com/4Dv20/4D/20/ServerEmbedsProjectDirectoryFile.300-6335773.en.html)||✓||
+|v20|[UseStandardZipFormat](https://doc.4d.com/4Dv20/4D/20/UseStandardZipFormat.300-6335800.en.html)||✓|generates scrambled and encrypted .4DZ|
+|v20|[HideAdministrationMenuItem](https://doc.4d.com/4Dv20/4D/20/HideAdministrationMenuItem.300-6336259.en.html)||✓|[disable server admin](https://blog.4d.com/integrate-your-own-administration-window-for-4d-server/)|
 
 ## Branding
 
@@ -126,15 +127,21 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 
 * Standard
 
-<img width="360" alt="" src="https://user-images.githubusercontent.com/1725068/220619223-492a0df4-fdda-4040-a7d9-a14c8dd4ae23.png">
+<!-- <img width="360" alt="" src="https://user-images.githubusercontent.com/1725068/220619223-492a0df4-fdda-4040-a7d9-a14c8dd4ae23.png" /> -->
+
+<img width="360" alt="" src="https://github.com/miyako/4d-presentation-summit-2023/assets/1725068/e5bf04ed-a32e-4ec6-9519-89b636f6b438" />
 
 * No List
 
-<img width="360" alt="" src="https://user-images.githubusercontent.com/1725068/221106408-a7b8cba1-bcc6-4895-88b2-11863085d139.png">
+<!-- <img width="360" alt="" src="https://user-images.githubusercontent.com/1725068/221106408-a7b8cba1-bcc6-4895-88b2-11863085d139.png"> -->
+
+<img width="360" alt="" src="https://github.com/miyako/4d-presentation-summit-2023/assets/1725068/79e6cdc5-5e14-4632-8912-230cf7ce0af0" />
 
 * No Edit
 
-<img width="360" alt="" src="https://user-images.githubusercontent.com/1725068/221106422-970ba3c0-6dec-4cad-beb0-2d60f8a00b5b.png">
+<!-- <img width="360" alt="" src="https://user-images.githubusercontent.com/1725068/221106422-970ba3c0-6dec-4cad-beb0-2d60f8a00b5b.png"> -->
+
+<img width="360" alt="" src="https://github.com/miyako/4d-presentation-summit-2023/assets/1725068/53f8daa5-77ac-4941-9691-1694cf790a40" />
 
 The 4D logo on the user login dialog can be replaced by a custom icon file[^loginimage]. The file format must be `.png`.
 
@@ -142,7 +149,9 @@ The 4D logo on the user login dialog can be replaced by a custom icon file[^logi
 * Location: Adjacent to the project folder  
 * Size: `80x80`  
 
-<img width="64" alt="icon" src="https://user-images.githubusercontent.com/1725068/220619757-ba13915a-904a-4b1e-ae2d-772ad1d3d182.png">
+<!-- <img width="64" alt="icon" src="https://user-images.githubusercontent.com/1725068/220619757-ba13915a-904a-4b1e-ae2d-772ad1d3d182.png" /> -->
+
+<img width="64" alt="icon" src="https://github.com/miyako/4d-presentation-summit-2023/assets/1725068/85763d0e-eef3-44f0-a96e-d8238c2fde36" />
 
 The 4D application icon[^CustomIcon] can be replaced by a custom icon file. The file format must be `.icns`[^icns] on Mac and `.ico`[^ico] on Windows. 
 
@@ -181,6 +190,10 @@ T.B.C.
 Some ideas:
 
 * Clear Local Cache before connecting to server
+
+## More custumisation
+
+* [Help Menu](https://blog.4d.com/create-a-help-menu-with-a-simple-collection/)
 
 
 
