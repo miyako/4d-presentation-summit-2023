@@ -191,6 +191,10 @@ Some ideas:
 
 * Clear Local Cache before connecting to server
 
+## More custumisation
+
+* [Help Menu](https://blog.4d.com/create-a-help-menu-with-a-simple-collection/)
+
 
 
 [^hybrid]: An app merged with *4D Volume Desktop* that intially launches as a desktop app instead of a client app that automatically connecting to a peer server. The startup project can execute with or without a local database. (v18 or later)
