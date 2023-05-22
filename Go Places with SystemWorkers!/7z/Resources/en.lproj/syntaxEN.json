@@ -327,8 +327,29 @@
 		"_inheritedFrom_": "_CLI_Controller"
 	},
 	"SevenZip": {
+		"extract()": {
+			"Syntax": "**.extract**( *destination* : 4D.Folder; *source* : Variant )->this : cs.SevenZip.SevenZip",
+			"Params": [
+				[
+					"destination",
+					"4D.Folder",
+					"->"
+				],
+				[
+					"source",
+					"Variant",
+					"->"
+				],
+				[
+					"this",
+					"cs.SevenZip.SevenZip",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
 		"add()": {
-			"Syntax": "**.add**( *destination* : 4D.File; *sources* : Collection )->this : cs.SevenZip.SevenZip",
+			"Syntax": "**.add**( *destination* : 4D.File; *source* : Variant )->this : cs.SevenZip.SevenZip",
 			"Params": [
 				[
 					"destination",
@@ -336,8 +357,8 @@
 					"->"
 				],
 				[
-					"sources",
-					"Collection",
+					"source",
+					"Variant",
 					"->"
 				],
 				[

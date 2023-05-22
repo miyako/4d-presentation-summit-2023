@@ -4,12 +4,16 @@
 
 ## .add()
 
-**.add**($destination : 4D.File; $sources : Collection)->$this : cs.SevenZip
+**.add**($destination : 4D.File; $sources : Variant)->$this : cs.SevenZip
 
-Adds a collection of `4D.File` or `4D.Folder` objects to an archive.
+Adds a collection of `4D.File` or `4D.Folder` objects to an archive. Alternatively archive a single object.
+
+Chained calls are queued as sequential tasks.
 
 ## .extract()
 
-**.extract**($source : 4D.File; $destination : 4D.Folder)->$this : cs.SevenZip
+**.extract**($destination : 4D.Folder; $sources : Variant)->$this : cs.SevenZip
 
 Extracts all files from an archive.
+
+Chained calls are queued as sequential tasks.

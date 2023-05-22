@@ -25,6 +25,10 @@ Else
 	
 	$zipper.add($z; New collection:C1472($a; $b; $c))
 	
+	$d:=Folder:C1567(fk desktop folder:K87:19)
+	
+	$zipper.extract($d; $z)
+	
 	//a worker is needed to handle event callbacks
 	
 End if 
