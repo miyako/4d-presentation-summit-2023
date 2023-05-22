@@ -1,10 +1,12 @@
 Class constructor($CLI : cs:C1710._CLI)
 	
-	This:C1470.onData:=This:C1470._onEvent
-	This:C1470.onDataError:=This:C1470._onEvent
-	This:C1470.onError:=This:C1470._onEvent
-	This:C1470.onResponse:=This:C1470._onEvent
-	This:C1470.onTerminate:=This:C1470._onEvent
+	//use default event hander if not defined in subclass definition
+	For each ($event; New collection:C1472("onData"; "onDataError"; "onError"; "onResponse"; "onTerminate"))
+		If (Not:C34(OB Instance of:C1731(This:C1470[$event]; 4D:C1709.Function)))
+			This:C1470[$event]:=This:C1470._onEvent
+		End if 
+	End for each 
+	
 	This:C1470.timeout:=Null:C1517
 	This:C1470.dataType:="text"
 	This:C1470.encoding:="UTF-8"
@@ -68,7 +70,7 @@ Function terminate()
 	
 	This:C1470._terminate()
 	
-	//MARK:-
+	//MARK: private methods
 	
 Function _onEvent($worker : 4D:C1709.SystemWorker; $params : Object)
 	

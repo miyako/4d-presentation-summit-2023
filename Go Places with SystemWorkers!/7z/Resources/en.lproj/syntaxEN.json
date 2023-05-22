@@ -1,27 +1,18 @@
 {
 	"_method_": {},
 	"cs.SevenZip": {
-		"TEST": {
-			"new()": {
-				"Syntax": "**.new**()",
-				"Params": [],
-				"Summary": ""
-			}
-		},
-		"SevenZip": {
-			"new()": {
-				"Syntax": "**.new**()",
-				"Params": [],
-				"Summary": ""
-			}
-		},
 		"_CLI": {
 			"new()": {
-				"Syntax": "**.new**( *executableName* : Text )",
+				"Syntax": "**.new**( *executableName* : Text; *controller* : 4D.Class )",
 				"Params": [
 					[
 						"executableName",
 						"Text",
+						"->"
+					],
+					[
+						"controller",
+						"4D.Class",
 						"->"
 					]
 				],
@@ -40,124 +31,34 @@
 				],
 				"Summary": ""
 			}
+		},
+		"_TEST_Controller": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"SevenZip": {
+			"new()": {
+				"Syntax": "**.new**( *controller* : 4D.Class )",
+				"Params": [
+					[
+						"controller",
+						"4D.Class",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"_Basic_Controller": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
 		}
-	},
-	"TEST": {
-		"onTerminate()": {
-			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
-			"Params": [
-				[
-					"worker",
-					"4D.SystemWorker",
-					"->"
-				],
-				[
-					"params",
-					"Object",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"onResponse()": {
-			"Syntax": "**.onResponse**( *worker* : 4D.SystemWorker; *params* : Object )",
-			"Params": [
-				[
-					"worker",
-					"4D.SystemWorker",
-					"->"
-				],
-				[
-					"params",
-					"Object",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"onDataError()": {
-			"Syntax": "**.onDataError**( *worker* : 4D.SystemWorker; *params* : Object )",
-			"Params": [
-				[
-					"worker",
-					"4D.SystemWorker",
-					"->"
-				],
-				[
-					"params",
-					"Object",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"get isRunning()": {
-			"Syntax": "**.get isRunning**()->isRunning : Boolean",
-			"Params": [
-				[
-					"isRunning",
-					"Boolean",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"onData()": {
-			"Syntax": "**.onData**( *worker* : 4D.SystemWorker; *params* : Object )",
-			"Params": [
-				[
-					"worker",
-					"4D.SystemWorker",
-					"->"
-				],
-				[
-					"params",
-					"Object",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"clear()": {
-			"Syntax": "**.clear**()->this : cs.SevenZip.TEST",
-			"Params": [
-				[
-					"this",
-					"cs.SevenZip.TEST",
-					"<-"
-				]
-			],
-			"Summary": ""
-		}
-	},
-	"SevenZip": {
-		"add()": {
-			"Syntax": "**.add**( *destination* : 4D.File; *sources* : Collection )->this : cs.SevenZip.SevenZip",
-			"Params": [
-				[
-					"destination",
-					"4D.File",
-					"->"
-				],
-				[
-					"sources",
-					"Collection",
-					"->"
-				],
-				[
-					"this",
-					"cs.SevenZip.SevenZip",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"terminate()": {
-			"Syntax": "**.terminate**()",
-			"Params": [],
-			"Summary": ""
-		},
-		"_inheritedFrom_": "_CLI"
 	},
 	"_CLI": {
 		"quote()": {
@@ -342,5 +243,183 @@
 			],
 			"Summary": ""
 		}
+	},
+	"_TEST_Controller": {
+		"onTerminate()": {
+			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onResponse()": {
+			"Syntax": "**.onResponse**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onDataError()": {
+			"Syntax": "**.onDataError**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onData()": {
+			"Syntax": "**.onData**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"clear()": {
+			"Syntax": "**.clear**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"stop()": {
+			"Syntax": "**.stop**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"start()": {
+			"Syntax": "**.start**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_CLI_Controller"
+	},
+	"SevenZip": {
+		"add()": {
+			"Syntax": "**.add**( *destination* : 4D.File; *sources* : Collection )->this : cs.SevenZip.SevenZip",
+			"Params": [
+				[
+					"destination",
+					"4D.File",
+					"->"
+				],
+				[
+					"sources",
+					"Collection",
+					"->"
+				],
+				[
+					"this",
+					"cs.SevenZip.SevenZip",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"terminate()": {
+			"Syntax": "**.terminate**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_CLI"
+	},
+	"_Basic_Controller": {
+		"onTerminate()": {
+			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onResponse()": {
+			"Syntax": "**.onResponse**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onData()": {
+			"Syntax": "**.onData**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onDataError()": {
+			"Syntax": "**.onDataError**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_CLI_Controller"
 	}
 }

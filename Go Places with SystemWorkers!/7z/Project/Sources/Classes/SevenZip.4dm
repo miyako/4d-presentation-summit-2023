@@ -1,8 +1,8 @@
 Class extends _CLI
 
-Class constructor()
+Class constructor($controller : 4D:C1709.Class)
 	
-	Super:C1705("7z")
+	Super:C1705("7z"; $controller)
 	
 Function terminate()
 	
@@ -26,7 +26,7 @@ resolve filesystem path
 			: (OB Instance of:C1731($source; 4D:C1709.Folder))
 				$source:=Folder:C1567($source.platformPath; fk platform path:K87:2)
 		End case 
-		$command:=This:C1470.executablePath
+		$command:=This:C1470.quote(This:C1470.executablePath)
 		$command:=$command+" a -snl -bso1 -bsp2 -y "+This:C1470.quote($destination.path)+" "+This:C1470.quote($source.path)
 /*
 -snl : store synbolic links as links (tar)

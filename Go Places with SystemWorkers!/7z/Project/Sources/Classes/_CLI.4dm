@@ -1,4 +1,4 @@
-Class constructor($executableName : Text)
+Class constructor($executableName : Text; $controller : 4D:C1709.Class)
 	
 	This:C1470._name:=OB Class:C1730(This:C1470).name
 	
@@ -24,7 +24,12 @@ Class constructor($executableName : Text)
 	End case 
 	
 	This:C1470._executableFile:=File:C1566(This:C1470.currentDirectory.file(This:C1470.executableName).path)
-	This:C1470._controller:=cs:C1710._CLI_Controller.new(This:C1470)
+	
+	If ($controller=Null:C1517)
+		This:C1470._controller:=cs:C1710._CLI_Controller.new(This:C1470)  //default controller
+	Else 
+		This:C1470._controller:=$controller.new(This:C1470)
+	End if 
 	
 	This:C1470._chmod()
 	

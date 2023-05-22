@@ -1,11 +1,7 @@
 {
 	"forms": {
 		"TEST": {
-			"timeStamp": "2023-04-25T02:44:29Z",
-			"destination": "detailScreen"
-		},
-		"ex": {
-			"timeStamp": "2023-04-25T04:07:46Z",
+			"timeStamp": "2023-05-22T03:13:31Z",
 			"destination": "detailScreen"
 		}
 	}

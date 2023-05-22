@@ -3,14 +3,12 @@
 		"version": "1",
 		"kind": "form"
 	},
-	"windowSizingX": "variable",
-	"windowSizingY": "variable",
+	"windowSizingX": "fixed",
+	"windowSizingY": "fixed",
 	"windowMinWidth": 0,
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
-	"rightMargin": 20,
-	"bottomMargin": 20,
 	"events": [
 		"onLoad",
 		"onUnload"
@@ -23,9 +21,9 @@
 		},
 		{
 			"objects": {
-				"button^TEST": {
+				"button^start": {
 					"type": "button",
-					"text": "run",
+					"text": "start",
 					"top": 29,
 					"left": 24,
 					"width": 108,
@@ -33,7 +31,7 @@
 					"events": [
 						"onClick"
 					],
-					"method": "ObjectMethods/button^TEST.4dm",
+					"method": "ObjectMethods/button^start.4dm",
 					"focusable": false
 				},
 				"title^onResponse": {
@@ -68,7 +66,8 @@
 					"width": 98,
 					"height": 16,
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "bold",
+					"fill": "#b1c4dd"
 				},
 				"count^onDataCount": {
 					"type": "input",
@@ -92,7 +91,8 @@
 					"width": 98,
 					"height": 16,
 					"textAlign": "right",
-					"fontWeight": "bold"
+					"fontWeight": "bold",
+					"fill": "#ffb6c1"
 				},
 				"count^onDataError": {
 					"type": "input",
@@ -157,20 +157,22 @@
 				"input^stdErr": {
 					"type": "input",
 					"left": 24,
-					"top": 143,
+					"top": 183,
 					"width": 492,
 					"height": 33,
 					"dataSource": "Form:C1466.stdErr",
-					"enterable": false
+					"enterable": false,
+					"fill": "#ffb6c1"
 				},
 				"input^stdOut": {
 					"type": "input",
 					"left": 24,
-					"top": 183,
+					"top": 143,
 					"width": 492,
 					"height": 33,
 					"dataSource": "Form:C1466.stdOut",
-					"enterable": false
+					"enterable": false,
+					"fill": "#b1c4dd"
 				},
 				"title^complete response": {
 					"type": "text",
@@ -192,8 +194,8 @@
 					"height": 16,
 					"textAlign": "left",
 					"fontWeight": "bold",
-					"stroke": "#008000",
-					"textDecoration": "underline"
+					"stroke": "#808080",
+					"textDecoration": "none"
 				},
 				"title^error stream": {
 					"type": "text",
@@ -204,8 +206,8 @@
 					"height": 16,
 					"textAlign": "left",
 					"fontWeight": "bold",
-					"stroke": "#ff0000",
-					"textDecoration": "underline"
+					"stroke": "#808080",
+					"textDecoration": "none"
 				},
 				"title^complete execution": {
 					"type": "text",
@@ -217,17 +219,40 @@
 					"textAlign": "left",
 					"fontWeight": "bold",
 					"stroke": "#808080"
+				},
+				"Button^Warning": {
+					"type": "button",
+					"text": "This form must be run with an instance of cs._CLI_Controller",
+					"top": 84,
+					"left": 40,
+					"width": 456,
+					"height": 57,
+					"events": [],
+					"imageHugsTitle": false,
+					"style": "custom",
+					"focusable": false,
+					"action": "",
+					"right": 496,
+					"visibility": "hidden"
 				}
 			}
 		}
 	],
-	"geometryStamp": 138,
+	"geometryStamp": 185,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {
-			"View 1": {}
+			"View 1": {},
+			"Warning": {
+				"visible": false,
+				"objects": [
+					"Button^Warning"
+				]
+			}
 		}
-	}
+	},
+	"width": 536,
+	"height": 236
 }

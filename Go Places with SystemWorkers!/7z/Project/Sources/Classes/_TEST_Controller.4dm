@@ -1,25 +1,30 @@
+Class extends _CLI_Controller
+
+property _startButtonName; _stopButtonName : Text
+property _stdIn; _stdErr; _stdOut : Text
+
 Class constructor
 	
-	//for display
+	Super:C1705()
 	
-	This:C1470.stdIn:=""
-	This:C1470._stdErr:=""
-	This:C1470._stdOut:=""
-	This:C1470.progress:=0
-	This:C1470.onDataCount:=0
-	This:C1470.onDataErrorCount:=0
-	This:C1470.onResponseCount:=0
-	This:C1470.onTerminateCount:=0
+	This:C1470._startButtonName:="button^start"
+	This:C1470._stopButtonName:="button^stop"
 	
-	//for buffering
+Function start()
 	
-	This:C1470._stdIn:=""
-	This:C1470._stdErr:=""
-	This:C1470._stdOut:=""
+	This:C1470.clear()
 	
-Function clear()->$this : cs:C1710.TEST
+	OBJECT SET ENABLED:C1123(*; This:C1470._startButtonName; False:C215)
+	OBJECT SET ENABLED:C1123(*; This:C1470._stopButtonName; True:C214)
 	
-	$this:=This:C1470
+Function stop()
+	
+	This:C1470.clear()
+	
+	OBJECT SET ENABLED:C1123(*; This:C1470._startButtonName; True:C214)
+	OBJECT SET ENABLED:C1123(*; This:C1470._stopButtonName; False:C215)
+	
+Function clear()
 	
 	Form:C1466.stdIn:=""
 	Form:C1466.stdErr:=""
@@ -29,26 +34,32 @@ Function clear()->$this : cs:C1710.TEST
 	Form:C1466.onDataErrorCount:=0
 	Form:C1466.onResponseCount:=0
 	Form:C1466.onTerminateCount:=0
-	Form:C1466._stdIn:=""
-	Form:C1466._stdErr:=""
-	Form:C1466._stdOut:=""
+	
+	This:C1470._stdIn:=""
+	This:C1470._stdErr:=""
+	This:C1470._stdOut:=""
+	
+	//MARK: inherited from cs._CLI_Controller
 	
 Function onDataError($worker : 4D:C1709.SystemWorker; $params : Object)
 	
-	If (Form:C1466.isRunning)
+	//Form is and instance of cs.SevenZip
+	//This is and instance of cs._TEST_Controller
+	
+	If (Form:C1466#Null:C1517)
 		
 		Case of 
 			: ($worker.dataType="text")
 				
-				Form:C1466._stdErr+=$params.data
+				This:C1470._stdErr+=$params.data
 				
 			: ($worker.dataType="blob")
 				
-				Form:C1466._stdErr+=Convert to text:C1012($params.data; Form:C1466.sevenZip.encoding)
+				This:C1470._stdErr+=Convert to text:C1012($params.data; This:C1470.encoding)
 				
 		End case 
 		
-		$data:=Form:C1466._stdErr
+		$data:=This:C1470._stdErr
 		
 		ARRAY LONGINT:C221($pos; 0)
 		ARRAY LONGINT:C221($len; 0)
@@ -59,12 +70,12 @@ Function onDataError($worker : 4D:C1709.SystemWorker; $params : Object)
 				$size:=Num:C11(Substring:C12($data; $pos{2}; $len{2}))
 				$flag:=Substring:C12($data; $pos{3}; $len{3})
 				Form:C1466.stdErr:=String:C10($progress; "^^0")+"%"+" "+Substring:C12($data; $pos{4}; $len{4})
-				Form:C1466._stdErr:=""
+				This:C1470._stdErr:=""
 				Form:C1466.progress:=$progress
 			: (Match regex:C1019("\\s*(\\d+)%\\s+(.+)"; $data; 1; $pos; $len))
 				$progress:=Num:C11(Substring:C12($data; $pos{1}; $len{1}))
 				Form:C1466.stdErr:=String:C10($progress; "^^0")+"%"+" "+Substring:C12($data; $pos{2}; $len{2})
-				Form:C1466._stdErr:=""
+				This:C1470._stdErr:=""
 				Form:C1466.progress:=$progress
 		End case 
 		
@@ -74,22 +85,25 @@ Function onDataError($worker : 4D:C1709.SystemWorker; $params : Object)
 	
 Function onData($worker : 4D:C1709.SystemWorker; $params : Object)
 	
-	If (Form:C1466.isRunning)
+	//Form is and instance of cs.SevenZip
+	//This is and instance of cs._TEST_Controller
+	
+	If (Form:C1466#Null:C1517)
 		
 		Case of 
 			: ($worker.dataType="text")
 				
-				Form:C1466._stdOut+=$params.data
+				This:C1470._stdOut+=$params.data
 				
 			: ($worker.dataType="blob")
 				
-				Form:C1466._stdOut+=Convert to text:C1012($params.data; Form:C1466.sevenZip.encoding)
+				This:C1470._stdOut+=Convert to text:C1012($params.data; This:C1470.encoding)
 				
 		End case 
 		
-		$data:=Form:C1466._stdOut
+		$data:=This:C1470._stdOut
 		
-		Form:C1466.stdOut+=Split string:C1554($data; Form:C1466.sevenZip.EOL; sk ignore empty strings:K86:1 | sk trim spaces:K86:2).join("\r")
+		Form:C1466.stdOut+=Split string:C1554($data; Form:C1466.EOL; sk ignore empty strings:K86:1 | sk trim spaces:K86:2).join("\r")
 		
 		Form:C1466.onDataCount+=1
 		
@@ -97,7 +111,10 @@ Function onData($worker : 4D:C1709.SystemWorker; $params : Object)
 	
 Function onResponse($worker : 4D:C1709.SystemWorker; $params : Object)
 	
-	If (Form:C1466.isRunning)
+	//Form is and instance of cs.SevenZip
+	//This is and instance of cs._TEST_Controller
+	
+	If (Form:C1466#Null:C1517)
 		
 		Form:C1466.onResponseCount+=1
 		
@@ -109,21 +126,20 @@ Function onResponse($worker : 4D:C1709.SystemWorker; $params : Object)
 	
 Function onTerminate($worker : 4D:C1709.SystemWorker; $params : Object)
 	
-	If (Form:C1466.isRunning)
+	//Form is and instance of cs.SevenZip
+	//This is and instance of cs._TEST_Controller
+	
+	If (Form:C1466#Null:C1517)
 		
 		Form:C1466.progress:=0
 		Form:C1466.onTerminateCount+=1
 		
 		If (This:C1470.complete)
 			//end of the queue
-			OBJECT SET ENABLED:C1123(*; "button^stop"; False:C215)
-			OBJECT SET ENABLED:C1123(*; "button^TEST"; True:C214)
+			OBJECT SET ENABLED:C1123(*; This:C1470._stopButtonName; False:C215)
+			OBJECT SET ENABLED:C1123(*; This:C1470._startButtonName; True:C214)
 			Form:C1466.stdOut:=""
 			Form:C1466.stdErr:=""
 		End if 
 		
 	End if 
-	
-Function get isRunning()->$isRunning : Boolean
-	
-	$isRunning:=(Form:C1466#Null:C1517)
