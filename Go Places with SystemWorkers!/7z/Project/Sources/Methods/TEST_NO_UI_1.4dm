@@ -7,6 +7,8 @@ If (Count parameters:C259=0)
 	
 Else 
 	
+	TRACE:C157
+	
 	$temp:=Folder:C1567(Temporary folder:C486; fk platform path:K87:2)
 	
 	$a:=$temp.file("a.txt")

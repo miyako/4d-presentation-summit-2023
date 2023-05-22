@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"invisible":true}
 #DECLARE($params : Object)
 
 If (Count parameters:C259=0)

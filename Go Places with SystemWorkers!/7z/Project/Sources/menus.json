@@ -22,6 +22,22 @@
 			"title": ":xliff:CommonMenuFile",
 			"items": [
 				{
+					"title": "TEST_NO_UI_0",
+					"method": "TEST_NO_UI_0"
+				},
+				{
+					"title": "TEST_NO_UI_1",
+					"method": "TEST_NO_UI_1"
+				},
+				{
+					"title": "TEST_NO_UI_2",
+					"method": "TEST_NO_UI_2"
+				},
+				{
+					"title": "TEST_UI",
+					"method": "TEST_UI"
+				},
+				{
 					"title": ":xliff:CommonMenuItemQuit",
 					"shortcutAccel": true,
 					"shortcutKey": "Q",

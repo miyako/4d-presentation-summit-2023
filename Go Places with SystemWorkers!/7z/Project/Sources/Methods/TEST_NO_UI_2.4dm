@@ -7,7 +7,13 @@ If (Count parameters:C259=0)
 	
 Else 
 	
-	$app:=Folder:C1567(Application file:C491; fk platform path:K87:2)
+	TRACE:C157
+	
+	If (Is Windows:C1573)
+		$app:=File:C1566(Application file:C491; fk platform path:K87:2).parent
+	Else 
+		$app:=Folder:C1567(Application file:C491; fk platform path:K87:2)
+	End if 
 	
 	$tar:=Folder:C1567(fk desktop folder:K87:19).file($app.fullName+".tar")
 	
