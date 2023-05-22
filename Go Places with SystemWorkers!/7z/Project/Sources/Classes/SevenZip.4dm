@@ -8,14 +8,20 @@ Function terminate()
 	
 	This:C1470.controller.terminate()
 	
-Function add($destination : 4D:C1709.File; $sources : Collection)->$this : cs:C1710.SevenZip
+Function add($destination : 4D:C1709.File; $source : Variant)->$this : cs:C1710.SevenZip
 	
 	$this:=This:C1470
 	
-	var $commands : Collection
+	var $commands; $sources : Collection
 	$commands:=New collection:C1472
 	
-	var $source : Object
+	Case of 
+		: (Value type:C1509($source)=Is object:K8:27)
+			$sources:=New collection:C1472($source)
+		: (Value type:C1509($source)=Is collection:K8:32)
+			$sources:=$source
+	End case 
+	
 	For each ($source; $sources)
 /*
 resolve filesystem path

@@ -7,23 +7,17 @@ If (Count parameters:C259=0)
 	
 Else 
 	
-	$temp:=Folder:C1567(Temporary folder:C486; fk platform path:K87:2)
+	$app:=Folder:C1567(Application file:C491; fk platform path:K87:2)
 	
-	$a:=$temp.file("a.txt")
-	$b:=$temp.file("b.txt")
-	$c:=$temp.file("c.txt")
-	
-	$files:=[$a; $b; $c]
-	
-	For each ($file; $files)
-		$file.setText($file.fullName)
-	End for each 
-	
-	$z:=Folder:C1567(fk desktop folder:K87:19).file("test.7z")
+	$tar:=Folder:C1567(fk desktop folder:K87:19).file($app.fullName+".tar")
 	
 	$zipper:=cs:C1710.SevenZip.new(cs:C1710._Basic_Controller)
 	
-	$zipper.add($z; New collection:C1472($a; $b; $c))
+	$zipper.add($tar; $app)
+	
+	$zip:=Folder:C1567(fk desktop folder:K87:19).file($app.fullName+".7z")
+	
+	$zipper.add($zip; $tar)
 	
 	//a subclass of cs._CLI_Controller can be used to intercept events
 	

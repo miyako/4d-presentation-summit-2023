@@ -11,6 +11,6 @@ If ($event.code=On Clicked:K2:4)
 	End if 
 	
 	Form:C1466.controller.start()
-	Form:C1466.add($tar; New collection:C1472($app))
+	Form:C1466.add($tar; $app)
 	
 End if 
