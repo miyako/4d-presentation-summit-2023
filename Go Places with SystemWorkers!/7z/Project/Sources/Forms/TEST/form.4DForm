@@ -234,11 +234,20 @@
 					"action": "",
 					"right": 496,
 					"visibility": "hidden"
+				},
+				"Input": {
+					"type": "input",
+					"left": 148,
+					"top": 31,
+					"width": 105,
+					"height": 16,
+					"dataSource": "Form:C1466.progress",
+					"dataSourceTypeHint": "number"
 				}
 			}
 		}
 	],
-	"geometryStamp": 185,
+	"geometryStamp": 187,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
