@@ -1,6 +1,6 @@
 Class extends _CLI_Controller
 
-property _startButtonName; _stopButtonName : Text
+property _startButtonName; _stopButtonName; _progressIndicatorName : Text
 property _stdIn; _stdErr; _stdOut : Text
 
 Class constructor
@@ -9,6 +9,7 @@ Class constructor
 	
 	This:C1470._startButtonName:="button^start"
 	This:C1470._stopButtonName:="button^stop"
+	This:C1470._progressIndicatorName:="thermo^progress"
 	
 Function start()
 	
@@ -16,6 +17,7 @@ Function start()
 	
 	OBJECT SET ENABLED:C1123(*; This:C1470._startButtonName; False:C215)
 	OBJECT SET ENABLED:C1123(*; This:C1470._stopButtonName; True:C214)
+	OBJECT SET VISIBLE:C603(*; This:C1470._progressIndicatorName; True:C214)
 	
 Function stop()
 	
@@ -23,6 +25,7 @@ Function stop()
 	
 	OBJECT SET ENABLED:C1123(*; This:C1470._startButtonName; True:C214)
 	OBJECT SET ENABLED:C1123(*; This:C1470._stopButtonName; False:C215)
+	OBJECT SET VISIBLE:C603(*; This:C1470._progressIndicatorName; False:C215)
 	
 Function clear()
 	

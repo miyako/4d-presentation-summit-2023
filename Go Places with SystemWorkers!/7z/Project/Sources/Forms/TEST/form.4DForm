@@ -152,7 +152,8 @@
 					"width": 300,
 					"height": 20,
 					"max": 100,
-					"dataSource": "Form:C1466.progress"
+					"dataSource": "Form:C1466.progress",
+					"visibility": "hidden"
 				},
 				"input^stdErr": {
 					"type": "input",
@@ -234,20 +235,11 @@
 					"action": "",
 					"right": 496,
 					"visibility": "hidden"
-				},
-				"Input": {
-					"type": "input",
-					"left": 148,
-					"top": 31,
-					"width": 105,
-					"height": 16,
-					"dataSource": "Form:C1466.progress",
-					"dataSourceTypeHint": "number"
 				}
 			}
 		}
 	],
-	"geometryStamp": 187,
+	"geometryStamp": 189,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
