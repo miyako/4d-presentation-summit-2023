@@ -67,17 +67,28 @@ Function onDataError($worker : 4D:C1709.SystemWorker; $params : Object)
 		ARRAY LONGINT:C221($pos; 0)
 		ARRAY LONGINT:C221($len; 0)
 		
+/*
+on Windows this stream is separated by CR, not CRLF. 
+CR does not count as end of line in regex
+so don't use "s" metacharacter here
+*/
+		
 		Case of 
-			: (Match regex:C1019("\\s*(\\d+)%\\s+(\\d+)\\s+(\\S+)\\s+(.+)"; $data; 1; $pos; $len))
+			: (Match regex:C1019("\\s*(\\d+)%[\\u0020]+(\\d+)[\\u0020]+(\\S+)[\\u0020]+(.+)"; $data; 1; $pos; $len))
 				$progress:=Num:C11(Substring:C12($data; $pos{1}; $len{1}))
 				$size:=Num:C11(Substring:C12($data; $pos{2}; $len{2}))
 				$flag:=Substring:C12($data; $pos{3}; $len{3})
-				Form:C1466.stdErr:=String:C10($progress; "^^0")+"%"+" "+Substring:C12($data; $pos{4}; $len{4})
+				$info:=Substring:C12($data; $pos{4}; $len{4})
+				Form:C1466.stdErr:=String:C10($progress; "^^0")+"%"+" "+$info
 				This:C1470._stdErr:=""
 				Form:C1466.progress:=$progress
-			: (Match regex:C1019("\\s*(\\d+)%\\s+(.+)"; $data; 1; $pos; $len))
+				
+			: (Match regex:C1019("\\s*(\\d+)%[\\u0020]+(\\S+)[\\u0020]+(.+)"; $data; 1; $pos; $len))
+				
 				$progress:=Num:C11(Substring:C12($data; $pos{1}; $len{1}))
-				Form:C1466.stdErr:=String:C10($progress; "^^0")+"%"+" "+Substring:C12($data; $pos{2}; $len{2})
+				$flag:=Substring:C12($data; $pos{2}; $len{2})
+				$info:=Substring:C12($data; $pos{3}; $len{3})
+				Form:C1466.stdErr:=String:C10($progress; "^^0")+"%"+" "+$info
 				This:C1470._stdErr:=""
 				Form:C1466.progress:=$progress
 		End case 
@@ -141,6 +152,8 @@ Function onTerminate($worker : 4D:C1709.SystemWorker; $params : Object)
 			//end of the queue
 			OBJECT SET ENABLED:C1123(*; This:C1470._stopButtonName; False:C215)
 			OBJECT SET ENABLED:C1123(*; This:C1470._startButtonName; True:C214)
+			OBJECT SET VISIBLE:C603(*; This:C1470._progressIndicatorName; False:C215)
+			//don't .clear() to keep stats
 			Form:C1466.stdOut:=""
 			Form:C1466.stdErr:=""
 		End if 
