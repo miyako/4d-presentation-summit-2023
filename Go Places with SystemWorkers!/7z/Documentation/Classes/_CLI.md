@@ -1,6 +1,6 @@
 # _CLI
 
-`_CLI` is a simple base class for command line interface proxies. 
+`_CLI` is a simple base class for command line interface proxies. Extend this abstract class to implement a console program.
 
 ## .new() 
 
@@ -43,4 +43,4 @@ Simply add double quotes on each sides of a string. Some CLI agent prefer this t
 
 **._chmod()**
 
-Executable files transfered from server to client in `/RESOURCES/` are copies as regular documents and missing the UNIX executable bit. This function is called once in the constructor to make sure that the CLI agent is ready to run on a Mac client.  
+Executable files transferred from server to client in `/RESOURCES/` are copies as regular documents and missing the UNIX executable bit. This internal function is internally called once in the constructor to make sure that the CLI agent is ready to run on a Mac client.  
