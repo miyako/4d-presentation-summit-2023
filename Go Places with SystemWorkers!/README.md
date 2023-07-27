@@ -6,11 +6,11 @@ SystemWorkers are here! In this session, learn how this feature opens the door t
 
 ## Synopsis 
 
-Present the benefits of SystemWorkers, compared to [`LAUNCH EXTERNAL PROCESS`](https://doc.4d.com/4Dv19/4D/19.5/LAUNCH-EXTERNAL-PROCESS.301-6137469.en.html) [`PHP Execute`](https://doc.4d.com/4Dv19/4D/19.5/PHP-Execute.301-6137576.en.html) or even plugins.
+1. Present the benefits of SystemWorkers, compared to [`LAUNCH EXTERNAL PROCESS`].
 
-Explain how Go is the ideal programming language for a cross-platform, deployment-ready utility executable to be embedded in 4D.
+1. Show some practical examples that adds value to the product or enhances the user experience.
 
-Show some practical examples that adds value to the product or enhances the user experience.
+1. Explain how Go is the ideal programming language for a cross-platform, deployment-ready utility executable to be embedded in 4D.
 
 ## Getting Started with Go
 
