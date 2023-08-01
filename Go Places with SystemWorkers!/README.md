@@ -6,7 +6,7 @@ SystemWorkers are here! In this session, learn how this feature opens the door t
 
 ## Synopsis 
 
-1. Present the benefits of SystemWorkers, compared to [`LAUNCH EXTERNAL PROCESS`].
+1. Present the benefits of SystemWorkers, compared to [`LAUNCH EXTERNAL PROCESS`](https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html).
 
 1. Show some practical examples that adds value to the product or enhances the user experience.
 
