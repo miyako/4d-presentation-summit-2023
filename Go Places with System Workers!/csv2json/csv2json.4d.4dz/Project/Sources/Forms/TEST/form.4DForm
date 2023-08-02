@@ -177,7 +177,7 @@
 					"sizingX": "grow",
 					"sizingY": "move"
 				},
-				"Button^Warning": {
+				"button-warning": {
 					"type": "button",
 					"text": "This form must be run with an instance of cs._CLI_Controller as Form",
 					"top": 84,
@@ -216,7 +216,7 @@
 			}
 		}
 	],
-	"geometryStamp": 320,
+	"geometryStamp": 321,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "Objects",
@@ -224,9 +224,8 @@
 		"views": {
 			"Objects": {},
 			"Warning": {
-				"visible": false,
 				"objects": [
-					"Button^Warning"
+					"button-warning"
 				]
 			}
 		}

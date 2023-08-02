@@ -17,7 +17,7 @@ Case of
 			$events{1}:=On Unload:K2:2
 			OBJECT SET EVENTS:C1239(*; ""; $events; Disable events others unchanged:K42:39)
 			OBJECT SET VISIBLE:C603(*; "@"; False:C215)
-			OBJECT SET VISIBLE:C603(*; "Button^Warning"; True:C214)
+			OBJECT SET VISIBLE:C603(*; "button-warning"; True:C214)
 		End if 
 		
 	: ($event.code=On Unload:K2:2)
