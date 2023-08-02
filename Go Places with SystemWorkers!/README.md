@@ -209,8 +209,6 @@ AI can also be used to perform mundane work such as
 
 The results get better the more you give specific instructions, such as naming conventions and arbitrary rules. You are not talking to an actual person, you should be as persistent and blunt as you need to be until you get a satisfactory answer.
 
-### References
-
 [^golangcsv]: [standard library > encoding >csv](https://pkg.go.dev/encoding/csv)
 [^golangxml]: [standard library > encoding > xml](https://pkg.go.dev/encoding/xml)
 [^golangjson]: [standard library > encoding > json](https://pkg.go.dev/encoding/json)
