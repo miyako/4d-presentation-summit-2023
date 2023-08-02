@@ -2,7 +2,7 @@
 
 ## Teaser Message
 
-System Workers are here! In this session, learn how this feature opens the door to new possibilities, its strengths and advantages compared to `LAUNCH EXTERNAL PROCESS`[^lep] with a bonus primer on the ubiquitous Go programming language.
+System Workers are here! In this session, learn how this feature opens the door to new possibilities, its strengths and advantages compared to `LAUNCH EXTERNAL PROCESS`[^lep] with a bonus primer on the ubiquitous [Go](https://go.dev) programming language.
 
 ## Synopsis 
 
