@@ -4,7 +4,7 @@ Class constructor
 	
 	Super:C1705()
 	
-	//MARK: inherited from cs._CLI_Controller
+	//MARK:-polymorphism
 	
 Function onDataError($worker : 4D:C1709.SystemWorker; $params : Object)
 	

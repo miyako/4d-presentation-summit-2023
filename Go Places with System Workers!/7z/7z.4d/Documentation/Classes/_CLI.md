@@ -1,6 +1,6 @@
 # _CLI
 
-`_CLI` is a simple base class for command line interface proxies. Extend this abstract class to implement a console program.
+`_CLI` is the base class to implement console program proxies. Extend this class to implement a specific command line interface.
 
 ## .new() 
 

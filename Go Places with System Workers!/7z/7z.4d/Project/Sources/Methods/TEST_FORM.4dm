@@ -7,7 +7,7 @@ If (Count parameters:C259=0)
 	
 Else 
 	
-	$form:=cs:C1710.SevenZip.new(cs:C1710._TEST_Controller)
+	$form:=cs:C1710.SevenZip.new(cs:C1710._TEST_Form_Controller)
 	
 	$window:=Open form window:C675("TEST")
 	DIALOG:C40("TEST"; $form; *)

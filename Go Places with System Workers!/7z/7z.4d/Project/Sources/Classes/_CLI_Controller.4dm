@@ -35,6 +35,8 @@ Function get worker()->$worker : 4D:C1709.SystemWorker
 	
 	$worker:=This:C1470._worker
 	
+	//MARK:-public methods
+	
 Function execute($command : Variant)
 	
 	var $commands : Collection
@@ -70,7 +72,7 @@ Function terminate()
 	
 	This:C1470._terminate()
 	
-	//MARK: private methods
+	//MARK:-private methods
 	
 Function _onEvent($worker : 4D:C1709.SystemWorker; $params : Object)
 	

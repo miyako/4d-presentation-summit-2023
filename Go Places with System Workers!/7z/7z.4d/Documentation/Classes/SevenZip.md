@@ -1,6 +1,6 @@
 # SevenZip
 
-`SevenZip` is a subclass of `_CLI` to execute the 7z program. 
+`SevenZip` is a subclass of `_CLI` to execute the `7z` program. 
 
 ## .add()
 

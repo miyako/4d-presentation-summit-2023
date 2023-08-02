@@ -22,20 +22,20 @@
 			"title": ":xliff:CommonMenuFile",
 			"items": [
 				{
-					"title": "TEST_NO_UI_0",
-					"method": "TEST_NO_UI_0"
+					"title": "TEST_PROCESS",
+					"method": "TEST_PROCESS"
 				},
 				{
-					"title": "TEST_NO_UI_1",
-					"method": "TEST_NO_UI_1"
+					"title": "TEST_WORKER",
+					"method": "TEST_WORKER"
 				},
 				{
-					"title": "TEST_NO_UI_2",
-					"method": "TEST_NO_UI_2"
+					"title": "TEST_WORKER_CB",
+					"method": "TEST_WORKER_CB"
 				},
 				{
-					"title": "TEST_UI",
-					"method": "TEST_UI"
+					"title": "TEST_FORM",
+					"method": "TEST_FORM"
 				},
 				{
 					"title": ":xliff:CommonMenuItemQuit",

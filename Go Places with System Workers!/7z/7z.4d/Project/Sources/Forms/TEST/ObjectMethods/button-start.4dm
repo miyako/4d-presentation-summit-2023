@@ -17,6 +17,7 @@ If ($event.code=On Clicked:K2:4)
 	$zip:=Folder:C1567(fk desktop folder:K87:19).file($app.fullName+".7z")
 	
 	Form:C1466.controller.start()
+	
 	Form:C1466.add($tar; $app).add($zip; $tar)
 	
 End if 

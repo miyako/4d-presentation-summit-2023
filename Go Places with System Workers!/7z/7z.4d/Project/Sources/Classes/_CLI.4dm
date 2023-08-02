@@ -28,7 +28,7 @@ Class constructor($executableName : Text; $controller : 4D:C1709.Class)
 	If ($controller=Null:C1517)
 		This:C1470._controller:=cs:C1710._CLI_Controller.new(This:C1470)  //default controller
 	Else 
-		This:C1470._controller:=$controller.new(This:C1470)
+		This:C1470._controller:=$controller.new(This:C1470)  //custom controller
 	End if 
 	
 	This:C1470._chmod()
@@ -64,6 +64,8 @@ Function get executableFile()->$executableFile : 4D:C1709.File
 Function get controller()->$controller : cs:C1710._CLI_Controller
 	
 	$controller:=This:C1470._controller
+	
+	//MARK:-public methods
 	
 Function escape($in : Text)->$out : Text
 	
@@ -119,7 +121,7 @@ Function quote($in : Text)->$out : Text
 	
 	$out:="\""+$in+"\""
 	
-	//MARK:-
+	//MARK:-private methods
 	
 Function _chmod()
 	

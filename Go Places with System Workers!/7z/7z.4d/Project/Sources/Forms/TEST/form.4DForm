@@ -21,239 +21,200 @@
 		},
 		{
 			"objects": {
-				"button^start": {
-					"type": "button",
-					"text": "start",
-					"top": 29,
-					"left": 24,
-					"width": 108,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"method": "ObjectMethods/button^start.4dm",
-					"focusable": false
-				},
-				"title^onResponse": {
-					"type": "text",
-					"text": "onResponse:",
-					"top": 29,
-					"left": 167,
-					"width": 98,
-					"height": 16,
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"count^onResponseCount": {
-					"type": "input",
-					"left": 273,
-					"top": 29,
-					"width": 51,
-					"height": 17,
-					"enterable": false,
-					"contextMenu": "none",
-					"fill": "transparent",
-					"borderStyle": "none",
-					"textAlign": "right",
-					"dataSourceTypeHint": "integer",
-					"dataSource": "Form:C1466.onResponseCount"
-				},
-				"title^onData": {
-					"type": "text",
-					"text": "onData:",
-					"top": 49,
-					"left": 167,
-					"width": 98,
-					"height": 16,
-					"textAlign": "right",
-					"fontWeight": "bold",
-					"fill": "#b1c4dd"
-				},
-				"count^onDataCount": {
-					"type": "input",
-					"left": 273,
-					"top": 49,
-					"width": 51,
-					"height": 17,
-					"enterable": false,
-					"contextMenu": "none",
-					"fill": "transparent",
-					"borderStyle": "none",
-					"textAlign": "right",
-					"dataSourceTypeHint": "integer",
-					"dataSource": "Form:C1466.onDataCount"
-				},
-				"title^onDataError": {
-					"type": "text",
-					"text": "onDataError:",
-					"top": 69,
-					"left": 167,
-					"width": 98,
-					"height": 16,
-					"textAlign": "right",
-					"fontWeight": "bold",
-					"fill": "#ffb6c1"
-				},
-				"count^onDataError": {
-					"type": "input",
-					"left": 273,
-					"top": 69,
-					"width": 51,
-					"height": 17,
-					"enterable": false,
-					"contextMenu": "none",
-					"fill": "transparent",
-					"borderStyle": "none",
-					"textAlign": "right",
-					"dataSourceTypeHint": "integer",
-					"dataSource": "Form:C1466.onDataErrorCount"
-				},
-				"title^onTerminate": {
-					"type": "text",
-					"text": "onTerminate:",
-					"top": 89,
-					"left": 167,
-					"width": 98,
-					"height": 16,
-					"textAlign": "right",
-					"fontWeight": "bold"
-				},
-				"count^onTerminate": {
-					"type": "input",
-					"left": 273,
-					"top": 89,
-					"width": 51,
-					"height": 17,
-					"enterable": false,
-					"contextMenu": "none",
-					"fill": "transparent",
-					"borderStyle": "none",
-					"textAlign": "right",
-					"dataSourceTypeHint": "integer",
-					"dataSource": "Form:C1466.onTerminateCount"
-				},
-				"button^stop": {
-					"type": "button",
-					"text": "stop",
-					"top": 64,
-					"left": 24,
-					"width": 108,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"method": "ObjectMethods/button^stop.4dm",
-					"focusable": false
-				},
-				"thermo^progress": {
+				"thermo-progress": {
 					"type": "progress",
 					"left": 24,
 					"top": 112,
 					"width": 300,
 					"height": 20,
 					"max": 100,
-					"dataSource": "Form:C1466.progress",
+					"dataSource": "Form:C1466.controller.progress",
 					"visibility": "hidden"
 				},
-				"input^stdErr": {
+				"input-stdErr": {
 					"type": "input",
-					"left": 24,
-					"top": 183,
-					"width": 492,
+					"left": 10,
+					"top": 200,
+					"width": 498,
 					"height": 33,
-					"dataSource": "Form:C1466.stdErr",
+					"dataSource": "Form:C1466.controller.stdErr",
 					"enterable": false,
-					"fill": "#ffb6c1"
+					"fill": "transparent",
+					"sizingX": "grow",
+					"sizingY": "move"
 				},
-				"input^stdOut": {
+				"input-stdOut": {
 					"type": "input",
-					"left": 24,
-					"top": 143,
-					"width": 492,
+					"left": 10,
+					"top": 160,
+					"width": 498,
 					"height": 33,
-					"dataSource": "Form:C1466.stdOut",
+					"dataSource": "Form:C1466.controller.stdOut",
 					"enterable": false,
-					"fill": "#b1c4dd"
+					"fill": "transparent",
+					"sizingX": "grow",
+					"sizingY": "move"
 				},
-				"title^complete response": {
+				"text-onResponse": {
 					"type": "text",
-					"text": "complete response",
-					"top": 29,
-					"left": 347,
-					"width": 158,
+					"text": "onResponse:",
+					"top": 7,
+					"left": 351,
+					"width": 98,
 					"height": 16,
-					"textAlign": "left",
+					"textAlign": "right",
 					"fontWeight": "bold",
-					"stroke": "#808080"
+					"fill": "transparent"
 				},
-				"title^output stream": {
+				"input-onResponseCount": {
+					"type": "input",
+					"left": 457,
+					"top": 7,
+					"width": 51,
+					"height": 17,
+					"enterable": false,
+					"contextMenu": "none",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"textAlign": "right",
+					"dataSourceTypeHint": "integer",
+					"dataSource": "Form:C1466.controller.onResponseCount"
+				},
+				"text-onData": {
 					"type": "text",
-					"text": "output stream",
-					"top": 49,
-					"left": 347,
-					"width": 118,
+					"text": "onData:",
+					"top": 27,
+					"left": 351,
+					"width": 98,
 					"height": 16,
-					"textAlign": "left",
+					"textAlign": "right",
 					"fontWeight": "bold",
-					"stroke": "#808080",
-					"textDecoration": "none"
+					"fill": "transparent"
 				},
-				"title^error stream": {
+				"input-onDataCount": {
+					"type": "input",
+					"left": 457,
+					"top": 27,
+					"width": 51,
+					"height": 17,
+					"enterable": false,
+					"contextMenu": "none",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"textAlign": "right",
+					"dataSourceTypeHint": "integer",
+					"dataSource": "Form:C1466.controller.onDataCount"
+				},
+				"text-onDataError": {
 					"type": "text",
-					"text": "error stream",
-					"top": 69,
-					"left": 347,
-					"width": 118,
+					"text": "onDataError:",
+					"top": 47,
+					"left": 351,
+					"width": 98,
 					"height": 16,
-					"textAlign": "left",
+					"textAlign": "right",
 					"fontWeight": "bold",
-					"stroke": "#808080",
-					"textDecoration": "none"
+					"fill": "transparent"
 				},
-				"title^complete execution": {
+				"input-onDataError": {
+					"type": "input",
+					"left": 457,
+					"top": 47,
+					"width": 51,
+					"height": 17,
+					"enterable": false,
+					"contextMenu": "none",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"textAlign": "right",
+					"dataSourceTypeHint": "integer",
+					"dataSource": "Form:C1466.controller.onDataErrorCount"
+				},
+				"text-onTerminate": {
 					"type": "text",
-					"text": "complete execution",
-					"top": 89,
-					"left": 347,
-					"width": 138,
+					"text": "onTerminate:",
+					"top": 67,
+					"left": 351,
+					"width": 98,
 					"height": 16,
-					"textAlign": "left",
+					"textAlign": "right",
 					"fontWeight": "bold",
-					"stroke": "#808080"
+					"fill": "transparent"
 				},
-				"Button^Warning": {
+				"input-onTerminate": {
+					"type": "input",
+					"left": 457,
+					"top": 67,
+					"width": 51,
+					"height": 17,
+					"enterable": false,
+					"contextMenu": "none",
+					"fill": "transparent",
+					"borderStyle": "none",
+					"textAlign": "right",
+					"dataSourceTypeHint": "integer",
+					"dataSource": "Form:C1466.controller.onTerminateCount"
+				},
+				"button-warning": {
 					"type": "button",
-					"text": "This form must be run with an instance of cs._CLI_Controller",
+					"text": "This form must be run with an instance of cs._CLI_Controller as Form",
 					"top": 84,
-					"left": 40,
-					"width": 456,
+					"left": 20,
+					"width": 488,
 					"height": 57,
 					"events": [],
 					"imageHugsTitle": false,
 					"style": "custom",
 					"focusable": false,
 					"action": "",
-					"right": 496,
+					"right": 508,
 					"visibility": "hidden"
+				},
+				"button-start": {
+					"type": "button",
+					"text": "start",
+					"top": 15,
+					"left": 10,
+					"width": 50,
+					"height": 60,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/button-start.4dm",
+					"focusable": false,
+					"icon": "Images/iconmonstr-media-control-48.svg",
+					"textPlacement": "top"
+				},
+				"button-stop": {
+					"type": "button",
+					"text": "stop",
+					"top": 15,
+					"left": 70,
+					"width": 50,
+					"height": 60,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/button-stop.4dm",
+					"focusable": false,
+					"icon": "Images/iconmonstr-media-control-50.svg",
+					"style": "regular",
+					"textPlacement": "top",
+					"imageHugsTitle": true
 				}
 			}
 		}
 	],
-	"geometryStamp": 189,
+	"geometryStamp": 225,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
 		"views": {
 			"View 1": {},
-			"Warning": {
-				"visible": false,
-				"objects": [
-					"Button^Warning"
-				]
-			}
+			"Warning": {}
 		}
 	},
-	"width": 536,
-	"height": 236
+	"rightMargin": 10,
+	"bottomMargin": 10
 }

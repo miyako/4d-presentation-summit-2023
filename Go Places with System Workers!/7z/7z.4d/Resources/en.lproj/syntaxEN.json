@@ -1,7 +1,14 @@
 {
 	"_method_": {},
 	"cs.SevenZip": {
-		"_TEST_Controller": {
+		"_TEST_Form_Controller": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"_Worker_Controller": {
 			"new()": {
 				"Syntax": "**.new**()",
 				"Params": [],
@@ -26,19 +33,6 @@
 				"Summary": ""
 			}
 		},
-		"SevenZip": {
-			"new()": {
-				"Syntax": "**.new**( *controller* : 4D.Class )",
-				"Params": [
-					[
-						"controller",
-						"4D.Class",
-						"->"
-					]
-				],
-				"Summary": ""
-			}
-		},
 		"_CLI_Controller": {
 			"new()": {
 				"Syntax": "**.new**( *CLI* : cs.SevenZip._CLI )",
@@ -52,10 +46,23 @@
 				"Summary": ""
 			}
 		},
-		"_Basic_Controller": {
+		"_Form_Controller": {
 			"new()": {
 				"Syntax": "**.new**()",
 				"Params": [],
+				"Summary": ""
+			}
+		},
+		"SevenZip": {
+			"new()": {
+				"Syntax": "**.new**( *controller* : 4D.Class )",
+				"Params": [
+					[
+						"controller",
+						"4D.Class",
+						"->"
+					]
+				],
 				"Summary": ""
 			}
 		},
@@ -67,7 +74,74 @@
 			}
 		}
 	},
-	"_TEST_Controller": {
+	"_TEST_Form_Controller": {
+		"stop()": {
+			"Syntax": "**.stop**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"start()": {
+			"Syntax": "**.start**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"onTerminate()": {
+			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onDataError()": {
+			"Syntax": "**.onDataError**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"bind()": {
+			"Syntax": "**.bind**( *options* : Object )",
+			"Params": [
+				[
+					"options",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"get progress()": {
+			"Syntax": "**.get progress**()->progress : Integer",
+			"Params": [
+				[
+					"progress",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_Form_Controller"
+	},
+	"_Worker_Controller": {
 		"onTerminate()": {
 			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
 			"Params": [
@@ -100,22 +174,6 @@
 			],
 			"Summary": ""
 		},
-		"onDataError()": {
-			"Syntax": "**.onDataError**( *worker* : 4D.SystemWorker; *params* : Object )",
-			"Params": [
-				[
-					"worker",
-					"4D.SystemWorker",
-					"->"
-				],
-				[
-					"params",
-					"Object",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
 		"onData()": {
 			"Syntax": "**.onData**( *worker* : 4D.SystemWorker; *params* : Object )",
 			"Params": [
@@ -132,19 +190,20 @@
 			],
 			"Summary": ""
 		},
-		"clear()": {
-			"Syntax": "**.clear**()",
-			"Params": [],
-			"Summary": ""
-		},
-		"stop()": {
-			"Syntax": "**.stop**()",
-			"Params": [],
-			"Summary": ""
-		},
-		"start()": {
-			"Syntax": "**.start**()",
-			"Params": [],
+		"onDataError()": {
+			"Syntax": "**.onDataError**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
 			"Summary": ""
 		},
 		"_inheritedFrom_": "_CLI_Controller"
@@ -271,56 +330,6 @@
 			"Summary": ""
 		}
 	},
-	"SevenZip": {
-		"extract()": {
-			"Syntax": "**.extract**( *destination* : 4D.Folder; *source* : Variant )->this : cs.SevenZip.SevenZip",
-			"Params": [
-				[
-					"destination",
-					"4D.Folder",
-					"->"
-				],
-				[
-					"source",
-					"Variant",
-					"->"
-				],
-				[
-					"this",
-					"cs.SevenZip.SevenZip",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"add()": {
-			"Syntax": "**.add**( *destination* : 4D.File; *source* : Variant )->this : cs.SevenZip.SevenZip",
-			"Params": [
-				[
-					"destination",
-					"4D.File",
-					"->"
-				],
-				[
-					"source",
-					"Variant",
-					"->"
-				],
-				[
-					"this",
-					"cs.SevenZip.SevenZip",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"terminate()": {
-			"Syntax": "**.terminate**()",
-			"Params": [],
-			"Summary": ""
-		},
-		"_inheritedFrom_": "_CLI"
-	},
 	"_CLI_Controller": {
 		"get commands()": {
 			"Syntax": "**.get commands**()->commands : Collection",
@@ -383,25 +392,9 @@
 			"Summary": ""
 		}
 	},
-	"_Basic_Controller": {
+	"_Form_Controller": {
 		"onTerminate()": {
 			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
-			"Params": [
-				[
-					"worker",
-					"4D.SystemWorker",
-					"->"
-				],
-				[
-					"params",
-					"Object",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"onResponse()": {
-			"Syntax": "**.onResponse**( *worker* : 4D.SystemWorker; *params* : Object )",
 			"Params": [
 				[
 					"worker",
@@ -448,7 +441,160 @@
 			],
 			"Summary": ""
 		},
+		"get onDataErrorCount()": {
+			"Syntax": "**.get onDataErrorCount**()->onDataErrorCount : Integer",
+			"Params": [
+				[
+					"onDataErrorCount",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"start()": {
+			"Syntax": "**.start**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"bind()": {
+			"Syntax": "**.bind**( *options* : Object )",
+			"Params": [
+				[
+					"options",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"get stdErr()": {
+			"Syntax": "**.get stdErr**()->stdErr : Text",
+			"Params": [
+				[
+					"stdErr",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"stop()": {
+			"Syntax": "**.stop**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"onResponse()": {
+			"Syntax": "**.onResponse**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"get onTerminateCount()": {
+			"Syntax": "**.get onTerminateCount**()->onTerminateCount : Integer",
+			"Params": [
+				[
+					"onTerminateCount",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get onDataCount()": {
+			"Syntax": "**.get onDataCount**()->onDataCount : Integer",
+			"Params": [
+				[
+					"onDataCount",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get onResponseCount()": {
+			"Syntax": "**.get onResponseCount**()->onResponseCount : Integer",
+			"Params": [
+				[
+					"onResponseCount",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get stdOut()": {
+			"Syntax": "**.get stdOut**()->stdOut : Text",
+			"Params": [
+				[
+					"stdOut",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
 		"_inheritedFrom_": "_CLI_Controller"
+	},
+	"SevenZip": {
+		"extract()": {
+			"Syntax": "**.extract**( *destination* : 4D.Folder; *source* : Variant )->this : cs.SevenZip.SevenZip",
+			"Params": [
+				[
+					"destination",
+					"4D.Folder",
+					"->"
+				],
+				[
+					"source",
+					"Variant",
+					"->"
+				],
+				[
+					"this",
+					"cs.SevenZip.SevenZip",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"add()": {
+			"Syntax": "**.add**( *destination* : 4D.File; *source* : Variant )->this : cs.SevenZip.SevenZip",
+			"Params": [
+				[
+					"destination",
+					"4D.File",
+					"->"
+				],
+				[
+					"source",
+					"Variant",
+					"->"
+				],
+				[
+					"this",
+					"cs.SevenZip.SevenZip",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"terminate()": {
+			"Syntax": "**.terminate**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_CLI"
 	},
 	"Marked": {
 		"parse()": {

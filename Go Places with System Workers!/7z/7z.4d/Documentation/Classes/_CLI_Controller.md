@@ -1,6 +1,6 @@
 # _CLI_Controller
 
-`_CLI_Controller` is a simple base class to control `_CLI` derivatives.
+`_CLI_Controller` is the base class for `_CLI` controllers. Extend this class to control a specific console program.
 
 ## .new() 
 
@@ -37,7 +37,7 @@ The constructor defines the following properties:
 
 **.execute**($command : Variant)
 
-Execute a one or more commands sequentially. Pass either a text or a collection of text. Subsequent calls to `.execute()` will add the new command to the task queue if an assoicaited worker is already running or else launch a new worker. Private callback functions intecept the `onResponse` and `onTerminate` events during exection to manage to task queue. All custom event hooks, including `onResponse` and `onTerminate` are invoked. Test `This.complete` to know if the event is the last in queue. 
+Execute one or more commands sequentially. Pass either a text or a collection of text. Subsequent calls to `.execute()` will add the new command to the task queue if an assoicaited worker is already running or else launch a new worker. Private callback functions intecept the `onResponse` and `onTerminate` events during exection to manage to task queue. All custom event hooks, including `onResponse` and `onTerminate` are invoked. Test `This.complete` to know if the event is the last in queue. 
 
 ## .terminate() 
 
