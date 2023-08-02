@@ -73,7 +73,7 @@ The same could be said of System Workers. When it comes to domain specific data 
 
 Fortunately, there are there are standard libraries for CSV[^golangcsv] and JSON[^golangjson] in Go. You can find good tutorials in no time.
 
-[Tutorial: How to create a CLI tool in Golang](https://levelup.gitconnected.com/tutorial-how-to-create-a-cli-tool-in-golang-a0fd980264f) by Andrew Davis Escalona, Published in Level Up Coding
+**Tutorial**: [How to create a CLI tool in Golang](https://levelup.gitconnected.com/tutorial-how-to-create-a-cli-tool-in-golang-a0fd980264f) by Andrew Davis Escalona, Published in Level Up Coding
 
 **Repository**: https://github.com/Andrew4d3/go-csv2json
 
