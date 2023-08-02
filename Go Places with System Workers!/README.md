@@ -59,7 +59,7 @@ build hello-world.go
 
 ## Whre to go from here
 
-The introduction to the plugin SDK includes the following passage:
+The [introduction to the plugin SDK](https://developer.4d.com/4D-Plugin-SDK/CMU84458.HTM) includes the following passage:
 
 > Why the need for a plug-in? Although 4th Dimension provides hundred of commands used to manipulate records and implement user interface, some special use or feature (sometimes platform dependant) may be needed...**specific statistics tools, file access over the network, a special user interface, or a private picture structure**. It is obvious that covering all areas of both the Macintosh and Windows operating systems by way of 4th Dimension commands would certainly lead to a product with thousands of commands, and at the same time, most users would have no need for such a large set of capabilities. Also, creating such an all-encompassing tool would make the 4th Dimension environment incredibly complex and would take most users months of study before useful results could be expected.
 
