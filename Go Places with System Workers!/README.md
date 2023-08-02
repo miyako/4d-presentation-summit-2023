@@ -54,7 +54,7 @@ lipo -create -output hello-world hello-world_amd64 hello-world_arm64
 * Build Windows
 
 ```
-build hello-world.go
+go build hello-world.go
 ```
 
 ## Whre to go from here
@@ -95,7 +95,7 @@ lipo -create -output csv2json csv2json_amd64 csv2json_arm64
 * Windows
 
 ```
-build csv2json.go
+go build csv2json.go
 ```
 
 Test the executable in console
