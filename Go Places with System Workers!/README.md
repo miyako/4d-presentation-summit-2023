@@ -220,7 +220,7 @@ Chatbots based on **Large Language Models** are known to hallucinate. Code snipp
 [^rfc4180]: [Common Format and MIME Type for Comma-Separated Values (CSV) Files](https://www.ietf.org/rfc/rfc4180.txt)
 [^importdata]: [4D Language Reference > Import and Export > IMPORT DATA](https://doc.4d.com/4Dv20/4D/20/IMPORT-DATA.301-6237689.en.html)
 [^exportdata]: [4D Language Reference > Import and Export > EXPORT DATA](https://doc.4d.com/4Dv20/4D/20/EXPORT-DATA.301-6237682.en.html)
-[^systemvariables]: [4D Language Reference > Language definition > System Variables](https://doc.4d.com/4Dv18/4D/18.4/System-Variables.300-5233658.en.html)
+[^systemvariables]: [4D Language Reference > Language definition > System Variables (v18)](https://doc.4d.com/4Dv18/4D/18.4/System-Variables.300-5233658.en.html)
 [^systemworker]: [Core Development > Class Functions > SystemWorker](https://developer.4d.com/docs/API/SystemWorkerClass)
 [^lep]: [4D Language Reference > Tools > LAUNCH EXTERNAL PROCESS](https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html)
 [^golangcsv]: [standard library > encoding >csv](https://pkg.go.dev/encoding/csv)
