@@ -8,7 +8,7 @@ System Workers are here! In this session, learn how this feature opens the door 
 
 1. Benefits of the **[`4D.SystemWorker`](https://doc4d.github.io/docs/next/API/SystemWorkerClass/)** class, compared to [`LAUNCH EXTERNAL PROCESS`](https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html)
 
-1. How to practice **Object Oriented Programming**, 4D style
+1. How to practice **Object Oriented Programming** in 4D 
 
 1. Why **Go** is the ideal programming language for a cross-platform, deployment-ready utility executable to be embedded in 4D
 
