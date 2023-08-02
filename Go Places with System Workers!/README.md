@@ -2,7 +2,7 @@
 
 ## Teaser Message
 
-System Workers are here! In this session, learn how this feature opens the door to new possibilities, its strengths and advantages compared to [^LAUNCH_EXTERNAL_PROCESS] with a bonus primer on the ubiquitous Go programming language.
+System Workers are here! In this session, learn how this feature opens the door to new possibilities, its strengths and advantages compared to `LAUNCH EXTERNAL PROCESS`[^lep] with a bonus primer on the ubiquitous Go programming language.
 
 ## Synopsis 
 
@@ -219,7 +219,7 @@ If you are rather unimpressed by chatbot hallucinations you can always look for 
 
 https://gosamples.dev/csv-to-json/
 
-[^LAUNCH_EXTERNAL_PROCESS]: [https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html]
+[^lep]: [https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html]
 [^golangcsv]: [standard library > encoding >csv](https://pkg.go.dev/encoding/csv)
 [^golangxml]: [standard library > encoding > xml](https://pkg.go.dev/encoding/xml)
 [^golangjson]: [standard library > encoding > json](https://pkg.go.dev/encoding/json)
