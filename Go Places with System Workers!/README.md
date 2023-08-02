@@ -6,7 +6,7 @@ System Workers are here! In this session, learn how this feature opens the door 
 
 ## Synopsis 
 
-1. Benefits of the **[`4D.SystemWorker`](https://doc4d.github.io/docs/next/API/SystemWorkerClass/)** class, compared to [`LAUNCH EXTERNAL PROCESS`](https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html)
+1. Benefits of the **`4D.SystemWorker`**[^systemworker] class, compared to `LAUNCH EXTERNAL PROCESS`[^lep]
 
 1. How to practice **Object Oriented Programming** in 4D 
 
@@ -219,6 +219,7 @@ If you are rather unimpressed by chatbot hallucinations you can always look for 
 
 https://gosamples.dev/csv-to-json/
 
+[^systemworker]: [https://doc4d.github.io/docs/next/API/SystemWorkerClass/]
 [^lep]: [https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html]
 [^golangcsv]: [standard library > encoding >csv](https://pkg.go.dev/encoding/csv)
 [^golangxml]: [standard library > encoding > xml](https://pkg.go.dev/encoding/xml)
