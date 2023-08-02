@@ -98,6 +98,20 @@ lipo -create -output csv2json csv2json_amd64 csv2json_arm64
 build csv2json.go
 ```
 
+Test the executable in console
+
+```
+csv2json -h
+Usage: csv2json [options] <csvFile>
+Options:
+  -pretty
+    	Generate pretty JSON
+  -separator string
+    	Column separator (default "comma")
+```
+
+
+
 ---
 
 ## Sidebar: ChatGPT
