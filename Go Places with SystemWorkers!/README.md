@@ -210,7 +210,7 @@ The results get better the more you give specific instructions, such as naming c
 
 ## Tutorials
 
-If you are rather unimpressed by chatbot hallucinations you can always switch to a classic tutorial. The code may looks suspiciously similar to the AI generated suggestion, which says a lot.
+If you are rather unimpressed by chatbot hallucinations you can always look for a classic tutorial. The code may looks suspiciously similar to the AI generated suggestion, which says a lot.
 
 https://gosamples.dev/csv-to-json/
 
