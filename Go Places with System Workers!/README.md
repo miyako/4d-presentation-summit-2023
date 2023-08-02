@@ -81,8 +81,22 @@ The repository does not have binaries for Windows or Mac, but no worries, you kn
 
 1. Download the repository
 2. Locate the `go-csv2json-master` folder
-3. Locate the `csv2json.go` file
+3. Open the folder in Visual Studio Code
+4. Open in Integrated Console
 
+* Mac
+
+```
+GOOS=darwin GOARCH=amd64 go build -o csv2json_amd64 csv2json.go
+GOOS=darwin GOARCH=arm64 go build -o csv2json_arm64 csv2json.go
+lipo -create -output csv2json csv2json_amd64 csv2json_arm64
+```
+
+* Windows
+
+```
+build csv2json.go
+```
 
 ---
 
