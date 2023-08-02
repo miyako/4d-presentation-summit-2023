@@ -2,15 +2,15 @@
 
 ## Teaser Message
 
-System Workers are here! In this session, learn how this feature opens the door to new possibilities, its strengths and advantages compared to `LAUNCH EXTERNAL PROCESS` with a bonus primer on the ubiquitous Go programming language.
+System Workers are here! In this session, learn how this feature opens the door to new possibilities, its strengths and advantages compared to [`LAUNCH EXTERNAL PROCESS`](https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html) with a bonus primer on the ubiquitous Go programming language.
 
 ## Synopsis 
 
-1. Present the benefits of the [`4D.SystemWorker`](https://doc4d.github.io/docs/next/API/SystemWorkerClass/) class, compared to [`LAUNCH EXTERNAL PROCESS`](https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html).
+1. **Benefits of the [`4D.SystemWorker`](https://doc4d.github.io/docs/next/API/SystemWorkerClass/) class**, compared to [`LAUNCH EXTERNAL PROCESS`](https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html)
 
-1. An up-to-date lecture on **Object Oriented Programmaing**, 4D style.
+1. How to practice **Object Oriented Programmaing**, 4D style
 
-1. Explain how Go is the ideal programming language for a cross-platform, deployment-ready utility executable to be embedded in 4D.
+1. Why **Go is the ideal programming language for a cross-platform, deployment-ready utility executable** to be embedded in 4D
 
 ## Getting Started with Go
 
