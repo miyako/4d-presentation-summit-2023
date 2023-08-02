@@ -61,7 +61,6 @@ build hello-world.go
 
 4D is not partculary versitle when it comes to processing proprietary data formats. For example, it doesn't have a robust CSV converter. On the other hand, there are standard libraries for CSV[^golangcsv], XML[^golangxml] and JSON[^golangjson] in Go. You can probably find ready-to-go solutions in no time.
 
-* https://gosamples.dev/csv-to-json/
 * https://github.com/signintech/gopdf
 
 ## More Examples
@@ -208,6 +207,12 @@ AI can also be used to perform mundane work such as
 * Ask for refactoring with an explanation of why one is better than the other 
 
 The results get better the more you give specific instructions, such as naming conventions and arbitrary rules. You are not talking to an actual person, you should be as persistent and blunt as you need to be until you get a satisfactory answer.
+
+## Tutorials
+
+If you are rather unimpressed by chatbot hallucinations you can always switch to a classic tutorial. The code looks suspiciously similar to the AI generated code.
+
+https://gosamples.dev/csv-to-json/
 
 [^golangcsv]: [standard library > encoding >csv](https://pkg.go.dev/encoding/csv)
 [^golangxml]: [standard library > encoding > xml](https://pkg.go.dev/encoding/xml)
