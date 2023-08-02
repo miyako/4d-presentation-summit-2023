@@ -77,7 +77,11 @@ Fortunately, there are there are standard libraries for CSV[^golangcsv] and JSON
 
 **Repository**: https://github.com/Andrew4d3/go-csv2json
 
+The repository does not have binaries for Windows or Mac, but no worries, you know how to compile.
 
+1. Download the repository
+2. Locate the `go-csv2json-master` folder
+3. Locate the `csv2json.go` file
 
 
 ---
