@@ -31,7 +31,7 @@ The official installer is somewhat better on Windows in that you can uninstall G
 
 Still, it may make sense to install with [Chocolatey](https://chocolatey.org) for its ease of managing updates.
 
-#### How to create a CLI with Go
+#### How to create a CLI executable with Go
 
 * hello-world.go
 
@@ -63,13 +63,15 @@ The introduction to the plugin SDK includes the following passage:
 
 > Why the need for a plug-in? Although 4th Dimension provides hundred of commands used to manipulate records and implement user interface, some special use or feature (sometimes platform dependant) may be needed...**specific statistics tools, file access over the network, a special user interface, or a private picture structure**. It is obvious that covering all areas of both the Macintosh and Windows operating systems by way of 4th Dimension commands would certainly lead to a product with thousands of commands, and at the same time, most users would have no need for such a large set of capabilities. Also, creating such an all-encompassing tool would make the 4th Dimension environment incredibly complex and would take most users months of study before useful results could be expected.
 
-The same could be said of System Workers.
+The same could be said of System Workers. When it comes to domain specific data processing, 4D the product or its developer community might not have the perfect toolset readymade for that task. Before you expend time in developing a prorietary solution, it might be worth your while to search for examples written in Go with a good track record. A generic, precompiled binary CLI utility would be your best match. Alternatively, it might be possible to furnish a proprietary CLI tool thanks to the ever growing catalog of libraries written in Go.  
 
+## Spitballing
 
-
-
+* data processing
 
 4D is not partculary versitle when it comes to processing proprietary data formats. For example, it doesn't have a robust CSV converter. On the other hand, there are standard libraries for CSV[^golangcsv], XML[^golangxml] and JSON[^golangjson] in Go. You can probably find ready-to-go solutions in no time.
+
+* PDF
 
 * https://github.com/signintech/gopdf
 
