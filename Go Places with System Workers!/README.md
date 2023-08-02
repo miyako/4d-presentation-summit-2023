@@ -6,7 +6,7 @@ System Workers are here! In this session, learn how this feature opens the door 
 
 ## Synopsis 
 
-1. Present the benefits of the `4D.SystemWorker` class, compared to [`LAUNCH EXTERNAL PROCESS`](https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html).
+1. Present the benefits of the [`4D.SystemWorker`](https://doc4d.github.io/docs/next/API/SystemWorkerClass/) class, compared to [`LAUNCH EXTERNAL PROCESS`](https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html).
 
 1. An up-to-date lecture on **Object Oriented Programmaing**, 4D style.
 
