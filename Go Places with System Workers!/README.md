@@ -2,15 +2,15 @@
 
 ## Teaser Message
 
-System Workers are here! In this session, learn how this feature opens the door to new possibilities, its strengths and advantages compared to `LAUNCH EXTERNAL PROCESS` with a bonus primer on the ubiquitous Go programming language.
+System Workers are here! In this session, learn how this feature opens the door to new possibilities, its strengths and advantages compared to `LAUNCH EXTERNAL PROCESS`[^lep] with a bonus primer on the ubiquitous [Go](https://go.dev) programming language.
 
 ## Synopsis 
 
-1. Present the benefits of the `4D.SystemWorker` class, compared to [`LAUNCH EXTERNAL PROCESS`](https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html).
+1. What is **`4D.SystemWorker`**[^systemworker], how does it compare to `LAUNCH EXTERNAL PROCESS`[^lep]
 
-1. An up-to-date lecture on **Object Oriented Programmaing**, 4D style.
+1. How to practice **Object Oriented Programming** in 4D 
 
-1. Explain how Go is the ideal programming language for a cross-platform, deployment-ready utility executable to be embedded in 4D.
+1. Why **Go** is the ideal programming language for a cross-platform, deployment-ready utility executable to be embedded in 4D
 
 ## Getting Started with Go
 
@@ -31,7 +31,7 @@ The official installer is somewhat better on Windows in that you can uninstall G
 
 Still, it may make sense to install with [Chocolatey](https://chocolatey.org) for its ease of managing updates.
 
-#### How to create a CLI with Go
+#### How to create a CLI executable with Go
 
 * hello-world.go
 
@@ -54,36 +54,71 @@ lipo -create -output hello-world hello-world_amd64 hello-world_arm64
 * Build Windows
 
 ```
-build hello-world.go
+go build hello-world.go
 ```
+
+#### Go extension for Visual Studio Code
+
+Go can be executed from the command line. Also there are several **Integrated Development Environment** options on the market. For our basic usuage the [Go extension for Visual Studio Code](https://code.visualstudio.com/docs/languages/go) should be more than sufficient.
 
 ## Whre to go from here
 
-The introduction to the plugin SDK includes the following passage:
+The [introduction to the plugin SDK](https://developer.4d.com/4D-Plugin-SDK/CMU84458.HTM) includes the following passage:
 
 > Why the need for a plug-in? Although 4th Dimension provides hundred of commands used to manipulate records and implement user interface, some special use or feature (sometimes platform dependant) may be needed...**specific statistics tools, file access over the network, a special user interface, or a private picture structure**. It is obvious that covering all areas of both the Macintosh and Windows operating systems by way of 4th Dimension commands would certainly lead to a product with thousands of commands, and at the same time, most users would have no need for such a large set of capabilities. Also, creating such an all-encompassing tool would make the 4th Dimension environment incredibly complex and would take most users months of study before useful results could be expected.
 
-The same could be said of System Workers.
+The same could be said of System Workers. When it comes to domain specific data processing, 4D the product or its developer community might not have the perfect toolset ready-made for that task. Before you expend time in developing a prorietary solution, it might be worth your while to search for examples written in Go with a good track record. A generic, precompiled binary CLI utility would be your best match. Alternatively, it might be possible to furnish a proprietary CLI tool thanks to the ever growing catalog of libraries written in Go.  
+
+## Case study: CSV to JSON
+
+4D is not partculary versitle when it comes to processing proprietary data formats. In fact, 4D doesn't really support [CSV](https://en.wikipedia.org/wiki/Comma-separated_values).  
+
+> System variables[^systemvariables] such as `FldDelimit` and `RecDelimit`, or the `IMPORT DATA`[^importdata] `EXPORT DATA`[^exportdata] commands purport to support comma-separated values but not to the degree expected in a business application, in particular the 2005 RFC 4180 standard[^rfc4180]. 
+
+Fortunately, there are there are standard libraries for CSV[^golangcsv] and JSON[^golangjson] in Go. You can find good tutorials in no time.
+
+**Tutorial**: [How to create a CLI tool in Golang](https://levelup.gitconnected.com/tutorial-how-to-create-a-cli-tool-in-golang-a0fd980264f) by Andrew Davis Escalona, Published in Level Up Coding
+
+**Repository**: https://github.com/Andrew4d3/go-csv2json
+
+The repository does not have binaries for Windows or Mac, but no worries, you know how to compile.
+
+1. Download the repository
+2. Locate the `go-csv2json-master` folder
+3. Open the folder in Visual Studio Code
+4. Open in Integrated Console
+
+* Mac
+
+```
+GOOS=darwin GOARCH=amd64 go build -o csv2json_amd64 csv2json.go
+GOOS=darwin GOARCH=arm64 go build -o csv2json_arm64 csv2json.go
+lipo -create -output csv2json csv2json_amd64 csv2json_arm64
+```
+
+* Windows
+
+```
+go build csv2json.go
+```
+
+Test the executable in console
+
+```
+csv2json -h
+Usage: csv2json [options] <csvFile>
+Options:
+  -pretty
+    	Generate pretty JSON
+  -separator string
+    	Column separator (default "comma")
+```
 
 
-
-
-
-4D is not partculary versitle when it comes to processing proprietary data formats. For example, it doesn't have a robust CSV converter. On the other hand, there are standard libraries for CSV[^golangcsv], XML[^golangxml] and JSON[^golangjson] in Go. You can probably find ready-to-go solutions in no time.
-
-* https://github.com/signintech/gopdf
-
-## More Examples
-
-There are no built-in triggers in 4D to execute scheduled tasks other than [`BACKUP`](https://doc.4d.com/4Dv19/4D/19.5/BACKUP.301-6137640.en.html). A cron[^gocron] job might be something interesting to implement with Go.
-
-Another common task that often called for 3rd party tools such as a plugin is to read and write `.xlsx` spreadsheets. Depending on the need, you may consider a simple[^xlsx] or more comprehensive[^excelize] library.
-
-Likewise, tools to extract[^docconv] plain text from `.doc` `.docx` or `.pdf` could be useful to build indexes.   
 
 ---
 
-## ChatGPT
+## Sidebar: ChatGPT
 
 The Go programming language has the tendancy to result in pretty formulaic code. Add to that the large population of programmers who actively work with the language, it makes an ideal candidate for AI assisted coding. 
 
@@ -218,12 +253,14 @@ AI can also be used to perform mundane work such as
 
 The results get better the more you give specific instructions, such as naming conventions and arbitrary rules. You are not talking to an actual person, you should be as persistent and blunt as you need to be until you get a satisfactory answer.
 
-## Tutorials
+Code snippets generated by **Pretrained Transformers** are suspiciously similar to online tutorials such as the one referenced earlier, which is interesting. Even so, chatbots based on **Large Language Models** are known to hallucinate, so be careful!
 
-If you are rather unimpressed by chatbot hallucinations you can always look for a classic tutorial. The code may looks suspiciously similar to the AI generated suggestion, which says a lot.
-
-https://gosamples.dev/csv-to-json/
-
+[^rfc4180]: [Common Format and MIME Type for Comma-Separated Values (CSV) Files](https://www.ietf.org/rfc/rfc4180.txt)
+[^importdata]: [4D Language Reference > Import and Export > IMPORT DATA](https://doc.4d.com/4Dv20/4D/20/IMPORT-DATA.301-6237689.en.html)
+[^exportdata]: [4D Language Reference > Import and Export > EXPORT DATA](https://doc.4d.com/4Dv20/4D/20/EXPORT-DATA.301-6237682.en.html)
+[^systemvariables]: [4D Language Reference > Language definition > System Variables (v18)](https://doc.4d.com/4Dv18/4D/18.4/System-Variables.300-5233658.en.html)
+[^systemworker]: [Core Development > Class Functions > SystemWorker](https://developer.4d.com/docs/API/SystemWorkerClass)
+[^lep]: [4D Language Reference > Tools > LAUNCH EXTERNAL PROCESS](https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html)
 [^golangcsv]: [standard library > encoding >csv](https://pkg.go.dev/encoding/csv)
 [^golangxml]: [standard library > encoding > xml](https://pkg.go.dev/encoding/xml)
 [^golangjson]: [standard library > encoding > json](https://pkg.go.dev/encoding/json)
