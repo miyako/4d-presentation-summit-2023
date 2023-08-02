@@ -57,6 +57,10 @@ lipo -create -output hello-world hello-world_amd64 hello-world_arm64
 go build hello-world.go
 ```
 
+#### Go extension for Visual Studio Code
+
+Go can be executed from the command line. Also there are several **Integrated Development Environment** options on the market. For our basic usuage the [Go extension for Visual Studio Code](https://code.visualstudio.com/docs/languages/go) should be more than sufficient.
+
 ## Whre to go from here
 
 The [introduction to the plugin SDK](https://developer.4d.com/4D-Plugin-SDK/CMU84458.HTM) includes the following passage:
