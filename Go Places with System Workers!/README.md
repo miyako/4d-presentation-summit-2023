@@ -219,8 +219,8 @@ If you are rather unimpressed by chatbot hallucinations you can always look for 
 
 https://gosamples.dev/csv-to-json/
 
-[^systemworker]: [https://doc4d.github.io/docs/next/API/SystemWorkerClass/]
-[^lep]: [https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html]
+[^systemworker]: [Core Development > Class Functions > SystemWorker](https://developer.4d.com/docs/API/SystemWorkerClass)
+[^lep]: [4D Language Reference > Tools > LAUNCH EXTERNAL PROCESS](https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html)
 [^golangcsv]: [standard library > encoding >csv](https://pkg.go.dev/encoding/csv)
 [^golangxml]: [standard library > encoding > xml](https://pkg.go.dev/encoding/xml)
 [^golangjson]: [standard library > encoding > json](https://pkg.go.dev/encoding/json)
