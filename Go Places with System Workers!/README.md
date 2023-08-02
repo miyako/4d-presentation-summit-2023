@@ -6,7 +6,7 @@ System Workers are here! In this session, learn how this feature opens the door 
 
 ## Synopsis 
 
-1. Benefits of the **`4D.SystemWorker`**[^systemworker] class, compared to `LAUNCH EXTERNAL PROCESS`[^lep]
+1. What is **`4D.SystemWorker`**[^systemworker], how does it compare to `LAUNCH EXTERNAL PROCESS`[^lep]
 
 1. How to practice **Object Oriented Programming** in 4D 
 
