@@ -1,14 +1,14 @@
-# Go Places with SystemWorkers!
+# Go Places with System Workers!
 
 ## Teaser Message
 
-SystemWorkers are here! In this session, learn how this feature opens the door to new possibilities, its strengths and advantages compared to `LAUNCH EXTERNAL PROCESS` or `PHP Execute`, with a bonus primer on the ubiquitous Go programming language.
+System Workers are here! In this session, learn how this feature opens the door to new possibilities, its strengths and advantages compared to `LAUNCH EXTERNAL PROCESS` with a bonus primer on the ubiquitous Go programming language.
 
 ## Synopsis 
 
-1. Present the benefits of SystemWorkers, compared to [`LAUNCH EXTERNAL PROCESS`](https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html).
+1. Present the benefits of the `4D.SystemWorker` class, compared to [`LAUNCH EXTERNAL PROCESS`](https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html).
 
-1. Show some practical examples that adds value to the product or enhances the user experience.
+1. An up-to-date lecture on **Object Oriented Programmaing**, 4D style.
 
 1. Explain how Go is the ideal programming language for a cross-platform, deployment-ready utility executable to be embedded in 4D.
 
@@ -57,7 +57,17 @@ lipo -create -output hello-world hello-world_amd64 hello-world_arm64
 build hello-world.go
 ```
 
-## Spitballing
+## Whre to go from here
+
+The introduction to the plugin SDK includes the following passage:
+
+> Why the need for a plug-in? Although 4th Dimension provides hundred of commands used to manipulate records and implement user interface, some special use or feature (sometimes platform dependant) may be needed...**specific statistics tools, file access over the network, a special user interface, or a private picture structure**. It is obvious that covering all areas of both the Macintosh and Windows operating systems by way of 4th Dimension commands would certainly lead to a product with thousands of commands, and at the same time, most users would have no need for such a large set of capabilities. Also, creating such an all-encompassing tool would make the 4th Dimension environment incredibly complex and would take most users months of study before useful results could be expected.
+
+The same could be said of System Workers.
+
+
+
+
 
 4D is not partculary versitle when it comes to processing proprietary data formats. For example, it doesn't have a robust CSV converter. On the other hand, there are standard libraries for CSV[^golangcsv], XML[^golangxml] and JSON[^golangjson] in Go. You can probably find ready-to-go solutions in no time.
 
