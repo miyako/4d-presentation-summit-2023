@@ -67,9 +67,10 @@ The same could be said of System Workers. When it comes to domain specific data 
 
 ## Case study: CSV to JSON
 
+[Tutorial: How to create a CLI tool in Golang](https://levelup.gitconnected.com/tutorial-how-to-create-a-cli-tool-in-golang-a0fd980264f)
 
 
-https://gosamples.dev/csv-to-json/
+
 
 
 
