@@ -71,9 +71,11 @@ The same could be said of System Workers. When it comes to domain specific data 
 
 > System variables[^systemvariables] such as `FldDelimit` and `RecDelimit`, or the `IMPORT DATA`[^importdata] `EXPORT DATA`[^exportdata] commands purport to support comma-separated values but not to the degree expected in a business application, in particular the 2005 RFC 4180 standard[^rfc4180]. 
 
+Fortunately, there are there are standard libraries for CSV[^golangcsv] and JSON[^golangjson] in Go. You can find good tutorials in no time.
+
 [Tutorial: How to create a CLI tool in Golang](https://levelup.gitconnected.com/tutorial-how-to-create-a-cli-tool-in-golang-a0fd980264f)
 
-https://github.com/Andrew4d3/go-csv2json
+**Repository**: https://github.com/Andrew4d3/go-csv2json
 
 
 
