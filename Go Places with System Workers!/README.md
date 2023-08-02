@@ -2,7 +2,7 @@
 
 ## Teaser Message
 
-System Workers are here! In this session, learn how this feature opens the door to new possibilities, its strengths and advantages compared to [`LAUNCH EXTERNAL PROCESS`](https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html) with a bonus primer on the ubiquitous Go programming language.
+System Workers are here! In this session, learn how this feature opens the door to new possibilities, its strengths and advantages compared to [^LAUNCH EXTERNAL PROCESS] with a bonus primer on the ubiquitous Go programming language.
 
 ## Synopsis 
 
@@ -75,13 +75,6 @@ The same could be said of System Workers. When it comes to domain specific data 
 
 * https://github.com/signintech/gopdf
 
-## More Examples
-
-There are no built-in triggers in 4D to execute scheduled tasks other than [`BACKUP`](https://doc.4d.com/4Dv19/4D/19.5/BACKUP.301-6137640.en.html). A cron[^gocron] job might be something interesting to implement with Go.
-
-Another common task that often called for 3rd party tools such as a plugin is to read and write `.xlsx` spreadsheets. Depending on the need, you may consider a simple[^xlsx] or more comprehensive[^excelize] library.
-
-Likewise, tools to extract[^docconv] plain text from `.doc` `.docx` or `.pdf` could be useful to build indexes.   
 
 ---
 
@@ -226,6 +219,7 @@ If you are rather unimpressed by chatbot hallucinations you can always look for 
 
 https://gosamples.dev/csv-to-json/
 
+[^LAUNCH EXTERNAL PROCESS]: [https://doc.4d.com/4Dv20/4D/20/LAUNCH-EXTERNAL-PROCESS.301-6238364.en.html]
 [^golangcsv]: [standard library > encoding >csv](https://pkg.go.dev/encoding/csv)
 [^golangxml]: [standard library > encoding > xml](https://pkg.go.dev/encoding/xml)
 [^golangjson]: [standard library > encoding > json](https://pkg.go.dev/encoding/json)
