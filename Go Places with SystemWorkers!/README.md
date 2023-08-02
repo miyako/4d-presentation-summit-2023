@@ -57,13 +57,24 @@ lipo -create -output hello-world hello-world_amd64 hello-world_arm64
 build hello-world.go
 ```
 
-## An Example
+## Spitballing
 
 4D is not partculary versitle when it comes to processing proprietary data formats. For example, it doesn't have a robust CSV converter. On the other hand, there are standard libraries for CSV[^golangcsv], XML[^golangxml] and JSON[^golangjson] in Go. You can probably find ready-to-go solutions in no time.
 
 * https://gosamples.dev/csv-to-json/
+* https://github.com/signintech/gopdf
 
-## GitHub Copilot and ChatGPT
+## More Examples
+
+There are no built-in triggers in 4D to execute scheduled tasks other than [`BACKUP`](https://doc.4d.com/4Dv19/4D/19.5/BACKUP.301-6137640.en.html). A cron[^gocron] job might be something interesting to implement with Go.
+
+Another common task that often called for 3rd party tools such as a plugin is to read and write `.xlsx` spreadsheets. Depending on the need, you may consider a simple[^xlsx] or more comprehensive[^excelize] library.
+
+Likewise, tools to extract[^docconv] plain text from `.doc` `.docx` or `.pdf` could be useful to build indexes.   
+
+---
+
+## ChatGPT
 
 The Go programming language has the tendancy to result in pretty formulaic code. Add to that the large population of programmers who actively work with the language, it makes an ideal candidate for AI assisted coding. 
 
@@ -198,17 +209,7 @@ AI can also be used to perform mundane work such as
 
 The results get better the more you give specific instructions, such as naming conventions and arbitrary rules. You are not talking to an actual person, you should be as persistent and blunt as you need to be until you get a satisfactory answer.
 
-## Processing PDF
-
-* https://github.com/signintech/gopdf
-
-## More Examples
-
-There are no built-in triggers in 4D to execute scheduled tasks other than [`BACKUP`](https://doc.4d.com/4Dv19/4D/19.5/BACKUP.301-6137640.en.html). A cron[^gocron] job might be something interesting to implement with Go.
-
-Another common task that often called for 3rd party tools such as a plugin is to read and write `.xlsx` spreadsheets. Depending on the need, you may consider a simple[^xlsx] or more comprehensive[^excelize] library.
-
-Likewise, tools to extract[^docconv] plain text from `.doc` `.docx` or `.pdf` could be useful to build indexes.   
+### References
 
 [^golangcsv]: [standard library > encoding >csv](https://pkg.go.dev/encoding/csv)
 [^golangxml]: [standard library > encoding > xml](https://pkg.go.dev/encoding/xml)
