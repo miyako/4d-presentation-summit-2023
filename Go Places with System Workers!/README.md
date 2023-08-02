@@ -114,7 +114,82 @@ Options:
     	Column separator (default "comma")
 ```
 
+Thanks to OOP, we can repurpose a large part of our previous project to incorporate this new console program.
 
+### classes that require no modifications
+
+* `_CLI`
+* `_CLI_Controller`
+* `_Form_Controller`
+* `_Worker_Controller`
+
+### class for worker implementation
+
+* `Csv2Json`
+
+Extend the `_CLI` base class and implement the constructor to reference the executable in `/RESOURCES/`:
+
+```4d
+Class extends _CLI
+
+Class constructor($controller : 4D.Class)
+	
+	Super("csv2json"; $controller)
+```
+
+Implement the `.execute()` method according to the documented CLI syntax:
+
+```4d
+Function execute($option : Variant)->$this : cs.Csv2Json
+	
+	$this:=This
+	
+	var $commands; $options : Collection
+	$commands:=New collection
+	
+	Case of 
+		: (Value type($option)=Is object)
+			$options:=New collection($option)
+		: (Value type($option)=Is collection)
+			$options:=$option
+	End case 
+	
+	var $csvFile : 4D.File
+	
+	For each ($option; $options)
+		
+		If (OB Instance of($option.src; 4D.File))
+			/*
+				resolve filesystem path
+			*/
+			$csvFile:=File($option.src.platformPath; fk platform path)
+			
+			$command:=This.escape(This.executablePath)
+			/*
+				-pretty: generate pretty JSON
+				-separator: comma or semicolon
+			*/
+			If (Bool($option.pretty))
+				$command:=$command+" -pretty"
+			End if 
+			Case of 
+				: (Value type($option.separator)#Is text)
+				: ($option.separator="semicolon")
+					$command:=$command+" -separator semicolon"
+			End case 
+			$command:=$command+" "+This.quote($csvFile.path)
+			$commands.push($command)
+		End if 
+	End for each 
+	
+	This.controller.execute($commands)
+```
+
+### class for form implementation
+
+* `_TEST_Form_Controller`
+
+See documentation in the demo project.
 
 ---
 
