@@ -7,7 +7,7 @@ If (Count parameters:C259=0)
 	
 Else 
 	
-	$form:=cs:C1710.Csv2Json.new(cs:C1710._TEST_Form_Controller)
+	$form:=cs:C1710.Csv2Json.new(cs:C1710._Csv2Json_Form_Controller)
 	
 	$form.CSV:="COL1,COL2,COL3\n1,2,3\n4,5,6\n"
 	$form.JSON:=""
