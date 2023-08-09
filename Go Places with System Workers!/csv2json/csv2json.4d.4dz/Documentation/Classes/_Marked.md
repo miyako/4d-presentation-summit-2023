@@ -1,6 +1,6 @@
-# Marked
+# _Marked
 
-`Marked` is a class to generate HTML renditions of project documentation. 
+`_Marked` is a class to generate HTML renditions of project documentation. 
 
 ## .generate()
 
