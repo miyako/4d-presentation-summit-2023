@@ -1,7 +1,7 @@
 //%attributes = {}
-var $marked : cs:C1710.Marked
+var $marked : cs:C1710._Marked
 
-$marked:=cs:C1710.Marked.new()
+$marked:=cs:C1710._Marked.new()
 
 $path:=METHOD Get path:C1164(Path class:K72:19; "_CLI")
 
