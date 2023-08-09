@@ -1,4 +1,4 @@
-# SevenZip
+# SevenZip : _CLI
 
 `SevenZip` is a subclass of `_CLI` to execute the `7z` program. 
 
