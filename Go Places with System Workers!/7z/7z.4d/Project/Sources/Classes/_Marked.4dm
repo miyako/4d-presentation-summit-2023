@@ -1,5 +1,5 @@
-property area : Text  //option for <span style="font-weight:bold;color:royalblue;">WA Run offscreen area</span>
-property url; result : 4D:C1709.File  //result from <span style="font-weight:bold;color:royalblue;">WA Run offscreen area</span>
+property area : Text  //option for WA Run offscreen area
+property url; result : 4D:C1709.File  //result from WA Run offscreen area
 
 Class constructor
 	
