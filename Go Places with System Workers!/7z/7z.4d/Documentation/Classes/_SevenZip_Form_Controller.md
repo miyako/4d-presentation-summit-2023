@@ -20,16 +20,9 @@ The following object names are supported:
 |Property|Type|Description|
 |:-|:-|:-|
 |startButton|Text||
-|_stopButtonName|Text||
-|csvInput|Text||
-|jsonInput|Text||
+|stopButton|Text||
+|progressIndicator|Text||
 
 The enabled/disabled status of each button object is toggled automatically.
 
-Pass the name of the input objects that should be bound the CSV input and JSON output.
-
-## .setInput() 
-
-**.setInput**()->$src : 4D.File
-
-Call this method before `.execute()` to set the CSV input value.
+The value of the thermometer object is updated automatically.

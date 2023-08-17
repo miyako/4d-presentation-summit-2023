@@ -24,7 +24,7 @@ The following object names are supported:
 |Property|Type|Description|
 |:-|:-|:-|
 |startButton|Text||
-|_stopButtonName|Text||
+|stopButton|Text||
 
 The enabled/disabled status of each button object is toggled automatically.
 

@@ -1,6 +1,6 @@
 # _Csv2Json_Form_Controller : _Form_Controller : _CLI_Controller
 
-`_Csv2Json_Form_Controller` is a subclass of `_Form_Controller` to execute `csv2json` in a form. 
+`_Lipo_Form_Controller` is a subclass of `_Form_Controller` to execute `lipo` in a form. 
 
 The class defines the following properties:
 
@@ -26,10 +26,14 @@ The following object names are supported:
 
 The enabled/disabled status of each button object is toggled automatically.
 
-Pass the name of the input objects that should be bound the CSV input and JSON output.
-
 ## .setInput() 
 
 **.setInput**()->$src : 4D.File
 
-Call this method before `.execute()` to set the CSV input value.
+Call this method before `.thin()` to set the input file.
+
+## .setInput() 
+
+**.setOutput**()->$dst : 4D.File
+
+Call this method before `.thin()` to set the output file.
