@@ -38,7 +38,6 @@ Class constructor($executableName : Text; $controller : 4D:C1709.Class)
 		This:C1470._executablePath:=This:C1470.executableName
 	End if 
 	
-	
 	If ($controller=Null:C1517)
 		This:C1470._controller:=cs:C1710._CLI_Controller.new(This:C1470)  //default controller
 	Else 
