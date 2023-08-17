@@ -31,7 +31,18 @@ resolve filesystem path
 			$input:=Folder:C1567($option.platformPath; fk platform path:K87:2)
 			
 			$command:=This:C1470.escape(This:C1470.executablePath)
-			$command:=$command+" "+This:C1470.escape($input.path)+" -type f -perm +ugo+x -print"
+			
+			var $path : Text
+			$path:=$input.path
+			
+			ARRAY LONGINT:C221($pos; 0)
+			ARRAY LONGINT:C221($len; 0)
+			
+			If (Match regex:C1019("(.+)\\/+"; $path; 1; $pos; $len))
+				$path:=Substring:C12($path; $pos{1}; $len{1})  //remove trailing slash
+			End if 
+			
+			$command:=$command+" "+This:C1470.escape($path)+" -type f -perm +ugo+x -print"
 			
 			$commands.push($command)
 		End if 

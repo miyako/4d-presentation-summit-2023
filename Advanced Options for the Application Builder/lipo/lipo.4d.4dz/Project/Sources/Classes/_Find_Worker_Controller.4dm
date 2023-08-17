@@ -1,6 +1,5 @@
 Class extends _Worker_Controller
 
-property _stdErr; _stdOut : Collection
 property _stdErrBuffer; _stdOutBuffer : Text
 property _instance : Object
 property _parameters : Collection
@@ -8,14 +7,6 @@ property _parameters : Collection
 Class constructor
 	
 	Super:C1705()
-	
-Function get stdOut()->$stdOut : Collection
-	
-	$stdOut:=This:C1470._stdOut
-	
-Function get stdErr()->$stdErr : Collection
-	
-	$stdErr:=This:C1470._stdErr
 	
 	//MARK:-public methods
 	
@@ -48,10 +39,6 @@ Function onDataError($worker : 4D:C1709.SystemWorker; $params : Object)
 			
 	End case 
 	
-	$data:=This:C1470._stdErrBuffer
-	
-	This:C1470._stdErr.combine(Split string:C1554($data; "\n"; sk ignore empty strings:K86:1 | sk trim spaces:K86:2))
-	
 Function onData($worker : 4D:C1709.SystemWorker; $params : Object)
 	
 	Case of 
@@ -65,15 +52,16 @@ Function onData($worker : 4D:C1709.SystemWorker; $params : Object)
 			
 	End case 
 	
-	$data:=This:C1470._stdOutBuffer
-	
-	This:C1470._stdOut.combine(Split string:C1554($data; "\n"; sk ignore empty strings:K86:1 | sk trim spaces:K86:2))
-	
 Function onResponse($worker : 4D:C1709.SystemWorker; $params : Object)
+	
+	var $paths; $messages : Collection
+	
+	$paths:=Split string:C1554(This:C1470._stdOutBuffer; "\n"; sk ignore empty strings:K86:1 | sk trim spaces:K86:2)
+	$messages:=Split string:C1554(This:C1470._stdErrBuffer; "\n"; sk ignore empty strings:K86:1 | sk trim spaces:K86:2)
 	
 	If (This:C1470.complete)
 		If (OB Instance of:C1731(This:C1470._instance.onResponse; 4D:C1709.Function))
-			This:C1470._instance.onResponse(This:C1470.stdOut; This:C1470.stdErr; This:C1470._parameters)
+			This:C1470._instance.onResponse($paths; $messages; This:C1470._parameters)
 		End if 
 	End if 
 	
@@ -81,6 +69,6 @@ Function onTerminate($worker : 4D:C1709.SystemWorker; $params : Object)
 	
 	If (This:C1470.complete)
 		If (OB Instance of:C1731(This:C1470._instance.onTerminate; 4D:C1709.Function))
-			This:C1470._instance.onTerminate(This:C1470.stdOut; This:C1470.stdErr; This:C1470._parameters)
+			This:C1470._instance.onTerminate(This:C1470._parameters)
 		End if 
 	End if 
