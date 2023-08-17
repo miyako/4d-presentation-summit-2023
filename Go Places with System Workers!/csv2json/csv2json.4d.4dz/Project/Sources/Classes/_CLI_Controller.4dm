@@ -97,7 +97,7 @@ Function _onExecute($worker : 4D:C1709.SystemWorker; $params : Object)
 		This:C1470._execute()
 	End if 
 	
-	If (This:C1470._onResponse#Null:C1517) && (OB Instance of:C1731(This:C1470._onResponse; 4D:C1709.Function))
+	If (OB Instance of:C1731(This:C1470._onResponse; 4D:C1709.Function))
 		This:C1470._onResponse.call(This:C1470; $worker; $params)
 	End if 
 	
@@ -108,7 +108,7 @@ Function _execute()
 	
 Function _onComplete($worker : 4D:C1709.SystemWorker; $params : Object)
 	
-	If (This:C1470._onTerminate#Null:C1517) && (OB Instance of:C1731(This:C1470._onTerminate; 4D:C1709.Function))
+	If (OB Instance of:C1731(This:C1470._onTerminate; 4D:C1709.Function))
 		This:C1470._onTerminate.call(This:C1470; $worker; $params)
 	End if 
 	
