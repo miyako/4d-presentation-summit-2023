@@ -6,7 +6,7 @@
 
 **.execute**($option : Variant)->$this : cs.Csv2Json
 
-Process a collection of file or a single file.
+Process a collection of files or a single file.
 
 Chained calls are queued as sequential tasks.
 
