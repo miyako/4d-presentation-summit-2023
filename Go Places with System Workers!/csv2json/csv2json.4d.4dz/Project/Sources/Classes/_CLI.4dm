@@ -16,22 +16,34 @@ Class constructor($executableName : Text; $controller : 4D:C1709.Class)
 	This:C1470._currentDirectory:=Folder:C1567(Get 4D folder:C485(Current resources folder:K5:16); fk platform path:K87:2)\
 		.folder("bin").folder(This:C1470.platform)
 	
-	Case of 
-		: (Is macOS:C1572)
-			This:C1470._executablePath:=This:C1470.currentDirectory.file(This:C1470.executableName).path
-		: (Is Windows:C1573)
-			This:C1470._executablePath:=This:C1470.currentDirectory.file(This:C1470.executableName).platformPath
-	End case 
-	
 	This:C1470._executableFile:=File:C1566(This:C1470.currentDirectory.file(This:C1470.executableName).path)
+	
+	If (This:C1470._executableFile.exists)
+		
+		//the executable is in /RESOURCES/bin/{platform}
+		
+		Case of 
+			: (Is macOS:C1572)
+				This:C1470._executablePath:=This:C1470.currentDirectory.file(This:C1470.executableName).path
+			: (Is Windows:C1573)
+				This:C1470._executablePath:=This:C1470.currentDirectory.file(This:C1470.executableName).platformPath
+		End case 
+		
+		This:C1470._chmod()
+		
+	Else 
+		
+		//the executable is not in /RESOURCES/bin/{platform} depend on $PATH
+		
+		This:C1470._executablePath:=This:C1470.executableName
+	End if 
+	
 	
 	If ($controller=Null:C1517)
 		This:C1470._controller:=cs:C1710._CLI_Controller.new(This:C1470)  //default controller
 	Else 
 		This:C1470._controller:=$controller.new(This:C1470)  //custom controller
 	End if 
-	
-	This:C1470._chmod()
 	
 Function get name()->$name : Text
 	

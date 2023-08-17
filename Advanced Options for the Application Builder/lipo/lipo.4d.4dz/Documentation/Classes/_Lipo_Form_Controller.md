@@ -1,4 +1,4 @@
-# _Csv2Json_Form_Controller : _Form_Controller : _CLI_Controller
+# _Lipo_Form_Controller : _Form_Controller : _CLI_Controller
 
 `_Lipo_Form_Controller` is a subclass of `_Form_Controller` to execute `lipo` in a form. 
 
@@ -8,6 +8,7 @@ The class defines the following properties:
 |:-|:-|:-|
 |src|4D.File|read-only|
 |dst|4D.File|read-only|
+|arch|Text|read-only|
 
 ## .bind() 
 
@@ -21,19 +22,5 @@ The following object names are supported:
 |:-|:-|:-|
 |startButton|Text||
 |stopButton|Text||
-|csvInput|Text||
-|jsonInput|Text||
 
 The enabled/disabled status of each button object is toggled automatically.
-
-## .setInput() 
-
-**.setInput**()->$src : 4D.File
-
-Call this method before `.thin()` to set the input file.
-
-## .setInput() 
-
-**.setOutput**()->$dst : 4D.File
-
-Call this method before `.thin()` to set the output file.
