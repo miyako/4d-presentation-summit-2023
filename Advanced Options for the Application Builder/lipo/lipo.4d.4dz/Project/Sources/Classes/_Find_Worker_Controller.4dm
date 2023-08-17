@@ -19,8 +19,6 @@ Function bind($instance : cs:C1710._CLI)
 	
 Function _clear()
 	
-	This:C1470._stdErr:=[]
-	This:C1470._stdOut:=[]
 	This:C1470._stdErrBuffer:=""
 	This:C1470._stdOutBuffer:=""
 	
