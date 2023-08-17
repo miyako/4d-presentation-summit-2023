@@ -3,6 +3,7 @@ Class extends _Worker_Controller
 property _stdErr; _stdOut : Collection
 property _stdErrBuffer; _stdOutBuffer : Text
 property _instance : Object
+property _parameters : Collection
 
 Class constructor
 	
@@ -22,6 +23,7 @@ Function bind($instance : cs:C1710._CLI)
 	
 	If (OB Instance of:C1731($instance; cs:C1710._CLI))
 		This:C1470._instance:=$instance
+		This:C1470._parameters:=Copy parameters:C1790(2)
 	End if 
 	
 Function _clear()
@@ -71,11 +73,7 @@ Function onResponse($worker : 4D:C1709.SystemWorker; $params : Object)
 	
 	If (This:C1470.complete)
 		If (OB Instance of:C1731(This:C1470._instance.onResponse; 4D:C1709.Function))
-			var $paths : Collection
-			$paths:=This:C1470.stdOut
-			var $messages : Collection
-			$messages:=This:C1470.stdErr
-			This:C1470._instance.onResponse($paths; $messages)
+			This:C1470._instance.onResponse(This:C1470.stdOut; This:C1470.stdErr; This:C1470._parameters)
 		End if 
 	End if 
 	
@@ -83,10 +81,6 @@ Function onTerminate($worker : 4D:C1709.SystemWorker; $params : Object)
 	
 	If (This:C1470.complete)
 		If (OB Instance of:C1731(This:C1470._instance.onTerminate; 4D:C1709.Function))
-			var $paths : Collection
-			$paths:=This:C1470.stdOut
-			var $messages : Collection
-			$messages:=This:C1470.stdErr
-			This:C1470._instance.onTerminate($paths; $messages)
+			This:C1470._instance.onTerminate(This:C1470.stdOut; This:C1470.stdErr; This:C1470._parameters)
 		End if 
 	End if 
