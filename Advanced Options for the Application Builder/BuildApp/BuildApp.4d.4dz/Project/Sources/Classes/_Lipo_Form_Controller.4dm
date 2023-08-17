@@ -25,6 +25,7 @@ Function onResponse($worker : 4D:C1709.SystemWorker; $params : Object)
 		
 		If (This:C1470.complete)
 			//end of the queue
+			This:C1470._commandLine:="complete!"
 		End if 
 		
 	End if 

@@ -2,11 +2,11 @@
 
 `Lipo` is a subclass of `_CLI` to execute the `lipo` program. 
 
-## .OnResponse()
+## .onResponse()
 
-**.OnResponse**($files : Collection; $parameters : Collection)
+**.onResponse**($files : Collection; $parameters : Collection)
 
-Used internally to process files returned from `_Find`. 
+Used internally to process files returned from an instance of `_Find`. 
 
 ## .thin()
 
@@ -25,3 +25,5 @@ An option should have the following properties:
 |arch|Text|the architecture type to keep `arm64` (default) or `x86_64`|
 
 `src` and `dst` must be matching objects.
+
+When `src` and `dst` are folders, an instance of `_Find` is used to find files that have the UNIX executable bit set. The filtered result is received asynchronously in `.onResponse()` and passed to `.thin()`.

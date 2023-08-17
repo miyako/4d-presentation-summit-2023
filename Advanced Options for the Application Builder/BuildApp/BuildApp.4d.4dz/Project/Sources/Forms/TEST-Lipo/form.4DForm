@@ -156,9 +156,9 @@
 				"input-commandLine": {
 					"type": "input",
 					"left": 237,
-					"top": 197,
+					"top": 177,
 					"width": 273,
-					"height": 121,
+					"height": 141,
 					"dataSource": "Form:C1466.controller.commandLine",
 					"enterable": false,
 					"fill": "transparent",
@@ -187,7 +187,7 @@
 					"width": 100,
 					"height": 100,
 					"dataSource": "Form:C1466.srcIcon",
-					"sizingY": "grow",
+					"sizingY": "fixed",
 					"dataSourceTypeHint": "picture",
 					"right": 120,
 					"contextMenu": "none",
@@ -201,7 +201,7 @@
 				},
 				"text-srcPath": {
 					"type": "text",
-					"text": "srcPath:",
+					"text": "src.path:",
 					"top": 137,
 					"left": 131,
 					"width": 98,
@@ -210,11 +210,11 @@
 					"fontWeight": "bold",
 					"fill": "transparent"
 				},
-				"input-stdPath": {
+				"input-srcPath": {
 					"type": "input",
-					"left": 197,
+					"left": 237,
 					"top": 137,
-					"width": 311,
+					"width": 271,
 					"height": 37,
 					"enterable": false,
 					"contextMenu": "none",
@@ -227,7 +227,7 @@
 				"text-commandLine": {
 					"type": "text",
 					"text": "commandLine:",
-					"top": 197,
+					"top": 177,
 					"left": 131,
 					"width": 98,
 					"height": 16,
@@ -238,7 +238,7 @@
 			}
 		}
 	],
-	"geometryStamp": 482,
+	"geometryStamp": 563,
 	"method": "method.4dm",
 	"editor": {
 		"activeView": "Objects",
