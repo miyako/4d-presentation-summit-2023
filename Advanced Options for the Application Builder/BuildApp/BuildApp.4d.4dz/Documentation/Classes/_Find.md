@@ -1,6 +1,6 @@
 # _Find : _CLI
 
-`_Find_` is a subclass of `_CLI` to execute the `find` command.
+`_Find_` is a subclass of `_CLI` to execute the `find` command on macOS.
 
 ## .findExecutables()
 

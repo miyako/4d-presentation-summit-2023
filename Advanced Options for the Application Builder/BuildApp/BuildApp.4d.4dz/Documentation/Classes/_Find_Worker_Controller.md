@@ -1,6 +1,6 @@
 # _Find_Worker_Controller : _Worker_Controller : _CLI_Controller
 
-`_Find_Worker_Controller` is a subclass of `_Worker_Controller` to execute the `find` command in a worker. 
+`_Find_Worker_Controller` is a subclass of `_Worker_Controller` to execute the `find` command  on macOS in a worker. 
 
 ## .bind() 
 

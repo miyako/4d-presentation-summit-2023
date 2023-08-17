@@ -1,6 +1,6 @@
 # Lipo : _CLI
 
-`Lipo` is a subclass of `_CLI` to execute the `lipo` program. 
+`Lipo` is a subclass of `_CLI` to execute the `lipo` program on macOS. 
 
 ## .onResponse()
 
