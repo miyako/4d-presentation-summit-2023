@@ -19,6 +19,98 @@ Function bind($instance : cs:C1710._CLI)
 	
 	//MARK:-private methods
 	
+Function _reducePaths($param : Object)->$files : Collection
+	
+	var $path : Text
+	$path:=$param.value
+	
+	Case of 
+		: ($path="@.xlf")
+		: ($path="@.xsl")
+		: ($path="@.xml")
+		: ($path="@.xsd")
+		: ($path="@.yml")
+		: ($path="@.svg")
+		: ($path="@.rsrc")
+		: ($path="@.json")
+		: ($path="@.html")
+		: ($path="@.htm")
+		: ($path="@.css")
+		: ($path="@.js")
+		: ($path="@.ts")
+		: ($path="@.coffee")
+		: ($path="@.jscsrc")
+		: ($path="@.jshintrc")
+		: ($path="@.md")
+		: ($path="@.editorconfig")
+		: ($path="@.gitignore")
+		: ($path="@.gitattributes")
+		: ($path="@.strings")
+		: ($path="@.4DSettings")
+		: ($path="@.4DPreferences")
+		: ($path="@.icns")
+		: ($path="@.png")
+		: ($path="@.ico")
+		: ($path="@.jpg")
+		: ($path="@.gif")
+		: ($path="@.tif")
+		: ($path="@.tiff")
+		: ($path="@.txt")
+		: ($path="@.dfont")
+		: ($path="@.woff")
+		: ($path="@.ttf")
+		: ($path="@.otf")
+		: ($path="@.woff2")
+		: ($path="@.4DZ")
+		: ($path="@.4DB")
+		: ($path="@.4DIndy")
+		: ($path="@.4DProject")
+		: ($path="@.4il")
+		: ($path="@.4vp")
+		: ($path="@.4wp")
+		: ($path="@.4dsyntax")
+		: ($path="@.pem")
+		: ($path="@.nib")
+		: ($path="@.xib")
+		: ($path="@.entitlements")
+		: ($path="@.aff")
+		: ($path="@.dic")
+		: ($path="@.ini")
+		: ($path="@.php")
+		: ($path="@.sh")
+		: ($path="@.project")
+		: ($path="@/LICENSE")
+		: ($path="@/PkgInfo")
+		: ($path="@/php-fcgi-4d")  //Mach-O 64-bit executable x86_64
+		: ($path="@/_CodeSignature/CodeResources")
+		: ($path="@/Info.plist")
+		: ($path="@.npmignore")
+		: ($path="@.nuspec")
+		: ($path="@.eslintrc")
+		: ($path="@.less")
+		: ($path="@.scss")
+		: ($path="@.eot")
+		: ($path="@.dtd")
+		: ($path="@.h")
+		: ($path="@.cpp")
+		: ($path="@.uni")
+		: ($path="@.bin")
+		: ($path="@.def")
+		: ($path="@/mecabrc")
+		: ($path="@/dicrc")
+		: ($path="@.4lbp")
+		: ($path="@.xcconfig")
+		: ($path="@.swiftdoc")
+		: ($path="@.swiftmodule")
+		: ($path="@.swiftsourceinfo")
+		: ($path="@.pak")
+		: ($path="@.dat")
+		: ($path="@/lib4d-arm64.dylib")
+			
+		Else 
+			$param.accumulator.push(File:C1566($path))
+	End case 
+	
 Function _clear()
 	
 	This:C1470._stdErrBuffer:=""
@@ -54,14 +146,14 @@ Function onData($worker : 4D:C1709.SystemWorker; $params : Object)
 	
 Function onResponse($worker : 4D:C1709.SystemWorker; $params : Object)
 	
-	var $paths; $messages : Collection
+	var $paths; $files : Collection
 	
 	$paths:=Split string:C1554(This:C1470._stdOutBuffer; "\n"; sk ignore empty strings:K86:1 | sk trim spaces:K86:2)
-	$messages:=Split string:C1554(This:C1470._stdErrBuffer; "\n"; sk ignore empty strings:K86:1 | sk trim spaces:K86:2)
+	$files:=$paths.reduce(This:C1470._reducePaths; New collection:C1472)
 	
 	If (This:C1470.complete)
 		If (OB Instance of:C1731(This:C1470._instance.onResponse; 4D:C1709.Function))
-			This:C1470._instance.onResponse($paths; $messages; This:C1470._parameters)
+			This:C1470._instance.onResponse($files; This:C1470._parameters)
 		End if 
 	End if 
 	
