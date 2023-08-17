@@ -17,6 +17,8 @@ Function bind($instance : cs:C1710._CLI)
 		This:C1470._parameters:=Copy parameters:C1790(2)
 	End if 
 	
+	//MARK:-private methods
+	
 Function _clear()
 	
 	This:C1470._stdErrBuffer:=""
