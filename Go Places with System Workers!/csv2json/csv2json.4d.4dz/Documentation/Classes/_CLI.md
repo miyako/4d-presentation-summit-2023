@@ -25,7 +25,7 @@ The constructor defines the following properties:
 |name|Text|read-only|
 |platform|Text|read-only|
 
-The classed is intended to be subclassed. `.name` returns the value `OB Class(This).name` which is the name of the extended class, not this class.
+The class is intended to be subclassed. `.name` returns the value `OB Class(This).name` which is the name of the extended class, not this class.
 
 ## .escape()
 
