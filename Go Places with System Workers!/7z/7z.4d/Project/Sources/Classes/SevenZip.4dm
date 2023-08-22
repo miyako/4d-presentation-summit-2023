@@ -35,7 +35,7 @@ resolve filesystem path
 		$command:=This:C1470.escape(This:C1470.executablePath)
 		$command:=$command+" a -snl -bso1 -bsp2 -y "+This:C1470.quote($destination.path)+" "+This:C1470.quote($source.path)
 /*
--snl : store synbolic links as links (tar)
+-snl : store symbolic links as links (tar)
 -bso1: redirect(b) stream(s) output  (p) stdout(1)
 -bsp2: redirect(b) stream(s) progress(p) stderr(2)
 */
