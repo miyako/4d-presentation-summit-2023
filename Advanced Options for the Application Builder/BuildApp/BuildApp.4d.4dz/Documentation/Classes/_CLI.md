@@ -31,7 +31,7 @@ The classed is intended to be subclassed. `.name` returns the value `OB Class(Th
 
 **.escape()**($in : Text) : Text
 
-Add add double quotes on each sides of a string that contains metacharacters on Windows, except when the last character is a backslash in which case the backslash is escaped with a backslash before the whole string is quoted. Escape metacharacters on Mac. Not all CLI agent respect this type of escaping.
+Add double quotes on each sides of a string that contains metacharacters on Windows, except when the last character is a backslash in which case the backslash is escaped with a backslash before the whole string is quoted. Escape metacharacters on Mac. Not all CLI agent respect this type of escaping.
 
 ## .quote()
 
