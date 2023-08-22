@@ -1,13 +1,6 @@
 {
 	"_method_": {},
 	"cs.SevenZip": {
-		"_TEST_Form_Controller": {
-			"new()": {
-				"Syntax": "**.new**()",
-				"Params": [],
-				"Summary": ""
-			}
-		},
 		"_Worker_Controller": {
 			"new()": {
 				"Syntax": "**.new**()",
@@ -24,6 +17,19 @@
 						"Text",
 						"->"
 					],
+					[
+						"controller",
+						"4D.Class",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"SevenZip": {
+			"new()": {
+				"Syntax": "**.new**( *controller* : 4D.Class )",
+				"Params": [
 					[
 						"controller",
 						"4D.Class",
@@ -53,93 +59,20 @@
 				"Summary": ""
 			}
 		},
-		"SevenZip": {
+		"_SevenZip_Form_Controller": {
 			"new()": {
-				"Syntax": "**.new**( *controller* : 4D.Class )",
-				"Params": [
-					[
-						"controller",
-						"4D.Class",
-						"->"
-					]
-				],
+				"Syntax": "**.new**()",
+				"Params": [],
 				"Summary": ""
 			}
 		},
-		"Marked": {
+		"_Marked": {
 			"new()": {
 				"Syntax": "**.new**()",
 				"Params": [],
 				"Summary": ""
 			}
 		}
-	},
-	"_TEST_Form_Controller": {
-		"stop()": {
-			"Syntax": "**.stop**()",
-			"Params": [],
-			"Summary": ""
-		},
-		"start()": {
-			"Syntax": "**.start**()",
-			"Params": [],
-			"Summary": ""
-		},
-		"onTerminate()": {
-			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
-			"Params": [
-				[
-					"worker",
-					"4D.SystemWorker",
-					"->"
-				],
-				[
-					"params",
-					"Object",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"onDataError()": {
-			"Syntax": "**.onDataError**( *worker* : 4D.SystemWorker; *params* : Object )",
-			"Params": [
-				[
-					"worker",
-					"4D.SystemWorker",
-					"->"
-				],
-				[
-					"params",
-					"Object",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"bind()": {
-			"Syntax": "**.bind**( *options* : Object )",
-			"Params": [
-				[
-					"options",
-					"Object",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"get progress()": {
-			"Syntax": "**.get progress**()->progress : Integer",
-			"Params": [
-				[
-					"progress",
-					"Integer",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"_inheritedFrom_": "_Form_Controller"
 	},
 	"_Worker_Controller": {
 		"onTerminate()": {
@@ -329,6 +262,56 @@
 			],
 			"Summary": ""
 		}
+	},
+	"SevenZip": {
+		"extract()": {
+			"Syntax": "**.extract**( *destination* : 4D.Folder; *source* : Variant )->this : cs.SevenZip.SevenZip",
+			"Params": [
+				[
+					"destination",
+					"4D.Folder",
+					"->"
+				],
+				[
+					"source",
+					"Variant",
+					"->"
+				],
+				[
+					"this",
+					"cs.SevenZip.SevenZip",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"add()": {
+			"Syntax": "**.add**( *destination* : 4D.File; *source* : Variant )->this : cs.SevenZip.SevenZip",
+			"Params": [
+				[
+					"destination",
+					"4D.File",
+					"->"
+				],
+				[
+					"source",
+					"Variant",
+					"->"
+				],
+				[
+					"this",
+					"cs.SevenZip.SevenZip",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"terminate()": {
+			"Syntax": "**.terminate**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_CLI"
 	},
 	"_CLI_Controller": {
 		"get commands()": {
@@ -546,57 +529,74 @@
 		},
 		"_inheritedFrom_": "_CLI_Controller"
 	},
-	"SevenZip": {
-		"extract()": {
-			"Syntax": "**.extract**( *destination* : 4D.Folder; *source* : Variant )->this : cs.SevenZip.SevenZip",
-			"Params": [
-				[
-					"destination",
-					"4D.Folder",
-					"->"
-				],
-				[
-					"source",
-					"Variant",
-					"->"
-				],
-				[
-					"this",
-					"cs.SevenZip.SevenZip",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"add()": {
-			"Syntax": "**.add**( *destination* : 4D.File; *source* : Variant )->this : cs.SevenZip.SevenZip",
-			"Params": [
-				[
-					"destination",
-					"4D.File",
-					"->"
-				],
-				[
-					"source",
-					"Variant",
-					"->"
-				],
-				[
-					"this",
-					"cs.SevenZip.SevenZip",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"terminate()": {
-			"Syntax": "**.terminate**()",
+	"_SevenZip_Form_Controller": {
+		"stop()": {
+			"Syntax": "**.stop**()",
 			"Params": [],
 			"Summary": ""
 		},
-		"_inheritedFrom_": "_CLI"
+		"start()": {
+			"Syntax": "**.start**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"onTerminate()": {
+			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onDataError()": {
+			"Syntax": "**.onDataError**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"bind()": {
+			"Syntax": "**.bind**( *options* : Object )",
+			"Params": [
+				[
+					"options",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"get progress()": {
+			"Syntax": "**.get progress**()->progress : Integer",
+			"Params": [
+				[
+					"progress",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_Form_Controller"
 	},
-	"Marked": {
+	"_Marked": {
 		"parse()": {
 			"Syntax": "**.parse**( *mdFile* : 4D.File )->htmlFile : 4D.File",
 			"Params": [
