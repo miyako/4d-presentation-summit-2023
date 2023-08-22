@@ -1,6 +1,6 @@
 Class constructor($CLI : cs:C1710._CLI)
 	
-	//use default event hander if not defined in subclass definition
+	//use default event handler if not defined in subclass definition
 	For each ($event; New collection:C1472("onData"; "onDataError"; "onError"; "onResponse"; "onTerminate"))
 		If (Not:C34(OB Instance of:C1731(This:C1470[$event]; 4D:C1709.Function)))
 			This:C1470[$event]:=This:C1470._onEvent
