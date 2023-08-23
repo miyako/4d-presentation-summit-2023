@@ -195,7 +195,7 @@ See documentation in the demo project.
 
 ## Sidebar: ChatGPT
 
-The Go programming language has the tendancy to result in pretty formulaic code. Add to that the large population of programmers who actively work with the language, it makes an ideal candidate for AI assisted coding. 
+The Go programming language has the tendency to result in formulaic code. Add to that the large population of programmers who actively work with the language, it makes an ideal candidate for AI assisted coding. 
 
 For example, if you ask ChatGPT
 
