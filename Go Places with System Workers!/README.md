@@ -59,7 +59,7 @@ go build hello-world.go
 
 #### Go extension for Visual Studio Code
 
-Go can be executed from the command line. Also there are several **Integrated Development Environment** options on the market. For our basic usuage the [Go extension for Visual Studio Code](https://code.visualstudio.com/docs/languages/go) should be more than sufficient.
+Go can be executed from the command line. There are also **Integrated Development Environment** options on the market. For our basic usage the [Go extension for Visual Studio Code](https://code.visualstudio.com/docs/languages/go) is more than sufficient.
 
 ## Whre to go from here
 
