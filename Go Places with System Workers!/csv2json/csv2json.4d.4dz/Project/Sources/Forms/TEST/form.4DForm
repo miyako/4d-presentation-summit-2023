@@ -224,6 +224,7 @@
 		"views": {
 			"Objects": {},
 			"Warning": {
+				"visible": false,
 				"objects": [
 					"button-warning"
 				]

@@ -212,7 +212,12 @@
 		"defaultView": "View 1",
 		"views": {
 			"View 1": {},
-			"Warning": {}
+			"Warning": {
+				"visible": false,
+				"objects": [
+					"button-warning"
+				]
+			}
 		}
 	},
 	"rightMargin": 10,
