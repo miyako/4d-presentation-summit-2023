@@ -71,7 +71,7 @@ The same could be said of System Workers. When it comes to domain specific data 
 
 ## Case study: CSV to JSON
 
-4D is not partculary versitle when it comes to processing proprietary data formats. In fact, 4D doesn't really support [CSV](https://en.wikipedia.org/wiki/Comma-separated_values).  
+4D is not particularly versatile when it comes to processing proprietary data formats. In fact, 4D doesn't really support [CSV](https://en.wikipedia.org/wiki/Comma-separated_values).  
 
 > System variables[^systemvariables] such as `FldDelimit` and `RecDelimit`, or the `IMPORT DATA`[^importdata] `EXPORT DATA`[^exportdata] commands purport to support comma-separated values but not to the degree expected in a business application, in particular the 2005 RFC 4180 standard[^rfc4180]. 
 
