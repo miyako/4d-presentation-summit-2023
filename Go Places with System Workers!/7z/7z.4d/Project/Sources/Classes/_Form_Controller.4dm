@@ -81,8 +81,8 @@ Function _clear()
 	
 Function onDataError($worker : 4D:C1709.SystemWorker; $params : Object)
 	
-	//Form is an instance of the view
-	//This is an instance of the controller
+	//Form is an instance of _CLI
+	//This is an instance of _Form_Controller
 	
 	If (Form:C1466#Null:C1517)
 		
@@ -107,8 +107,8 @@ Function onDataError($worker : 4D:C1709.SystemWorker; $params : Object)
 	
 Function onData($worker : 4D:C1709.SystemWorker; $params : Object)
 	
-	//Form is an instance of the view
-	//This is an instance of the controller
+	//Form is an instance of _CLI
+	//This is an instance of _Form_Controller
 	
 	If (Form:C1466#Null:C1517)
 		
@@ -133,8 +133,8 @@ Function onData($worker : 4D:C1709.SystemWorker; $params : Object)
 	
 Function onResponse($worker : 4D:C1709.SystemWorker; $params : Object)
 	
-	//Form is an instance of the view
-	//This is an instance of the controller
+	//Form is an instance of _CLI
+	//This is an instance of _Form_Controller
 	
 	If (Form:C1466#Null:C1517)
 		
@@ -148,8 +148,8 @@ Function onResponse($worker : 4D:C1709.SystemWorker; $params : Object)
 	
 Function onTerminate($worker : 4D:C1709.SystemWorker; $params : Object)
 	
-	//Form is an instance of the view
-	//This is an instance of the controller
+	//Form is an instance of _CLI
+	//This is an instance of _Form_Controller
 	
 	If (Form:C1466#Null:C1517)
 		
