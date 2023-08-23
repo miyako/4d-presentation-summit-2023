@@ -315,7 +315,7 @@ func main() {
 
 > In this code, we use `os.Stdin` to read CSV input from standard input. We parse the input using the `csv.NewReader` function and loop over the CSV records to convert them to a slice of maps. Finally, we use the `json.MarshalIndent` function to convert the data to JSON format and write it to standard output using the `fmt.Println` function.
 
-Does the code work? I don't know. Given the commonality of the problem, you could have searched the web the traditional way. As long as the request is well defined, the answer should not be too far off the mark. Also, you can keep refining your requests to get a better answer. The AI takes context into account.
+Does the code work? I don't know. Given the commonality of the problem, you could have searched the web the traditional way. If the request is well defined, the answer should not be too far off the mark. Also, you can keep refining your requests to get a better answer. The AI takes context into account.
 
 AI can also be used to perform mundane work such as 
 
