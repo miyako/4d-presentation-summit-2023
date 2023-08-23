@@ -61,7 +61,7 @@ go build hello-world.go
 
 Go can be executed from the command line. There are also **Integrated Development Environment** options on the market. For our basic usage the [Go extension for Visual Studio Code](https://code.visualstudio.com/docs/languages/go) is more than sufficient.
 
-## Whre to go from here
+## Where to go from here
 
 The [introduction to the plugin SDK](https://developer.4d.com/4D-Plugin-SDK/CMU84458.HTM) includes the following passage:
 
