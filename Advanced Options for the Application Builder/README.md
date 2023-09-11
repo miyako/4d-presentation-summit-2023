@@ -165,9 +165,7 @@ It is recommended to use specialised tools to create a multi-resolution icon fil
 
 * For Mac, the standard tool is `iconutil`[^iconutil]
 
-* For Windows, there are various 3rd party tools and online services that can create composite `.ico` files
-
-`go-png2ico`[^go-png2ico] is one such example.
+* For Windows, there are various 3rd party tools and online services that can create composite `.ico` files. `go-png2ico`[^go-png2ico] is one such example.
 
 #### Benefits of Using Advanced Options
 
