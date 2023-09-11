@@ -167,6 +167,8 @@ It is recommended to use specialised tools to create a multi-resolution icon fil
 
 * For Windows, there are various 3rd party tools and online services that can create composite `.ico` files
 
+`go-png2ico`[^go-png2ico] is one such example.
+
 #### Benefits of Using Advanced Options
 
 With the easy configuration your server, client and desktop apps will all share the same icon. XML keys allow you to better manage your app's public profile.
@@ -208,3 +210,5 @@ Some ideas:
 [^icns]: [Foundations > Design > App icons](https://developer.apple.com/design/human-interface-guidelines/foundations/app-icons)
 
 [^ico]: [Win32 > Design > Icons](https://learn.microsoft.com/en-us/windows/win32/uxguide/vis-icons)
+
+[^go-png2ico]: [J-Siu > go-png2ico](https://github.com/J-Siu/go-png2ico/)
