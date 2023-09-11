@@ -146,8 +146,8 @@ xxx = Mac/Win xxxxx=Client/Common/RuntimeVL/Server
 The 4D logo on the user login dialog can be replaced by a custom icon file[^loginimage]. The file format must be `.png`.
 
 * Name: *LoginImage.png*  
-* Location: Adjacent to the project folder  
-* Size: `80x80`  
+* Location: Resources folder (old specification: adjacent to the project folder) 
+* Size: Any (old specification: `80x80`)
 
 <!-- <img width="64" alt="icon" src="https://user-images.githubusercontent.com/1725068/220619757-ba13915a-904a-4b1e-ae2d-772ad1d3d182.png" /> -->
 
