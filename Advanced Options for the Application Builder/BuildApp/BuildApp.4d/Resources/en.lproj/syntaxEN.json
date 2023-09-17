@@ -1,0 +1,855 @@
+{
+	"_method_": {},
+	"cs.BuildApp": {
+		"_Form_Controller": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"_CLI_Controller": {
+			"new()": {
+				"Syntax": "**.new**( *CLI* : cs.BuildApp._CLI )",
+				"Params": [
+					[
+						"CLI",
+						"cs.BuildApp._CLI",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"_Lipo_Form_Controller": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"Iconutil": {
+			"new()": {
+				"Syntax": "**.new**( *controller* : 4D.Class )",
+				"Params": [
+					[
+						"controller",
+						"4D.Class",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"_CLI": {
+			"new()": {
+				"Syntax": "**.new**( *executableName* : Text; *controller* : 4D.Class )",
+				"Params": [
+					[
+						"executableName",
+						"Text",
+						"->"
+					],
+					[
+						"controller",
+						"4D.Class",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"Lipo": {
+			"new()": {
+				"Syntax": "**.new**( *controller* : 4D.Class )",
+				"Params": [
+					[
+						"controller",
+						"4D.Class",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"_Worker_Controller": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"Png2Ico": {
+			"new()": {
+				"Syntax": "**.new**( *controller* : 4D.Class )",
+				"Params": [
+					[
+						"controller",
+						"4D.Class",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"_Marked": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"_Find_Worker_Controller": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"_Find": {
+			"new()": {
+				"Syntax": "**.new**( *controller* : 4D.Class )",
+				"Params": [
+					[
+						"controller",
+						"4D.Class",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		}
+	},
+	"_Form_Controller": {
+		"onTerminate()": {
+			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onData()": {
+			"Syntax": "**.onData**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onDataError()": {
+			"Syntax": "**.onDataError**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"get onDataErrorCount()": {
+			"Syntax": "**.get onDataErrorCount**()->onDataErrorCount : Integer",
+			"Params": [
+				[
+					"onDataErrorCount",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"start()": {
+			"Syntax": "**.start**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"bind()": {
+			"Syntax": "**.bind**( *options* : Object )",
+			"Params": [
+				[
+					"options",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"get stdErr()": {
+			"Syntax": "**.get stdErr**()->stdErr : Text",
+			"Params": [
+				[
+					"stdErr",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"stop()": {
+			"Syntax": "**.stop**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"onResponse()": {
+			"Syntax": "**.onResponse**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"get onTerminateCount()": {
+			"Syntax": "**.get onTerminateCount**()->onTerminateCount : Integer",
+			"Params": [
+				[
+					"onTerminateCount",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get onDataCount()": {
+			"Syntax": "**.get onDataCount**()->onDataCount : Integer",
+			"Params": [
+				[
+					"onDataCount",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get onResponseCount()": {
+			"Syntax": "**.get onResponseCount**()->onResponseCount : Integer",
+			"Params": [
+				[
+					"onResponseCount",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get stdOut()": {
+			"Syntax": "**.get stdOut**()->stdOut : Text",
+			"Params": [
+				[
+					"stdOut",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_CLI_Controller"
+	},
+	"_CLI_Controller": {
+		"get commands()": {
+			"Syntax": "**.get commands**()->commands : Collection",
+			"Params": [
+				[
+					"commands",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get complete()": {
+			"Syntax": "**.get complete**()->complete : Boolean",
+			"Params": [
+				[
+					"complete",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"terminate()": {
+			"Syntax": "**.terminate**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"execute()": {
+			"Syntax": "**.execute**( *command* : Variant )",
+			"Params": [
+				[
+					"command",
+					"Variant",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"get worker()": {
+			"Syntax": "**.get worker**()->worker : 4D.SystemWorker",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get instance()": {
+			"Syntax": "**.get instance**()->instance : cs.BuildApp._CLI",
+			"Params": [
+				[
+					"instance",
+					"cs.BuildApp._CLI",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"_Lipo_Form_Controller": {
+		"onTerminate()": {
+			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onResponse()": {
+			"Syntax": "**.onResponse**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"get commandLine()": {
+			"Syntax": "**.get commandLine**()->commandLine : Text",
+			"Params": [
+				[
+					"commandLine",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_Form_Controller"
+	},
+	"Iconutil": {
+		"convert()": {
+			"Syntax": "**.convert**( *option* : Variant )->this : cs.BuildApp.Lipo",
+			"Params": [
+				[
+					"option",
+					"Variant",
+					"->"
+				],
+				[
+					"this",
+					"cs.BuildApp.Lipo",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"terminate()": {
+			"Syntax": "**.terminate**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"onResponse()": {
+			"Syntax": "**.onResponse**( *files* : Collection; *parameters* : Collection )",
+			"Params": [
+				[
+					"files",
+					"Collection",
+					"->"
+				],
+				[
+					"parameters",
+					"Collection",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_CLI"
+	},
+	"_CLI": {
+		"quote()": {
+			"Syntax": "**.quote**( *in* : Text )->out : Text",
+			"Params": [
+				[
+					"in",
+					"Text",
+					"->"
+				],
+				[
+					"out",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"escape()": {
+			"Syntax": "**.escape**( *in* : Text )->out : Text",
+			"Params": [
+				[
+					"in",
+					"Text",
+					"->"
+				],
+				[
+					"out",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get controller()": {
+			"Syntax": "**.get controller**()->controller : cs.BuildApp._CLI_Controller",
+			"Params": [
+				[
+					"controller",
+					"cs.BuildApp._CLI_Controller",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get executablePath()": {
+			"Syntax": "**.get executablePath**()->executablePath : Text",
+			"Params": [
+				[
+					"executablePath",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get currentDirectory()": {
+			"Syntax": "**.get currentDirectory**()->currentDirectory : 4D.Folder",
+			"Params": [
+				[
+					"currentDirectory",
+					"4D.Folder",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get executableFile()": {
+			"Syntax": "**.get executableFile**()->executableFile : 4D.File",
+			"Params": [
+				[
+					"executableFile",
+					"4D.File",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get platform()": {
+			"Syntax": "**.get platform**()->platform : Text",
+			"Params": [
+				[
+					"platform",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get EOL()": {
+			"Syntax": "**.get EOL**()->EOL : Text",
+			"Params": [
+				[
+					"EOL",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get executableName()": {
+			"Syntax": "**.get executableName**()->executableName : Text",
+			"Params": [
+				[
+					"executableName",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get name()": {
+			"Syntax": "**.get name**()->name : Text",
+			"Params": [
+				[
+					"name",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"Lipo": {
+		"thin()": {
+			"Syntax": "**.thin**( *option* : Variant )->this : cs.BuildApp.Lipo",
+			"Params": [
+				[
+					"option",
+					"Variant",
+					"->"
+				],
+				[
+					"this",
+					"cs.BuildApp.Lipo",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"terminate()": {
+			"Syntax": "**.terminate**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"onResponse()": {
+			"Syntax": "**.onResponse**( *files* : Collection; *parameters* : Collection )",
+			"Params": [
+				[
+					"files",
+					"Collection",
+					"->"
+				],
+				[
+					"parameters",
+					"Collection",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_CLI"
+	},
+	"_Worker_Controller": {
+		"onTerminate()": {
+			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onResponse()": {
+			"Syntax": "**.onResponse**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onData()": {
+			"Syntax": "**.onData**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onError()": {
+			"Syntax": "**.onError**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onDataError()": {
+			"Syntax": "**.onDataError**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_CLI_Controller"
+	},
+	"Png2Ico": {
+		"convert()": {
+			"Syntax": "**.convert**( *option* : Variant )->this : cs.BuildApp.Lipo",
+			"Params": [
+				[
+					"option",
+					"Variant",
+					"->"
+				],
+				[
+					"this",
+					"cs.BuildApp.Lipo",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"terminate()": {
+			"Syntax": "**.terminate**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"onResponse()": {
+			"Syntax": "**.onResponse**( *files* : Collection; *parameters* : Collection )",
+			"Params": [
+				[
+					"files",
+					"Collection",
+					"->"
+				],
+				[
+					"parameters",
+					"Collection",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_CLI"
+	},
+	"_Marked": {
+		"parse()": {
+			"Syntax": "**.parse**( *mdFile* : 4D.File )->htmlFile : 4D.File",
+			"Params": [
+				[
+					"mdFile",
+					"4D.File",
+					"->"
+				],
+				[
+					"htmlFile",
+					"4D.File",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"generate()": {
+			"Syntax": "**.generate**( *path* : Text )->htmlFile : 4D.File",
+			"Params": [
+				[
+					"path",
+					"Text",
+					"->"
+				],
+				[
+					"htmlFile",
+					"4D.File",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"result": {
+			"Syntax": "result : 4D.File"
+		},
+		"url": {
+			"Syntax": "url : 4D.File"
+		},
+		"area": {
+			"Syntax": "area : Text"
+		}
+	},
+	"_Find_Worker_Controller": {
+		"onData()": {
+			"Syntax": "**.onData**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onTerminate()": {
+			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onResponse()": {
+			"Syntax": "**.onResponse**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onDataError()": {
+			"Syntax": "**.onDataError**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"bind()": {
+			"Syntax": "**.bind**( *instance* : cs.BuildApp._CLI )",
+			"Params": [
+				[
+					"instance",
+					"cs.BuildApp._CLI",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_Worker_Controller"
+	},
+	"_Find": {
+		"findExecutables()": {
+			"Syntax": "**.findExecutables**( *option* : Variant )->this : cs.BuildApp._Find",
+			"Params": [
+				[
+					"option",
+					"Variant",
+					"->"
+				],
+				[
+					"this",
+					"cs.BuildApp._Find",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"terminate()": {
+			"Syntax": "**.terminate**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_CLI"
+	}
+}
