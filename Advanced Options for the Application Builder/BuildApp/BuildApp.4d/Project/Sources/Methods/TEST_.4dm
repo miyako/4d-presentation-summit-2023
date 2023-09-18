@@ -16,6 +16,6 @@ $file:=Folder:C1567(fk desktop folder:K87:19).file("buildApp.4DSettings")
 
 $BuildApp.toFile($file)
 
-$BuildApp.buildApplication()
+//$BuildApp.buildApplication()
 
 //BUILD APPLICATION($file.platformPath)

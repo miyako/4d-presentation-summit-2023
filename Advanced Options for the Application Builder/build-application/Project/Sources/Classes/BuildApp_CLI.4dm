@@ -42,7 +42,9 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 	
 	$success:=$status.success
 	
-	$CLI.print("success"; "bold").print(": ")
+	$CLI\
+		.print(" "*Length:C16(Parse formula:C1576(":C1760")))\
+		.print("  success: "; "bold")
 	
 	If ($success)
 		$CLI.print(String:C10($success); "green;bold").LF()
@@ -64,14 +66,18 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 		$CLI.print("     "; "bold").print(".code.path: ").print($error.code.path).LF()
 	End for each 
 	
-Function build($buildProject : 4D:C1709.File)->$success : Boolean
+Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->$success : Boolean
 	
 	$CLI:=This:C1470
+	
+	//$CLI\
+		.print(Parse formula(":C871"); "bold;underline")\
+		.print(": ")\
+		.print($buildProject.path)\
+		.LF()
 	
 	var $BuildApp : cs:C1710.BuildApp
 	
 	$BuildApp:=cs:C1710.BuildApp.new($buildProject)
 	
-	$BuildApp.findLicenses()
-	
-	$BuildApp.buildApplication()
+	$BuildApp.findLicenses().buildApplication($compileProject)

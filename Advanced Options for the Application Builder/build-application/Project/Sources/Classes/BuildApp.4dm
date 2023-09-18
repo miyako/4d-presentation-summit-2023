@@ -19,7 +19,7 @@ Function get settings()->$settings : Object
 	
 	//MARK:-public methods
 	
-Function buildApplication()->$BuildApp : cs:C1710.BuildApp
+Function buildApplication($compileProject : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 	
 	$BuildApp:=This:C1470
 	
@@ -27,53 +27,153 @@ Function buildApplication()->$BuildApp : cs:C1710.BuildApp
 	
 	$Build___DestFolder:="Build"+(Is macOS:C1572 ? "Mac" : "Win")+"DestFolder"
 	
-	If ($BuildApp[$Build___DestFolder]#Null:C1517)
-		If ($BuildApp[$Build___DestFolder]#"")
-			$BuildDestFolder:=Folder:C1567($BuildApp[$Build___DestFolder]; fk platform path:K87:2).folder("Final Application")
-			$BuildDestFolder.create()
+	If ($BuildApp[$Build___DestFolder]#Null:C1517) && ($BuildApp[$Build___DestFolder]#"")
+		$BuildDestFolder:=Folder:C1567($BuildApp[$Build___DestFolder]; fk platform path:K87:2).folder("Final Application")
+		$BuildDestFolder.create()
+		
+		$CLI\
+			.print($Build___DestFolder; "bold;underline")\
+			.print(": ")\
+			.print($BuildDestFolder.parent.path)\
+			.LF()
+		
+		If ($BuildApp.BuildApplicationSerialized)
 			
-			$CLI\
-				.print($Build___DestFolder; "bold;underline")\
-				.print(": ")\
-				.print($BuildDestFolder.parent.path)\
-				.LF()
-			
-			If ($BuildApp.BuildApplicationSerialized)
-				
-				If (Is macOS:C1572)
-					If ($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder#Null:C1517)
-						If ($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder#"")
-							$RuntimeVLMacFolder:=Folder:C1567($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder; fk platform path:K87:2)
-							If ($RuntimeVLMacFolder.exists)
+			If (Is macOS:C1572)
+				If ($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder#Null:C1517) && ($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder#"")
+					$RuntimeVLMacFolder:=Folder:C1567($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder; fk platform path:K87:2)
+					If ($RuntimeVLMacFolder.exists)
+						
+						$CLI\
+							.print("RuntimeVLMacFolder"; "bold;underline")\
+							.print(": ")\
+							.print($RuntimeVLMacFolder.path)\
+							.LF()
+						
+						If ($BuildDestFolder.folder($RuntimeVLMacFolder.fullName).exists)
+							$CLI\
+								.print("                  ")\
+								.print("  Overwrite existing file"; "yellow;bold")\
+								.LF()
+							
+						End if 
+						
+						If ($BuildApp.BuildApplicationName#Null:C1517) && ($BuildApp.BuildApplicationName#"")
+							
+							$CLI\
+								.print("BuildApplicationName"; "bold;underline")\
+								.print(": ")\
+								.print($BuildApp.BuildApplicationName)\
+								.LF()
+							
+							$appFolder:=$RuntimeVLMacFolder.copyTo($BuildDestFolder; $BuildApp.BuildApplicationName+".app"; fk overwrite:K87:5)
+						Else 
+							$appFolder:=$RuntimeVLMacFolder.copyTo($BuildDestFolder; fk overwrite:K87:5)
+						End if 
+						
+						This:C1470._copyDatabase($CLI; $appFolder; $compileProject)
+						
+						$propertyListFile:=$appFolder.folder("Contents").file("Info.plist")
+						
+						$info:=New object:C1471
+						
+						$info.CFBundleDisplayName:=$BuildApp.BuildApplicationName
+						$info.CFBundleName:=$BuildApp.BuildApplicationName
+						
+						If ($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIconMacPath#Null:C1517) && ($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIconMacPath#"")
+							$RuntimeVLIconMacPath:=File:C1566($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIconMacPath; fk platform path:K87:2)
+							If ($RuntimeVLIconMacPath.exists)
 								
 								$CLI\
-									.print("RuntimeVLMacFolder"; "bold;underline")\
+									.print("RuntimeVLIconMacPath"; "bold;underline")\
 									.print(": ")\
-									.print($RuntimeVLMacFolder.path)\
+									.print($RuntimeVLIconMacPath.path)\
 									.LF()
 								
-								If ($BuildDestFolder.folder($RuntimeVLMacFolder.fullName).exists)
-									$CLI\
-										.print("                  ")\
-										.print("  Overwrite existing file"; "yellow;bold")\
-										.LF()
-									
-								End if 
+								$RuntimeVLIconMacPath.copyTo($appFolder.folder("Contents").folder("Resources"); fk overwrite:K87:5)
 								
-								$CLI.LF()
-								
-								$RuntimeVLMacFolder.copyTo($BuildDestFolder; fk overwrite:K87:5)
+								$info.CFBundleIconFile:=$RuntimeVLIconMacPath.fullName
 								
 							End if 
 						End if 
+						
+						If ($BuildApp.Versioning.Common.CommonVersion#Null:C1517) && ($BuildApp.Versioning.Common.CommonVersion#"")
+							$info.CFBundleVersion:=$BuildApp.Versioning.Common.CommonVersion
+							$info.CFBundleShortVersionString:=$info.CFBundleVersion
+						End if 
+						
+						If ($BuildApp.Versioning.RuntimeVL.RuntimeVLVersion#Null:C1517) && ($BuildApp.Versioning.RuntimeVL.RuntimeVLVersion#"")
+							$info.CFBundleVersion:=$BuildApp.Versioning.RuntimeVL.RuntimeVLVersion
+							$info.CFBundleShortVersionString:=$info.CFBundleVersion
+						End if 
+						
+						//InfoPlist.strings must be updated for these
+						
+						//If ($BuildApp.Versioning.Common.CommonCopyright#Null) && ($BuildApp.Versioning.Common.CommonCopyright#"")
+						//$info.CFBundleGetInfoString:=$BuildApp.Versioning.Common.CommonCopyright
+						//$info.NSHumanReadableCopyright:=$info.CFBundleGetInfoString
+						//End if 
+						
+						//If ($BuildApp.Versioning.RuntimeVL.RuntimeVLCopyright#Null) && ($BuildApp.Versioning.RuntimeVL.RuntimeVLCopyright#"")
+						//$info.CFBundleGetInfoString:=$BuildApp.Versioning.RuntimeVL.RuntimeVLCopyright
+						//$info.NSHumanReadableCopyright:=$info.CFBundleGetInfoString
+						//End if 
+						
+						$propertyListFile.setAppInfo($info)
+						
 					End if 
 				End if 
 			End if 
-			
-			
-			
-			
 		End if 
+	End if 
+	
+Function _copyDatabase($CLI : cs:C1710.BuildApp_CLI; $appFolder : 4D:C1709.Folder; $compileProject : 4D:C1709.File)
+	
+	$BuildApp:=This:C1470
+	
+	$ProjectFolder:=$compileProject.parent
+	$ContentsFolder:=$appFolder.folder("Contents").folder("Database")
+	
+	If ($BuildApp.PackProject#Null:C1517) && ($BuildApp.PackProject)
+		
+		$zip:=New object:C1471
+		$zip.files:=New collection:C1472($ProjectFolder)
+		
+		If ($BuildApp.UseStandardZipFormat#Null:C1517) && ($BuildApp.UseStandardZipFormat)
+			$zip.encryption:=ZIP Encryption none:K91:3
+		Else 
+			$zip.encryption:=-1
+		End if 
+		
+		$status:=ZIP Create archive:C1640($zip; $ContentsFolder.file($BuildApp.BuildApplicationName+".4DZ"))
+		
+		$success:=$status.success
+		
+		$CLI\
+			.print("Archive"; "underline;bold")\
+			.print(": ")\
+			.print($ContentsFolder.file($BuildApp.BuildApplicationName+".4DZ").path)\
+			.LF()
+		
+		$CLI\
+			.print(" "*Length:C16("Archive"))\
+			.print("  success: "; "bold")
+		
+		If ($success)
+			$CLI.print(String:C10($success); "green;bold").LF()
+		Else 
+			$CLI.print(String:C10($success); "red;bold").LF()
+		End if 
+		
+	Else 
+		
+		$CLI\
+			.print("Copy"; "underline;bold")\
+			.print(": ")\
+			.print($ContentsFolder.file($ProjectFolder.fullName).path)\
+			.LF()
+		
+		$ProjectFolder.copyTo($ContentsFolder)
 	End if 
 	
 Function findLicenses($licenseTypes : Collection)->$BuildApp : cs:C1710.BuildApp
@@ -289,13 +389,13 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 		"ClientPrivateBuild"; Null:C1517; \
 		"ClientSpecialBuild"; Null:C1517))
 	
-	$BuildApp._settingsFile:=$settingsFile
+	$_BuildApp._settingsFile:=$settingsFile
 	
-	If ($BuildApp._settingsFile#Null:C1517) && (OB Instance of:C1731($BuildApp._settingsFile; 4D:C1709.File))
+	If ($_BuildApp._settingsFile#Null:C1517) && (OB Instance of:C1731($_BuildApp._settingsFile; 4D:C1709.File))
 		
-		If ($BuildApp._settingsFile.exists)
+		If ($_BuildApp._settingsFile.exists)
 			
-			$path:=$BuildApp._settingsFile.platformPath
+			$path:=$_BuildApp._settingsFile.platformPath
 			
 			C_LONGINT:C283($intValue)
 			C_TEXT:C284($stringValue)
@@ -399,6 +499,20 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 				If (OK=1)
 					DOM GET XML ELEMENT VALUE:C731($RuntimeVLWinFolder; $stringValue)
 					$_BuildApp.SourcesFiles.RuntimeVL.RuntimeVLWinFolder:=$stringValue
+				End if 
+				
+				$RuntimeVLIconWinPath:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/SourcesFiles/RuntimeVL/RuntimeVLIconWinPath")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($RuntimeVLIconWinPath; $stringValue)
+					$_BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIconWinPath:=$stringValue
+				End if 
+				
+				$RuntimeVLIconMacPath:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/SourcesFiles/RuntimeVL/RuntimeVLIconMacPath")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($RuntimeVLIconMacPath; $stringValue)
+					$_BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIconMacPath:=$stringValue
 				End if 
 				
 				$IsOEM:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/SourcesFiles/RuntimeVL/IsOEM")
