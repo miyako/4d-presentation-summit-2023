@@ -1,5 +1,9 @@
 {
 	"forms": {
+		"TEST-BuildApp": {
+			"timeStamp": "2023-09-18T14:24:08Z",
+			"destination": "detailScreen"
+		},
 		"TEST-Lipo": {
 			"timeStamp": "2023-09-18T03:48:37Z",
 			"destination": "detailScreen"

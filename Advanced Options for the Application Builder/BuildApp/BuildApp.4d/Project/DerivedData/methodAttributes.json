@@ -1,7 +1,25 @@
 {
 	"methods": {
+		"show_path": {
+			"timeStamp": "2023-09-18T10:29:21Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
 		"ICONUTIL_WORKER": {
 			"timeStamp": "2023-09-18T03:48:37Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"setup_application_path": {
+			"timeStamp": "2023-09-18T13:22:40Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"update_application_path": {
+			"timeStamp": "2023-09-18T13:33:07Z",
 			"attributes": {
 				"invisible": true
 			}
@@ -15,8 +33,50 @@
 		"LIPO_FORM": {
 			"timeStamp": "2023-09-18T03:48:37Z"
 		},
+		"TEST_ADVANCED": {
+			"timeStamp": "2023-09-18T14:08:01Z"
+		},
 		"PNG2ICO_WORKER": {
 			"timeStamp": "2023-09-18T03:48:37Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"update_destination_path": {
+			"timeStamp": "2023-09-18T11:03:13Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"setup_destination_path": {
+			"timeStamp": "2023-09-18T10:57:24Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"setup_icon_path": {
+			"timeStamp": "2023-09-18T12:17:08Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"update_module_list": {
+			"timeStamp": "2023-09-18T14:21:31Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"setup_data_path_lookup": {
+			"timeStamp": "2023-09-18T11:18:43Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"TEST_": {
+			"timeStamp": "2023-09-18T06:56:38Z"
+		},
+		"update_icon_path": {
+			"timeStamp": "2023-09-18T13:23:11Z",
 			"attributes": {
 				"invisible": true
 			}

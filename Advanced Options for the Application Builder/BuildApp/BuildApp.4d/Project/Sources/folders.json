@@ -1,3 +1,19 @@
 {
+	"TEST-BuildApp": {
+		"methods": [
+			"setup_application_path",
+			"setup_data_path_lookup",
+			"setup_destination_path",
+			"setup_icon_path",
+			"show_path",
+			"update_application_path",
+			"update_destination_path",
+			"update_icon_path",
+			"update_module_list"
+		],
+		"forms": [
+			"TEST-BuildApp"
+		]
+	},
 	"trash": {}
 }
