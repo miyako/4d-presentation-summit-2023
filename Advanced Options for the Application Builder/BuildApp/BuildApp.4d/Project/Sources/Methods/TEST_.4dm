@@ -14,8 +14,8 @@ $BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIconMacPath:=Folder:C1567(fk resources
 
 $file:=Folder:C1567(fk desktop folder:K87:19).file("buildApp.4DSettings")
 
-$BuildApp.toFile($file)
+$BuildApp.findLicense().toFile($file)
 
 //$BuildApp.buildApplication()
 
-//BUILD APPLICATION($file.platformPath)
+BUILD APPLICATION:C871($file.platformPath)

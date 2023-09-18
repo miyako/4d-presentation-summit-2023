@@ -29,11 +29,7 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 	
 	$CLI:=This:C1470
 	
-	$CLI\
-		.print(Parse formula:C1576(":C1760"); "bold;underline")\
-		.print(": ")\
-		.print($compileProject.path)\
-		.LF()
+	$CLI.print("Compile"; "bold").print(": ")
 	
 	$options:=New object:C1471
 	$options.generateSymbols:=True:C214
@@ -42,39 +38,35 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 	
 	$success:=$status.success
 	
-	$CLI\
-		.print(" "*Length:C16(Parse formula:C1576(":C1760")))\
-		.print("  success: "; "bold")
-	
 	If ($success)
-		$CLI.print(String:C10($success); "green;bold").LF()
+		$CLI.print("success"; "green;bold").LF()
 	Else 
-		$CLI.print(String:C10($success); "red;bold").LF()
+		$CLI.print("failure"; "red;bold").LF()
 	End if 
 	
-	For each ($error; $status.errors)
-		$CLI.print("error"; "bold").print(".isError: ")
-		If ($error.isError)
-			$CLI.print(String:C10($error.isError); "red;bold").LF()
-		Else 
-			$CLI.print(String:C10($error.isError); "yellow;bold").LF()
-		End if 
-		$CLI.print("     "; "bold").print(".message: ").print($error.message).LF()
-		$CLI.print("     "; "line").print(".line: ").print(String:C10($error.line)).LF()
-		$CLI.print("     "; "lineInFile").print(".lineInFile: ").print(String:C10($error.lineInFile)).LF()
-		$CLI.print("     "; "bold").print(".code.type: ").print($error.code.type).LF()
-		$CLI.print("     "; "bold").print(".code.path: ").print($error.code.path).LF()
-	End for each 
+	$CLI.print(" "*Length:C16("Compile")).print("  ").print($compileProject.path; "240").LF()
+	
+	If (False:C215)
+		
+		For each ($error; $status.errors)
+			$CLI.print("error"; "bold").print(".isError: ")
+			If ($error.isError)
+				$CLI.print(String:C10($error.isError); "red;bold").LF()
+			Else 
+				$CLI.print(String:C10($error.isError); "yellow;bold").LF()
+			End if 
+			$CLI.print("     "; "bold").print(".message: ").print($error.message).LF()
+			$CLI.print("     "; "line").print(".line: ").print(String:C10($error.line)).LF()
+			$CLI.print("     "; "lineInFile").print(".lineInFile: ").print(String:C10($error.lineInFile)).LF()
+			$CLI.print("     "; "bold").print(".code.type: ").print($error.code.type).LF()
+			$CLI.print("     "; "bold").print(".code.path: ").print($error.code.path).LF()
+		End for each 
+		
+	End if 
 	
 Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->$success : Boolean
 	
 	$CLI:=This:C1470
-	
-	//$CLI\
-		.print(Parse formula(":C871"); "bold;underline")\
-		.print(": ")\
-		.print($buildProject.path)\
-		.LF()
 	
 	var $BuildApp : cs:C1710.BuildApp
 	
