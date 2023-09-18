@@ -8,9 +8,9 @@ https://developer.4d.com/docs/Admin/cli/#tool4d
 
 If (Get application info:C1599.headless)
 	
-	var $CLI : cs:C1710._Output
+	var $CLI : cs:C1710.BuildApp_CLI
 	
-	$CLI:=cs:C1710._Output.new()
+	$CLI:=cs:C1710.BuildApp_CLI.new()
 	
 	$CLI.logo().version()
 	
@@ -52,6 +52,9 @@ If (Get application info:C1599.headless)
 			
 			If ($compileProject#Null:C1517)
 				$compiled:=$CLI.compile($compileProject)
+				If ($compiled)
+					$built:=$CLI.build($buildProject)
+				End if 
 			End if 
 			
 	End case 

@@ -1,6 +1,6 @@
 Class extends CLI
 
-Function logo()->$CLI : cs:C1710._Output
+Function logo()->$CLI : cs:C1710.BuildApp_CLI
 	
 	$CLI:=This:C1470
 	
@@ -11,7 +11,7 @@ Function logo()->$CLI : cs:C1710._Output
 		$CLI.print($line; "117;18;bold").LF()
 	End for each 
 	
-Function version()->$CLI : cs:C1710._Output
+Function version()->$CLI : cs:C1710.BuildApp_CLI
 	
 	$CLI:=This:C1470
 	
@@ -64,3 +64,14 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 		$CLI.print("     "; "bold").print(".code.path: ").print($error.code.path).LF()
 	End for each 
 	
+Function build($buildProject : 4D:C1709.File)->$success : Boolean
+	
+	$CLI:=This:C1470
+	
+	var $BuildApp : cs:C1710.BuildApp
+	
+	$BuildApp:=cs:C1710.BuildApp.new($buildProject)
+	
+	$BuildApp.findLicenses()
+	
+	$BuildApp.buildApplication()
