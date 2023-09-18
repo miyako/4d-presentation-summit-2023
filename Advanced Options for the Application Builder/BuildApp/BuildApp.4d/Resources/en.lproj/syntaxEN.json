@@ -1,19 +1,6 @@
 {
 	"_method_": {},
 	"cs.BuildApp": {
-		"BuildApp": {
-			"new()": {
-				"Syntax": "**.new**( *settingsFile* : Object )",
-				"Params": [
-					[
-						"settingsFile",
-						"Object",
-						"->"
-					]
-				],
-				"Summary": ""
-			}
-		},
 		"_Form_Controller": {
 			"new()": {
 				"Syntax": "**.new**()",
@@ -51,6 +38,13 @@
 						"->"
 					]
 				],
+				"Summary": ""
+			}
+		},
+		"CLI": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
 				"Summary": ""
 			}
 		},
@@ -124,78 +118,6 @@
 				],
 				"Summary": ""
 			}
-		}
-	},
-	"BuildApp": {
-		"findLicenses()": {
-			"Syntax": "**.findLicenses**( *licenseTypes* : Collection )->this : cs.BuildApp.BuildApp",
-			"Params": [
-				[
-					"licenseTypes",
-					"Collection",
-					"->"
-				],
-				[
-					"this",
-					"cs.BuildApp.BuildApp",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"toFile()": {
-			"Syntax": "**.toFile**( *file* : 4D.File )->this : cs.BuildApp.BuildApp",
-			"Params": [
-				[
-					"file",
-					"4D.File",
-					"->"
-				],
-				[
-					"this",
-					"cs.BuildApp.BuildApp",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"toString()": {
-			"Syntax": "**.toString**()->XML : Text",
-			"Params": [
-				[
-					"XML",
-					"Text",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"parseFile()": {
-			"Syntax": "**.parseFile**( *settingsFile* : 4D.File )->this : cs.BuildApp.BuildApp",
-			"Params": [
-				[
-					"settingsFile",
-					"4D.File",
-					"->"
-				],
-				[
-					"this",
-					"cs.BuildApp.BuildApp",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"useDefault()": {
-			"Syntax": "**.useDefault**()->this : cs.BuildApp.BuildApp",
-			"Params": [
-				[
-					"this",
-					"cs.BuildApp.BuildApp",
-					"<-"
-				]
-			],
-			"Summary": ""
 		}
 	},
 	"_Form_Controller": {
@@ -499,6 +421,72 @@
 			"Summary": ""
 		},
 		"_inheritedFrom_": "_CLI"
+	},
+	"CLI": {
+		"escape()": {
+			"Syntax": "**.escape**( *message* : Text; *style* : Text )->ANSI : Text",
+			"Params": [
+				[
+					"message",
+					"Text",
+					"->"
+				],
+				[
+					"style",
+					"Text",
+					"->"
+				],
+				[
+					"ANSI",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"print()": {
+			"Syntax": "**.print**( *message* : Text; *style* : Text )->this : cs.BuildApp.CLI",
+			"Params": [
+				[
+					"message",
+					"Text",
+					"->"
+				],
+				[
+					"style",
+					"Text",
+					"->"
+				],
+				[
+					"this",
+					"cs.BuildApp.CLI",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"LF()": {
+			"Syntax": "**.LF**()->this : cs.BuildApp.CLI",
+			"Params": [
+				[
+					"this",
+					"cs.BuildApp.CLI",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"CR()": {
+			"Syntax": "**.CR**()->this : cs.BuildApp.CLI",
+			"Params": [
+				[
+					"this",
+					"cs.BuildApp.CLI",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
 	},
 	"_CLI": {
 		"quote()": {
