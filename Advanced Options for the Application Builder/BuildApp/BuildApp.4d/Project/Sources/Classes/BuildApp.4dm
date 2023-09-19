@@ -772,7 +772,7 @@ Function _copyRuntime($CLI : cs:C1710.BuildApp_CLI; $RuntimeFolder : 4D:C1709.Fo
 	
 	$executableFile.moveTo($executableFile.parent; $executableName)
 	
-	$CLI.print($executableFile.parent.file($executableName).path; "240").LF()
+	$CLI.print(" "*Length:C16("Rename")).print("  ").print($executableFile.parent.file($executableName).path; "240").LF()
 	
 Function _copyDatabase($CLI : cs:C1710.BuildApp_CLI; $appFolder : 4D:C1709.Folder; $compileProject : 4D:C1709.File)
 	
@@ -809,27 +809,13 @@ Function _copyDatabase($CLI : cs:C1710.BuildApp_CLI; $appFolder : 4D:C1709.Folde
 	Else 
 		
 		$CLI\
-			.print("Copy"; "bold")\
+			.print("Copy"; "underline;bold")\
 			.print(": ")\
-			.print($ContentsFolder.file($ProjectFolder.fullName).path; "240")\
+			.print($ContentsFolder.file($ProjectFolder.fullName).path)\
 			.LF()
 		
 		$ProjectFolder.copyTo($ContentsFolder)
 	End if 
-	
-	$folders:=$ProjectFolder.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Resources"; "Libraries"; "Documentation"; "Default Data"))
-	
-	For each ($folder; $folders)
-		
-		$CLI\
-			.print("Copy"; "bold")\
-			.print(": ")\
-			.print($ContentsFolder.file($folder.fullName).path; "240")\
-			.LF()
-		
-		$folder.copyTo($ContentsFolder)
-		
-	End for each 
 	
 Function _desktopLicenses()->$licenses : Collection
 	
@@ -910,7 +896,7 @@ Function _updateProperty($CLI : cs:C1710.BuildApp_CLI; $appFolder : 4D:C1709.Fol
 	
 	This:C1470._updatePropertyStrings($CLI; $appFolder; $info)
 	
-	$CLI.print($keys.join(","); "green;bold").LF()
+	$CLI.print($keys.join(","); "190").LF()
 	
 	$CLI.print(" "*Length:C16("Property")).print("  ").print($propertyListFile.path; "240").LF()
 	
