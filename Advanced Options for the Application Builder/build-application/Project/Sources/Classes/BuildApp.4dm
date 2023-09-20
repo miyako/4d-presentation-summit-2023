@@ -23,24 +23,11 @@ Function buildApplication($compileProject : 4D:C1709.File)->$BuildApp : cs:C1710
 	
 	
 	
+	This:C1470._copyDatabase($CLI; $appFolder; $compileProject)
 	
-	If ($BuildApp.BuildApplicationSerialized)
-		
-		If (Is macOS:C1572)
-			If ($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder#Null:C1517) && ($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder#"")
-				$RuntimeVLMacFolder:=Folder:C1567($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder; fk platform path:K87:2)
-				If ($RuntimeVLMacFolder.exists)
-					
-					$appFolder:=This:C1470._copyRuntime($CLI; $RuntimeVLMacFolder; $BuildDestFolder)
-					
-					This:C1470._copyDatabase($CLI; $appFolder; $compileProject)
-					
-					This:C1470._updateProperty($CLI; $appFolder; "RuntimeVL"; "RuntimeVLIconMacPath")
-					
-				End if 
-			End if 
-		End if 
-	End if 
+	This:C1470._updateProperty($CLI; $appFolder; "RuntimeVL"; "RuntimeVLIconMacPath")
+	
+	
 	
 	
 	
@@ -743,24 +730,16 @@ Function _copyRuntime($CLI : cs:C1710.BuildApp_CLI; $RuntimeFolder : 4D:C1709.Fo
 	
 	$name:=$RuntimeFolder.fullName
 	
-	If ($BuildApp.BuildApplicationName#Null:C1517) && ($BuildApp.BuildApplicationName#"")
-		$name:=$BuildApp.BuildApplicationName+".app"
-	End if 
 	
-	If ($BuildDestFolder.folder($name).exists)
-		$CLI.print("overwrite"; "yellow;bold").LF()
-		$BuildDestFolder.folder($name).delete(Delete with contents:K24:24)
-	Else 
-		$CLI.print("success"; "green;bold").LF()
-	End if 
 	
-	$appFolder:=$RuntimeFolder.copyTo($BuildDestFolder; $name; fk overwrite:K87:5)
 	
-	$CLI.print(" "*Length:C16("Copy")).print("  ").print($BuildDestFolder.file($name).path; "240").LF()
+	
+	
+	
+	
 	
 	$CLI.print("Rename"; "bold").print(": ")
 	
-	$executableFile:=$BuildDestFolder.folder($name).folder("Contents").folder("MacOS").file("4D Volume Desktop")
 	
 	$executableName:=Path to object:C1547($name).name
 	

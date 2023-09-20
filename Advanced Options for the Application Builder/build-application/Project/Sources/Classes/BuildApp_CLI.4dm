@@ -163,6 +163,69 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 	$CLI._printTask("Set targets")
 	$CLI._printList($targets)
 	
+	$RuntimeVL___Folder:="RuntimeVL"+$platform+"Folder"
+	
+	If ($BuildApp.SourcesFiles.RuntimeVL[$RuntimeVL___Folder]#Null:C1517) && ($BuildApp.SourcesFiles.RuntimeVL[$RuntimeVL___Folder]#"")
+		
+		var $RuntimeVLFolder : 4D:C1709.Folder
+		$RuntimeVLFolder:=Folder:C1567($BuildApp.SourcesFiles.RuntimeVL[$RuntimeVL___Folder]; fk platform path:K87:2)
+		
+		$CLI._printTask("Check runtime folder")
+		$CLI._printStatus($RuntimeVLFolder.exists)
+		$CLI._printPath($RuntimeVLFolder)
+		
+		If ($RuntimeVLFolder.exists)
+			
+			$targetRuntimeVLFolder:=This:C1470._copyRuntime($BuildApp; $RuntimeVLFolder; $BuildDestFolder; $BuildApplicationName)
+			
+		End if 
+		
+	End if 
+	
+Function _copyRuntime($BuildApp : cs:C1710.BuildApp; \
+$RuntimeFolder : 4D:C1709.Folder; \
+$BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text)->$targetFolder : 4D:C1709.Folder
+	
+	$CLI:=This:C1470
+	
+	If (Is macOS:C1572)
+		$targetName:=$BuildApplicationName+".app"
+	Else 
+		$targetName:=$BuildApplicationName
+	End if 
+	
+	$targetFolder:=$BuildDestFolder.folder($targetName)
+	
+	If ($targetFolder.exists)
+		$CLI._printTask("Delete target runtime folder")
+		$CLI._printPath($targetFolder)
+		$targetFolder.delete(Delete with contents:K24:24)
+	End if 
+	
+	$targetFolder:=$RuntimeFolder.copyTo($BuildDestFolder; $targetName; fk overwrite:K87:5)
+	
+	$CLI._printTask("Copy runtime folder")
+	$CLI._printPath($targetFolder)
+	
+	If (Is macOS:C1572)
+		$executableFile:=$targetFolder.folder("Contents").folder("MacOS").file("4D Volume Desktop")
+		$executableName:=$BuildApplicationName
+	Else 
+		$executableFile:=$targetFolder.file("4D Volume Desktop.4DE")
+		$executableName:=$BuildApplicationName+".exe"
+	End if 
+	
+	$targetExecutableFile:=$executableFile.rename($executableName)
+	
+	$CLI._printTask("Rename executable file")
+	$CLI._printPath($targetExecutableFile)
+	
+	If (Is Windows:C1573)
+		$resourceFile:=$targetFolder.file("4D Volume Desktop.rsr")
+		$targetResourceFile:=$resourceFile.rename($BuildApplicationName+".rsr")
+		$CLI._printTask("Rename resource file")
+		$CLI._printPath($targetResourceFile)
+	End if 
 	
 	
 	
