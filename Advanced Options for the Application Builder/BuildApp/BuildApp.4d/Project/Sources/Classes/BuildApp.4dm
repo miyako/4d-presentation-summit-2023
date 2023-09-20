@@ -19,38 +19,6 @@ Function get settings()->$settings : Object
 	
 	//MARK:-public methods
 	
-Function buildApplication($compileProject : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
-	
-	$BuildApp:=This:C1470
-	
-	$CLI:=cs:C1710.BuildApp_CLI.new()
-	
-	$Build___DestFolder:="Build"+(Is macOS:C1572 ? "Mac" : "Win")+"DestFolder"
-	
-	If ($BuildApp[$Build___DestFolder]#Null:C1517) && ($BuildApp[$Build___DestFolder]#"")
-		$BuildDestFolder:=Folder:C1567($BuildApp[$Build___DestFolder]; fk platform path:K87:2).folder("Final Application")
-		$BuildDestFolder.create()
-		
-		If ($BuildApp.BuildApplicationSerialized)
-			
-			If (Is macOS:C1572)
-				If ($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder#Null:C1517) && ($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder#"")
-					$RuntimeVLMacFolder:=Folder:C1567($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder; fk platform path:K87:2)
-					If ($RuntimeVLMacFolder.exists)
-						
-						$appFolder:=This:C1470._copyRuntime($CLI; $RuntimeVLMacFolder; $BuildDestFolder)
-						
-						This:C1470._copyDatabase($CLI; $appFolder; $compileProject)
-						
-						This:C1470._updateProperty($CLI; $appFolder; "RuntimeVL"; "RuntimeVLIconMacPath")
-						
-					End if 
-				End if 
-			End if 
-		End if 
-		
-	End if 
-	
 Function findLicenses($licenseTypes : Collection)->$BuildApp : cs:C1710.BuildApp
 	
 	$BuildApp:=This:C1470
@@ -101,7 +69,7 @@ Function findLicenses($licenseTypes : Collection)->$BuildApp : cs:C1710.BuildApp
 	$isOEM:=($BuildApp.Licenses["ArrayLicense"+(Is macOS:C1572 ? "Mac" : "Win")].Item.includes("@4DOM@"))
 	$BuildApp.SourcesFiles.CS.IsOEM:=$isOEM
 	
-	$isOEM:=($BuildApp.Licenses["ArrayLicense"+(Is macOS:C1572 ? "Mac" : "Win")].Item.includes("@4DOE@"))
+	$isOEM:=($BuildApp.Licenses["ArrayLicense"+(Is macOS:C1572 ? "Mac" : "Win")].Item.includes("@4UOE@"))
 	$BuildApp.SourcesFiles.RuntimeVL.IsOEM:=$isOEM
 	
 Function loadFromHost()->$BuildApp : cs:C1710.BuildApp
@@ -741,85 +709,16 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 	
 	//MARK:-private methods
 	
-Function _copyRuntime($CLI : cs:C1710.BuildApp_CLI; $RuntimeFolder : 4D:C1709.Folder; $BuildDestFolder : 4D:C1709.Folder)->$appFolder : 4D:C1709.Folder
-	
-	$BuildApp:=This:C1470
-	
-	$CLI.print("Copy"; "bold").print(": ")
-	
-	$name:=$RuntimeFolder.fullName
-	
-	If ($BuildApp.BuildApplicationName#Null:C1517) && ($BuildApp.BuildApplicationName#"")
-		$name:=$BuildApp.BuildApplicationName+".app"
-	End if 
-	
-	If ($BuildDestFolder.folder($name).exists)
-		$CLI.print("overwrite"; "yellow;bold").LF()
-		$BuildDestFolder.folder($name).delete(Delete with contents:K24:24)
-	Else 
-		$CLI.print("success"; "green;bold").LF()
-	End if 
-	
-	$appFolder:=$RuntimeFolder.copyTo($BuildDestFolder; $name; fk overwrite:K87:5)
-	
-	$CLI.print(" "*Length:C16("Copy")).print("  ").print($BuildDestFolder.file($name).path; "240").LF()
-	
-	$CLI.print("Rename"; "bold").print(": ")
-	
-	$executableFile:=$BuildDestFolder.folder($name).folder("Contents").folder("MacOS").file("4D Volume Desktop")
-	
-	$executableName:=Path to object:C1547($name).name
-	
-	$executableFile.moveTo($executableFile.parent; $executableName)
-	
-	$CLI.print(" "*Length:C16("Rename")).print("  ").print($executableFile.parent.file($executableName).path; "240").LF()
-	
-Function _copyDatabase($CLI : cs:C1710.BuildApp_CLI; $appFolder : 4D:C1709.Folder; $compileProject : 4D:C1709.File)
-	
-	$BuildApp:=This:C1470
-	
-	$ProjectFolder:=$compileProject.parent
-	$ContentsFolder:=$appFolder.folder("Contents").folder("Database")
-	
-	If ($BuildApp.PackProject#Null:C1517) && ($BuildApp.PackProject)
-		
-		$zip:=New object:C1471
-		$zip.files:=New collection:C1472($ProjectFolder)
-		
-		If ($BuildApp.UseStandardZipFormat#Null:C1517) && ($BuildApp.UseStandardZipFormat)
-			$zip.encryption:=ZIP Encryption none:K91:3
-		Else 
-			$zip.encryption:=-1
-		End if 
-		
-		$status:=ZIP Create archive:C1640($zip; $ContentsFolder.file($BuildApp.BuildApplicationName+".4DZ"))
-		
-		$success:=$status.success
-		
-		$CLI.print("Archive"; "bold").print(": ")
-		
-		If ($success)
-			$CLI.print("success"; "green;bold").LF()
-		Else 
-			$CLI.print("failure"; "red;bold").LF()
-		End if 
-		
-		$CLI.print(" "*Length:C16("Archive")).print("  ").print($ContentsFolder.file($BuildApp.BuildApplicationName+".4DZ").path; "240").LF()
-		
-	Else 
-		
-		$CLI\
-			.print("Copy"; "underline;bold")\
-			.print(": ")\
-			.print($ContentsFolder.file($ProjectFolder.fullName).path)\
-			.LF()
-		
-		$ProjectFolder.copyTo($ContentsFolder)
-	End if 
-	
 Function _desktopLicenses()->$licenses : Collection
 	
-	$licenses:=New collection:C1472("4DOE"; "4UOE"; "4DDP"; "4UUD")
+	$licenses:=New collection:C1472("4UOE"; "4UUD")
+	
+/*
+4UOE:Desktop
+4UOE:OEM Desktop
+4DDP:Developer
+4DOE:OEM Developer
+*/
 	
 Function _getDefaultSettingsFile()->$settingsFile : 4D:C1709.File
 	
@@ -841,96 +740,17 @@ Function _refresh($settingsFile : 4D:C1709.File)
 	
 Function _serverLicenses()->$licenses : Collection
 	
-	$licenses:=New collection:C1472("4DOE"; "4UOE"; "4DDP"; "4UUD"; "4UOS"; "4DOM")
+	$licenses:=New collection:C1472("4UOE"; "4UUD"; "4UOS"; "4DOM")
 	
-Function _updateProperty($CLI : cs:C1710.BuildApp_CLI; $appFolder : 4D:C1709.Folder; $type : Text; $name : Text)
-	
-	$BuildApp:=This:C1470
-	
-	$CLI.print("Property"; "bold").print(": ")
-	
-	$propertyListFile:=$appFolder.folder("Contents").file("Info.plist")
-	
-	$info:=New object:C1471
-	
-	$info.CFBundleDisplayName:=$BuildApp.BuildApplicationName
-	$info.CFBundleName:=$BuildApp.BuildApplicationName
-	$info.CFBundleExecutable:=$appFolder.name
-	
-	$keys:=New collection:C1472("CFBundleExecutable")
-	
-	If ($BuildApp.SourcesFiles[$type][$name]#Null:C1517) && ($BuildApp.SourcesFiles[$type][$name]#"")
-		$RuntimeIconFile:=File:C1566($BuildApp.SourcesFiles[$type][$name]; fk platform path:K87:2)
-		If ($RuntimeIconFile.exists)
-			$RuntimeIconFile.copyTo($appFolder.folder("Contents").folder("Resources"); fk overwrite:K87:5)
-			$info.CFBundleIconFile:=$RuntimeIconFile.fullName
-			$keys.push($name)
-		End if 
-	End if 
-	
-	If ($BuildApp.Versioning.Common.CommonVersion#Null:C1517) && ($BuildApp.Versioning.Common.CommonVersion#"")
-		$info.CFBundleVersion:=$BuildApp.Versioning.Common.CommonVersion
-		$info.CFBundleShortVersionString:=$info.CFBundleVersion
-		$keys.push("CommonVersion")
-	End if 
-	
-	If ($BuildApp.Versioning[$type][$type+"Version"]#Null:C1517) && ($BuildApp.Versioning[$type][$type+"Version"]#"")
-		$info.CFBundleVersion:=$BuildApp.Versioning[$type][$type+"Version"]
-		$info.CFBundleShortVersionString:=$info.CFBundleVersion
-		$keys.push($type+"Version")
-	End if 
-	
-	$propertyListFile.setAppInfo($info)
-	
-	If ($BuildApp.Versioning.Common.CommonCopyright#Null:C1517) && ($BuildApp.Versioning.Common.CommonCopyright#"")
-		$info.CFBundleGetInfoString:=$BuildApp.Versioning.Common.CommonCopyright
-		$info.NSHumanReadableCopyright:=$info.CFBundleGetInfoString
-		$keys.push("CommonCopyright")
-	End if 
-	
-	If ($BuildApp.Versioning.RuntimeVL.RuntimeVLCopyright#Null:C1517) && ($BuildApp.Versioning.RuntimeVL.RuntimeVLCopyright#"")
-		$info.CFBundleGetInfoString:=$BuildApp.Versioning.RuntimeVL.RuntimeVLCopyright
-		$info.NSHumanReadableCopyright:=$info.CFBundleGetInfoString
-		$keys.push("RuntimeVLCopyright")
-	End if 
-	
-	This:C1470._updatePropertyStrings($CLI; $appFolder; $info)
-	
-	$CLI.print($keys.join(","); "190").LF()
-	
-	$CLI.print(" "*Length:C16("Property")).print("  ").print($propertyListFile.path; "240").LF()
-	
-Function _updatePropertyStrings($CLI : cs:C1710.BuildApp_CLI; $appFolder : 4D:C1709.Folder; $info : Object)
-	
-	$folders:=$appFolder.folder("Contents").folder("Resources").folders(fk ignore invisible:K87:22).query("extension == :1"; ".lproj")
-	
-	ARRAY LONGINT:C221($pos; 0)
-	ARRAY LONGINT:C221($len; 0)
-	
-	var $key : Text
-	
-	For each ($folder; $folders)
-		
-		$files:=$folder.files().query("fullName == :1"; "InfoPlist.strings")
-		
-		For each ($file; $files)
-			$strings:=$file.getText("utf-16le"; Document with LF:K24:22)
-			$lines:=Split string:C1554($strings; "\n")
-			For each ($key; $info)
-				For ($i; 1; $lines.length)
-					$line:=$lines[$i-1]
-					If (Match regex:C1019("^(\\S+)(\\s*=\\s*)\"(.*)\"(.*)"; $line; 1; $pos; $len))
-						If ($key=Substring:C12($line; $pos{1}; $len{1}))
-							$oper:=Substring:C12($line; $pos{2}; $len{2})
-							$term:=Substring:C12($line; $pos{4}; $len{4})
-							$oldValue:=Substring:C12($line; $pos{3}; $len{3})
-							$newValue:=$info[$key]
-							$lines[$i-1]:=$key+$oper+"\""+$newValue+"\""+$term
-						End if 
-					End if 
-				End for 
-			End for each 
-			$file.setText($lines.join("\n"); "utf-16le"; Document with LF:K24:22)
-		End for each 
-	End for each 
+/*
+4UOE:Desktop
+4UOE:OEM Desktop
+4DDP:Developer
+4DOE:OEM Developer
+4DTD:Team Developer
+4DOT:OEM Team Developer
+4USE:Server
+4UOS:OEM Server
+4DOM:OEM XML Keys
+*/
 	

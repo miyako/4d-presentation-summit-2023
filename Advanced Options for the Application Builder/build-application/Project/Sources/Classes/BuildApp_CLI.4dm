@@ -1,5 +1,23 @@
 Class extends CLI
 
+Function _getVersioning($BuildApp : cs:C1710.BuildApp; $key : Text; $domain : Text)->$value : Text
+	
+	If ($domain#"")
+		If ($BuildApp.Versioning[$domain][$domain+$key]#Null:C1517)
+			If ($BuildApp.Versioning[$domain][$domain+$key]#"")
+				$value:=$BuildApp.Versioning[$domain][$domain+$key]
+			End if 
+		End if 
+	End if 
+	
+	If ($value="")
+		If ($BuildApp.Versioning.Common["Common"+$key]#Null:C1517)
+			If ($BuildApp.Versioning.Common["Common"+$key]#"")
+				$value:=$BuildApp.Versioning.Common["Common"+$key]
+			End if 
+		End if 
+	End if 
+	
 Function _printItemToList($item : Text; $count : Integer)->$CLI : cs:C1710.BuildApp_CLI
 	
 	If ($count#0)
@@ -48,7 +66,15 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 	
 	$CLI:=This:C1470
 	
-	If (Not:C34(Is compiled mode:C492))
+	$CLI._printTask("Compile project")
+	
+	$localProjectFile:=File:C1566(Structure file:C489; fk platform path:K87:2)
+	
+	If ($compileProject.path=$localProjectFile.path) && (Is compiled mode:C492)
+		
+		$success:=True:C214  //skip compilation
+		
+	Else 
 		
 		$CLI._printTask("Compile project")
 		
@@ -58,8 +84,6 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 		$status:=Compile project:C1760($options)
 		
 		$success:=$status.success
-		
-		$CLI._printStatus($success)
 		
 		For each ($error; $status.errors)
 			If ($error.isError)
@@ -72,23 +96,8 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 		
 	End if 
 	
-Function _getVersioning($BuildApp : cs:C1710.BuildApp; $key : Text; $domain : Text)->$value : Text
-	
-	If ($domain#"")
-		If ($BuildApp.Versioning[$domain][$domain+$key]#Null:C1517)
-			If ($BuildApp.Versioning[$domain][$domain+$key]#"")
-				$value:=$BuildApp.Versioning[$domain][$domain+$key]
-			End if 
-		End if 
-	End if 
-	
-	If ($value="")
-		If ($BuildApp.Versioning.Common["Common"+$key]#Null:C1517)
-			If ($BuildApp.Versioning.Common["Common"+$key]#"")
-				$value:=$BuildApp.Versioning.Common["Common"+$key]
-			End if 
-		End if 
-	End if 
+	$CLI._printStatus($success)
+	$CLI._printPath($compileProject)
 	
 Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->$success : Boolean
 	
@@ -126,12 +135,15 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 	
 	$Build___DestFolder:="Build"+$platform+"DestFolder"
 	
+	var $BuildDestFolder : 4D:C1709.Folder
+	
 	If ($BuildApp[$Build___DestFolder]#Null:C1517) && ($BuildApp[$Build___DestFolder]#"")
 		$BuildDestFolder:=Folder:C1567($BuildApp[$Build___DestFolder]; fk platform path:K87:2).folder("Final Application")
 		$BuildDestFolder.create()
 	End if 
 	
 	$CLI._printTask("Set destination folder")
+	$CLI._printStatus($BuildDestFolder#Null:C1517)
 	$CLI._printPath($BuildDestFolder)
 	
 	$targets:=New collection:C1472
@@ -231,8 +243,6 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text)->$targetFolder
 		$localProjectFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent
 		
 		If ($targetFolder.path#($localProjectFolder.path+"@"))
-			$CLI._printTask("Delete target runtime folder")
-			$CLI._printPath($targetFolder)
 			$targetFolder.delete(Delete with contents:K24:24)
 		End if 
 		
@@ -241,6 +251,7 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text)->$targetFolder
 	$targetFolder:=$RuntimeFolder.copyTo($BuildDestFolder; $targetName; fk overwrite:K87:5)
 	
 	$CLI._printTask("Copy runtime folder")
+	$CLI._printStatus($targetFolder.exists)
 	$CLI._printPath($targetFolder)
 	
 	If (Is macOS:C1572)
@@ -254,12 +265,14 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text)->$targetFolder
 	$targetExecutableFile:=$executableFile.rename($executableName)
 	
 	$CLI._printTask("Rename executable file")
+	$CLI._printStatus($targetExecutableFile.exists)
 	$CLI._printPath($targetExecutableFile)
 	
 	If (Is Windows:C1573)
 		$resourceFile:=$targetFolder.file("4D Volume Desktop.rsr")
 		$targetResourceFile:=$resourceFile.rename($BuildApplicationName+".rsr")
 		$CLI._printTask("Rename resource file")
+		$CLI._printStatus($targetResourceFile.exists)
 		$CLI._printPath($targetResourceFile)
 	End if 
 	
@@ -338,9 +351,11 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 					If (Is macOS:C1572)
 						$targetIconFile:=$RuntimeVLIconFile.copyTo($targetRuntimeFolder.folder("Contents").folder("Resources"); fk overwrite:K87:5)
 						$CLI._printTask("Copy icon file")
+						$CLI._printStatus($targetIconFile.exists)
 						$CLI._printPath($targetIconFile)
 						$targetIconFile:=$RuntimeVLIconFile.copyTo($targetRuntimeFolder.folder("Contents").folder("Resources").folder("Images").folder("WindowIcons"); "windowIcon_205.icns"; fk overwrite:K87:5)
 						$CLI._printTask("Copy icon file")
+						$CLI._printStatus($targetIconFile.exists)
 						$CLI._printPath($targetIconFile)
 						$info.CFBundleIconFile:=$RuntimeVLIconFile.fullName
 						$keys.push("CFBundleIconFile")
@@ -472,8 +487,8 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 	End if 
 	
 	$CLI._printTask("Update property list")
-	$CLI._printPath($propertyListFile)
 	$CLI._printList($keys)
+	$CLI._printPath($propertyListFile)
 	
 	$propertyListFile.setAppInfo($info)
 	
@@ -498,6 +513,7 @@ $targetFolder : 4D:C1709.Folder; $info : Object)
 		$files:=$folder.files().query("fullName == :1"; "InfoPlist.strings")
 		
 		For each ($file; $files)
+			$changed:=False:C215
 			$strings:=$file.getText("utf-16le"; Document with LF:K24:22)
 			$lines:=Split string:C1554($strings; "\n")
 			For each ($key; $info)
@@ -511,21 +527,25 @@ $targetFolder : 4D:C1709.Folder; $info : Object)
 							$newValue:=$info[$key]
 							$lines[$i-1]:=$key+$oper+"\""+$newValue+"\""+$term
 							$keys.push($key)
+							$changed:=True:C214
 						End if 
 					End if 
 				End for 
 			End for each 
-			$file.setText($lines.join("\n"); "utf-16le"; Document with LF:K24:22)
-			$lproj.push($file)
+			If ($changed)
+				$file.setText($lines.join("\n"); "utf-16le"; Document with LF:K24:22)
+				$lproj.push($file)
+			End if 
 		End for each 
 	End for each 
 	
-	$CLI._printTask("Update strings")
-	$CLI._printList($keys.distinct())
-	
-	For each ($file; $lproj)
-		$CLI._printPath($file)
-	End for each 
+	If ($lproj.length#0)
+		$CLI._printTask("Update strings")
+		$CLI._printList($keys.distinct())
+		For each ($file; $lproj)
+			$CLI._printPath($file)
+		End for each 
+	End if 
 	
 Function _copyDatabase($BuildApp : cs:C1710.BuildApp; \
 $targetFolder : 4D:C1709.Folder; \
@@ -551,6 +571,7 @@ $sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
 		$targetProjectFolder:=$ProjectFolder.copyTo($ContentsFolder)
 		
 		$CLI._printTask("Set database folder")
+		$CLI._printStatus($targetProjectFolder.exists)
 		$CLI._printPath($targetProjectFolder)
 		
 		$localProjectFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent
@@ -605,8 +626,7 @@ $sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
 	
 	$folders:=$ProjectFolder.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Resources"; "Libraries"/*; "Documentation"*/; "Default Data"))
 	
-	$CLI._printTask("Copy database folders")
-	
+	$CLI._printTask("Copy database folders").LF()
 	For each ($folder; $folders)
 		$CLI._printPath($folder.copyTo($ContentsFolder))
 	End for each 

@@ -1,6 +1,7 @@
 {
-	"TEST-BuildApp": {
+	"BuildApp": {
 		"methods": [
+			"BUILDAPP_FORM",
 			"setup_application_path",
 			"setup_data_path_lookup",
 			"setup_destination_path",
@@ -13,6 +14,41 @@
 		],
 		"forms": [
 			"TEST-BuildApp"
+		],
+		"classes": [
+			"BuildApp"
+		]
+	},
+	"Iconutil": {
+		"methods": [
+			"ICONUTIL_WORKER"
+		],
+		"classes": [
+			"Iconutil"
+		]
+	},
+	"Lipo": {
+		"methods": [
+			"LIPO_FORM",
+			"LIPO_WORKER",
+			"LIPO_WORKER_CB"
+		],
+		"forms": [
+			"TEST-Lipo"
+		],
+		"classes": [
+			"_Find",
+			"_Find_Worker_Controller",
+			"_Lipo_Form_Controller",
+			"Lipo"
+		]
+	},
+	"Png2Ico": {
+		"methods": [
+			"PNG2ICO_WORKER"
+		],
+		"classes": [
+			"Png2Ico"
 		]
 	},
 	"trash": {}
