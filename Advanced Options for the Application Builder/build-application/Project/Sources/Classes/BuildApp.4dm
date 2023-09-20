@@ -69,7 +69,7 @@ Function findLicenses($licenseTypes : Collection)->$BuildApp : cs:C1710.BuildApp
 	$isOEM:=($BuildApp.Licenses["ArrayLicense"+(Is macOS:C1572 ? "Mac" : "Win")].Item.includes("@4DOM@"))
 	$BuildApp.SourcesFiles.CS.IsOEM:=$isOEM
 	
-	$isOEM:=($BuildApp.Licenses["ArrayLicense"+(Is macOS:C1572 ? "Mac" : "Win")].Item.includes("@4DOE@"))
+	$isOEM:=($BuildApp.Licenses["ArrayLicense"+(Is macOS:C1572 ? "Mac" : "Win")].Item.includes("@4UOE@"))
 	$BuildApp.SourcesFiles.RuntimeVL.IsOEM:=$isOEM
 	
 Function loadFromHost()->$BuildApp : cs:C1710.BuildApp
@@ -711,7 +711,14 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 	
 Function _desktopLicenses()->$licenses : Collection
 	
-	$licenses:=New collection:C1472("4DOE"; "4UOE"; "4DDP"; "4UUD")
+	$licenses:=New collection:C1472("4UOE"; "4UUD")
+	
+/*
+4UOE:Desktop
+4UOE:OEM Desktop
+4DDP:Developer
+4DOE:OEM Developer
+*/
 	
 Function _getDefaultSettingsFile()->$settingsFile : 4D:C1709.File
 	
@@ -733,5 +740,17 @@ Function _refresh($settingsFile : 4D:C1709.File)
 	
 Function _serverLicenses()->$licenses : Collection
 	
-	$licenses:=New collection:C1472("4DOE"; "4UOE"; "4DDP"; "4UUD"; "4UOS"; "4DOM")
+	$licenses:=New collection:C1472("4UOE"; "4UUD"; "4UOS"; "4DOM")
+	
+/*
+4UOE:Desktop
+4UOE:OEM Desktop
+4DDP:Developer
+4DOE:OEM Developer
+4DTD:Team Developer
+4DOT:OEM Team Developer
+4USE:Server
+4UOS:OEM Server
+4DOM:OEM XML Keys
+*/
 	

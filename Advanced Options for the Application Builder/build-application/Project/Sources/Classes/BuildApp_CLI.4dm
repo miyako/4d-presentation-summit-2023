@@ -200,6 +200,8 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 			
 			$CLI._copyDatabase($BuildApp; $targetRuntimeVLFolder; $compileProject)
 			
+			$CLI._generateLicense($BuildApp; $targetRuntimeVLFolder)
+			
 		End if 
 		
 	End if 
@@ -602,4 +604,55 @@ $sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
 	For each ($folder; $folders)
 		$CLI._printPath($folder.copyTo($ContentsFolder))
 	End for each 
+	
+Function _generateLicense($BuildApp : cs:C1710.BuildApp; $targetFolder : 4D:C1709.Folder; $buildApplicationType : Text)
+	
+	$CLI:=This:C1470
+	
+	var $platform; $ArrayLicense___ : Text
+	
+	$platform:=(Is macOS:C1572 ? "Mac" : "Win")
+	
+	$ArrayLicense___:="ArrayLicense"+$platform
+	
+	$licenes:=$BuildApp.Licenses[$ArrayLicense___].Item
+	
+	$UUDs:=$licenes.filter(Formula:C1597($1.result:=Path to object:C1547($1.value).name="@4UUD@"))
+	$UOEs:=$licenes.filter(Formula:C1597($1.result:=Path to object:C1547($1.value).name="@4UOE@"))
+	$UOSs:=$licenes.filter(Formula:C1597($1.result:=Path to object:C1547($1.value).name="@4UOS@"))
+	$DOMs:=$licenes.filter(Formula:C1597($1.result:=Path to object:C1547($1.value).name="@4DOM@"))
+	
+	var $status : Object
+	
+	Case of 
+		: ($buildApplicationType="Server") && ($DOMs.length#0) && ($UOSs.length#0)
+			
+			$status:=Create deployment license:C1811($targetFolder; File:C1566($UOSs[0]; fk platform path:K87:2); File:C1566($DOMs[0]; fk platform path:K87:2))
+			
+		Else 
+			
+			Case of 
+				: ($UOEs.length#0)
+					
+					$status:=Create deployment license:C1811($targetFolder; File:C1566($UOEs[0]; fk platform path:K87:2))
+					
+				: ($UUDs.length#0)
+					
+					$status:=Create deployment license:C1811($targetFolder; File:C1566($UUDs[0]; fk platform path:K87:2))
+					
+			End case 
+			
+	End case 
+	
+	If ($status#Null:C1517)
+		
+		$CLI._printTask("Generate license")
+		$CLI._printStatus($status.success)
+		If ($status.file#Null:C1517)
+			$CLI._printPath(File:C1566($status.file))
+		End if 
+		For each ($error; $status.errors)
+			$CLI.print($error.message; "177;bold")
+		End for each 
+	End if 
 	
