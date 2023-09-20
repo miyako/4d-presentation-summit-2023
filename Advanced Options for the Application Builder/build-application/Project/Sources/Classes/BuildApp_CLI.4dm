@@ -341,6 +341,12 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text)->$targetFolder
 		
 	End if 
 	
+Function _findPlugins($compileProject : 4D:C1709.File)->$plugins : Collection
+	
+	$ProjectFolder:=$compileProject.parent
+	$ProjectFolder
+	
+	
 Function _updateProperty($BuildApp : cs:C1710.BuildApp; \
 $targetRuntimeFolder : 4D:C1709.Folder; \
 $CompanyName : Text; \
@@ -689,7 +695,7 @@ $sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
 		
 	End if 
 	
-	$folders:=$ProjectFolder.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Resources"; "Libraries"/*; "Documentation"*/; "Default Data"))
+	$folders:=$ProjectFolder.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Resources"; "Libraries"/*; "Documentation"*/; "Default Data"; "Extras"))
 	
 	$CLI._printTask("Copy database folders").LF()
 	For each ($folder; $folders)
