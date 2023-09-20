@@ -25,7 +25,6 @@ Function buildApplication($compileProject : 4D:C1709.File)->$BuildApp : cs:C1710
 	
 	This:C1470._copyDatabase($CLI; $appFolder; $compileProject)
 	
-	This:C1470._updateProperty($CLI; $appFolder; "RuntimeVL"; "RuntimeVLIconMacPath")
 	
 	
 	
@@ -722,30 +721,6 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 	
 	//MARK:-private methods
 	
-Function _copyRuntime($CLI : cs:C1710.BuildApp_CLI; $RuntimeFolder : 4D:C1709.Folder; $BuildDestFolder : 4D:C1709.Folder)->$appFolder : 4D:C1709.Folder
-	
-	$BuildApp:=This:C1470
-	
-	$CLI.print("Copy"; "bold").print(": ")
-	
-	$name:=$RuntimeFolder.fullName
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	$CLI.print("Rename"; "bold").print(": ")
-	
-	
-	$executableName:=Path to object:C1547($name).name
-	
-	$executableFile.moveTo($executableFile.parent; $executableName)
-	
-	$CLI.print($executableFile.parent.file($executableName).path; "240").LF()
 	
 Function _copyDatabase($CLI : cs:C1710.BuildApp_CLI; $appFolder : 4D:C1709.Folder; $compileProject : 4D:C1709.File)
 	
@@ -830,62 +805,6 @@ Function _serverLicenses()->$licenses : Collection
 	
 	$licenses:=New collection:C1472("4DOE"; "4UOE"; "4DDP"; "4UUD"; "4UOS"; "4DOM")
 	
-Function _updateProperty($CLI : cs:C1710.BuildApp_CLI; $appFolder : 4D:C1709.Folder; $type : Text; $name : Text)
-	
-	$BuildApp:=This:C1470
-	
-	$CLI.print("Property"; "bold").print(": ")
-	
-	$propertyListFile:=$appFolder.folder("Contents").file("Info.plist")
-	
-	$info:=New object:C1471
-	
-	$info.CFBundleDisplayName:=$BuildApp.BuildApplicationName
-	$info.CFBundleName:=$BuildApp.BuildApplicationName
-	$info.CFBundleExecutable:=$appFolder.name
-	
-	$keys:=New collection:C1472("CFBundleExecutable")
-	
-	If ($BuildApp.SourcesFiles[$type][$name]#Null:C1517) && ($BuildApp.SourcesFiles[$type][$name]#"")
-		$RuntimeIconFile:=File:C1566($BuildApp.SourcesFiles[$type][$name]; fk platform path:K87:2)
-		If ($RuntimeIconFile.exists)
-			$RuntimeIconFile.copyTo($appFolder.folder("Contents").folder("Resources"); fk overwrite:K87:5)
-			$info.CFBundleIconFile:=$RuntimeIconFile.fullName
-			$keys.push($name)
-		End if 
-	End if 
-	
-	If ($BuildApp.Versioning.Common.CommonVersion#Null:C1517) && ($BuildApp.Versioning.Common.CommonVersion#"")
-		$info.CFBundleVersion:=$BuildApp.Versioning.Common.CommonVersion
-		$info.CFBundleShortVersionString:=$info.CFBundleVersion
-		$keys.push("CommonVersion")
-	End if 
-	
-	If ($BuildApp.Versioning[$type][$type+"Version"]#Null:C1517) && ($BuildApp.Versioning[$type][$type+"Version"]#"")
-		$info.CFBundleVersion:=$BuildApp.Versioning[$type][$type+"Version"]
-		$info.CFBundleShortVersionString:=$info.CFBundleVersion
-		$keys.push($type+"Version")
-	End if 
-	
-	$propertyListFile.setAppInfo($info)
-	
-	If ($BuildApp.Versioning.Common.CommonCopyright#Null:C1517) && ($BuildApp.Versioning.Common.CommonCopyright#"")
-		$info.CFBundleGetInfoString:=$BuildApp.Versioning.Common.CommonCopyright
-		$info.NSHumanReadableCopyright:=$info.CFBundleGetInfoString
-		$keys.push("CommonCopyright")
-	End if 
-	
-	If ($BuildApp.Versioning.RuntimeVL.RuntimeVLCopyright#Null:C1517) && ($BuildApp.Versioning.RuntimeVL.RuntimeVLCopyright#"")
-		$info.CFBundleGetInfoString:=$BuildApp.Versioning.RuntimeVL.RuntimeVLCopyright
-		$info.NSHumanReadableCopyright:=$info.CFBundleGetInfoString
-		$keys.push("RuntimeVLCopyright")
-	End if 
-	
-	This:C1470._updatePropertyStrings($CLI; $appFolder; $info)
-	
-	$CLI.print($keys.join(","); "green;bold").LF()
-	
-	$CLI.print(" "*Length:C16("Property")).print("  ").print($propertyListFile.path; "240").LF()
 	
 Function _updatePropertyStrings($CLI : cs:C1710.BuildApp_CLI; $appFolder : 4D:C1709.Folder; $info : Object)
 	
