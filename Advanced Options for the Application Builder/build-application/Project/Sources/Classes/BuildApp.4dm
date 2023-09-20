@@ -721,7 +721,6 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 	
 	//MARK:-private methods
 	
-	
 Function _copyDatabase($CLI : cs:C1710.BuildApp_CLI; $appFolder : 4D:C1709.Folder; $compileProject : 4D:C1709.File)
 	
 	$BuildApp:=This:C1470
@@ -804,39 +803,4 @@ Function _refresh($settingsFile : 4D:C1709.File)
 Function _serverLicenses()->$licenses : Collection
 	
 	$licenses:=New collection:C1472("4DOE"; "4UOE"; "4DDP"; "4UUD"; "4UOS"; "4DOM")
-	
-	
-Function _updatePropertyStrings($CLI : cs:C1710.BuildApp_CLI; $appFolder : 4D:C1709.Folder; $info : Object)
-	
-	$folders:=$appFolder.folder("Contents").folder("Resources").folders(fk ignore invisible:K87:22).query("extension == :1"; ".lproj")
-	
-	ARRAY LONGINT:C221($pos; 0)
-	ARRAY LONGINT:C221($len; 0)
-	
-	var $key : Text
-	
-	For each ($folder; $folders)
-		
-		$files:=$folder.files().query("fullName == :1"; "InfoPlist.strings")
-		
-		For each ($file; $files)
-			$strings:=$file.getText("utf-16le"; Document with LF:K24:22)
-			$lines:=Split string:C1554($strings; "\n")
-			For each ($key; $info)
-				For ($i; 1; $lines.length)
-					$line:=$lines[$i-1]
-					If (Match regex:C1019("^(\\S+)(\\s*=\\s*)\"(.*)\"(.*)"; $line; 1; $pos; $len))
-						If ($key=Substring:C12($line; $pos{1}; $len{1}))
-							$oper:=Substring:C12($line; $pos{2}; $len{2})
-							$term:=Substring:C12($line; $pos{4}; $len{4})
-							$oldValue:=Substring:C12($line; $pos{3}; $len{3})
-							$newValue:=$info[$key]
-							$lines[$i-1]:=$key+$oper+"\""+$newValue+"\""+$term
-						End if 
-					End if 
-				End for 
-			End for each 
-			$file.setText($lines.join("\n"); "utf-16le"; Document with LF:K24:22)
-		End for each 
-	End for each 
 	

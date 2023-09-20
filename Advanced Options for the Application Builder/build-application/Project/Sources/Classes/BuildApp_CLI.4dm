@@ -124,14 +124,13 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 	$CLI._printTask("Set application name")
 	$CLI._printItem($BuildApplicationName)
 	
-	$CLI._printTask("Set identifier prefix")
-	
 	$CompanyName:=$CLI._getVersioning($BuildApp; "CompanyName")
 	
 	If ($CompanyName="")
 		$CompanyName:="com.4d"
 	End if 
 	
+	$CLI._printTask("Set identifier prefix")
 	$CLI._printItem($CompanyName)
 	
 	var $platform; $Build___DestFolder : Text
@@ -323,10 +322,10 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 					If (Is macOS:C1572)
 						$targetIconFile:=$RuntimeVLIconFile.copyTo($targetRuntimeFolder.folder("Contents").folder("Resources"); fk overwrite:K87:5)
 						$CLI._printTask("Copy icon file")
-						$CLI._printPath($targetRuntimeVLIconFile)
+						$CLI._printPath($targetIconFile)
 						$targetIconFile:=$RuntimeVLIconFile.copyTo($targetRuntimeFolder.folder("Contents").folder("Resources").folder("Images").folder("WindowIcons"); "windowIcon_205.icns"; fk overwrite:K87:5)
 						$CLI._printTask("Copy icon file")
-						$CLI._printPath($targetRuntimeVLIconFile)
+						$CLI._printPath($targetIconFile)
 						$info.CFBundleIconFile:=$RuntimeVLIconFile.fullName
 						$keys.push("CFBundleIconFile")
 					Else 
@@ -426,5 +425,52 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 	
 	$propertyListFile.setAppInfo($info)
 	
-	//This._updatePropertyStrings($CLI; $appFolder; $info)
+	$CLI._updatePropertyStrings($BuildApp; $targetRuntimeFolder; $info)
 	
+Function _updatePropertyStrings($BuildApp : cs:C1710.BuildApp; \
+$targetFolder : 4D:C1709.Folder; $info : Object)
+	
+	$CLI:=This:C1470
+	
+	$folders:=$targetFolder.folder("Contents").folder("Resources").folders(fk ignore invisible:K87:22).query("extension == :1"; ".lproj")
+	
+	ARRAY LONGINT:C221($pos; 0)
+	ARRAY LONGINT:C221($len; 0)
+	
+	var $key : Text
+	$keys:=New collection:C1472
+	$lproj:=New collection:C1472
+	
+	For each ($folder; $folders)
+		
+		$files:=$folder.files().query("fullName == :1"; "InfoPlist.strings")
+		
+		For each ($file; $files)
+			$strings:=$file.getText("utf-16le"; Document with LF:K24:22)
+			$lines:=Split string:C1554($strings; "\n")
+			For each ($key; $info)
+				For ($i; 1; $lines.length)
+					$line:=$lines[$i-1]
+					If (Match regex:C1019("^(\\S+)(\\s*=\\s*)\"(.*)\"(.*)"; $line; 1; $pos; $len))
+						If ($key=Substring:C12($line; $pos{1}; $len{1}))
+							$oper:=Substring:C12($line; $pos{2}; $len{2})
+							$term:=Substring:C12($line; $pos{4}; $len{4})
+							$oldValue:=Substring:C12($line; $pos{3}; $len{3})
+							$newValue:=$info[$key]
+							$lines[$i-1]:=$key+$oper+"\""+$newValue+"\""+$term
+							$keys.push($key)
+						End if 
+					End if 
+				End for 
+			End for each 
+			$file.setText($lines.join("\n"); "utf-16le"; Document with LF:K24:22)
+			$lproj.push($file)
+		End for each 
+	End for each 
+	
+	$CLI._printTask("Update strings")
+	$CLI._printList($keys.distinct())
+	
+	For each ($file; $lproj)
+		$CLI._printPath($file)
+	End for each 
