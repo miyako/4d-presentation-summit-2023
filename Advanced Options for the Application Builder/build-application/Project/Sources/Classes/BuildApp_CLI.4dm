@@ -552,10 +552,8 @@ $sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
 			$files.combine($folder.files(fk ignore invisible:K87:22).query("extension == :1"; ".4dm"))
 		End for each 
 		
-		$CLI._printTask("Delete source files")
-		
 		For each ($file; $files)
-			$CLI._printPath($file)
+			$file.delete()
 		End for each 
 		
 	End if 
@@ -579,15 +577,15 @@ $sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
 		$CLI._printStatus($status.success)
 		$CLI._printPath($targetProjectFile)
 		
+		$ProjectFolder.delete()
+		
 	End if 
 	
-	$folders:=$ProjectFolder.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Resources"; "Libraries"; "Documentation"; "Default Data"))
+	$folders:=$ProjectFolder.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Resources"; "Libraries"/*; "Documentation"*/; "Default Data"))
 	
 	$CLI._printTask("Copy database folders")
 	
 	For each ($folder; $folders)
-		
 		$CLI._printPath($folder.copyTo($ContentsFolder))
-		
 	End for each 
 	
