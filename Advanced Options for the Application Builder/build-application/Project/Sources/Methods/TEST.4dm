@@ -9,5 +9,4 @@ $buildProject:=File:C1566("/Users/miyako/Desktop/buildApp.4DSettings")
 
 $compileProject:=File:C1566("Macintosh HD:Users:miyako:Desktop:aaaaa:Project:aaaaa.4DProject"; fk platform path:K87:2)
 
-
 $built:=$CLI.build($buildProject; $compileProject)

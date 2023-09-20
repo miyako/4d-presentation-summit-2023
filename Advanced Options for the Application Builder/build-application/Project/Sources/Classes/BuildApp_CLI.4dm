@@ -219,9 +219,15 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text)->$targetFolder
 	$targetFolder:=$BuildDestFolder.folder($targetName)
 	
 	If ($targetFolder.exists)
-		$CLI._printTask("Delete target runtime folder")
-		$CLI._printPath($targetFolder)
-		$targetFolder.delete(Delete with contents:K24:24)
+		
+		$localProjectFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent
+		
+		If ($targetFolder.path#($localProjectFolder.path+"@"))
+			$CLI._printTask("Delete target runtime folder")
+			$CLI._printPath($targetFolder)
+			$targetFolder.delete(Delete with contents:K24:24)
+		End if 
+		
 	End if 
 	
 	$targetFolder:=$RuntimeFolder.copyTo($BuildDestFolder; $targetName; fk overwrite:K87:5)
@@ -272,7 +278,7 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 	If (Is macOS:C1572)
 		$info.CFBundleDisplayName:=$BuildApp.BuildApplicationName
 		$info.CFBundleName:=$BuildApp.BuildApplicationName
-		$info.CFBundleExecutable:=$appFolder.name
+		$info.CFBundleExecutable:=$BuildApp.BuildApplicationName
 		$info.CFBundleIdentifier:=New collection:C1472($CompanyName; $BuildApplicationName; $buildApplicationType).join("."; ck ignore null or empty:K85:5)
 		$keys.push("CFBundleName")
 		$keys.push("CFBundleDisplayName")
@@ -539,29 +545,35 @@ $sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
 		$CLI._printTask("Set database folder")
 		$CLI._printPath($targetProjectFolder)
 		
-		$folders:=New collection:C1472($targetProjectFolder.folder("Trash"))
-		$folders.push($targetProjectFolder.folder("Sources").folder("DatabaseMethods"))
-		$folders.push($targetProjectFolder.folder("Sources").folder("TableForms"))
-		$folders.push($targetProjectFolder.folder("Sources").folder("Triggers"))
-		$folders.push($targetProjectFolder.folder("Sources").folder("Forms"))
-		$folders.push($targetProjectFolder.folder("Sources").folder("Classes"))
-		$folders.push($targetProjectFolder.folder("Sources").folder("Methods"))
+		$localProjectFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent
 		
-		$files:=New collection:C1472
-		For each ($folder; $folders)
-			$files.combine($folder.files(fk ignore invisible:K87:22).query("extension == :1"; ".4dm"))
-		End for each 
-		
-		For each ($file; $files)
-			$file.delete()
-		End for each 
+		If ($targetProjectFolder.path#($localProjectFolder.path+"@"))
+			
+			$folders:=New collection:C1472($targetProjectFolder.folder("Trash"))
+			$folders.push($targetProjectFolder.folder("Sources").folder("DatabaseMethods"))
+			$folders.push($targetProjectFolder.folder("Sources").folder("TableForms"))
+			$folders.push($targetProjectFolder.folder("Sources").folder("Triggers"))
+			$folders.push($targetProjectFolder.folder("Sources").folder("Forms"))
+			$folders.push($targetProjectFolder.folder("Sources").folder("Classes"))
+			$folders.push($targetProjectFolder.folder("Sources").folder("Methods"))
+			
+			$files:=New collection:C1472
+			
+			For each ($folder; $folders)
+				$files.combine($folder.files(fk ignore invisible:K87:22).query("extension == :1"; ".4dm"))
+			End for each 
+			
+			For each ($file; $files)
+				$file.delete()
+			End for each 
+		End if 
 		
 	End if 
 	
 	If ($BuildApp.PackProject#Null:C1517) && ($BuildApp.PackProject)
 		
 		$zip:=New object:C1471
-		$zip.files:=New collection:C1472($ProjectFolder)
+		$zip.files:=New collection:C1472($targetProjectFolder)
 		
 		If ($BuildApp.UseStandardZipFormat#Null:C1517) && ($BuildApp.UseStandardZipFormat)
 			$zip.encryption:=ZIP Encryption none:K91:3
@@ -577,7 +589,9 @@ $sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
 		$CLI._printStatus($status.success)
 		$CLI._printPath($targetProjectFile)
 		
-		$ProjectFolder.delete()
+		If ($targetProjectFolder.path#$localProjectFolder.path)
+			$targetProjectFolder.delete(Delete with contents:K24:24)
+		End if 
 		
 	End if 
 	
