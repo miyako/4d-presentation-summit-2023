@@ -1,7 +1,7 @@
 {
 	"methods": {
 		"build": {
-			"timeStamp": "2023-09-20T03:20:02Z",
+			"timeStamp": "2023-09-20T03:23:09Z",
 			"attributes": {
 				"invisible": true
 			}
@@ -9,7 +9,7 @@
 		"TEST": {
 			"timeStamp": "2023-09-20T03:20:02Z"
 		},
-		"buildError": {
+		"generic_error_handler": {
 			"timeStamp": "2023-09-20T03:20:02Z",
 			"attributes": {
 				"invisible": true

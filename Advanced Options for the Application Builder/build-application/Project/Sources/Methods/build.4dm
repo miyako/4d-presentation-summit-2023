@@ -14,7 +14,7 @@ If (Get application info:C1599.headless)
 	
 	$CLI.logo().version()
 	
-	ON ERR CALL:C155(Formula:C1597(buildError).source)
+	ON ERR CALL:C155(Formula:C1597(generic_error_handler).source)
 	
 	$CLI.LF()
 	
