@@ -8,14 +8,18 @@ Function _parse($settingsFile : 4D:C1709.File)->$status : Object
 	
 	$status:=New object:C1471("sdi_application"; Null:C1517; "allow_user_settings"; Null:C1517)
 	
-	$dom:=DOM Parse XML source:C719($settingsFile.platformPath)
-	
-	If (OK=1)
+	If ($settingsFile.exists)
 		
-		$status.sdi_application:=This:C1470.getBoolValue($dom; "/preferences/com.4d/interface/user@sdi_application")
-		$status.allow_user_settings:=This:C1470.getBoolValue($dom; "/preferences/com.4d/general@allow_user_settings")
+		$dom:=DOM Parse XML source:C719($settingsFile.platformPath)
 		
-		DOM CLOSE XML:C722($dom)
+		If (OK=1)
+			
+			$status.sdi_application:=This:C1470.getBoolValue($dom; "/preferences/com.4d/interface/user@sdi_application")
+			$status.allow_user_settings:=This:C1470.getBoolValue($dom; "/preferences/com.4d/general@allow_user_settings")
+			
+			DOM CLOSE XML:C722($dom)
+			
+		End if 
 		
 	End if 
 	
