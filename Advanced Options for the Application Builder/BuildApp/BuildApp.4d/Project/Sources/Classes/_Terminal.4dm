@@ -76,7 +76,7 @@ Function launch($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)
 	$command:=$command+" --startup-method=build"
 	$command:=$command+" --user-param="+This:C1470.escape($buildProject.path)+","+This:C1470.escape($compileProject.path)
 	
-	$command:="osascript"+" -e 'tell application \"Terminal\" to do script \""+Replace string:C233($command; "\\"; "\\\\"; *)+"\"' -e 'activate'"
+	$command:="osascript"+" -e 'tell application \"Terminal\" to activate\r' -e 'tell application \"Terminal\" to do script \""+Replace string:C233($command; "\\"; "\\\\"; *)+"\"'"
 	
 	$folder:=Folder:C1567(Temporary folder:C486; fk platform path:K87:2).folder(Generate UUID:C1066)
 	$folder.create()
@@ -86,6 +86,5 @@ Function launch($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)
 	$file:=$folder.file("tool4d.sh")
 	$file.setText($command)
 	
-	OPEN URL:C673(""; "Terminal")
 	LAUNCH EXTERNAL PROCESS:C811("/bin/sh "+This:C1470.escape($file.path))
 	
