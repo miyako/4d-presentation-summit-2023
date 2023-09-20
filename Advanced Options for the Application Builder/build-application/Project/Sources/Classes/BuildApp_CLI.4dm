@@ -1,5 +1,13 @@
 Class extends CLI
 
+Function _printItemToList($item : Text; $count : Integer)->$CLI : cs:C1710.BuildApp_CLI
+	
+	If ($count#0)
+		$CLI.print(","+$item; "39")
+	Else 
+		$CLI.print($item; "39")
+	End if 
+	
 Function _printItem($item : Text)->$CLI : cs:C1710.BuildApp_CLI
 	
 	$CLI:=This:C1470
@@ -40,25 +48,29 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 	
 	$CLI:=This:C1470
 	
-	$CLI._printTask("Compile project")
-	
-	$options:=New object:C1471
-	$options.generateSymbols:=True:C214
-	
-	$status:=Compile project:C1760($options)
-	
-	$success:=$status.success
-	
-	$CLI._printStatus($success)
-	
-	For each ($error; $status.errors)
-		If ($error.isError)
-			$CLI.print($error.message; "177;bold")
-		Else 
-			$CLI.print($error.message; "166;bold")
-		End if 
-		$CLI.print("…").print($error.code.path+"#"+String:C10($error.lineInFile); "244").LF()
-	End for each 
+	If (Not:C34(Is compiled mode:C492))
+		
+		$CLI._printTask("Compile project")
+		
+		$options:=New object:C1471
+		$options.generateSymbols:=True:C214
+		
+		$status:=Compile project:C1760($options)
+		
+		$success:=$status.success
+		
+		$CLI._printStatus($success)
+		
+		For each ($error; $status.errors)
+			If ($error.isError)
+				$CLI.print($error.message; "177;bold")
+			Else 
+				$CLI.print($error.message; "166;bold")
+			End if 
+			$CLI.print("…").print($error.code.path+"#"+String:C10($error.lineInFile); "244").LF()
+		End for each 
+		
+	End if 
 	
 Function _getVersioning($BuildApp : cs:C1710.BuildApp; $key : Text; $domain : Text)->$value : Text
 	
@@ -177,40 +189,28 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 			
 			$CLI._generateLicense($BuildApp; $targetRuntimeVLFolder)
 			
-			$CLI._sign()
+			$CLI.quickSign($targetRuntimeVLFolder)
+			
+			$success:=True:C214
 			
 		End if 
 		
 	End if 
 	
-Function _adHocSign($BuildApp : cs:C1710.BuildApp)
+Function quickSign($RuntimeFolder : 4D:C1709.Folder)->$success : Boolean
 	
 	$CLI:=This:C1470
 	
 	If (Is macOS:C1572)
 		
-		//$MacSignature:=Bool($BuildApp.SignApplication.MacSignature)
-		//$AdHocSign:=Bool($BuildApp.SignApplication.AdHocSign)
+		$CLI._printTask("Sign app")
+		$CLI._printPath($RuntimeFolder)
 		
-		//If ($BuildApp.SignApplication.MacCertificate#Null) && ($BuildApp.SignApplication.MacCertificate#"")
-		//$MacCertificate:=$BuildApp.SignApplication.MacCertificate
-		//End if 
+		quickSign($RuntimeFolder)
 		
-		$MacCertificate:="-"
-		
-		$applicationFolder:=Folder:C1567(Application file:C491; fk platform path:K87:2)
-		$applicationResourcesFolder:=$applicationFolder.folder("Contents").folder("Resources")
-		
-		$script:=$applicationResourcesFolder.file("SignApp.sh")
-		$entitlements:=$applicationResourcesFolder.file("4D.entitlements")
-		
-		
-		
-		
+		$success:=True:C214
 		
 	End if 
-	
-	
 	
 Function _copyRuntime($BuildApp : cs:C1710.BuildApp; \
 $RuntimeFolder : 4D:C1709.Folder; \

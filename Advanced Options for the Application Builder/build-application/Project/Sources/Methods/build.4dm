@@ -52,7 +52,9 @@ If (Get application info:C1599.headless)
 			
 			If ($compileProject#Null:C1517)
 				If ($CLI.compile($compileProject))
-					$CLI.build($buildProject; $compileProject)
+					If ($CLI.build($buildProject; $compileProject))
+						//
+					End if 
 				End if 
 			End if 
 			
