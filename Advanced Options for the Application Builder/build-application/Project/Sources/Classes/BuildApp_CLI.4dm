@@ -195,6 +195,8 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 			
 			$targetRuntimeVLFolder:=$CLI._copyRuntime($BuildApp; $RuntimeVLFolder; $BuildDestFolder; $BuildApplicationName)
 			
+			$CLI._copyPlugins($BuildApp; $RuntimeVLFolder; $compileProject)
+			
 			$CLI._updateProperty($BuildApp; $targetRuntimeVLFolder; $CompanyName; $BuildApplicationName; $settings.sdi_application)
 			
 			$CLI._copyDatabase($BuildApp; $targetRuntimeVLFolder; $compileProject)
@@ -223,6 +225,33 @@ Function quickSign($RuntimeFolder : 4D:C1709.Folder)->$success : Boolean
 		$success:=True:C214
 		
 	End if 
+	
+Function _copyPlugins($BuildApp : cs:C1710.BuildApp; \
+$RuntimeFolder : 4D:C1709.Folder; \
+$compileProject : 4D:C1709.File)
+	
+	$plugins:=$CLI._findPlugins($compileProject)
+	$targetPluginsFolder:=$RuntimeFolder.folder("Contents").folder("Plugins")
+	$targetPluginsFolder.create()
+	
+	For each ($plugin; $plugins)
+		
+		Case of 
+			: ($BuildApp.ArrayExcludedPluginID.Item.contains($plugin.manifest.id))
+				
+			: ($BuildApp.ArrayExcludedPluginName.Item.contains($plugin.manifest.name))
+				
+			Else 
+				
+				$targetPlugin:=$plugin.folder.copyTo($targetPluginsFolder)
+				
+				$CLI._printTask("Copy plugin")
+				$CLI._prinItem($plugin.manifest.name)
+				$CLI._printPath($targetPlugin)
+				
+		End case 
+		
+	End for each 
 	
 Function _copyRuntime($BuildApp : cs:C1710.BuildApp; \
 $RuntimeFolder : 4D:C1709.Folder; \
@@ -343,9 +372,33 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text)->$targetFolder
 	
 Function _findPlugins($compileProject : 4D:C1709.File)->$plugins : Collection
 	
-	$ProjectFolder:=$compileProject.parent
-	$ProjectFolder
+	$ProjectFolder:=$compileProject.parent.parent.folder("Plugins")
+	$bundles:=$ProjectFolder.folders(fk ignore invisible:K87:22).query("extension == :1"; ".bundle")
 	
+	$plugins:=New collection:C1472
+	
+	var $manifest : Object
+	
+	For each ($bundle; $bundles)
+		CLEAR VARIABLE:C89($manifest)
+		$manifestFile:=$bundle.folder("Contents").folder("Resources").file("manifest.json")
+		If ($manifestFile.exists)
+			$json:=Document to text:C1236($manifestFile.platformPath)
+			$manifest:=JSON Parse:C1218($json; Is object:K8:27)
+		Else 
+			$manifestFile:=$bundle.folder("Contents").file("manifest.json")  //old location
+			If ($manifestFile.exists)
+				$json:=Document to text:C1236($manifestFile)
+				$manifest:=JSON Parse:C1218($json; Is object:K8:27)
+			End if 
+		End if 
+		
+		If ($manifest#Null:C1517)
+			$plugin:=New object:C1471("folder"; $bundle; "manifest"; $manifest)
+			$plugins.push($plugin)
+		End if 
+		
+	End for each 
 	
 Function _updateProperty($BuildApp : cs:C1710.BuildApp; \
 $targetRuntimeFolder : 4D:C1709.Folder; \
