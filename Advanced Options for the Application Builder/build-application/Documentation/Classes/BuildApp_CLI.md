@@ -1,4 +1,4 @@
-# BuildApp_CLI
+# BuildApp_CLI : CLI
 
 `BuildApp_CLI` is a subclass of `CLI` to compile or build a project.
 
