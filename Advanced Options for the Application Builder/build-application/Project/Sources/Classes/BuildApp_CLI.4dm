@@ -36,31 +36,6 @@ Function _printTask($task : Text)->$CLI : cs:C1710.BuildApp_CLI
 	
 	$CLI.print($task; "bold").print("…")
 	
-Function logo()->$CLI : cs:C1710.BuildApp_CLI
-	
-	$CLI:=This:C1470
-	
-	$logo:=File:C1566("/RESOURCES/logo.txt").getText("us-ascii"; Document with CR:K24:21)
-	$lines:=Split string:C1554($logo; "\r")
-	
-	For each ($line; $lines)
-		$CLI.print($line; "117;18;bold").LF()
-	End for each 
-	
-Function version()->$CLI : cs:C1710.BuildApp_CLI
-	
-	$CLI:=This:C1470
-	
-	var $build : Integer
-	$version:=Application version:C493($build)
-	
-	$code:=Split string:C1554($version; "")
-	$name:=(($code[2]="0") ? ("v"+$code[0]+$code[1]+"."+$code[3]) : ("v"+$code[0]+$code[1]+" R"+$code[2]))
-	
-	$version:=New collection:C1472($name; $build).join(".")
-	
-	$CLI.print($version; "231;bold").LF()
-	
 Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 	
 	$CLI:=This:C1470
@@ -202,9 +177,40 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 			
 			$CLI._generateLicense($BuildApp; $targetRuntimeVLFolder)
 			
+			$CLI._sign()
+			
 		End if 
 		
 	End if 
+	
+Function _adHocSign($BuildApp : cs:C1710.BuildApp)
+	
+	$CLI:=This:C1470
+	
+	If (Is macOS:C1572)
+		
+		//$MacSignature:=Bool($BuildApp.SignApplication.MacSignature)
+		//$AdHocSign:=Bool($BuildApp.SignApplication.AdHocSign)
+		
+		//If ($BuildApp.SignApplication.MacCertificate#Null) && ($BuildApp.SignApplication.MacCertificate#"")
+		//$MacCertificate:=$BuildApp.SignApplication.MacCertificate
+		//End if 
+		
+		$MacCertificate:="-"
+		
+		$applicationFolder:=Folder:C1567(Application file:C491; fk platform path:K87:2)
+		$applicationResourcesFolder:=$applicationFolder.folder("Contents").folder("Resources")
+		
+		$script:=$applicationResourcesFolder.file("SignApp.sh")
+		$entitlements:=$applicationResourcesFolder.file("4D.entitlements")
+		
+		
+		
+		
+		
+	End if 
+	
+	
 	
 Function _copyRuntime($BuildApp : cs:C1710.BuildApp; \
 $RuntimeFolder : 4D:C1709.Folder; \

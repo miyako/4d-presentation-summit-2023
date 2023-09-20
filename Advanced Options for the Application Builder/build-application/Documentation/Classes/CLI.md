@@ -20,11 +20,23 @@ Print the line-feed ASCII code.
 
 Apply ASCII escape codes to `$message`.
 
+## .logo() 
+
+**.logo**() : cs.BuildApp_CLI
+
+Print an ASCII art of the 4D logo.
+
 ## .print() 
 
 **.print**($message : Text; $style : Text) : cs.CLI
 
 Print `$message` using ASCII escape codes.
+
+## .version() 
+
+**.version**() : cs.CLI
+
+Print the current 4D version.
 
 ```4d
 var $CLI : cs.CLI

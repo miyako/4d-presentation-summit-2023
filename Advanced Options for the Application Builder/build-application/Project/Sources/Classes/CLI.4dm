@@ -51,6 +51,17 @@ Function escape($message : Text; $style : Text)->$ANSI : Text
 		$ANSI:=$message
 	End if 
 	
+Function logo()->$CLI : cs:C1710.CLI
+	
+	$CLI:=This:C1470
+	
+	$logo:=File:C1566("/RESOURCES/logo.txt").getText("us-ascii"; Document with CR:K24:21)
+	$lines:=Split string:C1554($logo; "\r")
+	
+	For each ($line; $lines)
+		$CLI.print($line; "117;18;bold").LF()
+	End for each 
+	
 Function print($message : Text; $style : Text)->$this : cs:C1710.CLI
 	
 	$ANSI:=This:C1470.escape($message; $style)
@@ -58,6 +69,20 @@ Function print($message : Text; $style : Text)->$this : cs:C1710.CLI
 	LOG EVENT:C667(Into system standard outputs:K38:9; $ANSI; Information message:K38:1)
 	
 	$this:=This:C1470
+	
+Function version()->$CLI : cs:C1710.CLI
+	
+	$CLI:=This:C1470
+	
+	var $build : Integer
+	$version:=Application version:C493($build)
+	
+	$code:=Split string:C1554($version; "")
+	$name:=(($code[2]="0") ? ("v"+$code[0]+$code[1]+"."+$code[3]) : ("v"+$code[0]+$code[1]+" R"+$code[2]))
+	
+	$version:=New collection:C1472($name; $build).join(".")
+	
+	$CLI.print($version; "231;bold").LF()
 	
 	//MARK:-private methods
 	
