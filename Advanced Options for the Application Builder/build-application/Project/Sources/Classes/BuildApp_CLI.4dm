@@ -81,6 +81,18 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 		$options:=New object:C1471
 		$options.generateSymbols:=True:C214
 		
+		var $PluginsFolder : 4D:C1709.Folder
+		$PluginsFolder:=$compileProject.parent.parent.folder("Plugins")
+		If ($PluginsFolder.exists)
+			$options.plugins:=$PluginsFolder
+		End if 
+		
+		$options.components:=$CLI._findComponents($compileProject)
+		
+		If (Is macOS:C1572)
+			$options.targets:=New collection:C1472("x86_64_generic"; "arm64_macOS_lib")
+		End if 
+		
 		$status:=Compile project:C1760($options)
 		
 		$success:=$status.success
@@ -197,6 +209,8 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 			
 			$CLI._copyPlugins($BuildApp; $targetRuntimeVLFolder; $compileProject)
 			
+			$CLI._copyComponents($BuildApp; $targetRuntimeVLFolder; $compileProject)
+			
 			$CLI._updateProperty($BuildApp; $targetRuntimeVLFolder; $CompanyName; $BuildApplicationName; $settings.sdi_application)
 			
 			$CLI._copyDatabase($BuildApp; $targetRuntimeVLFolder; $compileProject)
@@ -225,6 +239,35 @@ Function quickSign($RuntimeFolder : 4D:C1709.Folder)->$success : Boolean
 		$success:=True:C214
 		
 	End if 
+	
+Function _copyComponents($BuildApp : cs:C1710.BuildApp; \
+$RuntimeFolder : 4D:C1709.Folder; \
+$compileProject : 4D:C1709.File)
+	
+	$CLI:=This:C1470
+	
+	$components:=$CLI._findComponents($compileProject)
+	$targetComponentsFolder:=$RuntimeFolder.folder("Contents").folder("Components")
+	
+	var $component : Object
+	
+	For each ($component; $components)
+		
+		Case of 
+			: ($BuildApp.ArrayExcludedComponentName.Item.includes($component.name))
+				
+			Else 
+				
+				$targetComponentsFolder.create()
+				$targetComponent:=$component.copyTo($targetComponentsFolder; fk overwrite:K87:5)
+				
+				$CLI._printTask("Copy component")
+				$CLI._printItem($component.name)
+				$CLI._printPath($targetComponent)
+				
+		End case 
+		
+	End for each 
 	
 Function _copyPlugins($BuildApp : cs:C1710.BuildApp; \
 $RuntimeFolder : 4D:C1709.Folder; \
@@ -376,10 +419,38 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text)->$targetFolder
 		
 	End if 
 	
+Function _findComponents($compileProject : 4D:C1709.File)->$components : Collection
+	
+	$ComponentsFolder:=$compileProject.parent.parent.folder("Components")
+	$projectComponents:=$ComponentsFolder.folders(fk ignore invisible:K87:22).query("extension in :1"; New collection:C1472(".4dbase"; ".4DC"; ".4DZ"))
+	
+	$paths:=$projectComponents.extract("path")
+	
+	If (Is macOS:C1572)
+		$ComponentsFolder:=Folder:C1567(Application file:C491; fk platform path:K87:2).folder("Contents").folder("Components")
+	Else 
+		$ComponentsFolder:=Folder:C1567(Application file:C491; fk platform path:K87:2).parent.folder("Components")
+	End if 
+	
+	$applicationComponents:=$ComponentsFolder.folders(fk ignore invisible:K87:22).query("extension in :1"; New collection:C1472(".4dbase"; ".4DC"; ".4DZ"))
+	
+	For each ($folder; $applicationComponents)
+		$path:=$folder.path
+		If (Not:C34($paths.includes($path)))
+			$paths.push($path)
+		End if 
+	End for each 
+	
+	$components:=New collection:C1472
+	
+	For each ($path; $paths)
+		$components.push(Folder:C1567($path))
+	End for each 
+	
 Function _findPlugins($compileProject : 4D:C1709.File)->$plugins : Collection
 	
-	$ProjectFolder:=$compileProject.parent.parent.folder("Plugins")
-	$bundles:=$ProjectFolder.folders(fk ignore invisible:K87:22).query("extension == :1"; ".bundle")
+	$PluginsFolder:=$compileProject.parent.parent.folder("Plugins")
+	$bundles:=$PluginsFolder.folders(fk ignore invisible:K87:22).query("extension == :1"; ".bundle")
 	
 	$plugins:=New collection:C1472
 	
