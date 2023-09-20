@@ -276,6 +276,71 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text)->$targetFolder
 		$CLI._printPath($targetResourceFile)
 	End if 
 	
+	If ($BuildApp.ArrayExcludedModuleName.Item.includes("PHP"))
+		
+		$moduleFolder:=$targetFolder.folder("Contents").folder("Resources").folder("php")
+		
+		$CLI._printTask("Delete PHP module")
+		$CLI._printStatus($moduleFolder.exists)
+		$CLI._printPath($moduleFolder)
+		
+		$moduleFolder.delete(Delete with contents:K24:24)
+		
+	End if 
+	
+	If ($BuildApp.ArrayExcludedModuleName.Item.includes("MeCab"))
+		
+		$moduleFolder:=$targetFolder.folder("Contents").folder("Resources").folder("mecab")
+		
+		$CLI._printTask("Delete MeCab module")
+		$CLI._printStatus($moduleFolder.exists)
+		$CLI._printPath($moduleFolder)
+		
+		$moduleFolder.delete(Delete with contents:K24:24)
+		
+	End if 
+	
+	If ($BuildApp.ArrayExcludedModuleName.Item.includes("4D Updater"))
+		
+		$moduleFolder:=$targetFolder.folder("Contents").folder("Resources").folder("Updater")
+		
+		$CLI._printTask("Delete 4D Updater module")
+		$CLI._printStatus($moduleFolder.exists)
+		$CLI._printPath($moduleFolder)
+		
+		$moduleFolder.delete(Delete with contents:K24:24)
+		
+	End if 
+	
+	If ($BuildApp.ArrayExcludedModuleName.Item.includes("SpellChecker"))
+		
+		$moduleFolder:=$targetFolder.folder("Contents").folder("Resources").folder("Spellcheck")
+		
+		$CLI._printTask("Delete SpellChecker module")
+		$CLI._printStatus($moduleFolder.exists)
+		$CLI._printPath($moduleFolder)
+		
+		$moduleFolder.delete(Delete with contents:K24:24)
+		
+	End if 
+	
+	If ($BuildApp.ArrayExcludedModuleName.Item.includes("CEF"))
+		
+		$moduleFolder:=$targetFolder.folder("Contents").folder("Native Components").folder("WebViewerCEF.bundle")
+		
+		$CLI._printTask("Delete CEF module")
+		$CLI._printStatus($moduleFolder.exists)
+		$CLI._printPath($moduleFolder)
+		
+		$moduleFolder.delete(Delete with contents:K24:24)
+		
+		//symlink
+		$file:=$targetFolder.folder("Contents").folder("Frameworks").file("Chromium Embedded Framework.framework")
+		$CLI._printPath($file)
+		$file.delete()
+		
+	End if 
+	
 Function _updateProperty($BuildApp : cs:C1710.BuildApp; \
 $targetRuntimeFolder : 4D:C1709.Folder; \
 $CompanyName : Text; \

@@ -5,9 +5,8 @@ If (Count parameters:C259=0)
 	
 	$BuildApp:=cs:C1710.BuildApp.new()
 	
-	$BuildApp.parseFile(Folder:C1567(fk desktop folder:K87:19).file("buildApp.4DSettings"))
-	
 	$BuildApp.BuildApplicationName:="TEST"
+	$BuildApp.BuildMacDestFolder:=System folder:C487(Desktop:K41:16)
 	
 	$BuildApp.BuildCompiled:=False:C215
 	$BuildApp.IncludeAssociatedFolders:=True:C214
@@ -69,6 +68,10 @@ If (Count parameters:C259=0)
 	$ServerWin:=Folder:C1567(fk applications folder:K87:20).folder("4D v20.1").folder("4D Server").platformPath
 	$BuildApp.SourcesFiles.CS.ServerMacFolder:=$ServerMac
 	$BuildApp.SourcesFiles.CS.ServerWinFolder:=$ServerWin
+	
+	$BuildApp.Versioning.Common.CommonVersion:="1.0.0"
+	$BuildApp.Versioning.Common.CommonCopyright:="©︎K.MIYAKO"
+	$BuildApp.Versioning.Common.CommonCompanyName:="com.4d.miyako"
 	
 	$BuildApp["Build"+(Is macOS:C1572 ? "Mac" : "Win")+"DestFolder"]:=Folder:C1567(fk desktop folder:K87:19).platformPath
 	

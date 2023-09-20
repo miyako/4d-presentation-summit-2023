@@ -21,26 +21,6 @@
 				"Summary": ""
 			}
 		},
-		"CLI": {
-			"new()": {
-				"Syntax": "**.new**()",
-				"Params": [],
-				"Summary": ""
-			}
-		},
-		"Iconutil": {
-			"new()": {
-				"Syntax": "**.new**( *controller* : 4D.Class )",
-				"Params": [
-					[
-						"controller",
-						"4D.Class",
-						"->"
-					]
-				],
-				"Summary": ""
-			}
-		},
 		"_Lipo_Form_Controller": {
 			"new()": {
 				"Syntax": "**.new**()",
@@ -61,7 +41,21 @@
 				"Summary": ""
 			}
 		},
-		"_Find": {
+		"_Find_Worker_Controller": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"_Worker_Controller": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"Png2Ico": {
 			"new()": {
 				"Syntax": "**.new**( *controller* : 4D.Class )",
 				"Params": [
@@ -75,6 +69,19 @@
 			}
 		},
 		"Lipo": {
+			"new()": {
+				"Syntax": "**.new**( *controller* : 4D.Class )",
+				"Params": [
+					[
+						"controller",
+						"4D.Class",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"_Find": {
 			"new()": {
 				"Syntax": "**.new**( *controller* : 4D.Class )",
 				"Params": [
@@ -105,14 +112,14 @@
 				"Summary": ""
 			}
 		},
-		"_Worker_Controller": {
+		"_Terminal": {
 			"new()": {
 				"Syntax": "**.new**()",
 				"Params": [],
 				"Summary": ""
 			}
 		},
-		"Png2Ico": {
+		"Iconutil": {
 			"new()": {
 				"Syntax": "**.new**( *controller* : 4D.Class )",
 				"Params": [
@@ -124,32 +131,9 @@
 				],
 				"Summary": ""
 			}
-		},
-		"_Find_Worker_Controller": {
-			"new()": {
-				"Syntax": "**.new**()",
-				"Params": [],
-				"Summary": ""
-			}
 		}
 	},
 	"BuildApp": {
-		"buildApplication()": {
-			"Syntax": "**.buildApplication**( *compileProject* : 4D.File )->BuildApp : cs.BuildApp.BuildApp",
-			"Params": [
-				[
-					"compileProject",
-					"4D.File",
-					"->"
-				],
-				[
-					"BuildApp",
-					"cs.BuildApp.BuildApp",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
 		"parseFile()": {
 			"Syntax": "**.parseFile**( *settingsFile* : 4D.File )->BuildApp : cs.BuildApp.BuildApp",
 			"Params": [
@@ -161,6 +145,28 @@
 				[
 					"BuildApp",
 					"cs.BuildApp.BuildApp",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get settings()": {
+			"Syntax": "**.get settings**()->settings : Object",
+			"Params": [
+				[
+					"settings",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"toString()": {
+			"Syntax": "**.toString**()->XML : Text",
+			"Params": [
+				[
+					"XML",
+					"Text",
 					"<-"
 				]
 			],
@@ -204,28 +210,6 @@
 				[
 					"BuildApp",
 					"cs.BuildApp.BuildApp",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"toString()": {
-			"Syntax": "**.toString**()->XML : Text",
-			"Params": [
-				[
-					"XML",
-					"Text",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get settings()": {
-			"Syntax": "**.get settings**()->settings : Object",
-			"Params": [
-				[
-					"settings",
-					"Object",
 					"<-"
 				]
 			],
@@ -386,112 +370,6 @@
 		},
 		"_inheritedFrom_": "_CLI_Controller"
 	},
-	"CLI": {
-		"escape()": {
-			"Syntax": "**.escape**( *message* : Text; *style* : Text )->ANSI : Text",
-			"Params": [
-				[
-					"message",
-					"Text",
-					"->"
-				],
-				[
-					"style",
-					"Text",
-					"->"
-				],
-				[
-					"ANSI",
-					"Text",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"print()": {
-			"Syntax": "**.print**( *message* : Text; *style* : Text )->this : cs.BuildApp.CLI",
-			"Params": [
-				[
-					"message",
-					"Text",
-					"->"
-				],
-				[
-					"style",
-					"Text",
-					"->"
-				],
-				[
-					"this",
-					"cs.BuildApp.CLI",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"LF()": {
-			"Syntax": "**.LF**()->this : cs.BuildApp.CLI",
-			"Params": [
-				[
-					"this",
-					"cs.BuildApp.CLI",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"CR()": {
-			"Syntax": "**.CR**()->this : cs.BuildApp.CLI",
-			"Params": [
-				[
-					"this",
-					"cs.BuildApp.CLI",
-					"<-"
-				]
-			],
-			"Summary": ""
-		}
-	},
-	"Iconutil": {
-		"convert()": {
-			"Syntax": "**.convert**( *option* : Variant )->this : cs.BuildApp.Lipo",
-			"Params": [
-				[
-					"option",
-					"Variant",
-					"->"
-				],
-				[
-					"this",
-					"cs.BuildApp.Lipo",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"terminate()": {
-			"Syntax": "**.terminate**()",
-			"Params": [],
-			"Summary": ""
-		},
-		"onResponse()": {
-			"Syntax": "**.onResponse**( *files* : Collection; *parameters* : Collection )",
-			"Params": [
-				[
-					"files",
-					"Collection",
-					"->"
-				],
-				[
-					"parameters",
-					"Collection",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"_inheritedFrom_": "_CLI"
-	},
 	"_Lipo_Form_Controller": {
 		"onTerminate()": {
 			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
@@ -600,71 +478,170 @@
 			"Summary": ""
 		}
 	},
-	"BuildApp_CLI": {
-		"build()": {
-			"Syntax": "**.build**( *buildProject* : 4D.File; *compileProject* : 4D.File )->success : Boolean",
+	"_Find_Worker_Controller": {
+		"onData()": {
+			"Syntax": "**.onData**( *worker* : 4D.SystemWorker; *params* : Object )",
 			"Params": [
 				[
-					"buildProject",
-					"4D.File",
+					"worker",
+					"4D.SystemWorker",
 					"->"
 				],
 				[
-					"compileProject",
-					"4D.File",
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onTerminate()": {
+			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
 					"->"
 				],
 				[
-					"success",
-					"Boolean",
-					"<-"
+					"params",
+					"Object",
+					"->"
 				]
 			],
 			"Summary": ""
 		},
-		"compile()": {
-			"Syntax": "**.compile**( *compileProject* : 4D.File )->success : Boolean",
+		"onResponse()": {
+			"Syntax": "**.onResponse**( *worker* : 4D.SystemWorker; *params* : Object )",
 			"Params": [
 				[
-					"compileProject",
-					"4D.File",
+					"worker",
+					"4D.SystemWorker",
 					"->"
 				],
 				[
-					"success",
-					"Boolean",
-					"<-"
+					"params",
+					"Object",
+					"->"
 				]
 			],
 			"Summary": ""
 		},
-		"version()": {
-			"Syntax": "**.version**()->CLI : cs.BuildApp.BuildApp_CLI",
+		"onDataError()": {
+			"Syntax": "**.onDataError**( *worker* : 4D.SystemWorker; *params* : Object )",
 			"Params": [
 				[
-					"CLI",
-					"cs.BuildApp.BuildApp_CLI",
-					"<-"
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
 				]
 			],
 			"Summary": ""
 		},
-		"logo()": {
-			"Syntax": "**.logo**()->CLI : cs.BuildApp.BuildApp_CLI",
+		"bind()": {
+			"Syntax": "**.bind**( *instance* : cs.BuildApp._CLI )",
 			"Params": [
 				[
-					"CLI",
-					"cs.BuildApp.BuildApp_CLI",
-					"<-"
+					"instance",
+					"cs.BuildApp._CLI",
+					"->"
 				]
 			],
 			"Summary": ""
 		},
-		"_inheritedFrom_": "CLI"
+		"_inheritedFrom_": "_Worker_Controller"
 	},
-	"_Find": {
-		"findExecutables()": {
-			"Syntax": "**.findExecutables**( *option* : Variant )->this : cs.BuildApp._Find",
+	"_Worker_Controller": {
+		"onTerminate()": {
+			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onResponse()": {
+			"Syntax": "**.onResponse**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onData()": {
+			"Syntax": "**.onData**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onError()": {
+			"Syntax": "**.onError**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onDataError()": {
+			"Syntax": "**.onDataError**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_CLI_Controller"
+	},
+	"Png2Ico": {
+		"convert()": {
+			"Syntax": "**.convert**( *option* : Variant )->this : cs.BuildApp.Lipo",
 			"Params": [
 				[
 					"option",
@@ -673,7 +650,7 @@
 				],
 				[
 					"this",
-					"cs.BuildApp._Find",
+					"cs.BuildApp.Lipo",
 					"<-"
 				]
 			],
@@ -682,6 +659,22 @@
 		"terminate()": {
 			"Syntax": "**.terminate**()",
 			"Params": [],
+			"Summary": ""
+		},
+		"onResponse()": {
+			"Syntax": "**.onResponse**( *files* : Collection; *parameters* : Collection )",
+			"Params": [
+				[
+					"files",
+					"Collection",
+					"->"
+				],
+				[
+					"parameters",
+					"Collection",
+					"->"
+				]
+			],
 			"Summary": ""
 		},
 		"_inheritedFrom_": "_CLI"
@@ -722,6 +715,30 @@
 					"->"
 				]
 			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_CLI"
+	},
+	"_Find": {
+		"findExecutables()": {
+			"Syntax": "**.findExecutables**( *option* : Variant )->this : cs.BuildApp._Find",
+			"Params": [
+				[
+					"option",
+					"Variant",
+					"->"
+				],
+				[
+					"this",
+					"cs.BuildApp._Find",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"terminate()": {
+			"Syntax": "**.terminate**()",
+			"Params": [],
 			"Summary": ""
 		},
 		"_inheritedFrom_": "_CLI"
@@ -848,90 +865,57 @@
 			"Summary": ""
 		}
 	},
-	"_Worker_Controller": {
-		"onTerminate()": {
-			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
+	"_Terminal": {
+		"launch()": {
+			"Syntax": "**.launch**( *buildProject* : 4D.File; *compileProject* : 4D.File )",
 			"Params": [
 				[
-					"worker",
-					"4D.SystemWorker",
+					"buildProject",
+					"4D.File",
 					"->"
 				],
 				[
-					"params",
-					"Object",
+					"compileProject",
+					"4D.File",
 					"->"
 				]
 			],
 			"Summary": ""
 		},
-		"onResponse()": {
-			"Syntax": "**.onResponse**( *worker* : 4D.SystemWorker; *params* : Object )",
+		"quote()": {
+			"Syntax": "**.quote**( *in* : Text )->out : Text",
 			"Params": [
 				[
-					"worker",
-					"4D.SystemWorker",
+					"in",
+					"Text",
 					"->"
 				],
 				[
-					"params",
-					"Object",
-					"->"
+					"out",
+					"Text",
+					"<-"
 				]
 			],
 			"Summary": ""
 		},
-		"onData()": {
-			"Syntax": "**.onData**( *worker* : 4D.SystemWorker; *params* : Object )",
+		"escape()": {
+			"Syntax": "**.escape**( *in* : Text )->out : Text",
 			"Params": [
 				[
-					"worker",
-					"4D.SystemWorker",
+					"in",
+					"Text",
 					"->"
 				],
 				[
-					"params",
-					"Object",
-					"->"
+					"out",
+					"Text",
+					"<-"
 				]
 			],
 			"Summary": ""
-		},
-		"onError()": {
-			"Syntax": "**.onError**( *worker* : 4D.SystemWorker; *params* : Object )",
-			"Params": [
-				[
-					"worker",
-					"4D.SystemWorker",
-					"->"
-				],
-				[
-					"params",
-					"Object",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"onDataError()": {
-			"Syntax": "**.onDataError**( *worker* : 4D.SystemWorker; *params* : Object )",
-			"Params": [
-				[
-					"worker",
-					"4D.SystemWorker",
-					"->"
-				],
-				[
-					"params",
-					"Object",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"_inheritedFrom_": "_CLI_Controller"
+		}
 	},
-	"Png2Ico": {
+	"Iconutil": {
 		"convert()": {
 			"Syntax": "**.convert**( *option* : Variant )->this : cs.BuildApp.Lipo",
 			"Params": [
@@ -970,83 +954,5 @@
 			"Summary": ""
 		},
 		"_inheritedFrom_": "_CLI"
-	},
-	"_Find_Worker_Controller": {
-		"onData()": {
-			"Syntax": "**.onData**( *worker* : 4D.SystemWorker; *params* : Object )",
-			"Params": [
-				[
-					"worker",
-					"4D.SystemWorker",
-					"->"
-				],
-				[
-					"params",
-					"Object",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"onTerminate()": {
-			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
-			"Params": [
-				[
-					"worker",
-					"4D.SystemWorker",
-					"->"
-				],
-				[
-					"params",
-					"Object",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"onResponse()": {
-			"Syntax": "**.onResponse**( *worker* : 4D.SystemWorker; *params* : Object )",
-			"Params": [
-				[
-					"worker",
-					"4D.SystemWorker",
-					"->"
-				],
-				[
-					"params",
-					"Object",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"onDataError()": {
-			"Syntax": "**.onDataError**( *worker* : 4D.SystemWorker; *params* : Object )",
-			"Params": [
-				[
-					"worker",
-					"4D.SystemWorker",
-					"->"
-				],
-				[
-					"params",
-					"Object",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"bind()": {
-			"Syntax": "**.bind**( *instance* : cs.BuildApp._CLI )",
-			"Params": [
-				[
-					"instance",
-					"cs.BuildApp._CLI",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"_inheritedFrom_": "_Worker_Controller"
 	}
 }

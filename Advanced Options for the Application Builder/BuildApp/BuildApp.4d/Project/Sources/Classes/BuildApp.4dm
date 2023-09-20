@@ -648,11 +648,12 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 					End if 
 				End for 
 				
-				ARRAY TEXT:C222($names; 3)
+				ARRAY TEXT:C222($names; 4)
 				
 				$names{1}:="ArrayExcludedPluginName"
 				$names{2}:="ArrayExcludedPluginID"
 				$names{3}:="ArrayExcludedComponentName"
+				$names{4}:="ArrayExcludedModuleName"
 				
 				For ($i; 1; Size of array:C274($names))
 					$name:=$names{$i}
