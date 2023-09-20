@@ -198,6 +198,8 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 			
 			$CLI._updateProperty($BuildApp; $targetRuntimeVLFolder; $CompanyName; $BuildApplicationName; $settings.sdi_application)
 			
+			$CLI._copyDatabase($BuildApp; $targetRuntimeVLFolder; $compileProject)
+			
 		End if 
 		
 	End if 
@@ -510,3 +512,82 @@ $targetFolder : 4D:C1709.Folder; $info : Object)
 	For each ($file; $lproj)
 		$CLI._printPath($file)
 	End for each 
+	
+Function _copyDatabase($BuildApp : cs:C1710.BuildApp; \
+$targetFolder : 4D:C1709.Folder; \
+$sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
+	
+	$CLI:=This:C1470
+	
+	$ProjectFolder:=$sourceProjectFile.parent
+	
+	var $ContentsFolder : 4D:C1709.Folder
+	
+	Case of 
+		: ($buildApplicationType="Client")
+		: ($buildApplicationType="Server")
+			$ContentsFolder:=$targetFolder.folder("Contents").folder("Server Database")
+		Else 
+			$ContentsFolder:=$targetFolder.folder("Contents").folder("Database")
+	End case 
+	
+	If ($ContentsFolder#Null:C1517)
+		
+		$ContentsFolder.create()
+		$targetProjectFolder:=$ProjectFolder.copyTo($ContentsFolder)
+		
+		$CLI._printTask("Set database folder")
+		$CLI._printPath($targetProjectFolder)
+		
+		$folders:=New collection:C1472($targetProjectFolder.folder("Trash"))
+		$folders.push($targetProjectFolder.folder("Sources").folder("DatabaseMethods"))
+		$folders.push($targetProjectFolder.folder("Sources").folder("TableForms"))
+		$folders.push($targetProjectFolder.folder("Sources").folder("Triggers"))
+		$folders.push($targetProjectFolder.folder("Sources").folder("Forms"))
+		$folders.push($targetProjectFolder.folder("Sources").folder("Classes"))
+		$folders.push($targetProjectFolder.folder("Sources").folder("Methods"))
+		
+		$files:=New collection:C1472
+		For each ($folder; $folders)
+			$files.combine($folder.files(fk ignore invisible:K87:22).query("extension == :1"; ".4dm"))
+		End for each 
+		
+		$CLI._printTask("Delete source files")
+		
+		For each ($file; $files)
+			$CLI._printPath($file)
+		End for each 
+		
+	End if 
+	
+	If ($BuildApp.PackProject#Null:C1517) && ($BuildApp.PackProject)
+		
+		$zip:=New object:C1471
+		$zip.files:=New collection:C1472($ProjectFolder)
+		
+		If ($BuildApp.UseStandardZipFormat#Null:C1517) && ($BuildApp.UseStandardZipFormat)
+			$zip.encryption:=ZIP Encryption none:K91:3
+		Else 
+			$zip.encryption:=-1
+		End if 
+		
+		$targetProjectFile:=$ContentsFolder.file($BuildApp.BuildApplicationName+".4DZ")
+		
+		$status:=ZIP Create archive:C1640($zip; $targetProjectFile)
+		
+		$CLI._printTask("Archive project folder")
+		$CLI._printStatus($status.success)
+		$CLI._printPath($targetProjectFile)
+		
+	End if 
+	
+	$folders:=$ProjectFolder.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Resources"; "Libraries"; "Documentation"; "Default Data"))
+	
+	$CLI._printTask("Copy database folders")
+	
+	For each ($folder; $folders)
+		
+		$CLI._printPath($folder.copyTo($ContentsFolder))
+		
+	End for each 
+	

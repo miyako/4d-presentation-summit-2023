@@ -19,18 +19,6 @@ Function get settings()->$settings : Object
 	
 	//MARK:-public methods
 	
-Function buildApplication($compileProject : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
-	
-	
-	
-	This:C1470._copyDatabase($CLI; $appFolder; $compileProject)
-	
-	
-	
-	
-	
-	
-	
 Function findLicenses($licenseTypes : Collection)->$BuildApp : cs:C1710.BuildApp
 	
 	$BuildApp:=This:C1470
@@ -720,63 +708,6 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 	End for each 
 	
 	//MARK:-private methods
-	
-Function _copyDatabase($CLI : cs:C1710.BuildApp_CLI; $appFolder : 4D:C1709.Folder; $compileProject : 4D:C1709.File)
-	
-	$BuildApp:=This:C1470
-	
-	$ProjectFolder:=$compileProject.parent
-	$ContentsFolder:=$appFolder.folder("Contents").folder("Database")
-	
-	If ($BuildApp.PackProject#Null:C1517) && ($BuildApp.PackProject)
-		
-		$zip:=New object:C1471
-		$zip.files:=New collection:C1472($ProjectFolder)
-		
-		If ($BuildApp.UseStandardZipFormat#Null:C1517) && ($BuildApp.UseStandardZipFormat)
-			$zip.encryption:=ZIP Encryption none:K91:3
-		Else 
-			$zip.encryption:=-1
-		End if 
-		
-		$status:=ZIP Create archive:C1640($zip; $ContentsFolder.file($BuildApp.BuildApplicationName+".4DZ"))
-		
-		$success:=$status.success
-		
-		$CLI.print("Archive"; "bold").print(": ")
-		
-		If ($success)
-			$CLI.print("success"; "green;bold").LF()
-		Else 
-			$CLI.print("failure"; "red;bold").LF()
-		End if 
-		
-		$CLI.print(" "*Length:C16("Archive")).print("  ").print($ContentsFolder.file($BuildApp.BuildApplicationName+".4DZ").path; "240").LF()
-		
-	Else 
-		
-		$CLI\
-			.print("Copy"; "bold")\
-			.print(": ")\
-			.print($ContentsFolder.file($ProjectFolder.fullName).path; "240")\
-			.LF()
-		
-		$ProjectFolder.copyTo($ContentsFolder)
-	End if 
-	
-	$folders:=$ProjectFolder.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Resources"; "Libraries"; "Documentation"; "Default Data"))
-	
-	For each ($folder; $folders)
-		
-		$CLI\
-			.print("Copy"; "bold")\
-			.print(": ")\
-			.print($ContentsFolder.file($folder.fullName).path; "240")\
-			.LF()
-		
-		$folder.copyTo($ContentsFolder)
-		
-	End for each 
 	
 Function _desktopLicenses()->$licenses : Collection
 	
