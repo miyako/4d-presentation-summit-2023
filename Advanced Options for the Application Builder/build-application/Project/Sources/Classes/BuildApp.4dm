@@ -21,35 +21,29 @@ Function get settings()->$settings : Object
 	
 Function buildApplication($compileProject : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 	
-	$BuildApp:=This:C1470
 	
-	$CLI:=cs:C1710.BuildApp_CLI.new()
 	
-	$Build___DestFolder:="Build"+(Is macOS:C1572 ? "Mac" : "Win")+"DestFolder"
 	
-	If ($BuildApp[$Build___DestFolder]#Null:C1517) && ($BuildApp[$Build___DestFolder]#"")
-		$BuildDestFolder:=Folder:C1567($BuildApp[$Build___DestFolder]; fk platform path:K87:2).folder("Final Application")
-		$BuildDestFolder.create()
+	If ($BuildApp.BuildApplicationSerialized)
 		
-		If ($BuildApp.BuildApplicationSerialized)
-			
-			If (Is macOS:C1572)
-				If ($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder#Null:C1517) && ($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder#"")
-					$RuntimeVLMacFolder:=Folder:C1567($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder; fk platform path:K87:2)
-					If ($RuntimeVLMacFolder.exists)
-						
-						$appFolder:=This:C1470._copyRuntime($CLI; $RuntimeVLMacFolder; $BuildDestFolder)
-						
-						This:C1470._copyDatabase($CLI; $appFolder; $compileProject)
-						
-						This:C1470._updateProperty($CLI; $appFolder; "RuntimeVL"; "RuntimeVLIconMacPath")
-						
-					End if 
+		If (Is macOS:C1572)
+			If ($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder#Null:C1517) && ($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder#"")
+				$RuntimeVLMacFolder:=Folder:C1567($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder; fk platform path:K87:2)
+				If ($RuntimeVLMacFolder.exists)
+					
+					$appFolder:=This:C1470._copyRuntime($CLI; $RuntimeVLMacFolder; $BuildDestFolder)
+					
+					This:C1470._copyDatabase($CLI; $appFolder; $compileProject)
+					
+					This:C1470._updateProperty($CLI; $appFolder; "RuntimeVL"; "RuntimeVLIconMacPath")
+					
 				End if 
 			End if 
 		End if 
-		
 	End if 
+	
+	
+	
 	
 Function findLicenses($licenseTypes : Collection)->$BuildApp : cs:C1710.BuildApp
 	

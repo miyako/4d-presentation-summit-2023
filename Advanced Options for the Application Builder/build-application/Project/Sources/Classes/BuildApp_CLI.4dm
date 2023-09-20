@@ -4,7 +4,13 @@ Function _printTask($task : Text)->$CLI : cs:C1710.BuildApp_CLI
 	
 	$CLI:=This:C1470
 	
-	$CLI.print($path; "bold").print("…").LF()
+	$CLI.print($task; "bold").print("…")
+	
+Function _printItem($item : Text)->$CLI : cs:C1710.BuildApp_CLI
+	
+	$CLI:=This:C1470
+	
+	$CLI.print($item; "39").LF()
 	
 Function _printList($list : Collection)->$CLI : cs:C1710.BuildApp_CLI
 	
@@ -59,14 +65,16 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 	
 	$CLI:=This:C1470
 	
-	This:C1470._printTask("Compile project")
+	$CLI._printTask("Compile project")
 	
 	$options:=New object:C1471
 	$options.generateSymbols:=True:C214
 	
 	$status:=Compile project:C1760($options)
 	
-	This:C1470._printStatus($status.success)
+	$success:=$status.success
+	
+	$CLI._printStatus($success)
 	
 	For each ($error; $status.errors)
 		If ($error.isError)
@@ -76,6 +84,16 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 		End if 
 		$CLI.print("…").print($error.code.path+"#"+String:C10($error.lineInFile); "244").LF()
 	End for each 
+	
+Function _getVersioning($BuildApp : cs:C1710.BuildApp; $key : Text)->$value : Text
+	
+	$value:="com.4d"
+	
+	If ($BuildApp.Versioning.Common["Common"+$key]#Null:C1517)
+		If ($BuildApp.Versioning.Common["Common"+$key]#"")
+			$value:=$BuildApp.Versioning.Common["Common"+$key]
+		End if 
+	End if 
 	
 Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->$success : Boolean
 	
@@ -87,9 +105,65 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 	
 	$BuildApp.findLicenses()
 	
-	This:C1470._printList(New collection:C1472("a"; "b"; "c"))
+	var $BuildApplicationName; $CompanyName : Text
 	
-	This:C1470._printStatus(True:C214)
-	This:C1470._printStatus(False:C215)
-	This:C1470._printPath(File:C1566(Data file:C490; fk platform path:K87:2))
-	This:C1470._printTask("Copy file")
+	If ($BuildApp.BuildApplicationName#Null:C1517) && ($BuildApp.BuildApplicationName#"")
+		$BuildApplicationName:=$BuildApp.BuildApplicationName
+	Else 
+		$BuildApplicationName:=$compileProject.name
+	End if 
+	
+	$CLI._printTask("Set application name")
+	$CLI._printItem($BuildApplicationName)
+	
+	$CLI._printTask("Set identifier prefix")
+	
+	$CompanyName:=$CLI._getVersioning($BuildApp; "CompanyName")
+	$CLI._printItem($CompanyName)
+	
+	var $platform; $Build___DestFolder : Text
+	
+	$platform:=(Is macOS:C1572 ? "Mac" : "Win")
+	
+	$Build___DestFolder:="Build"+$platform+"DestFolder"
+	
+	If ($BuildApp[$Build___DestFolder]#Null:C1517) && ($BuildApp[$Build___DestFolder]#"")
+		$BuildDestFolder:=Folder:C1567($BuildApp[$Build___DestFolder]; fk platform path:K87:2).folder("Final Application")
+		$BuildDestFolder.create()
+	End if 
+	
+	$CLI._printTask("Set destination folder")
+	$CLI._printPath($BuildDestFolder)
+	
+	$targets:=New collection:C1472
+	
+	If (Bool:C1537($BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIncludeIt))
+		If (Bool:C1537($BuildApp.BuildApplicationSerialized))
+			$targets.push("Serialized")
+		End if 
+		If (Bool:C1537($BuildApp.BuildApplicationLight))
+			$targets.push("Light")
+		End if 
+	End if 
+	If (Bool:C1537($BuildApp.BuildComponent))
+		$targets.push("Component")
+	End if 
+	If (Bool:C1537($BuildApp.CS.BuildServerApplication))
+		If (Bool:C1537($BuildApp.SourcesFiles.CS.ServerIncludeIt))
+			$targets.push("Server")
+		End if 
+		If (Bool:C1537($BuildApp.SourcesFiles.CS.ClientMacIncludeIt))
+			$targets.push("ClientMac")
+		End if 
+		If (Bool:C1537($BuildApp.SourcesFiles.CS.ClientWinIncludeIt))
+			$targets.push("ClientWin")
+		End if 
+	End if 
+	
+	$CLI._printTask("Set targets")
+	$CLI._printList($targets)
+	
+	
+	
+	
+	
