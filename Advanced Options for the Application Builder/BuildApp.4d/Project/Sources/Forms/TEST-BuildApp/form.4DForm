@@ -301,7 +301,8 @@
 					"width": 40,
 					"height": 16,
 					"fontWeight": "bold",
-					"textAlign": "right"
+					"textAlign": "right",
+					"sizingY": "grow"
 				},
 				"Hint for Both2": {
 					"type": "text",
@@ -309,7 +310,8 @@
 					"top": 642,
 					"left": 208,
 					"width": 90,
-					"height": 16
+					"height": 16,
+					"sizingY": "grow"
 				},
 				"Hint for Mac1": {
 					"type": "text",
@@ -319,7 +321,8 @@
 					"width": 40,
 					"height": 16,
 					"fontWeight": "bold",
-					"textAlign": "right"
+					"textAlign": "right",
+					"sizingY": "grow"
 				},
 				"Hint for Both1": {
 					"type": "text",
@@ -327,7 +330,8 @@
 					"top": 642,
 					"left": 348,
 					"width": 80,
-					"height": 16
+					"height": 16,
+					"sizingY": "grow"
 				},
 				"Hint for Win": {
 					"type": "text",
@@ -337,7 +341,8 @@
 					"width": 40,
 					"height": 16,
 					"fontWeight": "bold",
-					"textAlign": "right"
+					"textAlign": "right",
+					"sizingY": "grow"
 				},
 				"Hint for Win1": {
 					"type": "text",
@@ -347,7 +352,8 @@
 					"width": 40,
 					"height": 16,
 					"fontWeight": "bold",
-					"textAlign": "right"
+					"textAlign": "right",
+					"sizingY": "grow"
 				}
 			}
 		},
@@ -403,7 +409,7 @@
 					"text": "Exclude CEF",
 					"top": 225,
 					"left": 160,
-					"width": 132,
+					"width": 152,
 					"height": 21,
 					"events": [
 						"onClick"
@@ -419,7 +425,7 @@
 					"text": "Exclude MeCab",
 					"top": 245,
 					"left": 160,
-					"width": 132,
+					"width": 152,
 					"height": 21,
 					"events": [
 						"onClick"
@@ -435,7 +441,7 @@
 					"text": "Exclude PHP",
 					"top": 265,
 					"left": 160,
-					"width": 132,
+					"width": 152,
 					"height": 21,
 					"events": [
 						"onClick"
@@ -451,7 +457,7 @@
 					"text": "Exclude SpellChecker",
 					"top": 285,
 					"left": 160,
-					"width": 172,
+					"width": 152,
 					"height": 21,
 					"events": [
 						"onClick"
@@ -467,7 +473,7 @@
 					"text": "Exclude 4D Updater",
 					"top": 305,
 					"left": 160,
-					"width": 172,
+					"width": 152,
 					"height": 21,
 					"events": [
 						"onClick"
@@ -480,11 +486,14 @@
 				},
 				"Plugins": {
 					"type": "listbox",
-					"left": 326,
+					"left": 316,
 					"top": 225,
-					"width": 312,
+					"width": 152,
 					"height": 385,
-					"events": [],
+					"events": [
+						"onClick",
+						"onDataChange"
+					],
 					"resizingMode": "legacy",
 					"focusable": false,
 					"fill": "transparent",
@@ -501,6 +510,8 @@
 					"dataSource": "Form:C1466.plugins",
 					"listboxType": "collection",
 					"sortable": false,
+					"method": "ObjectMethods/Plugins.4dm",
+					"currentItemSource": "Form:C1466.plugin",
 					"columns": [
 						{
 							"header": {
@@ -528,9 +539,92 @@
 							"dataSource": "\"Exclude \"+This:C1470.name",
 							"resizable": false,
 							"enterable": false,
-							"truncateMode": "none"
+							"truncateMode": "none",
+							"width": 0
 						}
 					]
+				},
+				"components": {
+					"type": "listbox",
+					"left": 486,
+					"top": 225,
+					"width": 152,
+					"height": 385,
+					"events": [],
+					"resizingMode": "legacy",
+					"focusable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "hidden",
+					"horizontalLineStroke": "transparent",
+					"verticalLineStroke": "transparent",
+					"showHeaders": false,
+					"selectionMode": "none",
+					"rowHeight": "20px",
+					"hideSystemHighlight": true,
+					"hideExtraBlankRows": true,
+					"dataSource": "Form:C1466.components",
+					"listboxType": "collection",
+					"sortable": false,
+					"columns": [
+						{
+							"header": {
+								"text": "Header1",
+								"name": "Header4"
+							},
+							"name": "Column4",
+							"footer": {
+								"name": "Footer4"
+							},
+							"resizable": false,
+							"width": 22,
+							"dataSourceTypeHint": "boolean",
+							"dataSource": "This:C1470.selected"
+						},
+						{
+							"header": {
+								"name": "Header5",
+								"text": "Header3"
+							},
+							"name": "Column5",
+							"footer": {
+								"name": "Footer5"
+							},
+							"dataSource": "\"Exclude \"+This:C1470.name",
+							"resizable": false,
+							"enterable": false,
+							"truncateMode": "none",
+							"width": 0
+						}
+					]
+				},
+				"Text63": {
+					"type": "text",
+					"text": "Modules",
+					"top": 200,
+					"left": 160,
+					"width": 152,
+					"height": 16,
+					"fontWeight": "bold"
+				},
+				"Text64": {
+					"type": "text",
+					"text": "Plugins",
+					"top": 200,
+					"left": 315,
+					"width": 152,
+					"height": 16,
+					"fontWeight": "bold"
+				},
+				"Text65": {
+					"type": "text",
+					"text": "Components",
+					"top": 200,
+					"left": 485,
+					"width": 152,
+					"height": 16,
+					"fontWeight": "bold"
 				}
 			}
 		},
@@ -1097,7 +1191,8 @@
 					"dataSource": "Form:C1466.BuildApp.CS.BuildV13ClientUpgrades",
 					"dataSourceTypeHint": "boolean",
 					"fontWeight": "normal",
-					"focusable": false
+					"focusable": false,
+					"enterable": false
 				},
 				"BuildApp.CS.ClientWinSingleInstance": {
 					"type": "checkbox",
@@ -1769,6 +1864,24 @@
 					"height": 16,
 					"textAlign": "right",
 					"fontWeight": "normal"
+				},
+				"Text66": {
+					"type": "text",
+					"text": "Hint",
+					"top": 420,
+					"left": 160,
+					"width": 152,
+					"height": 16,
+					"fontWeight": "bold"
+				},
+				"Text67": {
+					"type": "text",
+					"text": "Common Company Names is used as CFBundleIdentifer prefix.",
+					"top": 440,
+					"left": 160,
+					"width": 464,
+					"height": 16,
+					"fontWeight": "normal"
 				}
 			}
 		},
@@ -2355,7 +2468,7 @@
 			}
 		}
 	],
-	"geometryStamp": 2324,
+	"geometryStamp": 2430,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

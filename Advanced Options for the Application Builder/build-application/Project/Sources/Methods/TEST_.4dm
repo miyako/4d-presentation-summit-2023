@@ -1,8 +1,8 @@
 //%attributes = {}
-var $CLI : cs:C1710.BuildApp_CLI
+var $BuildApp : cs:C1710.BuildApp
 
-$CLI:=cs:C1710.BuildApp_CLI.new()
+$BuildApp:=cs:C1710.BuildApp.new()
 
 $compileProject:=File:C1566("/Users/miyako/Desktop/aaaaa/Project/BuildApp.4DProject")
 
-$pp:=$CLI._findPlugins($compileProject).extract("folder")
+$pp:=$BuildApp.findPlugins($compileProject).extract("folder")

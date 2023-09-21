@@ -15,6 +15,8 @@ Case of
 		OBJECT SET VISIBLE:C603(*; "Hint for Mac@"; Is macOS:C1572)
 		OBJECT SET VISIBLE:C603(*; "Hint for Win@"; Is Windows:C1573)
 		
+		OBJECT SET ENABLED:C1123(*; "BuildApp.CS.BuildV13ClientUpgrades"; False:C215)
+		
 		//enabled won't work because of associated standard action 
 		//OBJECT SET VISIBLE(*; "copy to pasteboard@"; Form.BuildApp#Null)
 		

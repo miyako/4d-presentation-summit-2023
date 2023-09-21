@@ -36,8 +36,6 @@ Case of
 		$BuildApp.ArrayExcludedModuleName.Item[3]:="SpellChecker"
 		$BuildApp.ArrayExcludedModuleName.Item[4]:="4D Updater"
 		
-		$BuildApp.ArrayExcludedPluginName.Item[0]:="XXX"
-		
 		$BuildApp.CS.PortNumber:=19813
 		$BuildApp.CS.ServerStructureFolderName:=$BuildApp.BuildApplicationName
 		$BuildApp.CS.ClientServerSystemFolderName:=$BuildApp.BuildApplicationName
@@ -132,7 +130,6 @@ Case of
 		$form.ExcludePHP:=$BuildApp.ArrayExcludedModuleName.Item.includes("PHP")
 		$form.ExcludeSpellChecker:=$BuildApp.ArrayExcludedModuleName.Item.includes("SpellChecker")
 		$form.ExcludeUpdater:=$BuildApp.ArrayExcludedModuleName.Item.includes("4D Updater")
-		
 		
 		$form.BuildApp:=$BuildApp
 		
