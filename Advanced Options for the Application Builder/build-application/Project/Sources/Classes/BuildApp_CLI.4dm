@@ -66,8 +66,6 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 	
 	$CLI:=This:C1470
 	
-	$CLI._printTask("Compile project")
-	
 	$localProjectFile:=File:C1566(Structure file:C489; fk platform path:K87:2)
 	
 	If ($compileProject.path=$localProjectFile.path) && (Is compiled mode:C492)
@@ -76,23 +74,34 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 		
 	Else 
 		
-		$CLI._printTask("Compile project")
-		
 		$options:=New object:C1471
 		$options.generateSymbols:=False:C215
 		$options.generateSyntaxFile:=True:C214
 		
-		var $PluginsFolder : 4D:C1709.Folder
-		$PluginsFolder:=$compileProject.parent.parent.folder("Plugins")
-		If ($PluginsFolder.exists)
-			$options.plugins:=$PluginsFolder
+		$options.plugins:=$CLI._findPluginsFolder($compileProject)
+		
+		If ($options.plugins#Null:C1517)
+			$CLI._printTask("Use plugins")
+			$plugins:=$CLI._findPlugins($compileProject)
+			$CLI._printList($plugins.extract("folder.name"))
+			$CLI._printPath($options.plugins)
 		End if 
 		
 		$options.components:=$CLI._findComponents($compileProject; True:C214)
 		
+		If ($options.components.length#0)
+			$CLI._printTask("Use components")
+			$CLI._printList($options.components.extract("name"))
+			For each ($component; $CLI._findComponents($compileProject))
+				$CLI._printPath($component)
+			End for each 
+		End if 
+		
 		If (Is macOS:C1572)
 			$options.targets:=New collection:C1472("x86_64_generic"; "arm64_macOS_lib")
 		End if 
+		
+		$CLI._printTask("Compile project")
 		
 		$status:=Compile project:C1760($compileProject; $options)
 		
@@ -471,6 +480,14 @@ Function _findComponents($compileProject : 4D:C1709.File; $asFiles : Boolean)->$
 			$components.push($folder)
 		End if 
 	End for each 
+	
+Function _findPluginsFolder($compileProject : 4D:C1709.File)->$plugins : 4D:C1709.Folder
+	
+	var $PluginsFolder : 4D:C1709.Folder
+	$PluginsFolder:=$compileProject.parent.parent.folder("Plugins")
+	If ($PluginsFolder.exists)
+		$plugins:=$PluginsFolder
+	End if 
 	
 Function _findPlugins($compileProject : 4D:C1709.File)->$plugins : Collection
 	
