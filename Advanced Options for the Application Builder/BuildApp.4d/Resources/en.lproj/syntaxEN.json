@@ -150,23 +150,28 @@
 			],
 			"Summary": ""
 		},
-		"get settings()": {
-			"Syntax": "**.get settings**()->settings : Object",
+		"toObject()": {
+			"Syntax": "**.toObject**()->JSON : Text",
 			"Params": [
 				[
-					"settings",
-					"Object",
+					"JSON",
+					"Text",
 					"<-"
 				]
 			],
 			"Summary": ""
 		},
-		"toString()": {
-			"Syntax": "**.toString**()->XML : Text",
+		"findPlugins()": {
+			"Syntax": "**.findPlugins**( *compileProject* : 4D.File )->plugins : Collection",
 			"Params": [
 				[
-					"XML",
-					"Text",
+					"compileProject",
+					"4D.File",
+					"->"
+				],
+				[
+					"plugins",
+					"Collection",
 					"<-"
 				]
 			],
@@ -188,6 +193,33 @@
 			],
 			"Summary": ""
 		},
+		"loadFromHost()": {
+			"Syntax": "**.loadFromHost**()->BuildApp : cs.BuildApp.BuildApp",
+			"Params": [
+				[
+					"BuildApp",
+					"cs.BuildApp.BuildApp",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"findPluginsFolder()": {
+			"Syntax": "**.findPluginsFolder**( *compileProject* : 4D.File )->plugins : 4D.Folder",
+			"Params": [
+				[
+					"compileProject",
+					"4D.File",
+					"->"
+				],
+				[
+					"plugins",
+					"4D.Folder",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
 		"findLicenses()": {
 			"Syntax": "**.findLicenses**( *licenseTypes* : Collection )->BuildApp : cs.BuildApp.BuildApp",
 			"Params": [
@@ -204,12 +236,44 @@
 			],
 			"Summary": ""
 		},
-		"loadFromHost()": {
-			"Syntax": "**.loadFromHost**()->BuildApp : cs.BuildApp.BuildApp",
+		"findComponents()": {
+			"Syntax": "**.findComponents**( *compileProject* : 4D.File; *asFiles* : Boolean )->components : Collection",
 			"Params": [
 				[
-					"BuildApp",
-					"cs.BuildApp.BuildApp",
+					"compileProject",
+					"4D.File",
+					"->"
+				],
+				[
+					"asFiles",
+					"Boolean",
+					"->"
+				],
+				[
+					"components",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"toString()": {
+			"Syntax": "**.toString**()->XML : Text",
+			"Params": [
+				[
+					"XML",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get settings()": {
+			"Syntax": "**.get settings**()->settings : Object",
+			"Params": [
+				[
+					"settings",
+					"Object",
 					"<-"
 				]
 			],

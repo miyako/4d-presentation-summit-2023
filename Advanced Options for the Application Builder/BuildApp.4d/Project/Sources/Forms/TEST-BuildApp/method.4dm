@@ -17,8 +17,9 @@ Case of
 		
 		OBJECT SET ENABLED:C1123(*; "BuildApp.CS.BuildV13ClientUpgrades"; False:C215)
 		
-		//enabled won't work because of associated standard action 
-		//OBJECT SET VISIBLE(*; "copy to pasteboard@"; Form.BuildApp#Null)
+		OBJECT SET ENABLED:C1123(*; "BuildApp.SignApplication.MacSignature"; Not:C34(Bool:C1537(Form:C1466.BuildApp.SignApplication.AdHocSign)))
+		OBJECT SET ENABLED:C1123(*; "BuildApp.SignApplication.AdHocSign"; Not:C34(Bool:C1537(Form:C1466.BuildApp.SignApplication.MacSignature)))
+		OBJECT SET ENTERABLE:C238(*; "BuildApp.SignApplication.MacCertificate"; Bool:C1537(Form:C1466.BuildApp.SignApplication.MacSignature))
 		
 	: ($event.code=On Page Change:K2:54)
 		

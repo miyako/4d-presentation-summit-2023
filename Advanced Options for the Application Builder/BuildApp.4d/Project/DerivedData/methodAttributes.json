@@ -34,13 +34,19 @@
 			"timeStamp": "2023-09-18T03:48:37Z"
 		},
 		"update_plugins_list": {
-			"timeStamp": "2023-09-21T05:37:16Z",
+			"timeStamp": "2023-09-21T06:24:55Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"setup_components_list": {
+			"timeStamp": "2023-09-21T06:02:57Z",
 			"attributes": {
 				"invisible": true
 			}
 		},
 		"setup_plugins_list": {
-			"timeStamp": "2023-09-21T04:58:05Z",
+			"timeStamp": "2023-09-21T06:02:13Z",
 			"attributes": {
 				"invisible": true
 			}
@@ -82,10 +88,16 @@
 			}
 		},
 		"TEST_": {
-			"timeStamp": "2023-09-18T23:32:24Z"
+			"timeStamp": "2023-09-21T06:28:48Z"
 		},
 		"update_icon_path": {
 			"timeStamp": "2023-09-18T13:23:11Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"update_components_list": {
+			"timeStamp": "2023-09-21T06:18:31Z",
 			"attributes": {
 				"invisible": true
 			}
@@ -97,7 +109,7 @@
 			}
 		},
 		"BUILDAPP_FORM": {
-			"timeStamp": "2023-09-21T05:32:48Z"
+			"timeStamp": "2023-09-21T06:34:40Z"
 		}
 	}
 }

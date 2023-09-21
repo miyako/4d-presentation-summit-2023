@@ -3,10 +3,10 @@
 
 $plugins:=New collection:C1472
 
-For each ($plugin; $BuildApp.findPlugins($form.compileProject))
+For each ($item; $BuildApp.findPlugins($form.compileProject))
 	
-	$name:=$plugin.folder.name
-	$id:=$plugin.manifest.id
+	$name:=$item.folder.name
+	$id:=$item.manifest.id
 	
 	$plugin:=New object:C1471("name"; $name; "id"; $id; "selected"; Null:C1517)
 	

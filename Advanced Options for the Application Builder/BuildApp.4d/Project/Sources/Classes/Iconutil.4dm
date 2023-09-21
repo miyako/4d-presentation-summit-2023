@@ -34,8 +34,6 @@ Function onResponse($files : Collection; $parameters : Collection)
 		
 	End for each 
 	
-	This:C1470.thin($options)
-	
 Function terminate()
 	
 	This:C1470.controller.terminate()

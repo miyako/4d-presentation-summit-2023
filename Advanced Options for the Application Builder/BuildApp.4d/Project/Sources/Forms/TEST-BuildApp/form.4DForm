@@ -232,7 +232,7 @@
 				"Run": {
 					"type": "button",
 					"text": "Run",
-					"top": 640,
+					"top": 600,
 					"left": 434,
 					"width": 100,
 					"height": 21,
@@ -354,6 +354,23 @@
 					"fontWeight": "bold",
 					"textAlign": "right",
 					"sizingY": "grow"
+				},
+				"Build": {
+					"type": "button",
+					"text": "Build",
+					"top": 640,
+					"left": 434,
+					"width": 100,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"imageHugsTitle": false,
+					"focusable": false,
+					"action": "",
+					"sizingY": "move",
+					"sizingX": "move",
+					"method": "ObjectMethods/Build.4dm"
 				}
 			}
 		},
@@ -511,7 +528,7 @@
 					"listboxType": "collection",
 					"sortable": false,
 					"method": "ObjectMethods/Plugins.4dm",
-					"currentItemSource": "Form:C1466.plugin",
+					"currentItemSource": "",
 					"columns": [
 						{
 							"header": {
@@ -550,7 +567,10 @@
 					"top": 225,
 					"width": 152,
 					"height": 385,
-					"events": [],
+					"events": [
+						"onClick",
+						"onDataChange"
+					],
 					"resizingMode": "legacy",
 					"focusable": false,
 					"fill": "transparent",
@@ -567,6 +587,8 @@
 					"dataSource": "Form:C1466.components",
 					"listboxType": "collection",
 					"sortable": false,
+					"currentItemSource": "",
+					"method": "ObjectMethods/components.4dm",
 					"columns": [
 						{
 							"header": {
@@ -1635,7 +1657,8 @@
 					"dataSource": "Form:C1466.BuildApp.SignApplication.MacSignature",
 					"dataSourceTypeHint": "boolean",
 					"fontWeight": "normal",
-					"focusable": false
+					"focusable": false,
+					"method": "ObjectMethods/BuildApp.SignApplication.MacSignature.4dm"
 				},
 				"BuildApp.SignApplication.AdHocSign": {
 					"type": "checkbox",
@@ -1650,7 +1673,8 @@
 					"dataSource": "Form:C1466.BuildApp.SignApplication.AdHocSign",
 					"dataSourceTypeHint": "boolean",
 					"fontWeight": "normal",
-					"focusable": false
+					"focusable": false,
+					"method": "ObjectMethods/BuildApp.SignApplication.AdHocSign.4dm"
 				},
 				"BuildApp.SignApplication.MacCertificate": {
 					"type": "input",
@@ -1659,7 +1683,8 @@
 					"width": 304,
 					"height": 17,
 					"dataSource": "Form:C1466.BuildApp.SignApplication.MacCertificate",
-					"multiline": "no"
+					"multiline": "no",
+					"events": []
 				},
 				"Text62": {
 					"type": "text",
@@ -2468,7 +2493,7 @@
 			}
 		}
 	],
-	"geometryStamp": 2430,
+	"geometryStamp": 2436,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

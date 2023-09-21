@@ -30,6 +30,8 @@ Case of
 		$BuildApp.CS.MacCompiledDatabaseToWinIncludeIt:=False:C215
 		$BuildApp.CS.HideAdministrationMenuItem:=True:C214
 		
+		$BuildApp.SignApplication.AdHocSign:=True:C214
+		
 		$BuildApp.ArrayExcludedModuleName.Item[0]:="CEF"
 		$BuildApp.ArrayExcludedModuleName.Item[1]:="MeCab"
 		$BuildApp.ArrayExcludedModuleName.Item[2]:="PHP"
@@ -97,6 +99,7 @@ Case of
 		$form.pages.push(New object:C1471("page"; 9; "title"; "Version/Client"))
 		
 		setup_plugins_list($BuildApp; $form)
+		setup_components_list($BuildApp; $form)
 		
 		setup_destination_path($BuildApp; $form; "BuildDest")
 		

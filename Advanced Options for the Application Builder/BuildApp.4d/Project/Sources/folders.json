@@ -11,7 +11,8 @@
 			"update_application_path",
 			"update_destination_path",
 			"update_icon_path",
-			"update_module_list"
+			"update_module_list",
+			"update_plugins_list"
 		],
 		"forms": [
 			"TEST-BuildApp"

@@ -364,10 +364,14 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text)->$targetFolder
 	If (Is Windows:C1573)
 		$resourceFile:=$targetFolder.file("4D Volume Desktop.rsr")
 		$targetResourceFile:=$resourceFile.rename($BuildApplicationName+".rsr")
-		$CLI._printTask("Rename resource file")
-		$CLI._printStatus($targetResourceFile.exists)
-		$CLI._printPath($targetResourceFile)
+	Else 
+		$resourceFile:=$targetFolder.file("4D Volume Desktop.rsrc")
+		$targetResourceFile:=$resourceFile.rename($BuildApplicationName+".rsrc")
 	End if 
+	
+	$CLI._printTask("Rename resource file")
+	$CLI._printStatus($targetResourceFile.exists)
+	$CLI._printPath($targetResourceFile)
 	
 	If ($BuildApp.ArrayExcludedModuleName.Item.includes("PHP"))
 		
@@ -755,6 +759,18 @@ $sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
 			End for each 
 		End if 
 		
+		$files:=$ContentsFolder.folder("Project").files(fk ignore invisible:K87:22).query("extension == :1"; ".4DProject")
+		
+		If ($files.length#0)
+			
+			$targetProjectFile:=$files[0]
+			
+			$CLI._printTask("Rename project")
+			$targetProjectFile:=$targetProjectFile.rename($BuildApp.BuildApplicationName+".4DProject")
+			$CLI._printStatus($targetProjectFile.exists)
+			$CLI._printPath($targetProjectFile)
+		End if 
+		
 	End if 
 	
 	If ($BuildApp.PackProject#Null:C1517) && ($BuildApp.PackProject)
@@ -782,7 +798,7 @@ $sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
 		
 	End if 
 	
-	$folders:=$ProjectFolder.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Resources"; "Libraries"/*; "Documentation"*/; "Default Data"; "Extras"))
+	$folders:=$ProjectFolder.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Resources"; "Libraries"; "Documentation"; "Default Data"; "Extras"))
 	
 	$CLI._printTask("Copy database folders").LF()
 	For each ($folder; $folders)

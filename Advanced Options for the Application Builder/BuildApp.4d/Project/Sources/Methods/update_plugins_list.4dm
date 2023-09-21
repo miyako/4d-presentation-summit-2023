@@ -1,50 +1,25 @@
 //%attributes = {"invisible":true}
-#DECLARE($form : Object)->$icon : Picture
+#DECLARE($form : Object; $item : Object)->$icon : Picture
 
-var $item : Object
+$names:=New collection:C1472
+$excludes:=New collection:C1472
+$includes:=New collection:C1472
 
-$item:=$form.plugin
-
-If ($item#Null:C1517)
-	
-	//$item.selected:=Not($item.selected)
-	$name:=$item.name
-	$id:=$item.id
-	
-	$items:=$form.BuildApp.ArrayExcludedPluginName.Item
-	
-	If ($item.selected)
-		
-		If (Not:C34($items.includes($name)))
-			$form.BuildApp.ArrayExcludedPluginName.Item.push($name)
-		End if 
-		
+For each ($plugin; Form:C1466.plugins)
+	If ($plugin.selected)
+		$names.push($plugin.name)
+		$excludes.push($plugin.id)
 	Else 
-		
-		$_items:=New collection:C1472
-		
-		For each ($_name; $items)
-			If ($name#$_name)
-				$_items.push($_name)
-				break
-			End if 
-		End for each 
-		
-		$form.BuildApp.ArrayExcludedPluginName.Item:=$_items
-		
+		$includes.push($plugin.id)
 	End if 
-	
-	$items:=$form.BuildApp.ArrayExcludedPluginID.Item
-	
-	$_items:=New collection:C1472
-	
-	For each ($_id; $items)
-		If ($id#$_id)
-			$_items.push($_id)
-			break
-		End if 
-	End for each 
-	
-	$form.BuildApp.ArrayExcludedPluginID.Item:=$_items
-	
-End if 
+End for each 
+
+$ids:=New collection:C1472
+For each ($id; $excludes)
+	If (Not:C34($includes.includes($id)))
+		$ids.push($id)
+	End if 
+End for each 
+
+$form.BuildApp.ArrayExcludedPluginName.Item:=$names
+$form.BuildApp.ArrayExcludedPluginID.Item:=$ids

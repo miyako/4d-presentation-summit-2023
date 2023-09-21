@@ -16,6 +16,4 @@ $file:=Folder:C1567(fk desktop folder:K87:19).file("buildApp.4DSettings")
 
 $BuildApp.findLicenses().toFile($file)
 
-//$BuildApp.buildApplication()
-
 BUILD APPLICATION:C871($file.platformPath)
