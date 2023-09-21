@@ -1,22 +1,33 @@
 Class extends CLI
 
-Function _clean($compileProject : 4D:C1709.File)
+Function clean($compileProject : 4D:C1709.File)
 	
 	$CLI:=This:C1470
 	
 	$packageFolder:=$compileProject.parent.parent
 	
+	$folders:=New collection:C1472
+	
 	For each ($folder; $packageFolder.folders(fk ignore invisible:K87:22))
 		If ($folder.fullName="userPreferences.@")
-			$CLI._printTask("Clean cache").LF()
-			$cacheFolder:=$folder.folder("CompilerIntermediateFiles")
-			$CLI._printPath($cacheFolder)
-			$cacheFolder.delete(Delete with contents:K24:24)
+			$_folder:=$folder.folder("CompilerIntermediateFiles")
+			If ($_folder.exists)
+				$folders.push($_folder)
+			End if 
 		End if 
 	End for each 
 	
+	If ($folders.length)
+		$CLI._printTask("Delete compiler intermediate files").LF()
+		For each ($folder; $folders)
+			$CLI._printPath($folder)
+			$folder.delete(Delete with contents:K24:24)
+		End for each 
+	End if 
+	
 	$DerivedDataFolder:=$packageFolder.folder("Project").folder("DerivedData")
 	If ($DerivedDataFolder.exists)
+		$CLI._printTask("Delete derived data").LF()
 		$CLI._printPath($DerivedDataFolder)
 		$DerivedDataFolder.delete(Delete with contents:K24:24)
 	End if 
@@ -95,7 +106,7 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 		
 	Else 
 		
-		$CLI._clean($compileProject)
+		$CLI.clean($compileProject)
 		
 		$options:=New object:C1471
 		$options.generateSymbols:=False:C215
@@ -306,6 +317,109 @@ $compileProject : 4D:C1709.File)
 		
 	End for each 
 	
+Function _copyDatabase($BuildApp : cs:C1710.BuildApp; \
+$targetFolder : 4D:C1709.Folder; \
+$sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
+	
+	$CLI:=This:C1470
+	
+	$ProjectFolder:=$sourceProjectFile.parent
+	
+	var $ContentsFolder : 4D:C1709.Folder
+	
+	Case of 
+		: ($buildApplicationType="Client")
+		: ($buildApplicationType="Server")
+			$ContentsFolder:=$targetFolder.folder("Contents").folder("Server Database")
+		Else 
+			$ContentsFolder:=$targetFolder.folder("Contents").folder("Database")
+	End case 
+	
+	If ($ContentsFolder#Null:C1517)
+		
+		$ContentsFolder.create()
+		$targetProjectFolder:=$ProjectFolder.copyTo($ContentsFolder)
+		
+		$CLI._printTask("Set database folder")
+		$CLI._printStatus($targetProjectFolder.exists)
+		$CLI._printPath($targetProjectFolder)
+		
+		$localProjectFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent
+		
+		If ($targetProjectFolder.path#($localProjectFolder.path+"@"))
+			
+			$folders:=New collection:C1472($targetProjectFolder.folder("Trash"))
+			$folders.push($targetProjectFolder.folder("Sources").folder("DatabaseMethods"))
+			$folders.push($targetProjectFolder.folder("Sources").folder("TableForms"))
+			$folders.push($targetProjectFolder.folder("Sources").folder("Triggers"))
+			$folders.push($targetProjectFolder.folder("Sources").folder("Classes"))
+			$folders.push($targetProjectFolder.folder("Sources").folder("Methods"))
+			$folders.push($targetProjectFolder.folder("Sources").folder("Forms"))
+			
+			$files:=New collection:C1472
+			
+			For each ($folder; $folders)
+				$files.combine($folder.files(fk ignore invisible:K87:22).query("extension == :1"; ".4dm"))
+			End for each 
+			
+			For each ($file; $files)
+				$file.delete()
+			End for each 
+			
+			$Forms:=$folders.pop()
+			
+			For each ($folder; $folders)
+				$folder.delete()
+			End for each 
+			
+		End if 
+		
+		$files:=$ContentsFolder.folder("Project").files(fk ignore invisible:K87:22).query("extension == :1"; ".4DProject")
+		
+		If ($files.length#0)
+			
+			$targetProjectFile:=$files[0]
+			
+			$CLI._printTask("Rename project")
+			$targetProjectFile:=$targetProjectFile.rename($BuildApp.BuildApplicationName+".4DProject")
+			$CLI._printStatus($targetProjectFile.exists)
+			$CLI._printPath($targetProjectFile)
+		End if 
+		
+	End if 
+	
+	If ($BuildApp.PackProject#Null:C1517) && ($BuildApp.PackProject)
+		
+		$zip:=New object:C1471
+		$zip.files:=New collection:C1472($targetProjectFolder)
+		
+		If ($BuildApp.UseStandardZipFormat#Null:C1517) && ($BuildApp.UseStandardZipFormat)
+			$zip.encryption:=ZIP Encryption none:K91:3
+		Else 
+			$zip.encryption:=-1
+		End if 
+		
+		$targetProjectFile:=$ContentsFolder.file($BuildApp.BuildApplicationName+".4DZ")
+		
+		$status:=ZIP Create archive:C1640($zip; $targetProjectFile)
+		
+		$CLI._printTask("Archive project folder")
+		$CLI._printStatus($status.success)
+		$CLI._printPath($targetProjectFile)
+		
+		If ($targetProjectFolder.path#$localProjectFolder.path)
+			$targetProjectFolder.delete(Delete with contents:K24:24)
+		End if 
+		
+	End if 
+	
+	$folders:=$ProjectFolder.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Resources"; "Libraries"; "Documentation"; "Default Data"; "Extras"))
+	
+	$CLI._printTask("Copy database folders").LF()
+	For each ($folder; $folders)
+		$CLI._printPath($folder.copyTo($ContentsFolder))
+	End for each 
+	
 Function _copyPlugins($BuildApp : cs:C1710.BuildApp; \
 $RuntimeFolder : 4D:C1709.Folder; \
 $compileProject : 4D:C1709.File)
@@ -458,6 +572,57 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text)->$targetFolder
 		$CLI._printPath($file)
 		$file.delete()
 		
+	End if 
+	
+Function _generateLicense($BuildApp : cs:C1710.BuildApp; $targetFolder : 4D:C1709.Folder; $buildApplicationType : Text)
+	
+	$CLI:=This:C1470
+	
+	var $platform; $ArrayLicense___ : Text
+	
+	$platform:=(Is macOS:C1572 ? "Mac" : "Win")
+	
+	$ArrayLicense___:="ArrayLicense"+$platform
+	
+	$licenes:=$BuildApp.Licenses[$ArrayLicense___].Item
+	
+	$UUDs:=$licenes.filter(Formula:C1597($1.result:=Path to object:C1547($1.value).name="@4UUD@"))
+	$UOEs:=$licenes.filter(Formula:C1597($1.result:=Path to object:C1547($1.value).name="@4UOE@"))
+	$UOSs:=$licenes.filter(Formula:C1597($1.result:=Path to object:C1547($1.value).name="@4UOS@"))
+	$DOMs:=$licenes.filter(Formula:C1597($1.result:=Path to object:C1547($1.value).name="@4DOM@"))
+	
+	var $status : Object
+	
+	Case of 
+		: ($buildApplicationType="Server") && ($DOMs.length#0) && ($UOSs.length#0)
+			
+			$status:=Create deployment license:C1811($targetFolder; File:C1566($UOSs[0]; fk platform path:K87:2); File:C1566($DOMs[0]; fk platform path:K87:2))
+			
+		Else 
+			
+			Case of 
+				: ($UOEs.length#0)
+					
+					$status:=Create deployment license:C1811($targetFolder; File:C1566($UOEs[0]; fk platform path:K87:2))
+					
+				: ($UUDs.length#0)
+					
+					$status:=Create deployment license:C1811($targetFolder; File:C1566($UUDs[0]; fk platform path:K87:2))
+					
+			End case 
+			
+	End case 
+	
+	If ($status#Null:C1517)
+		
+		$CLI._printTask("Generate license")
+		$CLI._printStatus($status.success)
+		If ($status.file#Null:C1517)
+			$CLI._printPath(File:C1566($status.file))
+		End if 
+		For each ($error; $status.errors)
+			$CLI.print($error.message; "177;bold")
+		End for each 
 	End if 
 	
 Function _updateProperty($BuildApp : cs:C1710.BuildApp; \
@@ -731,157 +896,4 @@ $targetFolder : 4D:C1709.Folder; $info : Object)
 		End for each 
 	End if 
 	
-Function _copyDatabase($BuildApp : cs:C1710.BuildApp; \
-$targetFolder : 4D:C1709.Folder; \
-$sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
-	
-	$CLI:=This:C1470
-	
-	$ProjectFolder:=$sourceProjectFile.parent
-	
-	var $ContentsFolder : 4D:C1709.Folder
-	
-	Case of 
-		: ($buildApplicationType="Client")
-		: ($buildApplicationType="Server")
-			$ContentsFolder:=$targetFolder.folder("Contents").folder("Server Database")
-		Else 
-			$ContentsFolder:=$targetFolder.folder("Contents").folder("Database")
-	End case 
-	
-	If ($ContentsFolder#Null:C1517)
-		
-		$ContentsFolder.create()
-		$targetProjectFolder:=$ProjectFolder.copyTo($ContentsFolder)
-		
-		$CLI._printTask("Set database folder")
-		$CLI._printStatus($targetProjectFolder.exists)
-		$CLI._printPath($targetProjectFolder)
-		
-		$localProjectFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent
-		
-		If ($targetProjectFolder.path#($localProjectFolder.path+"@"))
-			
-			$folders:=New collection:C1472($targetProjectFolder.folder("Trash"))
-			$folders.push($targetProjectFolder.folder("Sources").folder("DatabaseMethods"))
-			$folders.push($targetProjectFolder.folder("Sources").folder("TableForms"))
-			$folders.push($targetProjectFolder.folder("Sources").folder("Triggers"))
-			$folders.push($targetProjectFolder.folder("Sources").folder("Classes"))
-			$folders.push($targetProjectFolder.folder("Sources").folder("Methods"))
-			$folders.push($targetProjectFolder.folder("Sources").folder("Forms"))
-			
-			$files:=New collection:C1472
-			
-			For each ($folder; $folders)
-				$files.combine($folder.files(fk ignore invisible:K87:22).query("extension == :1"; ".4dm"))
-			End for each 
-			
-			For each ($file; $files)
-				$file.delete()
-			End for each 
-			
-			$Forms:=$folders.pop()
-			
-			For each ($folder; $folders)
-				$folder.delete()
-			End for each 
-			
-		End if 
-		
-		$files:=$ContentsFolder.folder("Project").files(fk ignore invisible:K87:22).query("extension == :1"; ".4DProject")
-		
-		If ($files.length#0)
-			
-			$targetProjectFile:=$files[0]
-			
-			$CLI._printTask("Rename project")
-			$targetProjectFile:=$targetProjectFile.rename($BuildApp.BuildApplicationName+".4DProject")
-			$CLI._printStatus($targetProjectFile.exists)
-			$CLI._printPath($targetProjectFile)
-		End if 
-		
-	End if 
-	
-	If ($BuildApp.PackProject#Null:C1517) && ($BuildApp.PackProject)
-		
-		$zip:=New object:C1471
-		$zip.files:=New collection:C1472($targetProjectFolder)
-		
-		If ($BuildApp.UseStandardZipFormat#Null:C1517) && ($BuildApp.UseStandardZipFormat)
-			$zip.encryption:=ZIP Encryption none:K91:3
-		Else 
-			$zip.encryption:=-1
-		End if 
-		
-		$targetProjectFile:=$ContentsFolder.file($BuildApp.BuildApplicationName+".4DZ")
-		
-		$status:=ZIP Create archive:C1640($zip; $targetProjectFile)
-		
-		$CLI._printTask("Archive project folder")
-		$CLI._printStatus($status.success)
-		$CLI._printPath($targetProjectFile)
-		
-		If ($targetProjectFolder.path#$localProjectFolder.path)
-			$targetProjectFolder.delete(Delete with contents:K24:24)
-		End if 
-		
-	End if 
-	
-	$folders:=$ProjectFolder.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Resources"; "Libraries"; "Documentation"; "Default Data"; "Extras"))
-	
-	$CLI._printTask("Copy database folders").LF()
-	For each ($folder; $folders)
-		$CLI._printPath($folder.copyTo($ContentsFolder))
-	End for each 
-	
-Function _generateLicense($BuildApp : cs:C1710.BuildApp; $targetFolder : 4D:C1709.Folder; $buildApplicationType : Text)
-	
-	$CLI:=This:C1470
-	
-	var $platform; $ArrayLicense___ : Text
-	
-	$platform:=(Is macOS:C1572 ? "Mac" : "Win")
-	
-	$ArrayLicense___:="ArrayLicense"+$platform
-	
-	$licenes:=$BuildApp.Licenses[$ArrayLicense___].Item
-	
-	$UUDs:=$licenes.filter(Formula:C1597($1.result:=Path to object:C1547($1.value).name="@4UUD@"))
-	$UOEs:=$licenes.filter(Formula:C1597($1.result:=Path to object:C1547($1.value).name="@4UOE@"))
-	$UOSs:=$licenes.filter(Formula:C1597($1.result:=Path to object:C1547($1.value).name="@4UOS@"))
-	$DOMs:=$licenes.filter(Formula:C1597($1.result:=Path to object:C1547($1.value).name="@4DOM@"))
-	
-	var $status : Object
-	
-	Case of 
-		: ($buildApplicationType="Server") && ($DOMs.length#0) && ($UOSs.length#0)
-			
-			$status:=Create deployment license:C1811($targetFolder; File:C1566($UOSs[0]; fk platform path:K87:2); File:C1566($DOMs[0]; fk platform path:K87:2))
-			
-		Else 
-			
-			Case of 
-				: ($UOEs.length#0)
-					
-					$status:=Create deployment license:C1811($targetFolder; File:C1566($UOEs[0]; fk platform path:K87:2))
-					
-				: ($UUDs.length#0)
-					
-					$status:=Create deployment license:C1811($targetFolder; File:C1566($UUDs[0]; fk platform path:K87:2))
-					
-			End case 
-			
-	End case 
-	
-	If ($status#Null:C1517)
-		
-		$CLI._printTask("Generate license")
-		$CLI._printStatus($status.success)
-		If ($status.file#Null:C1517)
-			$CLI._printPath(File:C1566($status.file))
-		End if 
-		For each ($error; $status.errors)
-			$CLI.print($error.message; "177;bold")
-		End for each 
-	End if 
 	

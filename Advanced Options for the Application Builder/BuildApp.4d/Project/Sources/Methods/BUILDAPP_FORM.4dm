@@ -30,6 +30,9 @@ Case of
 		$BuildApp.CS.MacCompiledDatabaseToWinIncludeIt:=False:C215
 		$BuildApp.CS.HideAdministrationMenuItem:=True:C214
 		
+		$BuildApp.PackProject:=True:C214
+		$BuildApp.UseStandardZipFormat:=True:C214
+		
 		$BuildApp.SignApplication.AdHocSign:=True:C214
 		
 		$BuildApp.ArrayExcludedModuleName.Item[0]:="CEF"
@@ -37,6 +40,13 @@ Case of
 		$BuildApp.ArrayExcludedModuleName.Item[2]:="PHP"
 		$BuildApp.ArrayExcludedModuleName.Item[3]:="SpellChecker"
 		$BuildApp.ArrayExcludedModuleName.Item[4]:="4D Updater"
+		
+		$BuildApp.ArrayExcludedComponentName.Item[0]:="4D SVG"
+		$BuildApp.ArrayExcludedComponentName.Item[1]:="4D Progress"
+		$BuildApp.ArrayExcludedComponentName.Item[2]:="4D ViewPro"
+		$BuildApp.ArrayExcludedComponentName.Item[3]:="4D NetKit"
+		$BuildApp.ArrayExcludedComponentName.Item[5]:="4D WritePro Interface"
+		$BuildApp.ArrayExcludedComponentName.Item[6]:="4D Widgets"
 		
 		$BuildApp.CS.PortNumber:=19813
 		$BuildApp.CS.ServerStructureFolderName:=$BuildApp.BuildApplicationName

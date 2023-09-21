@@ -1,3 +1,24 @@
 {
+	"Entry points": {
+		"methods": [
+			"build",
+			"compile",
+			"rebuild"
+		]
+	},
+	"Private": {
+		"methods": [
+			"generic_error_handler",
+			"quickSign",
+			"run"
+		],
+		"classes": [
+			"_CLI",
+			"_CLI_Controller",
+			"_SettingsXmlParser",
+			"_Worker_Controller",
+			"_XmlParser"
+		]
+	},
 	"trash": {}
 }

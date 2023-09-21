@@ -7,13 +7,31 @@
 			}
 		},
 		"build": {
-			"timeStamp": "2023-09-20T11:54:08Z",
+			"timeStamp": "2023-09-21T09:47:10Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"compile": {
+			"timeStamp": "2023-09-21T09:47:10Z",
 			"attributes": {
 				"invisible": true
 			}
 		},
 		"TEST_sign_async": {
 			"timeStamp": "2023-09-20T12:07:05Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"run": {
+			"timeStamp": "2023-09-21T09:45:07Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"rebuild": {
+			"timeStamp": "2023-09-21T09:47:10Z",
 			"attributes": {
 				"invisible": true
 			}

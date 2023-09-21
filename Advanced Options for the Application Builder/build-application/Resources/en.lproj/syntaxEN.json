@@ -1,0 +1,858 @@
+{
+	"_method_": {},
+	"cs.BuildApp": {
+		"SignApp_Worker_Controller": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"BuildApp": {
+			"new()": {
+				"Syntax": "**.new**( *settingsFile* : 4D.File )",
+				"Params": [
+					[
+						"settingsFile",
+						"4D.File",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"CLI": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"SignApp": {
+			"new()": {
+				"Syntax": "**.new**( *controller* : 4D.Class; *signal* : 4D.Signal )",
+				"Params": [
+					[
+						"controller",
+						"4D.Class",
+						"->"
+					],
+					[
+						"signal",
+						"4D.Signal",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"_SettingsXmlParser": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"_XmlParser": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"_CLI": {
+			"new()": {
+				"Syntax": "**.new**( *executableName* : Text; *controller* : 4D.Class )",
+				"Params": [
+					[
+						"executableName",
+						"Text",
+						"->"
+					],
+					[
+						"controller",
+						"4D.Class",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"_Worker_Controller": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"_CLI_Controller": {
+			"new()": {
+				"Syntax": "**.new**( *CLI* : cs.BuildApp._CLI )",
+				"Params": [
+					[
+						"CLI",
+						"cs.BuildApp._CLI",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		}
+	},
+	"SignApp_Worker_Controller": {
+		"onData()": {
+			"Syntax": "**.onData**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onResponse()": {
+			"Syntax": "**.onResponse**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onError()": {
+			"Syntax": "**.onError**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onTerminate()": {
+			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onDataError()": {
+			"Syntax": "**.onDataError**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"execute()": {
+			"Syntax": "**.execute**( *command* : Variant; *logFile* : 4D.File )",
+			"Params": [
+				[
+					"command",
+					"Variant",
+					"->"
+				],
+				[
+					"logFile",
+					"4D.File",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"CLI": {
+			"Syntax": "CLI : cs.BuildApp.BuildApp_CLI"
+		},
+		"logFile": {
+			"Syntax": "logFile : 4D.File"
+		},
+		"_inheritedFrom_": "_CLI_Controller"
+	},
+	"BuildApp": {
+		"parseFile()": {
+			"Syntax": "**.parseFile**( *settingsFile* : 4D.File )->BuildApp : cs.BuildApp.BuildApp",
+			"Params": [
+				[
+					"settingsFile",
+					"4D.File",
+					"->"
+				],
+				[
+					"BuildApp",
+					"cs.BuildApp.BuildApp",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"toObject()": {
+			"Syntax": "**.toObject**()->JSON : Text",
+			"Params": [
+				[
+					"JSON",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"findPlugins()": {
+			"Syntax": "**.findPlugins**( *compileProject* : 4D.File )->plugins : Collection",
+			"Params": [
+				[
+					"compileProject",
+					"4D.File",
+					"->"
+				],
+				[
+					"plugins",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"toFile()": {
+			"Syntax": "**.toFile**( *file* : 4D.File )->BuildApp : cs.BuildApp.BuildApp",
+			"Params": [
+				[
+					"file",
+					"4D.File",
+					"->"
+				],
+				[
+					"BuildApp",
+					"cs.BuildApp.BuildApp",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"loadFromHost()": {
+			"Syntax": "**.loadFromHost**()->BuildApp : cs.BuildApp.BuildApp",
+			"Params": [
+				[
+					"BuildApp",
+					"cs.BuildApp.BuildApp",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"findPluginsFolder()": {
+			"Syntax": "**.findPluginsFolder**( *compileProject* : 4D.File )->plugins : 4D.Folder",
+			"Params": [
+				[
+					"compileProject",
+					"4D.File",
+					"->"
+				],
+				[
+					"plugins",
+					"4D.Folder",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"findLicenses()": {
+			"Syntax": "**.findLicenses**( *licenseTypes* : Collection )->BuildApp : cs.BuildApp.BuildApp",
+			"Params": [
+				[
+					"licenseTypes",
+					"Collection",
+					"->"
+				],
+				[
+					"BuildApp",
+					"cs.BuildApp.BuildApp",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"findComponents()": {
+			"Syntax": "**.findComponents**( *compileProject* : 4D.File; *asFiles* : Boolean )->components : Collection",
+			"Params": [
+				[
+					"compileProject",
+					"4D.File",
+					"->"
+				],
+				[
+					"asFiles",
+					"Boolean",
+					"->"
+				],
+				[
+					"components",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"toString()": {
+			"Syntax": "**.toString**()->XML : Text",
+			"Params": [
+				[
+					"XML",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get settings()": {
+			"Syntax": "**.get settings**()->settings : Object",
+			"Params": [
+				[
+					"settings",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"CLI": {
+		"logo()": {
+			"Syntax": "**.logo**()->CLI : cs.BuildApp.CLI",
+			"Params": [
+				[
+					"CLI",
+					"cs.BuildApp.CLI",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"escape()": {
+			"Syntax": "**.escape**( *message* : Text; *style* : Text )->ANSI : Text",
+			"Params": [
+				[
+					"message",
+					"Text",
+					"->"
+				],
+				[
+					"style",
+					"Text",
+					"->"
+				],
+				[
+					"ANSI",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"print()": {
+			"Syntax": "**.print**( *message* : Text; *style* : Text )->this : cs.BuildApp.CLI",
+			"Params": [
+				[
+					"message",
+					"Text",
+					"->"
+				],
+				[
+					"style",
+					"Text",
+					"->"
+				],
+				[
+					"this",
+					"cs.BuildApp.CLI",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"version()": {
+			"Syntax": "**.version**()->CLI : cs.BuildApp.CLI",
+			"Params": [
+				[
+					"CLI",
+					"cs.BuildApp.CLI",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"LF()": {
+			"Syntax": "**.LF**()->this : cs.BuildApp.CLI",
+			"Params": [
+				[
+					"this",
+					"cs.BuildApp.CLI",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"CR()": {
+			"Syntax": "**.CR**()->this : cs.BuildApp.CLI",
+			"Params": [
+				[
+					"this",
+					"cs.BuildApp.CLI",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"SignApp": {
+		"signAsync()": {
+			"Syntax": "**.signAsync**( *application* : 4D.Folder )->this : cs.BuildApp.SignApp",
+			"Params": [
+				[
+					"application",
+					"4D.Folder",
+					"->"
+				],
+				[
+					"this",
+					"cs.BuildApp.SignApp",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"sign()": {
+			"Syntax": "**.sign**( *application* : 4D.Folder )->this : cs.BuildApp.SignApp",
+			"Params": [
+				[
+					"application",
+					"4D.Folder",
+					"->"
+				],
+				[
+					"this",
+					"cs.BuildApp.SignApp",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"terminate()": {
+			"Syntax": "**.terminate**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_CLI"
+	},
+	"_SettingsXmlParser": {
+		"parse()": {
+			"Syntax": "**.parse**( *projectFile* : 4D.File )->status : Object",
+			"Params": [
+				[
+					"projectFile",
+					"4D.File",
+					"->"
+				],
+				[
+					"status",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_XmlParser"
+	},
+	"_XmlParser": {
+		"getBoolValue()": {
+			"Syntax": "**.getBoolValue**( *dom* : Text; *path* : Text )->boolValue : Variant",
+			"Params": [
+				[
+					"dom",
+					"Text",
+					"->"
+				],
+				[
+					"path",
+					"Text",
+					"->"
+				],
+				[
+					"boolValue",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"_CLI": {
+		"quote()": {
+			"Syntax": "**.quote**( *in* : Text )->out : Text",
+			"Params": [
+				[
+					"in",
+					"Text",
+					"->"
+				],
+				[
+					"out",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"escape()": {
+			"Syntax": "**.escape**( *in* : Text )->out : Text",
+			"Params": [
+				[
+					"in",
+					"Text",
+					"->"
+				],
+				[
+					"out",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get controller()": {
+			"Syntax": "**.get controller**()->controller : cs.BuildApp._CLI_Controller",
+			"Params": [
+				[
+					"controller",
+					"cs.BuildApp._CLI_Controller",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get executablePath()": {
+			"Syntax": "**.get executablePath**()->executablePath : Text",
+			"Params": [
+				[
+					"executablePath",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get currentDirectory()": {
+			"Syntax": "**.get currentDirectory**()->currentDirectory : 4D.Folder",
+			"Params": [
+				[
+					"currentDirectory",
+					"4D.Folder",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get executableFile()": {
+			"Syntax": "**.get executableFile**()->executableFile : 4D.File",
+			"Params": [
+				[
+					"executableFile",
+					"4D.File",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get platform()": {
+			"Syntax": "**.get platform**()->platform : Text",
+			"Params": [
+				[
+					"platform",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get EOL()": {
+			"Syntax": "**.get EOL**()->EOL : Text",
+			"Params": [
+				[
+					"EOL",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get executableName()": {
+			"Syntax": "**.get executableName**()->executableName : Text",
+			"Params": [
+				[
+					"executableName",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get name()": {
+			"Syntax": "**.get name**()->name : Text",
+			"Params": [
+				[
+					"name",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"_Worker_Controller": {
+		"onTerminate()": {
+			"Syntax": "**.onTerminate**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onResponse()": {
+			"Syntax": "**.onResponse**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onData()": {
+			"Syntax": "**.onData**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onError()": {
+			"Syntax": "**.onError**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onDataError()": {
+			"Syntax": "**.onDataError**( *worker* : 4D.SystemWorker; *params* : Object )",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"->"
+				],
+				[
+					"params",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_CLI_Controller"
+	},
+	"BuildApp_CLI": {
+		"quickSign()": {
+			"Syntax": "**.quickSign**( *RuntimeFolder* : 4D.Folder )->success : Boolean",
+			"Params": [
+				[
+					"RuntimeFolder",
+					"4D.Folder",
+					"->"
+				],
+				[
+					"success",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"build()": {
+			"Syntax": "**.build**( *buildProject* : 4D.File; *compileProject* : 4D.File )->success : Boolean",
+			"Params": [
+				[
+					"buildProject",
+					"4D.File",
+					"->"
+				],
+				[
+					"compileProject",
+					"4D.File",
+					"->"
+				],
+				[
+					"success",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"compile()": {
+			"Syntax": "**.compile**( *compileProject* : 4D.File )->success : Boolean",
+			"Params": [
+				[
+					"compileProject",
+					"4D.File",
+					"->"
+				],
+				[
+					"success",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"clean()": {
+			"Syntax": "**.clean**( *compileProject* : 4D.File )",
+			"Params": [
+				[
+					"compileProject",
+					"4D.File",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "CLI"
+	},
+	"_CLI_Controller": {
+		"get commands()": {
+			"Syntax": "**.get commands**()->commands : Collection",
+			"Params": [
+				[
+					"commands",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get complete()": {
+			"Syntax": "**.get complete**()->complete : Boolean",
+			"Params": [
+				[
+					"complete",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"terminate()": {
+			"Syntax": "**.terminate**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"execute()": {
+			"Syntax": "**.execute**( *command* : Variant )",
+			"Params": [
+				[
+					"command",
+					"Variant",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"get worker()": {
+			"Syntax": "**.get worker**()->worker : 4D.SystemWorker",
+			"Params": [
+				[
+					"worker",
+					"4D.SystemWorker",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get instance()": {
+			"Syntax": "**.get instance**()->instance : cs.BuildApp._CLI",
+			"Params": [
+				[
+					"instance",
+					"cs.BuildApp._CLI",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	}
+}

@@ -1,2 +1,2 @@
 //%attributes = {"invisible":true}
-run("compile,build")
+run("clean,compile,build")
