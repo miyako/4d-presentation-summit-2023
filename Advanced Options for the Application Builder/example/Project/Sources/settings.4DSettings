@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><preferences stamp="7">
+<?xml version="1.0" encoding="UTF-8"?><preferences stamp="9">
 	<com.4d>
 		<compiler>
 			<options target="all"/>
 			<typage default_for_button="2" default_for_numeric="1"/>
 		</compiler>
+		<general startup_environnement="0"/>
+		<interface>
+			<user flush_window="false" print_progress="false" splash_screen="false"/>
+		</interface>
 	</com.4d>
 </preferences>

@@ -1,5 +1,26 @@
 Class extends CLI
 
+Function _clean($compileProject : 4D:C1709.File)
+	
+	$CLI:=This:C1470
+	
+	$packageFolder:=$compileProject.parent.parent
+	
+	For each ($folder; $packageFolder.folders(fk ignore invisible:K87:22))
+		If ($folder.fullName="userPreferences.@")
+			$CLI._printTask("Clean cache").LF()
+			$cacheFolder:=$folder.folder("CompilerIntermediateFiles")
+			$CLI._printPath($cacheFolder)
+			$cacheFolder.delete(Delete with contents:K24:24)
+		End if 
+	End for each 
+	
+	$DerivedDataFolder:=$packageFolder.folder("Project").folder("DerivedData")
+	If ($DerivedDataFolder.exists)
+		$CLI._printPath($DerivedDataFolder)
+		$DerivedDataFolder.delete(Delete with contents:K24:24)
+	End if 
+	
 Function _getVersioning($BuildApp : cs:C1710.BuildApp; $key : Text; $domain : Text)->$value : Text
 	
 	If ($domain#"")
@@ -74,6 +95,8 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 		
 	Else 
 		
+		$CLI._clean($compileProject)
+		
 		$options:=New object:C1471
 		$options.generateSymbols:=False:C215
 		$options.generateSyntaxFile:=True:C214
@@ -84,7 +107,6 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 		
 		If ($options.plugins#Null:C1517)
 			$CLI._printTask("Use plugins")
-			
 			$plugins:=$BuildApp.findPlugins($compileProject)
 			$CLI._printList($plugins.extract("folder.name"))
 			$CLI._printPath($options.plugins)
@@ -101,7 +123,7 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 		End if 
 		
 		If (Is macOS:C1572)
-			$options.targets:=New collection:C1472("x86_64_generic"; "arm64_macOS_lib")
+			$options.targets:=New collection:C1472("arm64_macOS_lib"; "x86_64_generic")
 		End if 
 		
 		$CLI._printTask("Compile project")
@@ -365,7 +387,7 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text)->$targetFolder
 		$resourceFile:=$targetFolder.file("4D Volume Desktop.rsr")
 		$targetResourceFile:=$resourceFile.rename($BuildApplicationName+".rsr")
 	Else 
-		$resourceFile:=$targetFolder.file("4D Volume Desktop.rsrc")
+		$resourceFile:=$targetFolder.folder("Contents").folder("Resources").file("4D Volume Desktop.rsrc")
 		$targetResourceFile:=$resourceFile.rename($BuildApplicationName+".rsrc")
 	End if 
 	
@@ -744,9 +766,9 @@ $sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
 			$folders.push($targetProjectFolder.folder("Sources").folder("DatabaseMethods"))
 			$folders.push($targetProjectFolder.folder("Sources").folder("TableForms"))
 			$folders.push($targetProjectFolder.folder("Sources").folder("Triggers"))
-			$folders.push($targetProjectFolder.folder("Sources").folder("Forms"))
 			$folders.push($targetProjectFolder.folder("Sources").folder("Classes"))
 			$folders.push($targetProjectFolder.folder("Sources").folder("Methods"))
+			$folders.push($targetProjectFolder.folder("Sources").folder("Forms"))
 			
 			$files:=New collection:C1472
 			
@@ -757,6 +779,13 @@ $sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
 			For each ($file; $files)
 				$file.delete()
 			End for each 
+			
+			$Forms:=$folders.pop()
+			
+			For each ($folder; $folders)
+				$folder.delete()
+			End for each 
+			
 		End if 
 		
 		$files:=$ContentsFolder.folder("Project").files(fk ignore invisible:K87:22).query("extension == :1"; ".4DProject")
