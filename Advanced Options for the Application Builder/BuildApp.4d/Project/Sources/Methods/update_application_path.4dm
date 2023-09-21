@@ -12,6 +12,13 @@ Case of
 		$form.BuildApp.SourcesFiles.CS[$name+(Is macOS:C1572 ? "Mac" : "Win")+"Folder"]:=$path
 	Else 
 		$form.BuildApp.SourcesFiles[$name][$name+(Is macOS:C1572 ? "Mac" : "Win")+"Folder"]:=$path
+		If ($name="RuntimeVL")
+			If (Is macOS:C1572)
+				$form.BuildApp.SourcesFiles.CS.ClientMacFolderToMac:=$path
+			Else 
+				$form.BuildApp.SourcesFiles.CS.ClientWinFolderToWin:=$path
+			End if 
+		End if 
 End case 
 
 $form[$name+"ApplicationIcon"]:=setup_application_path($form.BuildApp; $form; $name)

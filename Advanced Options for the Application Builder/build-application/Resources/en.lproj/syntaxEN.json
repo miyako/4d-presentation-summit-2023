@@ -496,6 +496,22 @@
 			],
 			"Summary": ""
 		},
+		"setPortNumber()": {
+			"Syntax": "**.setPortNumber**( *projectFile* : 4D.File; *portNumber* : Integer )",
+			"Params": [
+				[
+					"projectFile",
+					"4D.File",
+					"->"
+				],
+				[
+					"portNumber",
+					"Integer",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
 		"_inheritedFrom_": "_XmlParser"
 	},
 	"_XmlParser": {
@@ -516,6 +532,27 @@
 					"boolValue",
 					"Variant",
 					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"setIntValue()": {
+			"Syntax": "**.setIntValue**( *dom* : Text; *path* : Text; *intValue* : Integer )",
+			"Params": [
+				[
+					"dom",
+					"Text",
+					"->"
+				],
+				[
+					"path",
+					"Text",
+					"->"
+				],
+				[
+					"intValue",
+					"Integer",
+					"->"
 				]
 			],
 			"Summary": ""

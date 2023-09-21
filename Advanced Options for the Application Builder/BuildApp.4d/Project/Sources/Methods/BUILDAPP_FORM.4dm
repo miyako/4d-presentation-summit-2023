@@ -60,10 +60,13 @@ Case of
 		$BuildApp.RuntimeVL.LastDataPathLookup:="ByAppName"
 		$BuildApp.CS.LastDataPathLookup:="ByAppName"
 		
-		$RuntimeVLMac:=Folder:C1567(fk applications folder:K87:20).folder("4D v20.1").folder("4D Volume Desktop.app").platformPath
-		$RuntimeVLWin:=Folder:C1567(fk applications folder:K87:20).folder("4D v20.1").folder("4D Volume Desktop").platformPath
-		$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder:=$RuntimeVLMac
-		$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLWinFolder:=$RuntimeVLWin
+		If (Is macOS:C1572)
+			$RuntimeVLMac:=Folder:C1567(fk applications folder:K87:20).folder("4D v20.1").folder("4D Volume Desktop.app").platformPath
+			$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder:=$RuntimeVLMac
+		Else 
+			$RuntimeVLWin:=Folder:C1567(fk applications folder:K87:20).folder("4D v20.1").folder("4D Volume Desktop").platformPath
+			$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLWinFolder:=$RuntimeVLWin
+		End if 
 		
 		$RuntimeVLIconMac:=Folder:C1567(fk resources folder:K87:11).file("BuildApp.icns").platformPath
 		$RuntimeVLIconWin:=Folder:C1567(fk resources folder:K87:11).file("BuildApp.ico").platformPath
@@ -77,8 +80,12 @@ Case of
 		$BuildApp.SourcesFiles.CS.ClientMacIconForWinPath:=$RuntimeVLIconMac
 		$BuildApp.SourcesFiles.CS.ClientWinIconForWinPath:=$RuntimeVLIconWin
 		
-		$ServerMac:=Folder:C1567(fk applications folder:K87:20).folder("4D v20.1").folder("4D Server.app").platformPath
-		$ServerWin:=Folder:C1567(fk applications folder:K87:20).folder("4D v20.1").folder("4D Server").platformPath
+		If (Is macOS:C1572)
+			$ServerMac:=Folder:C1567(fk applications folder:K87:20).folder("4D v20.1").folder("4D Server.app").platformPath
+		Else 
+			$ServerWin:=Folder:C1567(fk applications folder:K87:20).folder("4D v20.1").folder("4D Server").platformPath
+		End if 
+		
 		$BuildApp.SourcesFiles.CS.ServerMacFolder:=$ServerMac
 		$BuildApp.SourcesFiles.CS.ServerWinFolder:=$ServerWin
 		

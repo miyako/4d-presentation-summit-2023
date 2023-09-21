@@ -12,6 +12,13 @@ Case of
 		$path:=$BuildApp.SourcesFiles.CS[$name+(Is macOS:C1572 ? "Mac" : "Win")+"Folder"]
 	Else 
 		$path:=$BuildApp.SourcesFiles[$name][$name+(Is macOS:C1572 ? "Mac" : "Win")+"Folder"]
+		If ($name="RuntimeVL")
+			If (Is macOS:C1572)
+				$BuildApp.SourcesFiles.CS.ClientMacFolderToMac:=$path
+			Else 
+				$BuildApp.SourcesFiles.CS.ClientWinFolderToWin:=$path
+			End if 
+		End if 
 End case 
 
 var $icon : Picture

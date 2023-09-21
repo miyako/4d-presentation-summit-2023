@@ -23,9 +23,33 @@ Function _parse($settingsFile : 4D:C1709.File)->$status : Object
 		
 	End if 
 	
+Function setPortNumber($projectFile : 4D:C1709.File; $portNumber : Integer)
+	
+	If ($projectFile#Null:C1517) && (OB Instance of:C1731($projectFile; 4D:C1709.File)) && ($projectFile.exists)
+		
+		$projectSettingsFile:=$projectFile.parent.folder("Sources").file("settings.4DSettings")
+		
+		If ($projectSettingsFile.exists)
+			
+			$dom:=DOM Parse XML source:C719($projectSettingsFile.platformPath)
+			
+			If (OK=1)
+				
+				This:C1470.setIntValue($dom; "/preferences/com.4d/server/network/options@publication_port"; $portNumber)
+				
+				DOM EXPORT TO FILE:C862($dom; $projectSettingsFile.platformPath)
+				
+				DOM CLOSE XML:C722($dom)
+				
+			End if 
+			
+		End if 
+		
+	End if 
+	
 Function parse($projectFile : 4D:C1709.File)->$status : Object
 	
-	$status:=New object:C1471("sdi_application"; False:C215; "allow_user_settings"; False:C215)
+	$status:=New object:C1471("sdi_application"; False:C215; "allow_user_settings"; False:C215; "publication_name"; "")
 	
 	If ($projectFile#Null:C1517) && (OB Instance of:C1731($projectFile; 4D:C1709.File)) && ($projectFile.exists)
 		
@@ -35,6 +59,7 @@ Function parse($projectFile : 4D:C1709.File)->$status : Object
 		
 		$status.sdi_application:=Bool:C1537($projectStatus.sdi_application)
 		$status.allow_user_settings:=Bool:C1537($projectStatus.allow_user_settings)
+		$status.publication_name:=$projectStatus.publication_name=Null:C1517 ? "" : $projectStatus.publication_name
 		
 		If ($status.allow_user_settings)
 			
@@ -44,6 +69,10 @@ Function parse($projectFile : 4D:C1709.File)->$status : Object
 			
 			If ($userStatus.sdi_application#Null:C1517)
 				$status.sdi_application:=$userStatus.sdi_application
+			End if 
+			
+			If ($userStatus.publication_name#Null:C1517)
+				$status.publication_name:=$userStatus.publication_name
 			End if 
 			
 		End if 
