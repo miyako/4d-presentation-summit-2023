@@ -8,7 +8,7 @@ If (Form event code:C388=On Clicked:K2:4)
 	
 	$CLI:=cs:C1710._Terminal.new()
 	
-	$compileProject:=File:C1566("Macintosh HD:Users:miyako:Desktop:aaaaa:Project:BuildApp.4DProject"; fk platform path:K87:2)
+	$compileProject:=Form:C1466.compileProject
 	
 	$CLI.launch($buildProject; $compileProject)
 	

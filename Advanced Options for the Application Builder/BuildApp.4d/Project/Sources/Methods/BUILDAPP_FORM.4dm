@@ -126,6 +126,8 @@ Else
 	
 	$form.BuildApp:=$BuildApp
 	
+	$form.compileProject:=File:C1566(Structure file:C489; fk platform path:K87:2).parent.parent.parent.folder("example").folder("Project").file("example.4DProject")
+	
 	$window:=Open form window:C675("TEST-BuildApp")
 	DIALOG:C40("TEST-BuildApp"; $form; *)
 	
