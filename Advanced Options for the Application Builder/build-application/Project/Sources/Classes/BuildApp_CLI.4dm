@@ -93,18 +93,29 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 			$options.targets:=New collection:C1472("x86_64_generic"; "arm64_macOS_lib")
 		End if 
 		
+		$localDerivedDataFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent.folder("DerivedData")
+		$localDerivedDataFolder.delete(Delete with contents:K24:24)
+		
+		$localLibrariesFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent.parent.folder("Libraries")
+		$localLibrariesFolder.delete(Delete with contents:K24:24)
+		
 		$status:=Compile project:C1760($options)
 		
 		$success:=$status.success
 		
 		If ($success)
+			
+			$DerivedDataFolder:=$compileProject.parent
+			$targetDerivedDataFolder:=$localDerivedDataFolder.copyTo($DerivedDataFolder; fk overwrite:K87:5)
+			$CLI._printTask("Copy DerivedData")
+			$CLI._printStatus($targetDerivedDataFolder.exists)
+			$CLI._printPath($targetDerivedDataFolder)
+			
 			If (Is macOS:C1572)
-				$localLibrariesFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent.parent.folder("Libraries")
 				$LibrariesFolder:=$compileProject.parent.parent
-				$LibrariesFolder.create()
 				$targetLibrariesFolder:=$localLibrariesFolder.copyTo($LibrariesFolder; fk overwrite:K87:5)
 				$CLI._printTask("Copy libraries")
-				$CLI._printStatus($targetLibrariesFolder.extract)
+				$CLI._printStatus($targetLibrariesFolder.exists)
 				$CLI._printPath($targetLibrariesFolder)
 			End if 
 		End if 
