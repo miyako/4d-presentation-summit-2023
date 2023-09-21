@@ -818,21 +818,6 @@
 					"textAlign": "right",
 					"fontWeight": "normal"
 				},
-				"BuildApp.BuildApplicationLight": {
-					"type": "checkbox",
-					"text": "Build Application Light",
-					"top": 165,
-					"left": 420,
-					"width": 192,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.BuildApp.BuildApplicationLight",
-					"dataSourceTypeHint": "boolean",
-					"fontWeight": "normal",
-					"focusable": false
-				},
 				"BuildApp.BuildApplicationSerialized": {
 					"type": "checkbox",
 					"text": "Build Application Serialized",
@@ -943,7 +928,7 @@
 				"BuildApp.AutoUpdate.RuntimeVL.StartElevated": {
 					"type": "checkbox",
 					"text": "Start Elevated",
-					"top": 185,
+					"top": 165,
 					"left": 420,
 					"width": 192,
 					"height": 21,
@@ -960,7 +945,6 @@
 				"BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIncludeIt",
 				"BuildApp.BuildApplicationSerialized",
 				"BuildApp.SourcesFiles.RuntimeVL.IsOEM",
-				"BuildApp.BuildApplicationLight",
 				"BuildApp.RuntimeVL.LastDataPathLookup",
 				"RuntimeVLApplicationIcon",
 				"RuntimeVL.RuntimeVLFolder",
@@ -1320,7 +1304,7 @@
 				"BuildApp.AutoUpdate.CS.Server.StartElevated": {
 					"type": "checkbox",
 					"text": "Start Elevated",
-					"top": 185,
+					"top": 165,
 					"left": 420,
 					"width": 192,
 					"height": 21,
@@ -1372,22 +1356,6 @@
 					"dataSourceTypeHint": "boolean",
 					"fontWeight": "normal",
 					"focusable": false
-				},
-				"BuildApp.CS.BuildV13ClientUpgrades": {
-					"type": "checkbox",
-					"text": "Build v13 Client Upgrades",
-					"top": 165,
-					"left": 420,
-					"width": 192,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.BuildApp.CS.BuildV13ClientUpgrades",
-					"dataSourceTypeHint": "boolean",
-					"fontWeight": "normal",
-					"focusable": false,
-					"enterable": false
 				},
 				"BuildApp.CS.ClientWinSingleInstance": {
 					"type": "checkbox",
@@ -1819,7 +1787,7 @@
 				"BuildApp.AutoUpdate.CS.Client.StartElevated": {
 					"type": "checkbox",
 					"text": "Start Elevated",
-					"top": 205,
+					"top": 165,
 					"left": 420,
 					"width": 192,
 					"height": 21,
@@ -1851,7 +1819,6 @@
 				"BuildApp.SourcesFiles.CS.ClientMacIncludeIt",
 				"BuildApp.CS.BuildCSUpgradeable",
 				"BuildApp.SourcesFiles.CS.ClientWinIncludeIt",
-				"BuildApp.CS.BuildV13ClientUpgrades",
 				"BuildApp.CS.ClientWinSingleInstance",
 				"BuildApp.CS.ClientUserPreferencesFolderByPath",
 				"RuntimeVL.RuntimeVLFolder1",
@@ -2774,7 +2741,7 @@
 			]
 		}
 	],
-	"geometryStamp": 2526,
+	"geometryStamp": 2538,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
