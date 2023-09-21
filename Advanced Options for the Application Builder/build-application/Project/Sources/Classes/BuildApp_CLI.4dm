@@ -79,7 +79,8 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 		$CLI._printTask("Compile project")
 		
 		$options:=New object:C1471
-		$options.generateSymbols:=True:C214
+		$options.generateSymbols:=False:C215
+		$options.generateSyntaxFile:=True:C214
 		
 		var $PluginsFolder : 4D:C1709.Folder
 		$PluginsFolder:=$compileProject.parent.parent.folder("Plugins")
@@ -87,38 +88,15 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 			$options.plugins:=$PluginsFolder
 		End if 
 		
-		$options.components:=$CLI._findComponents($compileProject)
+		$options.components:=$CLI._findComponents($compileProject; True:C214)
 		
 		If (Is macOS:C1572)
 			$options.targets:=New collection:C1472("x86_64_generic"; "arm64_macOS_lib")
 		End if 
 		
-		$localDerivedDataFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent.folder("DerivedData")
-		$localDerivedDataFolder.delete(Delete with contents:K24:24)
-		
-		$localLibrariesFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent.parent.folder("Libraries")
-		$localLibrariesFolder.delete(Delete with contents:K24:24)
-		
-		$status:=Compile project:C1760($options)
+		$status:=Compile project:C1760($compileProject; $options)
 		
 		$success:=$status.success
-		
-		If ($success)
-			
-			$DerivedDataFolder:=$compileProject.parent
-			$targetDerivedDataFolder:=$localDerivedDataFolder.copyTo($DerivedDataFolder; fk overwrite:K87:5)
-			$CLI._printTask("Copy DerivedData")
-			$CLI._printStatus($targetDerivedDataFolder.exists)
-			$CLI._printPath($targetDerivedDataFolder)
-			
-			If (Is macOS:C1572)
-				$LibrariesFolder:=$compileProject.parent.parent
-				$targetLibrariesFolder:=$localLibrariesFolder.copyTo($LibrariesFolder; fk overwrite:K87:5)
-				$CLI._printTask("Copy libraries")
-				$CLI._printStatus($targetLibrariesFolder.exists)
-				$CLI._printPath($targetLibrariesFolder)
-			End if 
-		End if 
 		
 		For each ($error; $status.errors)
 			If ($error.isError)
@@ -126,7 +104,9 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 			Else 
 				$CLI.print($error.message; "166;bold")
 			End if 
-			$CLI.print("…").print($error.code.path+"#"+String:C10($error.lineInFile); "244").LF()
+			If ($error.code#Null:C1517)
+				$CLI.print("…").print($error.code.path+"#"+String:C10($error.lineInFile); "244").LF()
+			End if 
 		End for each 
 		
 	End if 
@@ -442,32 +422,54 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text)->$targetFolder
 		
 	End if 
 	
-Function _findComponents($compileProject : 4D:C1709.File)->$components : Collection
+Function _findComponents($compileProject : 4D:C1709.File; $asFiles : Boolean)->$components : Collection
 	
-	$ComponentsFolder:=$compileProject.parent.parent.folder("Components")
-	$projectComponents:=$ComponentsFolder.folders(fk ignore invisible:K87:22).query("extension in :1"; New collection:C1472(".4dbase"; ".4DC"; ".4DZ"))
-	
-	$paths:=$projectComponents.extract("path")
+	$projectComponentsFolder:=$compileProject.parent.parent.folder("Components")
 	
 	If (Is macOS:C1572)
-		$ComponentsFolder:=Folder:C1567(Application file:C491; fk platform path:K87:2).folder("Contents").folder("Components")
+		$applicationComponentsFolder:=Folder:C1567(Application file:C491; fk platform path:K87:2).folder("Contents").folder("Components")
 	Else 
-		$ComponentsFolder:=Folder:C1567(Application file:C491; fk platform path:K87:2).parent.folder("Components")
+		$applicationComponentsFolder:=Folder:C1567(Application file:C491; fk platform path:K87:2).parent.folder("Components")
 	End if 
 	
-	$applicationComponents:=$ComponentsFolder.folders(fk ignore invisible:K87:22).query("extension in :1"; New collection:C1472(".4dbase"; ".4DC"; ".4DZ"))
+	$projectComponentFolders:=$projectComponentsFolder.folders(fk ignore invisible:K87:22).query("extension in :1"; New collection:C1472(".4dbase"))
+	$projectComponentFiles:=$projectComponentsFolder.files(fk ignore invisible:K87:22).query("extension in :1"; New collection:C1472(".4DC"; ".4DZ"))
 	
-	For each ($folder; $applicationComponents)
-		$path:=$folder.path
-		If (Not:C34($paths.includes($path)))
-			$paths.push($path)
+	$applicationComponentFolders:=$applicationComponentsFolder.folders(fk ignore invisible:K87:22).query("extension in :1"; New collection:C1472(".4dbase"))
+	$applicationComponentFiles:=$applicationComponentsFolder.files(fk ignore invisible:K87:22).query("extension in :1"; New collection:C1472(".4DC"; ".4DZ"))
+	
+	$paths:=$projectComponentFolders.combine($projectComponentFiles).extract("path")
+	
+	//project > application
+	
+	$folders:=New collection:C1472
+	For each ($folder; $applicationComponentFolders)
+		If (Not:C34($paths.includes($folder.path)))
+			$folders.push($folder)
+		End if 
+	End for each 
+	
+	$files:=New collection:C1472
+	For each ($file; $applicationComponentFiles)
+		If (Not:C34($paths.includes($file.path)))
+			$files.push($path)
 		End if 
 	End for each 
 	
 	$components:=New collection:C1472
 	
-	For each ($path; $paths)
-		$components.push(Folder:C1567($path))
+	For each ($file; $files)
+		$components.push($file)
+	End for each 
+	
+	For each ($folder; $folders)
+		If ($asFiles)
+			For each ($file; $folder.files().query("extension in :1"; New collection:C1472(".4DC"; ".4DZ")))
+				$components.push($file)
+			End for each 
+		Else 
+			$components.push($folder)
+		End if 
 	End for each 
 	
 Function _findPlugins($compileProject : 4D:C1709.File)->$plugins : Collection

@@ -1,41 +1,7 @@
 {
 	"methods": {
-		"TEST_sign_sync": {
-			"timeStamp": "2023-09-20T12:06:08Z",
-			"attributes": {
-				"invisible": true
-			}
-		},
-		"build": {
-			"timeStamp": "2023-09-20T11:54:08Z",
-			"attributes": {
-				"invisible": true
-			}
-		},
-		"TEST_sign_async": {
-			"timeStamp": "2023-09-20T12:07:05Z",
-			"attributes": {
-				"invisible": true
-			}
-		},
-		"TEST_build": {
-			"timeStamp": "2023-09-21T01:41:26Z"
-		},
-		"TEST_": {
-			"timeStamp": "2023-09-20T22:33:00Z"
-		},
-		"generic_error_handler": {
-			"timeStamp": "2023-09-20T03:20:02Z",
-			"attributes": {
-				"invisible": true
-			}
-		},
-		"quickSign": {
-			"timeStamp": "2023-09-20T11:56:32Z",
-			"attributes": {
-				"invisible": true,
-				"preemptive": "capable"
-			}
+		"TEST": {
+			"timeStamp": "2023-09-21T01:30:34Z"
 		}
 	}
 }
