@@ -86,6 +86,24 @@ Function toFile($file : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 		$file.setText($BuildApp.toString(); "utf-8"; Document with CR:K24:21)
 	End if 
 	
+Function _cajole()->$settings : Object
+	
+	$BuildApp:=This:C1470
+	
+	$settings:=OB Copy:C1225($BuildApp.settings)
+	
+	OB REMOVE:C1226($settings; "_settingsFile")
+	OB REMOVE:C1226($settings.ArrayExcludedComponentName; "ItemsCount")
+	OB REMOVE:C1226($settings.ArrayExcludedModuleName; "ItemsCount")
+	OB REMOVE:C1226($settings.ArrayExcludedPluginID; "ItemsCount")
+	OB REMOVE:C1226($settings.ArrayExcludedPluginName; "ItemsCount")
+	OB REMOVE:C1226($settings.Licenses.ArrayLicenseMac; "ItemsCount")
+	OB REMOVE:C1226($settings.Licenses.ArrayLicenseWin; "ItemsCount")
+	
+Function toObject()->$JSON : Text
+	
+	$JSON:=JSON Stringify:C1217(This:C1470._cajole(); *)
+	
 Function toString()->$XML : Text
 	
 	$BuildApp:=This:C1470

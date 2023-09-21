@@ -68,11 +68,11 @@
 				},
 				"Up": {
 					"type": "button",
-					"text": "",
+					"text": "Up",
 					"top": 0,
-					"left": 673,
-					"width": 18,
-					"height": 20,
+					"left": 680,
+					"width": 120,
+					"height": 40,
 					"events": [
 						"onClick"
 					],
@@ -89,11 +89,11 @@
 				},
 				"Down": {
 					"type": "button",
-					"text": "",
+					"text": "Down",
 					"top": 40,
-					"left": 673,
-					"width": 18,
-					"height": 20,
+					"left": 680,
+					"width": 120,
+					"height": 40,
 					"events": [
 						"onClick"
 					],
@@ -245,6 +245,109 @@
 					"sizingY": "move",
 					"sizingX": "move",
 					"method": "ObjectMethods/Run.4dm"
+				},
+				"copy to pasteboard JSON": {
+					"type": "button",
+					"text": "⌘⌥J",
+					"top": 80,
+					"left": 680,
+					"width": 120,
+					"height": 40,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"focusable": false,
+					"method": "ObjectMethods/copy to pasteboard JSON.4dm",
+					"shortcutAccel": true,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": true,
+					"shortcutKey": "j",
+					"action": "showClipboard",
+					"fontWeight": "normal",
+					"stroke": "automatic",
+					"imageHugsTitle": false
+				},
+				"copy to pasteboard XML": {
+					"type": "button",
+					"text": "⌘⌥X",
+					"top": 120,
+					"left": 680,
+					"width": 120,
+					"height": 40,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"focusable": false,
+					"method": "ObjectMethods/copy to pasteboard XML.4dm",
+					"shortcutAccel": true,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": true,
+					"shortcutKey": "x",
+					"action": "showClipboard",
+					"fontWeight": "normal",
+					"stroke": "automatic",
+					"imageHugsTitle": false,
+					"sizingX": "move"
+				},
+				"Hint for Mac": {
+					"type": "text",
+					"text": "⌘⌥J",
+					"top": 642,
+					"left": 160,
+					"width": 40,
+					"height": 16,
+					"fontWeight": "bold",
+					"textAlign": "right"
+				},
+				"Hint for Both2": {
+					"type": "text",
+					"text": "Preview JSON",
+					"top": 642,
+					"left": 208,
+					"width": 90,
+					"height": 16
+				},
+				"Hint for Mac1": {
+					"type": "text",
+					"text": "⌘⌥X",
+					"top": 642,
+					"left": 300,
+					"width": 40,
+					"height": 16,
+					"fontWeight": "bold",
+					"textAlign": "right"
+				},
+				"Hint for Both1": {
+					"type": "text",
+					"text": "Preview XML",
+					"top": 642,
+					"left": 348,
+					"width": 80,
+					"height": 16
+				},
+				"Hint for Win": {
+					"type": "text",
+					"text": "⌃⎇J",
+					"top": 642,
+					"left": 160,
+					"width": 40,
+					"height": 16,
+					"fontWeight": "bold",
+					"textAlign": "right"
+				},
+				"Hint for Win1": {
+					"type": "text",
+					"text": "⌃⎇X",
+					"top": 642,
+					"left": 300,
+					"width": 40,
+					"height": 16,
+					"fontWeight": "bold",
+					"textAlign": "right"
 				}
 			}
 		},
@@ -374,6 +477,69 @@
 					"fontWeight": "normal",
 					"focusable": false,
 					"method": "ObjectMethods/ExcludeUpdater.4dm"
+				},
+				"Plugins": {
+					"type": "listbox",
+					"left": 326,
+					"top": 225,
+					"width": 312,
+					"height": 385,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"resizingMode": "legacy",
+					"focusable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "hidden",
+					"horizontalLineStroke": "transparent",
+					"verticalLineStroke": "transparent",
+					"showHeaders": false,
+					"selectionMode": "none",
+					"rowHeight": "20px",
+					"hideSystemHighlight": true,
+					"hideExtraBlankRows": true,
+					"dataSource": "Form:C1466.plugins",
+					"listboxType": "collection",
+					"columns": [
+						{
+							"header": {
+								"text": "Header1",
+								"name": "Header2"
+							},
+							"name": "Column2",
+							"footer": {
+								"name": "Footer2"
+							},
+							"resizable": false,
+							"width": 18
+						},
+						{
+							"header": {
+								"name": "Header3",
+								"text": "Header3"
+							},
+							"name": "Column3",
+							"footer": {
+								"name": "Footer3"
+							}
+						}
+					]
+				},
+				"Check Box": {
+					"type": "checkbox",
+					"text": "Checkbox",
+					"top": 201,
+					"left": 326,
+					"width": 111,
+					"height": 22,
+					"events": [
+						"onClick"
+					]
 				}
 			}
 		},
@@ -2198,7 +2364,7 @@
 			}
 		}
 	],
-	"geometryStamp": 2093,
+	"geometryStamp": 2321,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

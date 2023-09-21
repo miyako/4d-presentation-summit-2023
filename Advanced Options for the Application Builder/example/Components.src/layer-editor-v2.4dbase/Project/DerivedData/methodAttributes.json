@@ -1,0 +1,224 @@
+{
+	"methods": {
+		"EDITOR_new_clip": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"TEST_integration_onUnload": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"EDITOR_start_polyline": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"EDITOR_select_polyline_mode": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"SVG_init": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "incapable"
+			}
+		},
+		"EDITOR_draw_clip": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"EDITOR_clear_objects": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"EDITOR_close_clip": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"TEST_integration": {
+			"timeStamp": "2023-09-18T03:27:44Z"
+		},
+		"EDITOR_DEINIT": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"Image_fit_to_frame": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "incapable"
+			}
+		},
+		"EDITOR_FORM": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "incapable"
+			}
+		},
+		"EDITOR_new_polyline": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"TEST_integration_onLoad": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"EDITOR_update_clear_tool": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"EDITOR_WORKER": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "capable"
+			}
+		},
+		"EDITOR_reset_clip": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"Image_update": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "incapable"
+			}
+		},
+		"EDITOR_INIT": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "incapable"
+			}
+		},
+		"EDITOR_new_object": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"SVG_deinit": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "incapable"
+			}
+		},
+		"EDITOR_end_clip": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"EDITOR_close_polyline": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"EDITOR_hover_tools": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"LEv2_OPEN_EDITOR": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true,
+				"shared": true,
+				"preemptive": "capable"
+			}
+		},
+		"Clip_create_rect": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"Image_get_coordinates": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "incapable"
+			}
+		},
+		"EDITOR_draw_polyline": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"EDITOR_select_clip_mode": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"EDITOR_update_reset_tool": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"EDITOR_new_event": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"EDITOR_on_click": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "incapable"
+			}
+		},
+		"SVG_onError": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "incapable"
+			}
+		},
+		"EDITOR_end_polyline": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"EDITOR_on_timer": {
+			"timeStamp": "2023-09-18T03:27:44Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "incapable"
+			}
+		}
+	}
+}
