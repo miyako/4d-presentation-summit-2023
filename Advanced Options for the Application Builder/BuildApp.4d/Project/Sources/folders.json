@@ -6,6 +6,7 @@
 			"setup_data_path_lookup",
 			"setup_destination_path",
 			"setup_icon_path",
+			"setup_plugins_list",
 			"show_path",
 			"update_application_path",
 			"update_destination_path",

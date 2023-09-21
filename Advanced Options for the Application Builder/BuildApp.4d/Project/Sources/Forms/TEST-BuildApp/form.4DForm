@@ -484,12 +484,7 @@
 					"top": 225,
 					"width": 312,
 					"height": 385,
-					"events": [
-						"onClick",
-						"onHeaderClick",
-						"onDataChange",
-						"onSelectionChange"
-					],
+					"events": [],
 					"resizingMode": "legacy",
 					"focusable": false,
 					"fill": "transparent",
@@ -505,6 +500,7 @@
 					"hideExtraBlankRows": true,
 					"dataSource": "Form:C1466.plugins",
 					"listboxType": "collection",
+					"sortable": false,
 					"columns": [
 						{
 							"header": {
@@ -516,7 +512,9 @@
 								"name": "Footer2"
 							},
 							"resizable": false,
-							"width": 18
+							"width": 22,
+							"dataSourceTypeHint": "boolean",
+							"dataSource": "This:C1470.selected"
 						},
 						{
 							"header": {
@@ -526,19 +524,12 @@
 							"name": "Column3",
 							"footer": {
 								"name": "Footer3"
-							}
+							},
+							"dataSource": "\"Exclude \"+This:C1470.name",
+							"resizable": false,
+							"enterable": false,
+							"truncateMode": "none"
 						}
-					]
-				},
-				"Check Box": {
-					"type": "checkbox",
-					"text": "Checkbox",
-					"top": 201,
-					"left": 326,
-					"width": 111,
-					"height": 22,
-					"events": [
-						"onClick"
 					]
 				}
 			}
@@ -2364,7 +2355,7 @@
 			}
 		}
 	],
-	"geometryStamp": 2321,
+	"geometryStamp": 2324,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

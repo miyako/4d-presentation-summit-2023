@@ -33,6 +33,12 @@
 		"LIPO_FORM": {
 			"timeStamp": "2023-09-18T03:48:37Z"
 		},
+		"setup_plugins_list": {
+			"timeStamp": "2023-09-21T04:14:09Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
 		"PNG2ICO_WORKER": {
 			"timeStamp": "2023-09-18T03:48:37Z",
 			"attributes": {
@@ -85,7 +91,7 @@
 			}
 		},
 		"BUILDAPP_FORM": {
-			"timeStamp": "2023-09-21T01:35:32Z"
+			"timeStamp": "2023-09-21T04:13:43Z"
 		}
 	}
 }
