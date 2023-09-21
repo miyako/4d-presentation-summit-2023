@@ -227,10 +227,10 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 	$_BuildApp.AutoUpdate:=New object:C1471(\
 		"CS"; \
 		New object:C1471(\
-		"Client"; New object:C1471("StartElevated"; Null:C1517); \
-		"ClientUpdateWin"; New object:C1471("StartElevated"; Null:C1517); \
-		"Server"; New object:C1471("StartElevated"; Null:C1517)); \
-		"RuntimeVL"; New object:C1471("StartElevated"; Null:C1517))
+		"Client"; New object:C1471("StartElevated"; False:C215); \
+		"ClientUpdateWin"; New object:C1471("StartElevated"; False:C215); \
+		"Server"; New object:C1471("StartElevated"; False:C215)); \
+		"RuntimeVL"; New object:C1471("StartElevated"; False:C215))
 	
 	$_BuildApp.CS:=New object:C1471(\
 		"BuildServerApplication"; False:C215; \
@@ -247,7 +247,6 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 		"ServerStructureFolderName"; Null:C1517; \
 		"ClientWinSingleInstance"; True:C214; \
 		"ClientServerSystemFolderName"; Null:C1517; \
-		"ClientWinSingleInstance"; False:C215; \
 		"ServerEmbedsProjectDirectoryFile"; False:C215; \
 		"ServerDataCollection"; False:C215; \
 		"HideDataExplorerMenuItem"; False:C215; \
@@ -706,6 +705,98 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 					DOM GET XML ELEMENT VALUE:C731($MacCompiledDatabaseToWinInclude; $boolValue)
 					$_BuildApp.CS.MacCompiledDatabaseToWinIncludeIt:=$boolValue
 				End if 
+				
+				$HideAdministrationMenuItem:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/HideAdministrationMenuItem")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($HideAdministrationMenuItem; $boolValue)
+					$_BuildApp.CS.HideAdministrationMenuItem:=$boolValue
+				End if 
+				
+				$StartElevated:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/AutoUpdate/RuntimeVL/StartElevated")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($StartElevated; $boolValue)
+					$_BuildApp.AutoUpdate.RuntimeVL.StartElevated:=$boolValue
+				End if 
+				
+				$StartElevated:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/AutoUpdate/CS/Server/StartElevated")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($StartElevated; $boolValue)
+					$_BuildApp.AutoUpdate.CS.Server.StartElevated:=$boolValue
+				End if 
+				
+				$StartElevated:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/AutoUpdate/CS/Client/StartElevated")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($StartElevated; $boolValue)
+					$_BuildApp.AutoUpdate.CS.Client.StartElevated:=$boolValue
+				End if 
+				
+				$StartElevated:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/AutoUpdate/CS/ClientUpdateWin/StartElevated")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($StartElevated; $boolValue)
+					$_BuildApp.AutoUpdate.CS.ClientUpdateWin.StartElevated:=$boolValue
+				End if 
+				
+				$ShareLocalResourcesOnWindowsCli:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/ShareLocalResourcesOnWindowsClient")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($ShareLocalResourcesOnWindowsCli; $boolValue)
+					$_BuildApp.CS.ShareLocalResourcesOnWindowsClient:=$boolValue
+				End if 
+				
+				$ClientUserPreferencesFolderByPa:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/ClientUserPreferencesFolderByPath")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($ClientUserPreferencesFolderByPa; $boolValue)
+					$_BuildApp.CS.ClientUserPreferencesFolderByPath:=$boolValue
+				End if 
+				
+				$HideRuntimeExplorerMenuItem:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/HideRuntimeExplorerMenuItem")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($HideRuntimeExplorerMenuItem; $boolValue)
+					$_BuildApp.CS.HideRuntimeExplorerMenuItem:=$boolValue
+				End if 
+				
+				$HideDataExplorerMenuItem:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/HideDataExplorerMenuItem")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($HideDataExplorerMenuItem; $boolValue)
+					$_BuildApp.CS.HideDataExplorerMenuItem:=$boolValue
+				End if 
+				
+				$ServerDataCollection:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/ServerDataCollection")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($ServerDataCollection; $boolValue)
+					$_BuildApp.CS.ServerDataCollection:=$boolValue
+				End if 
+				
+				$ServerEmbedsProjectDirectoryFil:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/ServerEmbedsProjectDirectoryFile")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($ServerEmbedsProjectDirectoryFil; $boolValue)
+					$_BuildApp.CS.ServerEmbedsProjectDirectoryFile:=$boolValue
+				End if 
+				
+				$ClientWinSingleInstance:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/ClientWinSingleInstance")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($ClientWinSingleInstance; $boolValue)
+					$_BuildApp.CS.ClientWinSingleInstance:=$boolValue
+				End if 
+				
+				
+				
+				
+				
+				
+				
+				
 				
 				$MacSignature:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/SignApplication/MacSignature")
 				

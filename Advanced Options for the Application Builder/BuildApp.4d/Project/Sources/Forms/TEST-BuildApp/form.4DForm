@@ -394,7 +394,7 @@
 					"shortcutShift": false,
 					"shortcutAlt": true,
 					"shortcutKey": "t",
-					"action": "showClipboard",
+					"action": "",
 					"fontWeight": "normal",
 					"stroke": "automatic",
 					"imageHugsTitle": false,

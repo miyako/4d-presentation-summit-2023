@@ -269,7 +269,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 						
 						$CLI._updateProperty($BuildApp; $targetRuntimeVLFolder; $CompanyName; $BuildApplicationName; $settings.sdi_application)
 						
-						$CLI._copyDatabase($BuildApp; $targetRuntimeVLFolder; $compileProject)
+						$CLI._copyDatabase($BuildApp; $targetRuntimeVLFolder; $compileProject; $target)
 						
 						If ($target="Serialized")
 							$CLI._generateLicense($BuildApp; $targetRuntimeVLFolder)
@@ -614,13 +614,6 @@ $sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
 					$folder.delete()
 				End for each 
 				
-				If ($BuildApp.CS.PortNumber#Null:C1517)
-					$PortNumber:=Num:C11($BuildApp.CS.PortNumber)
-					If ($PortNumber>0)
-						$SettingsXmlParser.setPortNumber($targetProjectFolder; $PortNumber)
-					End if 
-				End if 
-				
 			End if 
 			
 			$files:=$ContentsFolder.folder("Project").files(fk ignore invisible:K87:22).query("extension == :1"; ".4DProject")
@@ -628,6 +621,13 @@ $sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
 			If ($files.length#0)
 				
 				$targetProjectFile:=$files[0]
+				
+				If ($BuildApp.CS.PortNumber#Null:C1517)
+					$PortNumber:=Num:C11($BuildApp.CS.PortNumber)
+					If ($PortNumber>0)
+						$SettingsXmlParser.setPortNumber($targetProjectFile; $PortNumber)
+					End if 
+				End if 
 				
 				$CLI._printTask("Rename project")
 				$targetProjectFile:=$targetProjectFile.rename($BuildApp.BuildApplicationName+".4DProject")
@@ -666,6 +666,18 @@ $sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
 			For each ($folder; $folders)
 				$CLI._printPath($folder.copyTo($ContentsFolder))
 			End for each 
+			
+			If ($buildApplicationType="Server")
+				
+				If ($BuildApp.CS.ServerEmbedsProjectDirectoryFile#Null:C1517) && ($BuildApp.CS.ServerEmbedsProjectDirectoryFile)
+					$directoryFile:=$ProjectFolder.parent.folder("Settings").file("directory.json")
+					If ($directoryFile.exists)
+						$directoryFile.copyTo($targetProjectFolder.parent.folder("Settings"))
+					End if 
+					
+				End if 
+				
+			End if 
 			
 		End if 
 		
@@ -795,11 +807,15 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text; $buildApplicat
 		
 		$moduleFolder:=$targetFolder.folder("Contents").folder("Resources").folder("php")
 		
-		$CLI._printTask("Delete PHP module")
-		$CLI._printStatus($moduleFolder.exists)
-		$CLI._printPath($moduleFolder)
-		
-		$moduleFolder.delete(Delete with contents:K24:24)
+		If ($moduleFolder.exists)
+			
+			$CLI._printTask("Delete PHP module")
+			$CLI._printStatus($moduleFolder.exists)
+			$CLI._printPath($moduleFolder)
+			
+			$moduleFolder.delete(Delete with contents:K24:24)
+			
+		End if 
 		
 	End if 
 	
@@ -807,11 +823,15 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text; $buildApplicat
 		
 		$moduleFolder:=$targetFolder.folder("Contents").folder("Resources").folder("mecab")
 		
-		$CLI._printTask("Delete MeCab module")
-		$CLI._printStatus($moduleFolder.exists)
-		$CLI._printPath($moduleFolder)
-		
-		$moduleFolder.delete(Delete with contents:K24:24)
+		If ($moduleFolder.exists)
+			
+			$CLI._printTask("Delete MeCab module")
+			$CLI._printStatus($moduleFolder.exists)
+			$CLI._printPath($moduleFolder)
+			
+			$moduleFolder.delete(Delete with contents:K24:24)
+			
+		End if 
 		
 	End if 
 	
@@ -819,11 +839,15 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text; $buildApplicat
 		
 		$moduleFolder:=$targetFolder.folder("Contents").folder("Resources").folder("Updater")
 		
-		$CLI._printTask("Delete 4D Updater module")
-		$CLI._printStatus($moduleFolder.exists)
-		$CLI._printPath($moduleFolder)
-		
-		$moduleFolder.delete(Delete with contents:K24:24)
+		If ($moduleFolder.exists)
+			
+			$CLI._printTask("Delete 4D Updater module")
+			$CLI._printStatus($moduleFolder.exists)
+			$CLI._printPath($moduleFolder)
+			
+			$moduleFolder.delete(Delete with contents:K24:24)
+			
+		End if 
 		
 	End if 
 	
@@ -831,11 +855,15 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text; $buildApplicat
 		
 		$moduleFolder:=$targetFolder.folder("Contents").folder("Resources").folder("Spellcheck")
 		
-		$CLI._printTask("Delete SpellChecker module")
-		$CLI._printStatus($moduleFolder.exists)
-		$CLI._printPath($moduleFolder)
-		
-		$moduleFolder.delete(Delete with contents:K24:24)
+		If ($moduleFolder.exists)  //does not exist for server
+			
+			$CLI._printTask("Delete SpellChecker module")
+			$CLI._printStatus($moduleFolder.exists)
+			$CLI._printPath($moduleFolder)
+			
+			$moduleFolder.delete(Delete with contents:K24:24)
+			
+		End if 
 		
 	End if 
 	
@@ -843,16 +871,20 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text; $buildApplicat
 		
 		$moduleFolder:=$targetFolder.folder("Contents").folder("Native Components").folder("WebViewerCEF.bundle")
 		
-		$CLI._printTask("Delete CEF module")
-		$CLI._printStatus($moduleFolder.exists)
-		$CLI._printPath($moduleFolder)
-		
-		$moduleFolder.delete(Delete with contents:K24:24)
-		
-		//symlink
-		$file:=$targetFolder.folder("Contents").folder("Frameworks").file("Chromium Embedded Framework.framework")
-		$CLI._printPath($file)
-		$file.delete()
+		If ($moduleFolder.exists)
+			
+			$CLI._printTask("Delete CEF module")
+			$CLI._printStatus($moduleFolder.exists)
+			$CLI._printPath($moduleFolder)
+			
+			$moduleFolder.delete(Delete with contents:K24:24)
+			
+			//symlink
+			$file:=$targetFolder.folder("Contents").folder("Frameworks").file("Chromium Embedded Framework.framework")
+			$CLI._printPath($file)
+			$file.delete()
+			
+		End if 
 		
 	End if 
 	
@@ -1055,23 +1087,21 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 				$keys.push("com.4D.HideRuntimeExplorerMenuItem")
 			End if 
 			
-			If ($BuildApp.CS.HideAdministrationMenuItem)
-				$info["com.4D.HideAdministrationWindowMenuItem"]:="true"
-				$keys.push("com.4D.HideAdministrationWindowMenuItem")
-			End if 
-			
 			If ($BuildApp.CS.ServerDataCollection)
 				$info["com.4d.dataCollection"]:="true"
 				$info["DataCollection"]:="true"
 				$keys.push("com.4d.dataCollection")
 				$keys.push("DataCollection")
 			End if 
+			
 			If ($BuildApp.CS.HideAdministrationMenuItem)
 				$info["com.4D.HideAdministrationWindowMenuItem"]:="true"
 				$keys.push("com.4D.HideAdministrationWindowMenuItem")
 			End if 
+			
 			$info["com.4D.BuildApp.LastDataPathLookup"]:=$BuildApp.CS.LastDataPathLookup
 			$keys.push("com.4D.BuildApp.LastDataPathLookup")
+			
 		Else 
 			$info["com.4D.BuildApp.LastDataPathLookup"]:=$BuildApp.RuntimeVL.LastDataPathLookup
 			$keys.push("com.4D.BuildApp.LastDataPathLookup")
