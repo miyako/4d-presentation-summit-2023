@@ -1,8 +1,13 @@
 //%attributes = {}
-var $UI : cs:C1710.UI
+#DECLARE($params : Object)
 
-$UI:=cs:C1710.UI.new()
-
-$SVG:=$UI.getColoredImage("4d-logo")
-
-SET TEXT TO PASTEBOARD:C523($SVG)
+If (Count parameters:C259=0)
+	
+	CALL WORKER:C1389(1; Current method name:C684; New object:C1471)
+	
+Else 
+	
+	$window:=Open form window:C675("TEST")
+	DIALOG:C40("TEST"; *)
+	
+End if 

@@ -23,7 +23,7 @@
 					"left": 8,
 					"width": 225,
 					"height": 317,
-					"sizingY": "move",
+					"sizingY": "grow",
 					"dataSource": "",
 					"columnCount": 1,
 					"events": [
@@ -32,7 +32,8 @@
 					"class": "logo",
 					"rowCount": 2,
 					"switchWhenRollover": false,
-					"switchBackWhenReleased": true
+					"switchBackWhenReleased": true,
+					"sizingX": "grow"
 				}
 			}
 		}
@@ -56,5 +57,5 @@
 		"version": "1",
 		"kind": "form"
 	},
-	"geometryStamp": 172
+	"geometryStamp": 174
 }
