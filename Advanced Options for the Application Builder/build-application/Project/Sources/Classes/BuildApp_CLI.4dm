@@ -97,6 +97,18 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 		
 		$success:=$status.success
 		
+		If ($success)
+			If (Is macOS:C1572)
+				$localLibrariesFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent.parent.folder("Libraries")
+				$LibrariesFolder:=$compileProject.parent.parent
+				$LibrariesFolder.create()
+				$targetLibrariesFolder:=$localLibrariesFolder.copyTo($LibrariesFolder; fk overwrite:K87:5)
+				$CLI._printTask("Copy libraries")
+				$CLI._printStatus($targetLibrariesFolder.extract)
+				$CLI._printPath($targetLibrariesFolder)
+			End if 
+		End if 
+		
 		For each ($error; $status.errors)
 			If ($error.isError)
 				$CLI.print($error.message; "177;bold")
