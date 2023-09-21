@@ -19,6 +19,56 @@ Function get settings()->$settings : Object
 	
 	//MARK:-public methods
 	
+Function findComponents($compileProject : 4D:C1709.File; $asFiles : Boolean)->$components : Collection
+	
+	$projectComponentsFolder:=$compileProject.parent.parent.folder("Components")
+	
+	If (Is macOS:C1572)
+		$applicationComponentsFolder:=Folder:C1567(Application file:C491; fk platform path:K87:2).folder("Contents").folder("Components")
+	Else 
+		$applicationComponentsFolder:=Folder:C1567(Application file:C491; fk platform path:K87:2).parent.folder("Components")
+	End if 
+	
+	$projectComponentFolders:=$projectComponentsFolder.folders(fk ignore invisible:K87:22).query("extension in :1"; New collection:C1472(".4dbase"))
+	$projectComponentFiles:=$projectComponentsFolder.files(fk ignore invisible:K87:22).query("extension in :1"; New collection:C1472(".4DC"; ".4DZ"))
+	
+	$applicationComponentFolders:=$applicationComponentsFolder.folders(fk ignore invisible:K87:22).query("extension in :1"; New collection:C1472(".4dbase"))
+	$applicationComponentFiles:=$applicationComponentsFolder.files(fk ignore invisible:K87:22).query("extension in :1"; New collection:C1472(".4DC"; ".4DZ"))
+	
+	$paths:=$projectComponentFolders.combine($projectComponentFiles).extract("path")
+	
+	//project > application
+	
+	$folders:=New collection:C1472
+	For each ($folder; $applicationComponentFolders)
+		If (Not:C34($paths.includes($folder.path)))
+			$folders.push($folder)
+		End if 
+	End for each 
+	
+	$files:=New collection:C1472
+	For each ($file; $applicationComponentFiles)
+		If (Not:C34($paths.includes($file.path)))
+			$files.push($path)
+		End if 
+	End for each 
+	
+	$components:=New collection:C1472
+	
+	For each ($file; $files)
+		$components.push($file)
+	End for each 
+	
+	For each ($folder; $folders)
+		If ($asFiles)
+			For each ($file; $folder.files().query("extension in :1"; New collection:C1472(".4DC"; ".4DZ")))
+				$components.push($file)
+			End for each 
+		Else 
+			$components.push($folder)
+		End if 
+	End for each 
+	
 Function findLicenses($licenseTypes : Collection)->$BuildApp : cs:C1710.BuildApp
 	
 	$BuildApp:=This:C1470
@@ -71,6 +121,46 @@ Function findLicenses($licenseTypes : Collection)->$BuildApp : cs:C1710.BuildApp
 	
 	$isOEM:=($BuildApp.Licenses["ArrayLicense"+(Is macOS:C1572 ? "Mac" : "Win")].Item.includes("@4UOE@"))
 	$BuildApp.SourcesFiles.RuntimeVL.IsOEM:=$isOEM
+	
+Function findPlugins($compileProject : 4D:C1709.File)->$plugins : Collection
+	
+	$PluginsFolder:=$compileProject.parent.parent.folder("Plugins")
+	$bundles:=$PluginsFolder.folders(fk ignore invisible:K87:22).query("extension == :1"; ".bundle")
+	
+	$plugins:=New collection:C1472
+	
+	var $manifest : Object
+	var $json : Text
+	var $manifestFile : 4D:C1709.File
+	
+	For each ($bundle; $bundles)
+		CLEAR VARIABLE:C89($manifest)
+		$manifestFile:=$bundle.folder("Contents").folder("Resources").file("manifest.json")
+		If ($manifestFile.exists)
+			$json:=Document to text:C1236($manifestFile.platformPath)
+			$manifest:=JSON Parse:C1218($json; Is object:K8:27)
+		Else 
+			$manifestFile:=$bundle.folder("Contents").file("manifest.json")  //old location
+			If ($manifestFile.exists)
+				$json:=Document to text:C1236($manifestFile.platformPath)
+				$manifest:=JSON Parse:C1218($json; Is object:K8:27)
+			End if 
+		End if 
+		
+		If ($manifest#Null:C1517)
+			$plugin:=New object:C1471("folder"; $bundle; "manifest"; $manifest)
+			$plugins.push($plugin)
+		End if 
+		
+	End for each 
+	
+Function findPluginsFolder($compileProject : 4D:C1709.File)->$plugins : 4D:C1709.Folder
+	
+	var $PluginsFolder : 4D:C1709.Folder
+	$PluginsFolder:=$compileProject.parent.parent.folder("Plugins")
+	If ($PluginsFolder.exists)
+		$plugins:=$PluginsFolder
+	End if 
 	
 Function loadFromHost()->$BuildApp : cs:C1710.BuildApp
 	
