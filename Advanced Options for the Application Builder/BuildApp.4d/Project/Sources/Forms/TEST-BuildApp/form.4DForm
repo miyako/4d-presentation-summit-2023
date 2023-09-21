@@ -939,6 +939,21 @@
 						"onDragOver"
 					],
 					"method": "ObjectMethods/RuntimeVLApplicationIcon.4dm"
+				},
+				"BuildApp.AutoUpdate.RuntimeVL.StartElevated": {
+					"type": "checkbox",
+					"text": "Start Elevated",
+					"top": 185,
+					"left": 420,
+					"width": 192,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.BuildApp.AutoUpdate.RuntimeVL.StartElevated",
+					"dataSourceTypeHint": "boolean",
+					"fontWeight": "normal",
+					"focusable": false
 				}
 			},
 			"entryOrder": [
@@ -950,7 +965,8 @@
 				"RuntimeVLApplicationIcon",
 				"RuntimeVL.RuntimeVLFolder",
 				"RuntimeVLIcon",
-				"RuntimeVL.RuntimeVLIconPath"
+				"RuntimeVL.RuntimeVLIconPath",
+				"BuildApp.AutoUpdate.RuntimeVL.StartElevated"
 			]
 		},
 		{
@@ -1301,17 +1317,17 @@
 					"textAlign": "right",
 					"fontWeight": "normal"
 				},
-				"BuildApp.AutoUpdate.Server.StartElevated": {
+				"BuildApp.AutoUpdate.CS.Server.StartElevated": {
 					"type": "checkbox",
 					"text": "Start Elevated",
-					"top": 165,
+					"top": 185,
 					"left": 420,
 					"width": 192,
 					"height": 21,
 					"events": [
 						"onClick"
 					],
-					"dataSource": "Form:C1466.BuildApp.AutoUpdate.Server.StartElevated",
+					"dataSource": "Form:C1466.BuildApp.AutoUpdate.CS.Server.StartElevated",
 					"dataSourceTypeHint": "boolean",
 					"fontWeight": "normal",
 					"focusable": false
@@ -1337,7 +1353,7 @@
 				"BuildApp.CS.PortNumber",
 				"BuildApp.CS.ServerStructureFolderName",
 				"BuildApp.CS.ClientServerSystemFolderName",
-				"BuildApp.AutoUpdate.Server.StartElevated"
+				"BuildApp.AutoUpdate.CS.Server.StartElevated"
 			]
 		},
 		{
@@ -1800,24 +1816,9 @@
 					],
 					"method": "ObjectMethods/DatabaseToEmbedInClientWinApplicationIcon.4dm"
 				},
-				"BuildApp.AutoUpdate.Client.StartElevated": {
+				"BuildApp.AutoUpdate.CS.Client.StartElevated": {
 					"type": "checkbox",
 					"text": "Start Elevated",
-					"top": 185,
-					"left": 420,
-					"width": 192,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.BuildApp.AutoUpdate.Client.StartElevated",
-					"dataSourceTypeHint": "boolean",
-					"fontWeight": "normal",
-					"focusable": false
-				},
-				"BuildApp.AutoUpdate.ClientUpdateWin.StartElevated": {
-					"type": "checkbox",
-					"text": "Start Elevated (Mac Server)",
 					"top": 205,
 					"left": 420,
 					"width": 192,
@@ -1825,7 +1826,22 @@
 					"events": [
 						"onClick"
 					],
-					"dataSource": "Form:C1466.BuildApp.AutoUpdate.ClientUpdateWin.StartElevated",
+					"dataSource": "Form:C1466.BuildApp.AutoUpdate.CS.Client.StartElevated",
+					"dataSourceTypeHint": "boolean",
+					"fontWeight": "normal",
+					"focusable": false
+				},
+				"BuildApp.AutoUpdate.CS.ClientUpdateWin.StartElevated": {
+					"type": "checkbox",
+					"text": "Start Elevated (Mac Server)",
+					"top": 185,
+					"left": 420,
+					"width": 192,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.BuildApp.AutoUpdate.CS.ClientUpdateWin.StartElevated",
 					"dataSourceTypeHint": "boolean",
 					"fontWeight": "normal",
 					"focusable": false
@@ -1855,8 +1871,8 @@
 				"MacCompiledDatabaseToWinApplicationIcon",
 				"DatabaseToEmbedInClientMacApplicationIcon",
 				"DatabaseToEmbedInClientWinApplicationIcon",
-				"BuildApp.AutoUpdate.Client.StartElevated",
-				"BuildApp.AutoUpdate.ClientUpdateWin.StartElevated"
+				"BuildApp.AutoUpdate.CS.Client.StartElevated",
+				"BuildApp.AutoUpdate.CS.ClientUpdateWin.StartElevated"
 			]
 		},
 		{
@@ -2758,7 +2774,7 @@
 			]
 		}
 	],
-	"geometryStamp": 2516,
+	"geometryStamp": 2526,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

@@ -35,9 +35,10 @@ Case of
 		
 		$BuildApp.SignApplication.AdHocSign:=True:C214
 		
-		$BuildApp.AutoUpdate.ClientUpdateWin.StartElevated:=True:C214
-		$BuildApp.AutoUpdate.Client.StartElevated:=True:C214
-		$BuildApp.AutoUpdate.Server.StartElevated:=True:C214
+		$BuildApp.AutoUpdate.RuntimeVL.StartElevated:=True:C214
+		$BuildApp.AutoUpdate.CS.ClientUpdateWin.StartElevated:=True:C214
+		$BuildApp.AutoUpdate.CS.Client.StartElevated:=True:C214
+		$BuildApp.AutoUpdate.CS.Server.StartElevated:=True:C214
 		
 		$BuildApp.ArrayExcludedModuleName.Item[0]:="CEF"
 		$BuildApp.ArrayExcludedModuleName.Item[1]:="MeCab"

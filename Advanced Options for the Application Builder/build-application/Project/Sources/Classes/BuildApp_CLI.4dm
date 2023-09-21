@@ -743,13 +743,17 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 	
 	$info:=New object:C1471
 	
+	$info.BuildName:=$BuildApplicationName
+	$info.PublishName:=$BuildApplicationName
+	$keys.push("BuildName")
+	$keys.push("PublishName")
+	
+	$info["BuildHardLink"]:=""
+	$info["com.4D.BuildApp.ReadOnlyApp"]:="true"
+	$keys.push("BuildHardLink")
+	$keys.push("com.4D.BuildApp.ReadOnlyApp")
+	
 	If (Is macOS:C1572)
-		$info.CFBundleDisplayName:=$BuildApp.BuildApplicationName
-		$info.CFBundleName:=$BuildApp.BuildApplicationName
-		$info.CFBundleExecutable:=$BuildApp.BuildApplicationName
-		$info.BuildName:=$BuildApp.BuildApplicationName
-		$info.PublishName:=$BuildApp.BuildApplicationName
-		
 		Case of 
 			: ($buildApplicationType="Server")
 				$info.CFBundleIdentifier:=New collection:C1472($CompanyName; $BuildApplicationName; "server").join("."; ck ignore null or empty:K85:5)
@@ -758,11 +762,21 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 			Else 
 				$info.CFBundleIdentifier:=New collection:C1472($CompanyName; $BuildApplicationName).join("."; ck ignore null or empty:K85:5)
 		End case 
-		
+		$keys.push("CFBundleIdentifier")
+	End if 
+	
+	Case of 
+		: ($buildApplicationType="Client@")
+			$BuildApplicationName:=$BuildApplicationName+" Client"
+	End case 
+	
+	If (Is macOS:C1572)
+		$info.CFBundleDisplayName:=$BuildApplicationName
+		$info.CFBundleName:=$BuildApplicationName
+		$info.CFBundleExecutable:=$BuildApplicationName
 		$keys.push("CFBundleName")
 		$keys.push("CFBundleDisplayName")
 		$keys.push("CFBundleExecutable")
-		$keys.push("CFBundleIdentifier")
 	Else 
 		$info.OriginalFilename:=$BuildApplicationName+".exe"
 		$keys.push("OriginalFilename")
@@ -770,62 +784,143 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 		$keys.push("ProductName")
 	End if 
 	
+	Case of 
+		: ($buildApplicationType="Server")
+			$BuildApplicationName:=$BuildApplicationName+" Server"
+	End case 
+	
 	$info.DataFileConversionMode:="0"
 	$keys.push("DataFileConversionMode")
 	
 	If (Is Windows:C1573)
 		$info.SDIRuntime:=$sdi_application ? "1" : "0"
 		$keys.push("SDIRuntime")
+	Else 
+		$info.SDIRuntime:="0"
+		$keys.push("SDIRuntime")
 	End if 
-	
-	$info["com.4D.BuildApp.ReadOnlyApp"]:="true"
-	$keys.push("com.4D.BuildApp.ReadOnlyApp")
 	
 	If ($BuildApp.CS.ClientWinSingleInstance)
 		$info["4D_SingleInstance"]:="1"
+		$keys.push("4D_SingleInstance")
+	End if 
+	
+	If ($BuildApp.CS.RangeVersMin#Null:C1517)
+		$RangeVersMin:=Num:C11($BuildApp.CS.RangeVersMin)
+		If ($RangeVersMin>1)
+			$info["BuildRangeVersMin"]:=String:C10(Int:C8($RangeVersMin))
+			$keys.push("BuildRangeVersMin")
+		End if 
+	End if 
+	
+	If ($BuildApp.CS.RangeVersMax#Null:C1517)
+		$RangeVersMax:=Num:C11($BuildApp.CS.RangeVersMax)
+		If ($RangeVersMax>1)
+			$info["BuildRangeVersMax"]:=String:C10(Int:C8($RangeVersMax))
+			$keys.push("BuildRangeVersMax")
+		End if 
+	End if 
+	
+	If ($BuildApp.CS.CurrentVers#Null:C1517)
+		$CurrentVers:=Num:C11($BuildApp.CS.CurrentVers)
+		If ($CurrentVers>1)
+			$info["CurrentVers"]:=String:C10(Int:C8($CurrentVers))
+			$keys.push("CurrentVers")
+		End if 
+	End if 
+	
+	var $EnginedServer : Text
+	$database_shortcut:=DOM Create XML Ref:C861("database_shortcut")
+	DOM SET XML ATTRIBUTE:C866($database_shortcut; "is_remote"; True:C214)
+	
+	If ($BuildApp.CS.IPAddress#Null:C1517)
+		$IPAddress:=Num:C11($BuildApp.CS.IPAddress)
+		If ($IPAddress#"")
+			$server_path:=$IPAddress
+			If ($BuildApp.CS.PortNumber#Null:C1517)
+				$PortNumber:=Num:C11($BuildApp.CS.PortNumber)
+				If ($PortNumber>1)
+					$server_path:=$server_path+":"+String:C10($PortNumber)
+				Else 
+					$server_path:=$server_path+":19813"
+				End if 
+				DOM SET XML ATTRIBUTE:C866($database_shortcut; "server_path"; $server_path)
+			End if 
+		End if 
 	End if 
 	
 	If ($BuildApp.CS.ClientServerSystemFolderName#Null:C1517) && ($BuildApp.CS.ClientServerSystemFolderName#"")
-		$info["com.4d.ServerCacheFolderName"]:=$BuildApp.CS.ClientServerSystemFolderName
+		var $cache_folder_name : Text
+		$cache_folder_name:=$BuildApp.CS.ClientServerSystemFolderName
+		DOM SET XML ATTRIBUTE:C866($database_shortcut; "cache_folder_name"; $cache_folder_name)
 	End if 
 	
-	If ($BuildApp.CS.HideDataExplorerMenuItem)
-		$info["com.4D.HideDataExplorerMenuItem"]:="true"
+	If ($BuildApp.CS.ServerStructureFolderName#Null:C1517) && ($BuildApp.CS.ServerStructureFolderName#"")
+		var $server_database_name : Text
+		$server_database_name:=$BuildApp.CS.ServerStructureFolderName
+		DOM SET XML ATTRIBUTE:C866($database_shortcut; "server_database_name"; $server_database_name)
 	End if 
 	
-	If ($BuildApp.CS.ServerDataCollection)
-		$info["com.4d.dataCollection"]:="true"
-		$info["DataCollection"]:="true"
-	End if 
-	
-	If ($BuildApp.CS.HideAdministrationMenuItem)
-		$info["com.4D.HideAdministrationWindowMenuItem"]:="true"
-	End if 
-	
-	If ($BuildApp.CS.HideRuntimeExplorerMenuItem)
-		$info["com.4D.HideRuntimeExplorerMenuItem"]:="true"
-	End if 
-	
-	If ($BuildApp.CS.HardLink#Null:C1517) && ($BuildApp.CS.HardLink#"")
-		$info["BuildHardLink"]:=$BuildApp.CS.HardLink
-	End if 
-	
-	If ($BuildApp.CS.RangeVersMin#Null:C1517) && ($BuildApp.CS.RangeVersMin#0)
-		$info["BuildRangeVersMin"]:=String:C10($BuildApp.CS.RangeVersMin)
-	End if 
-	
-	If ($BuildApp.CS.RangeVersMax#Null:C1517) && ($BuildApp.CS.RangeVersMax#0)
-		$info["BuildRangeVersMax"]:=String:C10($BuildApp.CS.RangeVersMax)
-	End if 
-	
-	If ($BuildApp.CS.CurrentVers#Null:C1517) && ($BuildApp.CS.CurrentVers#0)
-		$info["BuildCurrentVers"]:=String:C10($BuildApp.CS.CurrentVers)
-	End if 
+	DOM EXPORT TO VAR:C863($database_shortcut; $EnginedServer)
+	DOM CLOSE XML:C722($database_shortcut)
 	
 	Case of 
 		: ($buildApplicationType="Client@")
-			//
+			
+			If ($BuildApp.CS.ClientServerSystemFolderName#Null:C1517) && ($BuildApp.CS.ClientServerSystemFolderName#"")
+				$info["BuildCacheFolderNameClient"]:=$cache_folder_name
+				$keys.push("BuildCacheFolderNameClient")
+			End if 
+			
+			If ($BuildApp.CS.ServerSelectionAllowed#Null:C1517)
+				If (Bool:C1537($BuildApp.CS.ServerSelectionAllowed))
+					$info["com.4D.BuildApp.ServerSelectionAllowed"]:="true"
+					$keys.push("com.4D.BuildApp.ServerSelectionAllowed")
+				End if 
+			End if 
+			
+			If ($BuildApp.CS.ClientWinSingleInstance)
+				$info["4D_MultipleClient"]:="1"
+				$keys.push("4D_MultipleClient")
+			End if 
+			
+			If ($BuildApp.CS.ShareLocalResourcesOnWindowsClient)
+				$info["RemoteSharedResources"]:="true"
+				$keys.push("RemoteSharedResources")
+			End if 
+			
 		: ($buildApplicationType="Server")
+			
+			If ($BuildApp.CS.ClientServerSystemFolderName#Null:C1517) && ($BuildApp.CS.ClientServerSystemFolderName#"")
+				$info["com.4d.ServerCacheFolderName"]:=$cache_folder_name
+				$keys.push("com.4d.ServerCacheFolderName")
+			End if 
+			
+			If ($BuildApp.CS.HideDataExplorerMenuItem)
+				$info["com.4D.HideDataExplorerMenuItem"]:="true"
+				$keys.push("com.4D.HideDataExplorerMenuItem")
+			End if 
+			
+			If ($BuildApp.CS.HideRuntimeExplorerMenuItem)
+				$info["com.4D.HideRuntimeExplorerMenuItem"]:="true"
+				$keys.push("com.4D.HideRuntimeExplorerMenuItem")
+			End if 
+			
+			If ($BuildApp.CS.HideAdministrationMenuItem)
+				$info["com.4D.HideAdministrationWindowMenuItem"]:="true"
+				$keys.push("com.4D.HideAdministrationWindowMenuItem")
+			End if 
+			
+			If ($BuildApp.CS.ServerDataCollection)
+				$info["com.4d.dataCollection"]:="true"
+				$info["DataCollection"]:="true"
+				$keys.push("com.4d.dataCollection")
+				$keys.push("DataCollection")
+			End if 
+			If ($BuildApp.CS.HideAdministrationMenuItem)
+				$info["com.4D.HideAdministrationWindowMenuItem"]:="true"
+				$keys.push("com.4D.HideAdministrationWindowMenuItem")
+			End if 
 			$info["com.4D.BuildApp.LastDataPathLookup"]:=$BuildApp.CS.LastDataPathLookup
 			$keys.push("com.4D.BuildApp.LastDataPathLookup")
 		Else 
