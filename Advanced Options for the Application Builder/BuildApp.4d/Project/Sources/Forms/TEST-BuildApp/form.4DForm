@@ -181,7 +181,8 @@
 					"dataSource": "Form:C1466.BuildApp.PackProject",
 					"dataSourceTypeHint": "boolean",
 					"fontWeight": "normal",
-					"focusable": false
+					"focusable": false,
+					"method": "ObjectMethods/BuildApp.PackProject.4dm"
 				},
 				"Line": {
 					"type": "line",
@@ -228,23 +229,6 @@
 						"onDragOver"
 					],
 					"method": "ObjectMethods/BuildDestIcon.4dm"
-				},
-				"Run": {
-					"type": "button",
-					"text": "Run",
-					"top": 610,
-					"left": 434,
-					"width": 100,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"imageHugsTitle": false,
-					"focusable": false,
-					"action": "",
-					"sizingY": "move",
-					"sizingX": "move",
-					"method": "ObjectMethods/Run.4dm"
 				},
 				"copy to pasteboard JSON": {
 					"type": "button",
@@ -371,8 +355,123 @@
 					"sizingY": "move",
 					"sizingX": "move",
 					"method": "ObjectMethods/Build.4dm"
+				},
+				"Hint for Mac2": {
+					"type": "text",
+					"text": "⌘⌥T",
+					"top": 622,
+					"left": 160,
+					"width": 40,
+					"height": 16,
+					"fontWeight": "bold",
+					"textAlign": "right",
+					"sizingY": "grow"
+				},
+				"Hint for Mac3": {
+					"type": "text",
+					"text": "Run in Terminal",
+					"top": 622,
+					"left": 208,
+					"width": 110,
+					"height": 16,
+					"sizingY": "grow"
+				},
+				"run in terminal": {
+					"type": "button",
+					"text": "⌘⌥T",
+					"top": 160,
+					"left": 680,
+					"width": 120,
+					"height": 40,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"focusable": false,
+					"method": "ObjectMethods/run in terminal.4dm",
+					"shortcutAccel": true,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": true,
+					"shortcutKey": "t",
+					"action": "showClipboard",
+					"fontWeight": "normal",
+					"stroke": "automatic",
+					"imageHugsTitle": false,
+					"sizingX": "move"
+				},
+				"Hint for Mac4": {
+					"type": "text",
+					"text": "⌘⌥S",
+					"top": 622,
+					"left": 300,
+					"width": 40,
+					"height": 16,
+					"fontWeight": "bold",
+					"textAlign": "right",
+					"sizingY": "grow"
+				},
+				"Hint for Both3": {
+					"type": "text",
+					"text": "Save as…",
+					"top": 622,
+					"left": 348,
+					"width": 90,
+					"height": 16,
+					"sizingY": "grow"
+				},
+				"Hint for Win2": {
+					"type": "text",
+					"text": "⌃⎇S",
+					"top": 622,
+					"left": 300,
+					"width": 40,
+					"height": 16,
+					"fontWeight": "bold",
+					"textAlign": "right",
+					"sizingY": "grow"
+				},
+				"save as": {
+					"type": "button",
+					"text": "⌘⌥S",
+					"top": 200,
+					"left": 680,
+					"width": 120,
+					"height": 40,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"focusable": false,
+					"method": "ObjectMethods/save as.4dm",
+					"shortcutAccel": true,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": true,
+					"shortcutKey": "s",
+					"action": "",
+					"fontWeight": "normal",
+					"stroke": "automatic",
+					"imageHugsTitle": false,
+					"sizingX": "move"
 				}
-			}
+			},
+			"entryOrder": [
+				"lb.pages",
+				"Up",
+				"BuildApp.BuildApplicationName",
+				"BuildDestIcon",
+				"Down",
+				"BuildDest.BuildDestFolder",
+				"copy to pasteboard JSON",
+				"BuildApp.PackProject",
+				"BuildApp.UseStandardZipFormat",
+				"copy to pasteboard XML",
+				"run in terminal",
+				"save as",
+				"Close",
+				"Build"
+			]
 		},
 		{
 			"objects": {
@@ -648,7 +747,19 @@
 					"height": 16,
 					"fontWeight": "bold"
 				}
-			}
+			},
+			"entryOrder": [
+				"BuildApp.IncludeAssociatedFolders",
+				"BuildApp.BuildCompiled",
+				"BuildApp.BuildComponent",
+				"ExcludeCEF",
+				"Plugins",
+				"components",
+				"ExcludeMeCab",
+				"ExcludePHP",
+				"ExcludeSpellChecker",
+				"ExcludeUpdater"
+			]
 		},
 		{
 			"objects": {
@@ -830,7 +941,17 @@
 					"method": "ObjectMethods/RuntimeVLApplicationIcon.4dm"
 				}
 			},
-			"entryOrder": []
+			"entryOrder": [
+				"BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIncludeIt",
+				"BuildApp.BuildApplicationSerialized",
+				"BuildApp.SourcesFiles.RuntimeVL.IsOEM",
+				"BuildApp.BuildApplicationLight",
+				"BuildApp.RuntimeVL.LastDataPathLookup",
+				"RuntimeVLApplicationIcon",
+				"RuntimeVL.RuntimeVLFolder",
+				"RuntimeVLIcon",
+				"RuntimeVL.RuntimeVLIconPath"
+			]
 		},
 		{
 			"objects": {
@@ -1179,9 +1300,45 @@
 					"height": 16,
 					"textAlign": "right",
 					"fontWeight": "normal"
+				},
+				"BuildApp.AutoUpdate.Server.StartElevated": {
+					"type": "checkbox",
+					"text": "Start Elevated",
+					"top": 165,
+					"left": 420,
+					"width": 192,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.BuildApp.AutoUpdate.Server.StartElevated",
+					"dataSourceTypeHint": "boolean",
+					"fontWeight": "normal",
+					"focusable": false
 				}
 			},
-			"entryOrder": []
+			"entryOrder": [
+				"BuildApp.SourcesFiles.CS.ServerIncludeIt",
+				"BuildApp.CS.BuildServerApplication",
+				"BuildApp.SourcesFiles.CS.IsOEM",
+				"BuildApp.CS.LastDataPathLookup",
+				"ServerApplicationIcon",
+				"Server.ServerFolder",
+				"ServerIcon",
+				"Server.ServerIconPath",
+				"BuildApp.CS.ServerSelectionAllowed",
+				"BuildApp.CS.HideDataExplorerMenuItem",
+				"BuildApp.CS.ServerEmbedsProjectDirectoryFile",
+				"BuildApp.CS.HideRuntimeExplorerMenuItem",
+				"BuildApp.CS.ServerDataCollection",
+				"BuildApp.CS.HideAdministrationMenuItem",
+				"BuildApp.CS.HardLink",
+				"BuildApp.CS.IPAddress",
+				"BuildApp.CS.PortNumber",
+				"BuildApp.CS.ServerStructureFolderName",
+				"BuildApp.CS.ClientServerSystemFolderName",
+				"BuildApp.AutoUpdate.Server.StartElevated"
+			]
 		},
 		{
 			"objects": {
@@ -1451,7 +1608,8 @@
 					"width": 44,
 					"height": 17,
 					"dataSource": "Form:C1466.BuildApp.CS.CurrentVers",
-					"multiline": "no"
+					"multiline": "no",
+					"dataSourceTypeHint": "integer"
 				},
 				"Text51": {
 					"type": "text",
@@ -1465,18 +1623,19 @@
 				},
 				"BuildApp.CS.RangeVersMin": {
 					"type": "input",
-					"left": 320,
-					"top": 575,
+					"left": 520,
+					"top": 545,
 					"width": 44,
 					"height": 17,
 					"dataSource": "Form:C1466.BuildApp.CS.RangeVersMin",
-					"multiline": "no"
+					"multiline": "no",
+					"dataSourceTypeHint": "integer"
 				},
 				"Text55": {
 					"type": "text",
 					"text": "Range Min:",
-					"top": 576,
-					"left": 220,
+					"top": 546,
+					"left": 420,
 					"width": 90,
 					"height": 16,
 					"textAlign": "right",
@@ -1484,18 +1643,19 @@
 				},
 				"BuildApp.CS.RangeVersMax": {
 					"type": "input",
-					"left": 320,
-					"top": 606,
+					"left": 520,
+					"top": 576,
 					"width": 44,
 					"height": 17,
 					"dataSource": "Form:C1466.BuildApp.CS.RangeVersMax",
-					"multiline": "no"
+					"multiline": "no",
+					"dataSourceTypeHint": "integer"
 				},
 				"Text56": {
 					"type": "text",
 					"text": "Range Max:",
-					"top": 607,
-					"left": 220,
+					"top": 577,
+					"left": 420,
 					"width": 90,
 					"height": 16,
 					"textAlign": "right",
@@ -1639,8 +1799,65 @@
 						"onDragOver"
 					],
 					"method": "ObjectMethods/DatabaseToEmbedInClientWinApplicationIcon.4dm"
+				},
+				"BuildApp.AutoUpdate.Client.StartElevated": {
+					"type": "checkbox",
+					"text": "Start Elevated",
+					"top": 185,
+					"left": 420,
+					"width": 192,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.BuildApp.AutoUpdate.Client.StartElevated",
+					"dataSourceTypeHint": "boolean",
+					"fontWeight": "normal",
+					"focusable": false
+				},
+				"BuildApp.AutoUpdate.ClientUpdateWin.StartElevated": {
+					"type": "checkbox",
+					"text": "Start Elevated (Mac Server)",
+					"top": 205,
+					"left": 420,
+					"width": 192,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.BuildApp.AutoUpdate.ClientUpdateWin.StartElevated",
+					"dataSourceTypeHint": "boolean",
+					"fontWeight": "normal",
+					"focusable": false
 				}
-			}
+			},
+			"entryOrder": [
+				"BuildApp.SourcesFiles.CS.ClientMacIncludeIt",
+				"BuildApp.CS.BuildCSUpgradeable",
+				"BuildApp.SourcesFiles.CS.ClientWinIncludeIt",
+				"BuildApp.CS.BuildV13ClientUpgrades",
+				"BuildApp.CS.ClientWinSingleInstance",
+				"BuildApp.CS.ClientUserPreferencesFolderByPath",
+				"RuntimeVL.RuntimeVLFolder1",
+				"ClientMac.ClientMacIconPath",
+				"ClientWin.ClientWinIconPath",
+				"BuildApp.CS.ShareLocalResourcesOnWindowsClient",
+				"BuildApp.CS.MacCompiledDatabaseToWinIncludeIt",
+				"MacCompiledDatabaseToWin.MacCompiledDatabaseToWinFolder",
+				"DatabaseToEmbedInClientMac.DatabaseToEmbedInClientMacFolder",
+				"DatabaseToEmbedInClientWin.DatabaseToEmbedInClientWinFolder",
+				"BuildApp.CS.CurrentVers",
+				"BuildApp.CS.RangeVersMin",
+				"BuildApp.CS.RangeVersMax",
+				"RuntimeVLApplicationIcon1",
+				"ClientMacIcon",
+				"ClientWinIcon",
+				"MacCompiledDatabaseToWinApplicationIcon",
+				"DatabaseToEmbedInClientMacApplicationIcon",
+				"DatabaseToEmbedInClientWinApplicationIcon",
+				"BuildApp.AutoUpdate.Client.StartElevated",
+				"BuildApp.AutoUpdate.ClientUpdateWin.StartElevated"
+			]
 		},
 		{
 			"objects": {
@@ -1908,7 +2125,19 @@
 					"height": 16,
 					"fontWeight": "normal"
 				}
-			}
+			},
+			"entryOrder": [
+				"BuildApp.Versioning.Common.CommonVersion1",
+				"BuildApp.Versioning.Common.CommonCopyright",
+				"BuildApp.Versioning.Common.CommonCreator",
+				"BuildApp.Versioning.Common.CommonComment",
+				"BuildApp.Versioning.Common.CommonCompanyName",
+				"BuildApp.Versioning.Common.CommonFileDescription",
+				"BuildApp.Versioning.Common.CommonInternalName",
+				"BuildApp.Versioning.Common.CommonLegalTrademark",
+				"BuildApp.Versioning.Common.CommonPrivateBuild",
+				"BuildApp.Versioning.Common.CommonSpecialBuild"
+			]
 		},
 		{
 			"objects": {
@@ -2102,7 +2331,19 @@
 					"textAlign": "right",
 					"fontWeight": "normal"
 				}
-			}
+			},
+			"entryOrder": [
+				"BuildApp.Versioning.RuntimeVL.RuntimeVLVersion",
+				"BuildApp.Versioning.RuntimeVL.RuntimeVLCopyright",
+				"BuildApp.Versioning.RuntimeVL.RuntimeVLCreator",
+				"BuildApp.Versioning.RuntimeVL.RuntimeVLComment",
+				"BuildApp.Versioning.RuntimeVL.RuntimeVLCompanyName",
+				"BuildApp.Versioning.RuntimeVL.RuntimeVLFileDescription1",
+				"BuildApp.Versioning.RuntimeVL.RuntimeVLInternalName",
+				"BuildApp.Versioning.RuntimeVL.RuntimeVLLegalTrademark",
+				"BuildApp.Versioning.RuntimeVL.RuntimeVLPrivateBuild",
+				"BuildApp.Versioning.RuntimeVL.RuntimeVLSpecialBuild"
+			]
 		},
 		{
 			"objects": {
@@ -2296,7 +2537,19 @@
 					"textAlign": "right",
 					"fontWeight": "normal"
 				}
-			}
+			},
+			"entryOrder": [
+				"BuildApp.Versioning.Server.ServerVersion",
+				"BuildApp.Versioning.Server.ServerCopyright",
+				"BuildApp.Versioning.Server.ServerCreator",
+				"BuildApp.Versioning.Server.ServerComment",
+				"BuildApp.Versioning.Server.ServerCompanyName",
+				"BuildApp.Versioning.Server.ServerFileDescription",
+				"BuildApp.Versioning.Server.ServerInternalName",
+				"BuildApp.Versioning.Server.ServerLegalTrademark",
+				"BuildApp.Versioning.Server.ServerPrivateBuild",
+				"BuildApp.Versioning.Server.ServerSpecialBuild"
+			]
 		},
 		{
 			"objects": {
@@ -2490,10 +2743,22 @@
 					"textAlign": "right",
 					"fontWeight": "normal"
 				}
-			}
+			},
+			"entryOrder": [
+				"BuildApp.Versioning.Client.ClientVersion",
+				"BuildApp.Versioning.Client.ClientCopyright",
+				"BuildApp.Versioning.Client.ClientCreator",
+				"BuildApp.Versioning.Client.ClientComment",
+				"BuildApp.Versioning.Client.ClientCompanyName",
+				"BuildApp.Versioning.Client.ClientFileDescription",
+				"BuildApp.Versioning.Client.ClientInternalName",
+				"BuildApp.Versioning.Client.ClientLegalTrademark",
+				"BuildApp.Versioning.Client.ClientPrivateBuild",
+				"BuildApp.Versioning.Client.ClientSpecialBuild"
+			]
 		}
 	],
-	"geometryStamp": 2447,
+	"geometryStamp": 2516,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
