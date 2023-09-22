@@ -2,16 +2,20 @@
 	"BuildApp": {
 		"methods": [
 			"BUILDAPP_FORM",
+			"patch_correct_nulls",
 			"setup_application_path",
+			"setup_components_list",
 			"setup_data_path_lookup",
 			"setup_destination_path",
 			"setup_icon_path",
+			"setup_modules_list",
 			"setup_plugins_list",
 			"show_path",
 			"update_application_path",
+			"update_components_list",
 			"update_destination_path",
 			"update_icon_path",
-			"update_module_list",
+			"update_modules_list",
 			"update_plugins_list"
 		],
 		"forms": [
@@ -19,6 +23,14 @@
 		],
 		"classes": [
 			"BuildApp"
+		]
+	},
+	"Classes": {
+		"classes": [
+			"_CLI",
+			"_CLI_Controller",
+			"_Form_Controller",
+			"_Worker_Controller"
 		]
 	},
 	"Iconutil": {

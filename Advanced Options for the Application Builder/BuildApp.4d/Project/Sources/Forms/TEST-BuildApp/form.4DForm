@@ -286,7 +286,7 @@
 					"height": 16,
 					"fontWeight": "bold",
 					"textAlign": "right",
-					"sizingY": "grow"
+					"sizingY": "move"
 				},
 				"Hint for Both2": {
 					"type": "text",
@@ -295,7 +295,7 @@
 					"left": 208,
 					"width": 90,
 					"height": 16,
-					"sizingY": "grow"
+					"sizingY": "move"
 				},
 				"Hint for Mac1": {
 					"type": "text",
@@ -306,7 +306,7 @@
 					"height": 16,
 					"fontWeight": "bold",
 					"textAlign": "right",
-					"sizingY": "grow"
+					"sizingY": "move"
 				},
 				"Hint for Both1": {
 					"type": "text",
@@ -315,7 +315,7 @@
 					"left": 348,
 					"width": 80,
 					"height": 16,
-					"sizingY": "grow"
+					"sizingY": "move"
 				},
 				"Hint for Win": {
 					"type": "text",
@@ -326,7 +326,7 @@
 					"height": 16,
 					"fontWeight": "bold",
 					"textAlign": "right",
-					"sizingY": "grow"
+					"sizingY": "move"
 				},
 				"Hint for Win1": {
 					"type": "text",
@@ -337,7 +337,7 @@
 					"height": 16,
 					"fontWeight": "bold",
 					"textAlign": "right",
-					"sizingY": "grow"
+					"sizingY": "move"
 				},
 				"Build": {
 					"type": "button",
@@ -365,7 +365,7 @@
 					"height": 16,
 					"fontWeight": "bold",
 					"textAlign": "right",
-					"sizingY": "grow"
+					"sizingY": "move"
 				},
 				"Hint for Mac3": {
 					"type": "text",
@@ -374,7 +374,7 @@
 					"left": 208,
 					"width": 110,
 					"height": 16,
-					"sizingY": "grow"
+					"sizingY": "move"
 				},
 				"run in terminal": {
 					"type": "button",
@@ -409,7 +409,7 @@
 					"height": 16,
 					"fontWeight": "bold",
 					"textAlign": "right",
-					"sizingY": "grow"
+					"sizingY": "move"
 				},
 				"Hint for Both3": {
 					"type": "text",
@@ -418,7 +418,7 @@
 					"left": 348,
 					"width": 90,
 					"height": 16,
-					"sizingY": "grow"
+					"sizingY": "move"
 				},
 				"Hint for Win2": {
 					"type": "text",
@@ -429,7 +429,7 @@
 					"height": 16,
 					"fontWeight": "bold",
 					"textAlign": "right",
-					"sizingY": "grow"
+					"sizingY": "move"
 				},
 				"save as": {
 					"type": "button",
@@ -523,8 +523,8 @@
 				"ExcludeCEF": {
 					"type": "checkbox",
 					"text": "Exclude CEF",
-					"top": 225,
-					"left": 160,
+					"top": 285,
+					"left": 660,
 					"width": 152,
 					"height": 21,
 					"events": [
@@ -539,8 +539,8 @@
 				"ExcludeMeCab": {
 					"type": "checkbox",
 					"text": "Exclude MeCab",
-					"top": 245,
-					"left": 160,
+					"top": 305,
+					"left": 660,
 					"width": 152,
 					"height": 21,
 					"events": [
@@ -555,8 +555,8 @@
 				"ExcludePHP": {
 					"type": "checkbox",
 					"text": "Exclude PHP",
-					"top": 265,
-					"left": 160,
+					"top": 325,
+					"left": 660,
 					"width": 152,
 					"height": 21,
 					"events": [
@@ -571,8 +571,8 @@
 				"ExcludeSpellChecker": {
 					"type": "checkbox",
 					"text": "Exclude SpellChecker",
-					"top": 285,
-					"left": 160,
+					"top": 345,
+					"left": 660,
 					"width": 152,
 					"height": 21,
 					"events": [
@@ -587,8 +587,8 @@
 				"ExcludeUpdater": {
 					"type": "checkbox",
 					"text": "Exclude 4D Updater",
-					"top": 305,
-					"left": 160,
+					"top": 365,
+					"left": 660,
 					"width": 152,
 					"height": 21,
 					"events": [
@@ -652,7 +652,7 @@
 							"footer": {
 								"name": "Footer3"
 							},
-							"dataSource": "\"Exclude \"+This:C1470.name",
+							"dataSource": "This:C1470.name",
 							"resizable": false,
 							"enterable": false,
 							"truncateMode": "none",
@@ -712,7 +712,7 @@
 							"footer": {
 								"name": "Footer5"
 							},
-							"dataSource": "\"Exclude \"+This:C1470.name",
+							"dataSource": "This:C1470.name",
 							"resizable": false,
 							"enterable": false,
 							"truncateMode": "none",
@@ -746,6 +746,66 @@
 					"width": 152,
 					"height": 16,
 					"fontWeight": "bold"
+				},
+				"modules": {
+					"type": "listbox",
+					"left": 160,
+					"top": 225,
+					"width": 152,
+					"height": 385,
+					"events": [
+						"onClick",
+						"onDataChange"
+					],
+					"resizingMode": "legacy",
+					"focusable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "hidden",
+					"horizontalLineStroke": "transparent",
+					"verticalLineStroke": "transparent",
+					"showHeaders": false,
+					"selectionMode": "none",
+					"rowHeight": "20px",
+					"hideSystemHighlight": true,
+					"hideExtraBlankRows": true,
+					"dataSource": "Form:C1466.modules",
+					"listboxType": "collection",
+					"sortable": false,
+					"currentItemSource": "",
+					"method": "ObjectMethods/modules.4dm",
+					"columns": [
+						{
+							"header": {
+								"text": "Header1",
+								"name": "Header6"
+							},
+							"name": "Column6",
+							"footer": {
+								"name": "Footer6"
+							},
+							"resizable": false,
+							"width": 22,
+							"dataSourceTypeHint": "boolean",
+							"dataSource": "This:C1470.selected"
+						},
+						{
+							"header": {
+								"name": "Header7",
+								"text": "Header3"
+							},
+							"name": "Column7",
+							"footer": {
+								"name": "Footer7"
+							},
+							"dataSource": "This:C1470.name",
+							"resizable": false,
+							"enterable": false,
+							"truncateMode": "none",
+							"width": 0
+						}
+					]
 				}
 			},
 			"entryOrder": [
@@ -758,7 +818,8 @@
 				"ExcludeMeCab",
 				"ExcludePHP",
 				"ExcludeSpellChecker",
-				"ExcludeUpdater"
+				"ExcludeUpdater",
+				"modules"
 			]
 		},
 		{
@@ -1209,7 +1270,7 @@
 				"BuildApp.CS.IPAddress": {
 					"type": "input",
 					"left": 400,
-					"top": 439,
+					"top": 404,
 					"width": 224,
 					"height": 17,
 					"dataSource": "Form:C1466.BuildApp.CS.IPAddress",
@@ -1218,7 +1279,7 @@
 				"Text53": {
 					"type": "text",
 					"text": "IP Address:",
-					"top": 440,
+					"top": 405,
 					"left": 280,
 					"width": 110,
 					"height": 16,
@@ -1228,7 +1289,7 @@
 				"BuildApp.CS.PortNumber": {
 					"type": "input",
 					"left": 400,
-					"top": 469,
+					"top": 434,
 					"width": 64,
 					"height": 17,
 					"dataSource": "Form:C1466.BuildApp.CS.PortNumber",
@@ -1237,7 +1298,7 @@
 				"Text54": {
 					"type": "text",
 					"text": "Port Number:",
-					"top": 470,
+					"top": 435,
 					"left": 280,
 					"width": 110,
 					"height": 16,
@@ -1247,7 +1308,7 @@
 				"BuildApp.CS.ServerStructureFolderName": {
 					"type": "input",
 					"left": 400,
-					"top": 499,
+					"top": 464,
 					"width": 224,
 					"height": 17,
 					"dataSource": "Form:C1466.BuildApp.CS.ServerStructureFolderName",
@@ -1256,7 +1317,7 @@
 				"Text57": {
 					"type": "text",
 					"text": "Server Structure Folder Name:",
-					"top": 500,
+					"top": 465,
 					"left": 160,
 					"width": 230,
 					"height": 16,
@@ -1266,7 +1327,7 @@
 				"BuildApp.CS.ClientServerSystemFolderName": {
 					"type": "input",
 					"left": 400,
-					"top": 529,
+					"top": 494,
 					"width": 224,
 					"height": 17,
 					"dataSource": "Form:C1466.BuildApp.CS.ClientServerSystemFolderName",
@@ -1275,28 +1336,9 @@
 				"Text58": {
 					"type": "text",
 					"text": "Client Server System Folder Name:",
-					"top": 530,
+					"top": 495,
 					"left": 160,
 					"width": 230,
-					"height": 16,
-					"textAlign": "right",
-					"fontWeight": "normal"
-				},
-				"BuildApp.CS.HardLink": {
-					"type": "input",
-					"left": 400,
-					"top": 409,
-					"width": 224,
-					"height": 17,
-					"dataSource": "Form:C1466.BuildApp.CS.HardLink",
-					"multiline": "no"
-				},
-				"Text52": {
-					"type": "text",
-					"text": "Hard Link:",
-					"top": 410,
-					"left": 280,
-					"width": 110,
 					"height": 16,
 					"textAlign": "right",
 					"fontWeight": "normal"
@@ -1332,7 +1374,6 @@
 				"BuildApp.CS.HideRuntimeExplorerMenuItem",
 				"BuildApp.CS.ServerDataCollection",
 				"BuildApp.CS.HideAdministrationMenuItem",
-				"BuildApp.CS.HardLink",
 				"BuildApp.CS.IPAddress",
 				"BuildApp.CS.PortNumber",
 				"BuildApp.CS.ServerStructureFolderName",
@@ -1798,21 +1839,6 @@
 					"dataSourceTypeHint": "boolean",
 					"fontWeight": "normal",
 					"focusable": false
-				},
-				"BuildApp.AutoUpdate.CS.ClientUpdateWin.StartElevated": {
-					"type": "checkbox",
-					"text": "Start Elevated (Mac Server)",
-					"top": 185,
-					"left": 420,
-					"width": 192,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.BuildApp.AutoUpdate.CS.ClientUpdateWin.StartElevated",
-					"dataSourceTypeHint": "boolean",
-					"fontWeight": "normal",
-					"focusable": false
 				}
 			},
 			"entryOrder": [
@@ -1838,8 +1864,7 @@
 				"MacCompiledDatabaseToWinApplicationIcon",
 				"DatabaseToEmbedInClientMacApplicationIcon",
 				"DatabaseToEmbedInClientWinApplicationIcon",
-				"BuildApp.AutoUpdate.CS.Client.StartElevated",
-				"BuildApp.AutoUpdate.CS.ClientUpdateWin.StartElevated"
+				"BuildApp.AutoUpdate.CS.Client.StartElevated"
 			]
 		},
 		{
@@ -2739,9 +2764,77 @@
 				"BuildApp.Versioning.Client.ClientPrivateBuild",
 				"BuildApp.Versioning.Client.ClientSpecialBuild"
 			]
+		},
+		{
+			"objects": {
+				"BuildApp.AutoUpdate.CS.ClientUpdateWin.StartElevated": {
+					"type": "checkbox",
+					"text": "Start Elevated (Mac Server)",
+					"top": 185,
+					"left": 420,
+					"width": 192,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.BuildApp.AutoUpdate.CS.ClientUpdateWin.StartElevated",
+					"dataSourceTypeHint": "boolean",
+					"fontWeight": "normal",
+					"focusable": false
+				},
+				"BuildApp.BuildApplicationLight": {
+					"type": "checkbox",
+					"text": "Build Application Light",
+					"top": 145,
+					"left": 160,
+					"width": 192,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.BuildApp.BuildApplicationLight",
+					"dataSourceTypeHint": "boolean",
+					"fontWeight": "normal",
+					"focusable": false
+				},
+				"BuildApp.CS.BuildV13ClientUpgrades": {
+					"type": "checkbox",
+					"text": "Build v13 Client Upgrades",
+					"top": 165,
+					"left": 160,
+					"width": 192,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.BuildApp.CS.BuildV13ClientUpgrades",
+					"dataSourceTypeHint": "boolean",
+					"fontWeight": "normal",
+					"focusable": false
+				},
+				"BuildApp.CS.HardLink": {
+					"type": "input",
+					"left": 400,
+					"top": 409,
+					"width": 224,
+					"height": 17,
+					"dataSource": "Form:C1466.BuildApp.CS.HardLink",
+					"multiline": "no"
+				},
+				"Text52": {
+					"type": "text",
+					"text": "Hard Link:",
+					"top": 410,
+					"left": 280,
+					"width": 110,
+					"height": 16,
+					"textAlign": "right",
+					"fontWeight": "normal"
+				}
+			}
 		}
 	],
-	"geometryStamp": 2538,
+	"geometryStamp": 2651,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

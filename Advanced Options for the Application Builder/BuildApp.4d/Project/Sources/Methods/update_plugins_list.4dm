@@ -6,7 +6,7 @@ $excludes:=New collection:C1472
 $includes:=New collection:C1472
 
 For each ($plugin; Form:C1466.plugins)
-	If ($plugin.selected)
+	If (Not:C34($plugin.selected))
 		$names.push($plugin.name)
 		$excludes.push($plugin.id)
 	Else 
@@ -16,7 +16,7 @@ End for each
 
 $ids:=New collection:C1472
 For each ($id; $excludes)
-	If (Not:C34($includes.includes($id)))
+	If ($includes.includes($id))
 		$ids.push($id)
 	End if 
 End for each 
