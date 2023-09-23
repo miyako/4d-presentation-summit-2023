@@ -30,8 +30,6 @@ Case of
 		$BuildApp.CS.MacCompiledDatabaseToWinIncludeIt:=False:C215
 		$BuildApp.CS.HideAdministrationMenuItem:=True:C214
 		
-		$BuildApp.SignApplication.AdHocSign:=True:C214
-		
 		$BuildApp.AutoUpdate.RuntimeVL.StartElevated:=True:C214
 		$BuildApp.AutoUpdate.CS.Client.StartElevated:=True:C214
 		$BuildApp.AutoUpdate.CS.Server.StartElevated:=True:C214
@@ -144,12 +142,6 @@ Case of
 		
 		$form.MacCompiledDatabaseToWin:=New object:C1471
 		$form.MacCompiledDatabaseToWinApplicationIcon:=setup_application_path($BuildApp; $form; "MacCompiledDatabaseToWin")
-		
-		//possible bug
-		
-		//patch_correct_nulls($BuildApp)
-		
-		//ready!
 		
 		$form.BuildApp:=$BuildApp
 		

@@ -106,8 +106,6 @@ Function compile($compileProject : 4D:C1709.File)->$success : Boolean
 		
 	Else 
 		
-		$CLI.clean($compileProject)
-		
 		$options:=New object:C1471
 		$options.generateSymbols:=False:C215
 		$options.generateSyntaxFile:=True:C214
