@@ -176,20 +176,6 @@ Function toFile($file : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 		$file.setText($BuildApp.toString(); "utf-8"; Document with CR:K24:21)
 	End if 
 	
-Function _cajole()->$settings : Object
-	
-	$BuildApp:=This:C1470
-	
-	$settings:=OB Copy:C1225($BuildApp.settings)
-	
-	OB REMOVE:C1226($settings; "_settingsFile")
-	OB REMOVE:C1226($settings.ArrayExcludedComponentName; "ItemsCount")
-	OB REMOVE:C1226($settings.ArrayExcludedModuleName; "ItemsCount")
-	OB REMOVE:C1226($settings.ArrayExcludedPluginID; "ItemsCount")
-	OB REMOVE:C1226($settings.ArrayExcludedPluginName; "ItemsCount")
-	OB REMOVE:C1226($settings.Licenses.ArrayLicenseMac; "ItemsCount")
-	OB REMOVE:C1226($settings.Licenses.ArrayLicenseWin; "ItemsCount")
-	
 Function toObject()->$JSON : Text
 	
 	$JSON:=JSON Stringify:C1217(This:C1470._cajole(); *)
@@ -208,10 +194,10 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 	$BuildApp:=This:C1470
 	
 	$_BuildApp:=New object:C1471(\
-		"BuildApplicationName"; Null:C1517; \
-		"BuildWinDestFolder"; Null:C1517; \
-		"BuildMacDestFolder"; Null:C1517; \
-		"DataFilePath"; Null:C1517; \
+		"BuildApplicationName"; ""; \
+		"BuildWinDestFolder"; ""; \
+		"BuildMacDestFolder"; ""; \
+		"DataFilePath"; ""; \
 		"BuildApplicationSerialized"; False:C215; \
 		"BuildApplicationLight"; False:C215; \
 		"IncludeAssociatedFolders"; False:C215; \
@@ -222,39 +208,38 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 		"ArrayExcludedComponentName"; New object:C1471("ItemsCount"; Formula:C1597(This:C1470.Item.length); "Item"; New collection:C1472); \
 		"ArrayExcludedModuleName"; New object:C1471("ItemsCount"; Formula:C1597(This:C1470.Item.length); "Item"; New collection:C1472); \
 		"UseStandardZipFormat"; False:C215; \
-		"PackProject"; True:C214)
+		"PackProject"; False:C215)
 	
 	$_BuildApp.AutoUpdate:=New object:C1471(\
 		"CS"; \
 		New object:C1471(\
-		"Client"; New object:C1471("StartElevated"; Null:C1517); \
-		"ClientUpdateWin"; New object:C1471("StartElevated"; Null:C1517); \
-		"Server"; New object:C1471("StartElevated"; Null:C1517)); \
-		"RuntimeVL"; New object:C1471("StartElevated"; Null:C1517))
+		"Client"; New object:C1471("StartElevated"; False:C215); \
+		"ClientUpdateWin"; New object:C1471("StartElevated"; False:C215); \
+		"Server"; New object:C1471("StartElevated"; False:C215)); \
+		"RuntimeVL"; New object:C1471("StartElevated"; False:C215))
 	
 	$_BuildApp.CS:=New object:C1471(\
 		"BuildServerApplication"; False:C215; \
 		"BuildCSUpgradeable"; False:C215; \
 		"BuildV13ClientUpgrades"; False:C215; \
-		"IPAddress"; Null:C1517; \
-		"PortNumber"; Null:C1517; \
-		"HardLink"; Null:C1517; \
+		"IPAddress"; ""; \
+		"PortNumber"; 19813; \
+		"HardLink"; ""; \
 		"RangeVersMin"; 1; \
 		"RangeVersMax"; 1; \
 		"CurrentVers"; 1; \
-		"LastDataPathLookup"; Null:C1517; \
+		"LastDataPathLookup"; "ByAppName"; \
 		"ServerSelectionAllowed"; False:C215; \
-		"ServerStructureFolderName"; Null:C1517; \
+		"ServerStructureFolderName"; ""; \
 		"ClientWinSingleInstance"; True:C214; \
-		"ClientServerSystemFolderName"; Null:C1517; \
-		"ClientWinSingleInstance"; False:C215; \
+		"ClientServerSystemFolderName"; ""; \
 		"ServerEmbedsProjectDirectoryFile"; False:C215; \
 		"ServerDataCollection"; False:C215; \
 		"HideDataExplorerMenuItem"; False:C215; \
 		"HideRuntimeExplorerMenuItem"; False:C215; \
 		"ClientUserPreferencesFolderByPath"; False:C215; \
 		"ShareLocalResourcesOnWindowsClient"; False:C215; \
-		"MacCompiledDatabaseToWin"; Null:C1517; \
+		"MacCompiledDatabaseToWin"; ""; \
 		"MacCompiledDatabaseToWinIncludeIt"; False:C215; \
 		"HideAdministrationMenuItem"; False:C215)
 	
@@ -264,81 +249,81 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 	
 	$_BuildApp.RuntimeVL:=New object:C1471("LastDataPathLookup"; "ByAppName")
 	
-	$_BuildApp.SignApplication:=New object:C1471("MacSignature"; Null:C1517; "MacCertificate"; Null:C1517; "AdHocSign"; Null:C1517)
+	$_BuildApp.SignApplication:=New object:C1471("MacSignature"; ""; "MacCertificate"; ""; "AdHocSign"; True:C214)
 	
 	$_BuildApp.SourcesFiles:=New object:C1471(\
 		"RuntimeVL"; New object:C1471(\
 		"RuntimeVLIncludeIt"; False:C215; \
-		"RuntimeVLWinFolder"; Null:C1517; \
-		"RuntimeVLMacFolder"; Null:C1517; \
-		"RuntimeVLIconWinPath"; Null:C1517; \
-		"RuntimeVLIconMacPath"; Null:C1517; \
+		"RuntimeVLWinFolder"; ""; \
+		"RuntimeVLMacFolder"; ""; \
+		"RuntimeVLIconWinPath"; ""; \
+		"RuntimeVLIconMacPath"; ""; \
 		"IsOEM"; False:C215); \
 		"CS"; New object:C1471(\
 		"ServerIncludeIt"; False:C215; \
-		"ServerWinFolder"; Null:C1517; \
-		"ServerMacFolder"; Null:C1517; \
+		"ServerWinFolder"; ""; \
+		"ServerMacFolder"; ""; \
 		"ClientWinIncludeIt"; False:C215; \
-		"ClientWinFolderToWin"; Null:C1517; \
-		"ClientWinFolderToMac"; Null:C1517; \
+		"ClientWinFolderToWin"; ""; \
+		"ClientWinFolderToMac"; ""; \
 		"ClientMacIncludeIt"; False:C215; \
-		"ClientMacFolderToWin"; Null:C1517; \
-		"ClientMacFolderToMac"; Null:C1517; \
-		"ServerIconWinPath"; Null:C1517; \
-		"ServerIconMacPath"; Null:C1517; \
-		"ClientMacIconForMacPath"; Null:C1517; \
-		"ClientWinIconForMacPath"; Null:C1517; \
-		"ClientMacIconForWinPath"; Null:C1517; \
-		"ClientWinIconForWinPath"; Null:C1517; \
-		"DatabaseToEmbedInClientWinFolder"; Null:C1517; \
-		"DatabaseToEmbedInClientMacFolder"; Null:C1517; \
+		"ClientMacFolderToWin"; ""; \
+		"ClientMacFolderToMac"; ""; \
+		"ServerIconWinPath"; ""; \
+		"ServerIconMacPath"; ""; \
+		"ClientMacIconForMacPath"; ""; \
+		"ClientWinIconForMacPath"; ""; \
+		"ClientMacIconForWinPath"; ""; \
+		"ClientWinIconForWinPath"; ""; \
+		"DatabaseToEmbedInClientWinFolder"; ""; \
+		"DatabaseToEmbedInClientMacFolder"; ""; \
 		"IsOEM"; False:C215))
 	
 	$_BuildApp.Versioning:=New object:C1471(\
 		"Common"; New object:C1471(\
-		"CommonVersion"; Null:C1517; \
-		"CommonCopyright"; Null:C1517; \
-		"CommonCreator"; Null:C1517; \
-		"CommonComment"; Null:C1517; \
-		"CommonCompanyName"; Null:C1517; \
-		"CommonFileDescription"; Null:C1517; \
-		"CommonInternalName"; Null:C1517; \
-		"CommonLegalTrademark"; Null:C1517; \
-		"CommonPrivateBuild"; Null:C1517; \
-		"CommonSpecialBuild"; Null:C1517); \
+		"CommonVersion"; ""; \
+		"CommonCopyright"; ""; \
+		"CommonCreator"; ""; \
+		"CommonComment"; ""; \
+		"CommonCompanyName"; ""; \
+		"CommonFileDescription"; ""; \
+		"CommonInternalName"; ""; \
+		"CommonLegalTrademark"; ""; \
+		"CommonPrivateBuild"; ""; \
+		"CommonSpecialBuild"; ""); \
 		"RuntimeVL"; New object:C1471(\
-		"RuntimeVLVersion"; Null:C1517; \
-		"RuntimeVLCopyright"; Null:C1517; \
-		"RuntimeVLCreator"; Null:C1517; \
-		"RuntimeVLComment"; Null:C1517; \
-		"RuntimeVLCompanyName"; Null:C1517; \
-		"RuntimeVLFileDescription"; Null:C1517; \
-		"RuntimeVLInternalName"; Null:C1517; \
-		"RuntimeVLLegalTrademark"; Null:C1517; \
-		"RuntimeVLPrivateBuild"; Null:C1517; \
-		"RuntimeVLSpecialBuild"; Null:C1517); \
+		"RuntimeVLVersion"; ""; \
+		"RuntimeVLCopyright"; ""; \
+		"RuntimeVLCreator"; ""; \
+		"RuntimeVLComment"; ""; \
+		"RuntimeVLCompanyName"; ""; \
+		"RuntimeVLFileDescription"; ""; \
+		"RuntimeVLInternalName"; ""; \
+		"RuntimeVLLegalTrademark"; ""; \
+		"RuntimeVLPrivateBuild"; ""; \
+		"RuntimeVLSpecialBuild"; ""); \
 		"Server"; New object:C1471(\
-		"ServerVersion"; Null:C1517; \
-		"ServerCopyright"; Null:C1517; \
-		"ServerCreator"; Null:C1517; \
-		"ServerComment"; Null:C1517; \
-		"ServerCompanyName"; Null:C1517; \
-		"ServerFileDescription"; Null:C1517; \
-		"ServerInternalName"; Null:C1517; \
-		"ServerLegalTrademark"; Null:C1517; \
-		"ServerPrivateBuild"; Null:C1517; \
-		"ServerSpecialBuild"; Null:C1517); \
+		"ServerVersion"; ""; \
+		"ServerCopyright"; ""; \
+		"ServerCreator"; ""; \
+		"ServerComment"; ""; \
+		"ServerCompanyName"; ""; \
+		"ServerFileDescription"; ""; \
+		"ServerInternalName"; ""; \
+		"ServerLegalTrademark"; ""; \
+		"ServerPrivateBuild"; ""; \
+		"ServerSpecialBuild"; ""); \
 		"Client"; New object:C1471(\
-		"ClientVersion"; Null:C1517; \
-		"ClientCopyright"; Null:C1517; \
-		"ClientCreator"; Null:C1517; \
-		"ClientComment"; Null:C1517; \
-		"ClientCompanyName"; Null:C1517; \
-		"ClientFileDescription"; Null:C1517; \
-		"ClientInternalName"; Null:C1517; \
-		"ClientLegalTrademark"; Null:C1517; \
-		"ClientPrivateBuild"; Null:C1517; \
-		"ClientSpecialBuild"; Null:C1517))
+		"ClientVersion"; ""; \
+		"ClientCopyright"; ""; \
+		"ClientCreator"; ""; \
+		"ClientComment"; ""; \
+		"ClientCompanyName"; ""; \
+		"ClientFileDescription"; ""; \
+		"ClientInternalName"; ""; \
+		"ClientLegalTrademark"; ""; \
+		"ClientPrivateBuild"; ""; \
+		"ClientSpecialBuild"; ""))
 	
 	$_BuildApp._settingsFile:=$settingsFile
 	
@@ -707,6 +692,98 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 					$_BuildApp.CS.MacCompiledDatabaseToWinIncludeIt:=$boolValue
 				End if 
 				
+				$HideAdministrationMenuItem:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/HideAdministrationMenuItem")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($HideAdministrationMenuItem; $boolValue)
+					$_BuildApp.CS.HideAdministrationMenuItem:=$boolValue
+				End if 
+				
+				$StartElevated:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/AutoUpdate/RuntimeVL/StartElevated")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($StartElevated; $boolValue)
+					$_BuildApp.AutoUpdate.RuntimeVL.StartElevated:=$boolValue
+				End if 
+				
+				$StartElevated:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/AutoUpdate/CS/Server/StartElevated")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($StartElevated; $boolValue)
+					$_BuildApp.AutoUpdate.CS.Server.StartElevated:=$boolValue
+				End if 
+				
+				$StartElevated:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/AutoUpdate/CS/Client/StartElevated")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($StartElevated; $boolValue)
+					$_BuildApp.AutoUpdate.CS.Client.StartElevated:=$boolValue
+				End if 
+				
+				$StartElevated:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/AutoUpdate/CS/ClientUpdateWin/StartElevated")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($StartElevated; $boolValue)
+					$_BuildApp.AutoUpdate.CS.ClientUpdateWin.StartElevated:=$boolValue
+				End if 
+				
+				$ShareLocalResourcesOnWindowsCli:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/ShareLocalResourcesOnWindowsClient")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($ShareLocalResourcesOnWindowsCli; $boolValue)
+					$_BuildApp.CS.ShareLocalResourcesOnWindowsClient:=$boolValue
+				End if 
+				
+				$ClientUserPreferencesFolderByPa:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/ClientUserPreferencesFolderByPath")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($ClientUserPreferencesFolderByPa; $boolValue)
+					$_BuildApp.CS.ClientUserPreferencesFolderByPath:=$boolValue
+				End if 
+				
+				$HideRuntimeExplorerMenuItem:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/HideRuntimeExplorerMenuItem")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($HideRuntimeExplorerMenuItem; $boolValue)
+					$_BuildApp.CS.HideRuntimeExplorerMenuItem:=$boolValue
+				End if 
+				
+				$HideDataExplorerMenuItem:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/HideDataExplorerMenuItem")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($HideDataExplorerMenuItem; $boolValue)
+					$_BuildApp.CS.HideDataExplorerMenuItem:=$boolValue
+				End if 
+				
+				$ServerDataCollection:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/ServerDataCollection")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($ServerDataCollection; $boolValue)
+					$_BuildApp.CS.ServerDataCollection:=$boolValue
+				End if 
+				
+				$ServerEmbedsProjectDirectoryFil:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/ServerEmbedsProjectDirectoryFile")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($ServerEmbedsProjectDirectoryFil; $boolValue)
+					$_BuildApp.CS.ServerEmbedsProjectDirectoryFile:=$boolValue
+				End if 
+				
+				$ClientWinSingleInstance:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/ClientWinSingleInstance")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($ClientWinSingleInstance; $boolValue)
+					$_BuildApp.CS.ClientWinSingleInstance:=$boolValue
+				End if 
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				$MacSignature:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/SignApplication/MacSignature")
 				
 				If (OK=1)
@@ -817,6 +894,20 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 	End for each 
 	
 	//MARK:-private methods
+	
+Function _cajole()->$settings : Object
+	
+	$BuildApp:=This:C1470
+	
+	$settings:=OB Copy:C1225($BuildApp.settings)
+	
+	OB REMOVE:C1226($settings; "_settingsFile")
+	OB REMOVE:C1226($settings.ArrayExcludedComponentName; "ItemsCount")
+	OB REMOVE:C1226($settings.ArrayExcludedModuleName; "ItemsCount")
+	OB REMOVE:C1226($settings.ArrayExcludedPluginID; "ItemsCount")
+	OB REMOVE:C1226($settings.ArrayExcludedPluginName; "ItemsCount")
+	OB REMOVE:C1226($settings.Licenses.ArrayLicenseMac; "ItemsCount")
+	OB REMOVE:C1226($settings.Licenses.ArrayLicenseWin; "ItemsCount")
 	
 Function _desktopLicenses()->$licenses : Collection
 	

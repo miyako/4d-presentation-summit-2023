@@ -147,7 +147,7 @@ Case of
 		
 		//possible bug
 		
-		patch_correct_nulls($BuildApp)
+		//patch_correct_nulls($BuildApp)
 		
 		//ready!
 		
