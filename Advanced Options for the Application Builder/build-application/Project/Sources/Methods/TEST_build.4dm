@@ -11,8 +11,6 @@ var $BuildApp : cs:C1710.BuildApp
 
 $BuildApp:=cs:C1710.BuildApp.new($buildProject)
 
-//$CLI._getIntValue($BuildApp; "CS.RangeVersMin")
-
 $compile:=$CLI.compile($compileProject)
 
 $built:=$CLI.build($buildProject; $compileProject)

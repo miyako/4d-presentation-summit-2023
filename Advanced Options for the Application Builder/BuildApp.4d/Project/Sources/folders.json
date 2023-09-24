@@ -1,7 +1,6 @@
 {
 	"BuildApp": {
 		"methods": [
-			"BUILDAPP_FORM",
 			"setup_application_path",
 			"setup_components_list",
 			"setup_data_path_lookup",

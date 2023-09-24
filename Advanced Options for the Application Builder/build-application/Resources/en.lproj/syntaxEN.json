@@ -515,6 +515,27 @@
 		"_inheritedFrom_": "_XmlParser"
 	},
 	"_XmlParser": {
+		"getStringValue()": {
+			"Syntax": "**.getStringValue**( *dom* : Text; *path* : Text )->stringValue : Variant",
+			"Params": [
+				[
+					"dom",
+					"Text",
+					"->"
+				],
+				[
+					"path",
+					"Text",
+					"->"
+				],
+				[
+					"stringValue",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
 		"getBoolValue()": {
 			"Syntax": "**.getBoolValue**( *dom* : Text; *path* : Text )->boolValue : Variant",
 			"Params": [

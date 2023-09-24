@@ -727,10 +727,10 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 					$_BuildApp.AutoUpdate.CS.ClientUpdateWin.StartElevated:=$boolValue
 				End if 
 				
-				$ShareLocalResourcesOnWindowsCli:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/ShareLocalResourcesOnWindowsClient")
+				$ShareLocalResourcesOnClient:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/ShareLocalResourcesOnWindowsClient")
 				
 				If (OK=1)
-					DOM GET XML ELEMENT VALUE:C731($ShareLocalResourcesOnWindowsCli; $boolValue)
+					DOM GET XML ELEMENT VALUE:C731($ShareLocalResourcesOnClient; $boolValue)
 					$_BuildApp.CS.ShareLocalResourcesOnWindowsClient:=$boolValue
 				End if 
 				

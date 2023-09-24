@@ -1,4 +1,7 @@
 //%attributes = {}
+RESTORE:C918("Macintosh HD:Users:miyako:Desktop:update.mac.zip"; System folder:C487(Desktop:K41:16))
+
+
 var $BuildApp : cs:C1710.BuildApp
 
 $BuildApp:=cs:C1710.BuildApp.new()

@@ -169,7 +169,9 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 	
 	var $BuildApplicationName; $CompanyName : Text
 	
-	If ($BuildApp.BuildApplicationName#Null:C1517) && ($BuildApp.BuildApplicationName#"")
+	$BuildApplicationName:=$CLI._getStringValue($BuildApp; "BuildApplicationName")
+	
+	If ($BuildApplicationName#"")
 		$BuildApplicationName:=$BuildApp.BuildApplicationName
 	Else 
 		$BuildApplicationName:=$compileProject.name
@@ -235,47 +237,53 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 		Case of 
 			: ($target="Serialized") | ($target="Light")
 				
-				var $BuildDestFolder : 4D:C1709.Folder
+				$BuildDestFolderPath:=$CLI._getStringValue($BuildApp; $Build___DestFolder)
 				
-				If ($BuildApp[$Build___DestFolder]#Null:C1517) && ($BuildApp[$Build___DestFolder]#"")
+				If ($BuildDestFolderPath#"")
+					
+					var $BuildDestFolder : 4D:C1709.Folder
+					
 					$BuildDestFolder:=Folder:C1567($BuildApp[$Build___DestFolder]; fk platform path:K87:2).folder("Final Application")
 					$BuildDestFolder.create()
-				End if 
-				
-				$CLI._printTask("Set destination folder")
-				$CLI._printStatus($BuildDestFolder#Null:C1517)
-				$CLI._printPath($BuildDestFolder)
-				
-				$RuntimeVL___Folder:="RuntimeVL"+$platform+"Folder"
-				
-				If ($BuildApp.SourcesFiles.RuntimeVL[$RuntimeVL___Folder]#Null:C1517) && ($BuildApp.SourcesFiles.RuntimeVL[$RuntimeVL___Folder]#"")
 					
-					var $RuntimeVLFolder : 4D:C1709.Folder
-					$RuntimeVLFolder:=Folder:C1567($BuildApp.SourcesFiles.RuntimeVL[$RuntimeVL___Folder]; fk platform path:K87:2)
+					$CLI._printTask("Set destination folder")
+					$CLI._printStatus($BuildDestFolder#Null:C1517)
+					$CLI._printPath($BuildDestFolder)
 					
-					$CLI._printTask("Check runtime folder")
-					$CLI._printStatus($RuntimeVLFolder.exists)
-					$CLI._printPath($RuntimeVLFolder)
+					$RuntimeVL___Folder:="RuntimeVL"+$platform+"Folder"
 					
-					If ($RuntimeVLFolder.exists)
+					$RuntimeVLFolderPath:=$CLI._getStringValue($BuildApp; "SourcesFiles.RuntimeVL."+$RuntimeVL___Folder)
+					
+					If ($RuntimeVLFolderPath#"")
 						
-						$targetRuntimeVLFolder:=$CLI._copyRuntime($BuildApp; $RuntimeVLFolder; $BuildDestFolder; $BuildApplicationName)
+						var $RuntimeVLFolder : 4D:C1709.Folder
+						$RuntimeVLFolder:=Folder:C1567($RuntimeVLFolderPath; fk platform path:K87:2)
 						
-						$CLI._copyPlugins($BuildApp; $targetRuntimeVLFolder; $compileProject; $target)
+						$CLI._printTask("Check runtime folder")
+						$CLI._printStatus($RuntimeVLFolder.exists)
+						$CLI._printPath($RuntimeVLFolder)
 						
-						$CLI._copyComponents($BuildApp; $targetRuntimeVLFolder; $compileProject; $target)
-						
-						$CLI._updateProperty($BuildApp; $targetRuntimeVLFolder; $CompanyName; $BuildApplicationName; $settings.sdi_application)
-						
-						$CLI._copyDatabase($BuildApp; $targetRuntimeVLFolder; $compileProject; $target)
-						
-						If ($target="Serialized")
-							$CLI._generateLicense($BuildApp; $targetRuntimeVLFolder)
+						If ($RuntimeVLFolder.exists)
+							
+							$targetRuntimeVLFolder:=$CLI._copyRuntime($BuildApp; $RuntimeVLFolder; $BuildDestFolder; $BuildApplicationName; $settings.sdi_application)
+							
+							$CLI._copyPlugins($BuildApp; $targetRuntimeVLFolder; $compileProject; $target)
+							
+							$CLI._copyComponents($BuildApp; $targetRuntimeVLFolder; $compileProject; $target)
+							
+							$CLI._updateProperty($BuildApp; $targetRuntimeVLFolder; $CompanyName; $BuildApplicationName; $settings.sdi_application)
+							
+							$CLI._copyDatabase($BuildApp; $targetRuntimeVLFolder; $compileProject; $target)
+							
+							If ($target="Serialized")
+								$CLI._generateLicense($BuildApp; $targetRuntimeVLFolder)
+							End if 
+							
+							$CLI.quickSign($targetRuntimeVLFolder)
+							
+							$success:=True:C214
+							
 						End if 
-						
-						$CLI.quickSign($targetRuntimeVLFolder)
-						
-						$success:=True:C214
 						
 					End if 
 					
@@ -283,47 +291,55 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 				
 			: ($target="Server")
 				
-				var $BuildDestFolder : 4D:C1709.Folder
+				$BuildDestFolderPath:=$CLI._getStringValue($BuildApp; $Build___DestFolder)
 				
-				If ($BuildApp[$Build___DestFolder]#Null:C1517) && ($BuildApp[$Build___DestFolder]#"")
-					$BuildDestFolder:=Folder:C1567($BuildApp[$Build___DestFolder]; fk platform path:K87:2).folder("Client Server executable")
+				If ($BuildDestFolderPath#"")
+					
+					var $BuildDestFolder : 4D:C1709.Folder
+					
+					$BuildDestFolder:=Folder:C1567($BuildDestFolderPath; fk platform path:K87:2).folder("Client Server executable")
 					$BuildDestFolder.create()
-				End if 
-				
-				$CLI._printTask("Set destination folder")
-				$CLI._printStatus($BuildDestFolder#Null:C1517)
-				$CLI._printPath($BuildDestFolder)
-				
-				$Server___Folder:="Server"+$platform+"Folder"
-				
-				If ($BuildApp.SourcesFiles.CS[$Server___Folder]#Null:C1517) && ($BuildApp.SourcesFiles.CS[$Server___Folder]#"")
 					
-					var $ServerFolder : 4D:C1709.Folder
-					$ServerFolder:=Folder:C1567($BuildApp.SourcesFiles.CS[$Server___Folder]; fk platform path:K87:2)
+					$CLI._printTask("Set destination folder")
+					$CLI._printStatus($BuildDestFolder#Null:C1517)
+					$CLI._printPath($BuildDestFolder)
 					
-					$CLI._printTask("Check server runtime folder")
-					$CLI._printStatus($ServerFolder.exists)
-					$CLI._printPath($ServerFolder)
+					$Server___Folder:="Server"+$platform+"Folder"
 					
-					If ($ServerFolder.exists)
+					$ServerFolderPath:=$CLI._getStringValue($BuildApp; "SourcesFiles.CS."+$Server___Folder)
+					
+					If ($ServerFolderPath#"")
 						
-						$targetServerFolder:=$CLI._copyRuntime($BuildApp; $ServerFolder; $BuildDestFolder; $BuildApplicationName; $target)
+						var $ServerFolder : 4D:C1709.Folder
+						$ServerFolder:=Folder:C1567($ServerFolderPath; fk platform path:K87:2)
 						
-						$CLI._copyPlugins($BuildApp; $targetServerFolder; $compileProject; $target)
+						$CLI._printTask("Check server runtime folder")
+						$CLI._printStatus($ServerFolder.exists)
+						$CLI._printPath($ServerFolder)
 						
-						$CLI._copyComponents($BuildApp; $targetServerFolder; $compileProject; $target)
-						
-						$CLI._updateProperty($BuildApp; $targetServerFolder; $CompanyName; $BuildApplicationName; $settings.sdi_application; $target)
-						
-						$CLI._copyDatabase($BuildApp; $targetServerFolder; $compileProject; $target)
-						
-						If ($BuildApp.SourcesFiles.CS.IsOEM)
-							$CLI._generateLicense($BuildApp; $targetServerFolder)
+						If ($ServerFolder.exists)
+							
+							$targetServerFolder:=$CLI._copyRuntime($BuildApp; $ServerFolder; $BuildDestFolder; $BuildApplicationName; $settings.sdi_application; $target)
+							
+							$CLI._copyPlugins($BuildApp; $targetServerFolder; $compileProject; $target)
+							
+							$CLI._copyComponents($BuildApp; $targetServerFolder; $compileProject; $target)
+							
+							$CLI._updateProperty($BuildApp; $targetServerFolder; $CompanyName; $BuildApplicationName; $settings.sdi_application; $target)
+							
+							$CLI._copyDatabase($BuildApp; $targetServerFolder; $compileProject; $target)
+							
+							$IsOEM:=$CLI._getBoolValue($BuildApp; "SourcesFiles.CS.IsOEM")
+							
+							If ($IsOEM)
+								$CLI._generateLicense($BuildApp; $targetServerFolder)
+							End if 
+							
+							$CLI.quickSign($targetServerFolder)
+							
+							$success:=True:C214
+							
 						End if 
-						
-						$CLI.quickSign($targetServerFolder)
-						
-						$success:=True:C214
 						
 					End if 
 					
@@ -331,119 +347,129 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 				
 			: ($target="Compiled")
 				
-				var $BuildDestFolder : 4D:C1709.Folder
+				$BuildDestFolderPath:=$CLI._getStringValue($BuildApp; $Build___DestFolder)
 				
-				If ($BuildApp[$Build___DestFolder]#Null:C1517) && ($BuildApp[$Build___DestFolder]#"")
-					$BuildDestFolder:=Folder:C1567($BuildApp[$Build___DestFolder]; fk platform path:K87:2).folder("Compiled Database")
+				If ($BuildDestFolderPath#"")
+					
+					var $BuildDestFolder : 4D:C1709.Folder
+					
+					$BuildDestFolder:=Folder:C1567($BuildDestFolderPath; fk platform path:K87:2).folder("Compiled Database")
 					$BuildDestFolder.create()
-				End if 
-				
-				$targetFolder:=$BuildDestFolder.folder($BuildApplicationName)
-				
-				$localProjectFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent
-				
-				If ($targetFolder.path#$localProjectFolder.path)
-					If ($targetFolder.exists)
-						$targetFolder.delete(Delete with contents:K24:24)
+					
+					$targetFolder:=$BuildDestFolder.folder($BuildApplicationName)
+					
+					$localProjectFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent
+					
+					If ($targetFolder.path#$localProjectFolder.path)
+						If ($targetFolder.exists)
+							$targetFolder.delete(Delete with contents:K24:24)
+						End if 
 					End if 
+					
+					$targetFolder.create()
+					
+					$CLI._printTask("Set destination folder")
+					$CLI._printStatus($targetFolder.exists)
+					$CLI._printPath($targetFolder)
+					
+					$CLI._copyDatabase($BuildApp; $targetFolder; $compileProject; $target)
+					
+					$CLI._copyPlugins($BuildApp; $targetFolder; $compileProject; $target)
+					
+					$CLI._copyComponents($BuildApp; $targetServerFolder; $compileProject; $target)
+					
+					$CLI.quickSign($targetFolder)
+					
+					$success:=True:C214
+					
 				End if 
-				
-				$targetFolder.create()
-				
-				$CLI._printTask("Set destination folder")
-				$CLI._printStatus($targetFolder.exists)
-				$CLI._printPath($targetFolder)
-				
-				$CLI._copyDatabase($BuildApp; $targetFolder; $compileProject; $target)
-				
-				$CLI._copyPlugins($BuildApp; $targetFolder; $compileProject; $target)
-				
-				$CLI._copyComponents($BuildApp; $targetServerFolder; $compileProject; $target)
-				
-				$CLI.quickSign($targetFolder)
-				
-				$success:=True:C214
 				
 			: ($target="Component")
 				
 				var $BuildDestFolder : 4D:C1709.Folder
 				
-				If ($BuildApp[$Build___DestFolder]#Null:C1517) && ($BuildApp[$Build___DestFolder]#"")
-					$BuildDestFolder:=Folder:C1567($BuildApp[$Build___DestFolder]; fk platform path:K87:2).folder("Components")
+				$BuildDestFolderPath:=$CLI._getStringValue($BuildApp; $Build___DestFolder)
+				
+				If ($BuildDestFolderPath#"")
+					
+					$BuildDestFolder:=Folder:C1567($BuildDestFolderPath; fk platform path:K87:2).folder("Components")
 					$BuildDestFolder.create()
-				End if 
-				
-				$targetPackage:=$BuildDestFolder.folder($BuildApplicationName+".4dbase")
-				
-				$localProjectFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent
-				
-				If ($targetPackage.path#$localProjectFolder.path)
-					If ($targetPackage.exists)
-						$targetPackage.delete(Delete with contents:K24:24)
+					
+					$targetPackage:=$BuildDestFolder.folder($BuildApplicationName+".4dbase")
+					
+					$localProjectFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent
+					
+					If ($targetPackage.path#$localProjectFolder.path)
+						If ($targetPackage.exists)
+							$targetPackage.delete(Delete with contents:K24:24)
+						End if 
 					End if 
+					
+					$targetPackage.create()
+					
+					$CLI._printTask("Set destination folder")
+					$CLI._printStatus($targetPackage.exists)
+					$CLI._printPath($targetPackage)
+					
+					$CLI._copyDatabase($BuildApp; $targetPackage; $compileProject; $target)
+					
+					$CLI.quickSign($targetPackage)
+					
+					$success:=True:C214
+					
 				End if 
-				
-				$targetPackage.create()
-				
-				$CLI._printTask("Set destination folder")
-				$CLI._printStatus($targetPackage.exists)
-				$CLI._printPath($targetPackage)
-				
-				$CLI._copyDatabase($BuildApp; $targetPackage; $compileProject; $target)
-				
-				$CLI.quickSign($targetPackage)
-				
-				$success:=True:C214
 				
 			: ($target="ClientMac") | ($target="ClientWin")
 				
-				var $BuildDestFolder : 4D:C1709.Folder
+				$BuildDestFolderPath:=$CLI._getStringValue($BuildApp; $Build___DestFolder)
 				
-				If ($BuildApp[$Build___DestFolder]#Null:C1517) && ($BuildApp[$Build___DestFolder]#"")
-					$BuildDestFolder:=Folder:C1567($BuildApp[$Build___DestFolder]; fk platform path:K87:2).folder("Client Server executable")
+				If ($BuildDestFolderPath#"")
+					
+					var $BuildDestFolder : 4D:C1709.Folder
+					
+					$BuildDestFolder:=Folder:C1567($BuildDestFolderPath; fk platform path:K87:2).folder("Client Server executable")
 					$BuildDestFolder.create()
-				End if 
-				
-				$CLI._printTask("Set destination folder")
-				$CLI._printStatus($BuildDestFolder#Null:C1517)
-				$CLI._printPath($BuildDestFolder)
-				
-				If (Is macOS:C1572)
-					$Client___Folder:="Client"+$platform+"FolderToMac"
-					//ClientWinFolderToMac
-				Else 
-					$Client___Folder:="Client"+$platform+"FolderToWin"
-					//ClientMacFolderToWin
-				End if 
-				
-				If ($BuildApp.SourcesFiles.CS[$Client___Folder]#Null:C1517) && ($BuildApp.SourcesFiles.CS[$Client___Folder]#"")
 					
-					var $ClientFolder : 4D:C1709.Folder
-					$ClientFolder:=Folder:C1567($BuildApp.SourcesFiles.CS[$Client___Folder]; fk platform path:K87:2)
+					$CLI._printTask("Set destination folder")
+					$CLI._printStatus($BuildDestFolder#Null:C1517)
+					$CLI._printPath($BuildDestFolder)
 					
-					$CLI._printTask("Check runtime folder")
-					$CLI._printStatus($ClientFolder.exists)
-					$CLI._printPath($ClientFolder)
+					If (Is macOS:C1572)
+						$Client___Folder:="Client"+$platform+"FolderToMac"
+					Else 
+						$Client___Folder:="Client"+$platform+"FolderToWin"
+					End if 
 					
-					If ($ClientFolder.exists)
+					$ClientFolderPath:=$CLI._getStringValue($BuildApp; "SourcesFiles.CS."+$Client___Folder)
+					
+					If ($ClientFolderPath#"")
 						
-						$targetServerFolder:=$CLI._copyRuntime($BuildApp; $ClientFolder; $BuildDestFolder; $BuildApplicationName; $target)
+						var $ClientFolder : 4D:C1709.Folder
+						$ClientFolder:=Folder:C1567($ClientFolderPath; fk platform path:K87:2)
 						
-						//$CLI._copyPlugins($BuildApp; $targetServerFolder; $compileProject; $target)
+						$CLI._printTask("Check runtime folder")
+						$CLI._printStatus($ClientFolder.exists)
+						$CLI._printPath($ClientFolder)
 						
-						//$CLI._copyComponents($BuildApp; $targetServerFolder; $compileProject; $target)
-						
-						$CLI._updateProperty($BuildApp; $targetServerFolder; $CompanyName; $BuildApplicationName; $settings.sdi_application; $target)
-						
-						$CLI._copyDatabase($BuildApp; $targetServerFolder; $compileProject; $target)
-						
-						If ($BuildApp.SourcesFiles.CS.IsOEM)
-							$CLI._generateLicense($BuildApp; $targetServerFolder)
+						If ($ClientFolder.exists)
+							
+							$targetClientFolder:=$CLI._copyRuntime($BuildApp; $ClientFolder; $BuildDestFolder; $BuildApplicationName; $settings.sdi_application; $target)
+							
+							$CLI._updateProperty($BuildApp; $targetClientFolder; $CompanyName; $BuildApplicationName; $settings.sdi_application; $target)
+							
+							$CLI._copyDatabase($BuildApp; $targetClientFolder; $compileProject; $target)
+							
+							$IsOEM:=$CLI._getBoolValue($BuildApp; "SourcesFiles.CS.IsOEM")
+							
+							If ($IsOEM)
+								$CLI._generateLicense($BuildApp; $targetClientFolder)
+							End if 
+							
+							$CLI.quickSign($targetClientFolder)
+							
+							$success:=True:C214
+							
 						End if 
-						
-						$CLI.quickSign($targetServerFolder)
-						
-						$success:=True:C214
 						
 					End if 
 					
@@ -576,32 +602,29 @@ $sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
 			DOM SET XML ATTRIBUTE:C866($database_shortcut; "is_remote"; True:C214)
 			DOM SET XML ATTRIBUTE:C866($database_shortcut; "server_database_name"; $publication_name)
 			
-			If ($BuildApp.CS.IPAddress#Null:C1517)
-				$IPAddress:=$BuildApp.CS.IPAddress
-				If ($IPAddress#"")
-					$server_path:=$IPAddress
-					If ($BuildApp.CS.PortNumber#Null:C1517)
-						$PortNumber:=Num:C11($BuildApp.CS.PortNumber)
-						If ($PortNumber>0)
-							$server_path:=$server_path+":"+String:C10($PortNumber)
-						Else 
-							$server_path:=$server_path+":19813"
-						End if 
-						DOM SET XML ATTRIBUTE:C866($database_shortcut; "server_path"; $server_path)
-					End if 
+			$IPAddress:=$CLI._getStringValue($BuildApp; "CS.IPAddress")
+			$PortNumber:=$CLI._getIntValue($BuildApp; "CS.PortNumber")
+			
+			If ($IPAddress#"")
+				$server_path:=$IPAddress
+				If ($PortNumber>0)
+					$server_path:=$server_path+":"+String:C10($PortNumber)
+				Else 
+					$server_path:=$server_path+":19813"
 				End if 
+				DOM SET XML ATTRIBUTE:C866($database_shortcut; "server_path"; $server_path)
 			End if 
 			
-			If ($BuildApp.CS.ClientServerSystemFolderName#Null:C1517) && ($BuildApp.CS.ClientServerSystemFolderName#"")
-				var $cache_folder_name : Text
-				$cache_folder_name:=$BuildApp.CS.ClientServerSystemFolderName
-				DOM SET XML ATTRIBUTE:C866($database_shortcut; "cache_folder_name"; $cache_folder_name)
+			$ClientServerSystemFolderName:=$CLI._getStringValue($BuildApp; "CS.ClientServerSystemFolderName")
+			
+			If ($ClientServerSystemFolderName#"")
+				DOM SET XML ATTRIBUTE:C866($database_shortcut; "cache_folder_name"; $ClientServerSystemFolderName)
 			End if 
 			
-			If ($BuildApp.CS.ServerStructureFolderName#Null:C1517) && ($BuildApp.CS.ServerStructureFolderName#"")
-				var $server_database_name : Text
-				$server_database_name:=$BuildApp.CS.ServerStructureFolderName
-				DOM SET XML ATTRIBUTE:C866($database_shortcut; "server_database_name"; $server_database_name)
+			$ServerStructureFolderName:=$CLI._getStringValue($BuildApp; "CS.ServerStructureFolderName")
+			
+			If ($ServerStructureFolderName#"")
+				DOM SET XML ATTRIBUTE:C866($database_shortcut; "server_database_name"; $ServerStructureFolderName)
 			End if 
 			
 			DOM EXPORT TO FILE:C862($database_shortcut; $ContentsFolder.file("EnginedServer.4Dlink").platformPath)
@@ -651,57 +674,62 @@ $sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
 				
 				$targetProjectFile:=$files[0]
 				
-				If ($BuildApp.CS.PortNumber#Null:C1517)
-					$PortNumber:=Num:C11($BuildApp.CS.PortNumber)
-					If ($PortNumber>0)
-						$SettingsXmlParser.setPortNumber($targetProjectFile; $PortNumber)
+				$PortNumber:=$CLI._getIntValue($BuildApp; "CS.PortNumber")
+				
+				If ($PortNumber>0)
+					$SettingsXmlParser.setPortNumber($targetProjectFile; $PortNumber)
+					
+					$CLI._printTask("Rename project")
+					$targetProjectFile:=$targetProjectFile.rename($BuildApp.BuildApplicationName+".4DProject")
+					$CLI._printStatus($targetProjectFile.exists)
+					$CLI._printPath($targetProjectFile)
+				End if 
+				
+				$PackProject:=$CLI._getBoolValue($BuildApp; "PackProject")
+				
+				If ($PackProject)
+					
+					$zip:=New object:C1471
+					$zip.files:=New collection:C1472($targetProjectFolder)
+					
+					$UseStandardZipFormat:=$CLI._getBoolValue($BuildApp; "UseStandardZipFormat")
+					
+					If ($UseStandardZipFormat)
+						$zip.encryption:=ZIP Encryption none:K91:3
+					Else 
+						$zip.encryption:=-1
 					End if 
+					
+					$targetProjectFile:=$ContentsFolder.file($BuildApp.BuildApplicationName+".4DZ")
+					
+					$status:=ZIP Create archive:C1640($zip; $targetProjectFile)
+					
+					$CLI._printTask("Archive project folder")
+					$CLI._printStatus($status.success)
+					$CLI._printPath($targetProjectFile)
+					
+					If ($targetProjectFolder.path#$localProjectFolder.path)
+						$targetProjectFolder.delete(Delete with contents:K24:24)
+					End if 
+					
 				End if 
 				
-				$CLI._printTask("Rename project")
-				$targetProjectFile:=$targetProjectFile.rename($BuildApp.BuildApplicationName+".4DProject")
-				$CLI._printStatus($targetProjectFile.exists)
-				$CLI._printPath($targetProjectFile)
-			End if 
-			
-			If ($BuildApp.PackProject#Null:C1517) && ($BuildApp.PackProject)
+				$folders:=$ProjectFolder.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Resources"; "Libraries"; "Documentation"; "Default Data"; "Extras"))
 				
-				$zip:=New object:C1471
-				$zip.files:=New collection:C1472($targetProjectFolder)
+				$CLI._printTask("Copy database folders").LF()
+				For each ($folder; $folders)
+					$CLI._printPath($folder.copyTo($ContentsFolder))
+				End for each 
 				
-				If ($BuildApp.UseStandardZipFormat#Null:C1517) && ($BuildApp.UseStandardZipFormat)
-					$zip.encryption:=ZIP Encryption none:K91:3
-				Else 
-					$zip.encryption:=-1
-				End if 
-				
-				$targetProjectFile:=$ContentsFolder.file($BuildApp.BuildApplicationName+".4DZ")
-				
-				$status:=ZIP Create archive:C1640($zip; $targetProjectFile)
-				
-				$CLI._printTask("Archive project folder")
-				$CLI._printStatus($status.success)
-				$CLI._printPath($targetProjectFile)
-				
-				If ($targetProjectFolder.path#$localProjectFolder.path)
-					$targetProjectFolder.delete(Delete with contents:K24:24)
-				End if 
-				
-			End if 
-			
-			$folders:=$ProjectFolder.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Resources"; "Libraries"; "Documentation"; "Default Data"; "Extras"))
-			
-			$CLI._printTask("Copy database folders").LF()
-			For each ($folder; $folders)
-				$CLI._printPath($folder.copyTo($ContentsFolder))
-			End for each 
-			
-			If ($buildApplicationType="Server")
-				
-				If ($BuildApp.CS.ServerEmbedsProjectDirectoryFile#Null:C1517) && ($BuildApp.CS.ServerEmbedsProjectDirectoryFile)
-					$directoryFile:=$ProjectFolder.parent.folder("Settings").file("directory.json")
-					If ($directoryFile.exists)
-						$directoryFile.copyTo($targetProjectFolder.parent.folder("Settings"))
+				If ($buildApplicationType="Server")
+					
+					$ServerEmbedsProjectDirectory:=$CLI._getStringValue($BuildApp; "CS.ServerEmbedsProjectDirectoryFile")
+					
+					If ($ServerEmbedsProjectDirectory)
+						$directoryFile:=$ProjectFolder.parent.folder("Settings").file("directory.json")
+						If ($directoryFile.exists)
+							$directoryFile.copyTo($targetProjectFolder.parent.folder("Settings"))
+						End if 
 					End if 
 					
 				End if 
@@ -753,14 +781,16 @@ $compileProject : 4D:C1709.File; $buildApplicationType : Text)
 	
 Function _copyRuntime($BuildApp : cs:C1710.BuildApp; \
 $RuntimeFolder : 4D:C1709.Folder; \
-$BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text; $buildApplicationType : Text)->$targetFolder : 4D:C1709.Folder
+$BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text; \
+$sdi_application : Boolean; $buildApplicationType : Text)->$targetFolder : 4D:C1709.Folder
 	
 	$CLI:=This:C1470
 	
 	Case of 
 		: ($buildApplicationType="Server")
 			$targetName:=$BuildApplicationName+" Server"
-		: ($buildApplicationType="Client@")
+			$BuildCSUpgradeable:=$CLI._getBoolValue($BuildApp; "CS.BuildCSUpgradeable")
+		: ($buildApplicationType="Client@") | ($buildApplicationType="Upgrade4DClient")
 			$targetName:=$BuildApplicationName+" Client"
 		Else 
 			$targetName:=$BuildApplicationName
@@ -770,16 +800,14 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text; $buildApplicat
 		$targetName:=$targetName+".app"
 	End if 
 	
+	$localProjectFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent
+	
 	$targetFolder:=$BuildDestFolder.folder($targetName)
 	
 	If ($targetFolder.exists)
-		
-		$localProjectFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent
-		
 		If ($targetFolder.path#($localProjectFolder.path+"@"))
 			$targetFolder.delete(Delete with contents:K24:24)
 		End if 
-		
 	End if 
 	
 	$targetFolder:=$RuntimeFolder.copyTo($BuildDestFolder; $targetName; fk overwrite:K87:5)
@@ -788,49 +816,148 @@ $BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text; $buildApplicat
 	$CLI._printStatus($targetFolder.exists)
 	$CLI._printPath($targetFolder)
 	
-	Case of 
-		: ($buildApplicationType="Server")
-			$RuntimeExecutableName:="4D Server"
-		Else 
-			$RuntimeExecutableName:="4D Volume Desktop"
-	End case 
-	
-	Case of 
-		: ($buildApplicationType="Client@")
-			$executableName:=$BuildApplicationName+" Client"
-		Else 
-			$executableName:=$BuildApplicationName
-	End case 
-	
-	If (Is macOS:C1572)
-		$executableFile:=$targetFolder.folder("Contents").folder("MacOS").file($RuntimeExecutableName)
-	Else 
-		$executableName:=$executableName+".exe"
+	If ($targetFolder.exists)
+		
 		Case of 
 			: ($buildApplicationType="Server")
-				$executableFile:=$targetFolder.file($RuntimeExecutableName+".exe")
+				$RuntimeExecutableName:="4D Server"
 			Else 
-				$executableFile:=$targetFolder.file($RuntimeExecutableName+".4DE")
+				$RuntimeExecutableName:="4D Volume Desktop"
 		End case 
+		
+		Case of 
+			: ($buildApplicationType="Client@") | ($buildApplicationType="Upgrade4DClient")
+				$executableName:=$BuildApplicationName+" Client"
+			Else 
+				$executableName:=$BuildApplicationName
+		End case 
+		
+		If (Is macOS:C1572)
+			$executableFile:=$targetFolder.folder("Contents").folder("MacOS").file($RuntimeExecutableName)
+		Else 
+			$executableName:=$executableName+".exe"
+			Case of 
+				: ($buildApplicationType="Server")
+					$executableFile:=$targetFolder.file($RuntimeExecutableName+".exe")
+				Else 
+					$executableFile:=$targetFolder.file($RuntimeExecutableName+".4DE")
+			End case 
+		End if 
+		
+		$targetExecutableFile:=$executableFile.rename($executableName)
+		
+		$CLI._printTask("Rename executable file")
+		$CLI._printStatus($targetExecutableFile.exists)
+		$CLI._printPath($targetExecutableFile)
+		
+		If (Is Windows:C1573)
+			$resourceFile:=$targetFolder.file($RuntimeExecutableName+".rsr")
+			$targetResourceFile:=$resourceFile.rename($BuildApplicationName+".rsr")
+		Else 
+			$resourceFile:=$targetFolder.folder("Contents").folder("Resources").file($RuntimeExecutableName+".rsrc")
+			$targetResourceFile:=$resourceFile.rename($BuildApplicationName+".rsrc")
+		End if 
+		
+		$CLI._printTask("Rename resource file")
+		$CLI._printStatus($targetResourceFile.exists)
+		$CLI._printPath($targetResourceFile)
+		
+		If ($buildApplicationType="Server")
+			$BuildCSUpgradeable:=$CLI._getBoolValue($BuildApp; "CS.BuildCSUpgradeable")
+			If ($BuildCSUpgradeable)
+				
+				If (Is macOS:C1572)
+					$Client___Folder:="ClientMacFolderToMac"
+					$ClientFolderFile:="ClientWinFolderToMac"  //.4darchive
+				Else 
+					$Client___Folder:="ClientWinFolderToWin"
+					$ClientFolderFile:="ClientMacFolderToWin"  //.4darchive
+				End if 
+				
+				If ($ClientFolderFile#"")
+					$ClientFile:=File:C1566($ClientFolderFile; fk platform path:K87:2)
+					$CLI._printTask("Check client archive folder")
+					$CLI._printStatus($ClientFile.exists)
+					$CLI._printPath($ClientFile)
+					If ($ClientFile.exists)
+						If (Is macOS:C1572)
+							$Upgrade4DClientFolder:=$BuildDestFolder.folder("Contents").folder("Upgrade4DClient")
+						Else 
+							$Upgrade4DClientFolder:=$BuildDestFolder.folder("Upgrade4DClient")
+						End if 
+						$ClientFile:=$ClientFile.copyTo($Upgrade4DClientFolder; "update."+(Is macOS:C1572 ? "mac" : "win")+".4darchive")
+						$CLI._printTask("Copy 4darchive file for "+(Is macOS:C1572 ? "macos" : "windows"))
+						$CLI._printStatus($ClientFile.exists)
+						$CLI._printPath($ClientFile)
+					End if 
+				End if 
+				
+				$ClientFolderPath:=$CLI._getStringValue($BuildApp; "SourcesFiles.CS."+$Client___Folder)
+				
+				If ($ClientFolderPath#"")
+					
+					var $ClientFolder : 4D:C1709.Folder
+					$ClientFolder:=Folder:C1567($ClientFolderPath; fk platform path:K87:2)
+					
+					$CLI._printTask("Check client runtime folder")
+					$CLI._printStatus($ClientFolder.exists)
+					$CLI._printPath($ClientFolder)
+					
+					If ($ClientFolder.exists)
+						
+						$CLI._copyRuntime($BuildApp; $ClientFolder; $BuildDestFolder; $BuildApplicationName; $sdi_application; "Upgrade4DClient")
+						
+					End if 
+				End if 
+			End if 
+		End if 
+		
+		If ($buildApplicationType="Upgrade4DClient")
+			
+			$info:=$CLI._createUpgradeClientManifest($BuildApp; $BuildApplicationName)
+			
+			$targetManifestFile:=$targetFolder.file("info.json")
+			$targetManifestFile.setText($info)
+			
+			$CLI._printTask("Create info.json")
+			$CLI._printStatus($targetManifestFile.exists)
+			$CLI._printPath($targetManifestFile)
+			
+			$target:="Client"+(Is macOS:C1572 ? "Mac" : "Win")
+			
+			$CLI._updateProperty($BuildApp; $targetFolder; $CompanyName; $BuildApplicationName; $settings.sdi_application; $target)
+			
+			$CLI._copyDatabase($BuildApp; $targetFolder; $compileProject; $target)
+			
+			$IsOEM:=$CLI._getBoolValue($BuildApp; "SourcesFiles.CS.IsOEM")
+			
+			If ($IsOEM)
+				$CLI._generateLicense($BuildApp; $targetFolder)
+			End if 
+			
+			$CLI.quickSign($targetFolder)
+			
+			$zip:=New object:C1471
+			$zip.files:=New collection:C1472($targetFolder)
+			$zip.encryption:=ZIP Encryption none:K91:3
+			
+			$Upgrade4DClientFolder:=$ContentsFolder.folder("Upgrade4DClient")
+			
+			$targetArchiveFile:=$Upgrade4DClientFolder.file("update."+(Is macOS:C1572 ? "mac" : "win")+".4darchive")
+			
+			$status:=ZIP Create archive:C1640($zip; $targetArchiveFile)
+			
+			If ($targetFolder.path#$localProjectFolder.path)
+				$targetFolder.delete(Delete with contents:K24:24)
+			End if 
+			
+			$CLI._printTask("Archive client")
+			$CLI._printStatus($status.success)
+			$CLI._printPath($targetArchiveFile)
+			
+		End if 
+		
 	End if 
-	
-	$targetExecutableFile:=$executableFile.rename($executableName)
-	
-	$CLI._printTask("Rename executable file")
-	$CLI._printStatus($targetExecutableFile.exists)
-	$CLI._printPath($targetExecutableFile)
-	
-	If (Is Windows:C1573)
-		$resourceFile:=$targetFolder.file($RuntimeExecutableName+".rsr")
-		$targetResourceFile:=$resourceFile.rename($BuildApplicationName+".rsr")
-	Else 
-		$resourceFile:=$targetFolder.folder("Contents").folder("Resources").file($RuntimeExecutableName+".rsrc")
-		$targetResourceFile:=$resourceFile.rename($BuildApplicationName+".rsrc")
-	End if 
-	
-	$CLI._printTask("Rename resource file")
-	$CLI._printStatus($targetResourceFile.exists)
-	$CLI._printPath($targetResourceFile)
 	
 	If ($BuildApp.ArrayExcludedModuleName.Item.includes("PHP"))
 		
@@ -1024,8 +1151,8 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 		$keys.push("CFBundleExecutable")
 	Else 
 		$info.OriginalFilename:=$BuildApplicationName+".exe"
-		$keys.push("OriginalFilename")
 		$info.ProductName:=$BuildApplicationName
+		$keys.push("OriginalFilename")
 		$keys.push("ProductName")
 	End if 
 	
@@ -1045,7 +1172,9 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 		$keys.push("SDIRuntime")
 	End if 
 	
-	If ($BuildApp.CS.ClientWinSingleInstance)
+	$ClientWinSingleInstance:=$CLI._getBoolValue($BuildApp; "CS.ClientWinSingleInstance")
+	
+	If ($ClientWinSingleInstance)
 		$info["4D_SingleInstance"]:="1"
 		$keys.push("4D_SingleInstance")
 	End if 
@@ -1065,65 +1194,72 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 	$info["CurrentVers"]:=String:C10($CurrentVers)
 	$keys.push("CurrentVers")
 	
+	$ClientServerSystemFolderName:=$CLI._getStringValue($BuildApp; "CS.ClientServerSystemFolderName")
 	
 	Case of 
 		: ($buildApplicationType="Client@")
 			
-			If ($BuildApp.CS.ClientServerSystemFolderName#Null:C1517) && ($BuildApp.CS.ClientServerSystemFolderName#"")
-				$info["BuildCacheFolderNameClient"]:=$cache_folder_name
-				$keys.push("BuildCacheFolderNameClient")
-			End if 
+			$info["com.4d.BuildApp.dataless"]:="true"
+			$keys.push("com.4d.BuildApp.dataless")
 			
-			If ($BuildApp.CS.ServerSelectionAllowed#Null:C1517)
-				If (Bool:C1537($BuildApp.CS.ServerSelectionAllowed))
-					$info["com.4D.BuildApp.ServerSelectionAllowed"]:="true"
-					$keys.push("com.4D.BuildApp.ServerSelectionAllowed")
-				End if 
-			End if 
+			$info["BuildCacheFolderNameClient"]:=$cache_folder_name
+			$keys.push("BuildCacheFolderNameClient")
 			
-			If ($BuildApp.CS.ClientWinSingleInstance)
-				$info["4D_MultipleClient"]:="1"
-				$keys.push("4D_MultipleClient")
-			End if 
+			$ServerSelectionAllowed:=$CLI._getBoolValue($BuildApp; "CS.ServerSelectionAllowed")
+			$info["com.4D.BuildApp.ServerSelectionAllowed"]:=$ServerSelectionAllowed ? "true" : "false"
+			$keys.push("com.4D.BuildApp.ServerSelectionAllowed")
 			
-			If ($BuildApp.CS.ShareLocalResourcesOnWindowsClient)
-				$info["RemoteSharedResources"]:="true"
-				$keys.push("RemoteSharedResources")
-			End if 
+			$ClientWinSingleInstance:=$CLI._getBoolValue($BuildApp; "CS.ClientWinSingleInstance")
+			$info["4D_MultipleClient"]:=$ClientWinSingleInstance ? "1" : "0"
+			$keys.push("4D_MultipleClient")
+			
+			$ShareLocalResourcesOnClient:=$CLI._getBoolValue($BuildApp; "CS.ShareLocalResourcesOnWindowsClient")
+			$info["RemoteSharedResources"]:=$ShareLocalResourcesOnClient ? "true" : "false"
+			$keys.push("RemoteSharedResources")
 			
 		: ($buildApplicationType="Server")
 			
-			If ($BuildApp.CS.ClientServerSystemFolderName#Null:C1517) && ($BuildApp.CS.ClientServerSystemFolderName#"")
+			If ($ClientServerSystemFolderName#"")
 				$info["com.4d.ServerCacheFolderName"]:=$cache_folder_name
 				$keys.push("com.4d.ServerCacheFolderName")
 			End if 
 			
-			If ($BuildApp.CS.ServerDataCollection)
+			$ServerDataCollection:=$CLI._getBoolValue($BuildApp; "CS.ServerDataCollection")
+			
+			If ($ServerDataCollection)
 				$info["com.4d.dataCollection"]:="true"
 				$info["DataCollection"]:="true"
 				$keys.push("com.4d.dataCollection")
 				$keys.push("DataCollection")
 			End if 
 			
-			If ($BuildApp.CS.HideAdministrationMenuItem)
+			$HideAdministrationMenuItem:=$CLI._getBoolValue($BuildApp; "CS.HideAdministrationMenuItem")
+			
+			If ($HideAdministrationMenuItem)
 				$info["com.4D.HideAdministrationWindowMenuItem"]:="true"
 				$keys.push("com.4D.HideAdministrationWindowMenuItem")
 			End if 
 			
-			$info["com.4D.BuildApp.LastDataPathLookup"]:=$BuildApp.CS.LastDataPathLookup
+			$info["com.4D.BuildApp.LastDataPathLookup"]:=$CLI._getStringValue($BuildApp; "CS.LastDataPathLookup")
 			$keys.push("com.4D.BuildApp.LastDataPathLookup")
 			
 		Else 
-			$info["com.4D.BuildApp.LastDataPathLookup"]:=$BuildApp.RuntimeVL.LastDataPathLookup
+			
+			$info["com.4D.BuildApp.LastDataPathLookup"]:=$CLI._getStringValue($BuildApp; "RuntimeVL.LastDataPathLookup")
 			$keys.push("com.4D.BuildApp.LastDataPathLookup")
+			
 	End case 
 	
-	If (Bool:C1537($BuildApp.CS.HideDataExplorerMenuItem))
+	$HideDataExplorerMenuItem:=$CLI._getBoolValue($BuildApp; "CS.HideDataExplorerMenuItem")
+	
+	If ($HideDataExplorerMenuItem)
 		$info["com.4D.HideDataExplorerMenuItem"]:="true"
 		$keys.push("com.4D.HideDataExplorerMenuItem")
 	End if 
 	
-	If (Bool:C1537($BuildApp.CS.HideRuntimeExplorerMenuItem))
+	$HideRuntimeExplorerMenuItem:=$CLI._getBoolValue($BuildApp; "CS.HideRuntimeExplorerMenuItem")
+	
+	If ($HideRuntimeExplorerMenuItem)
 		$info["com.4D.HideRuntimeExplorerMenuItem"]:="true"
 		$keys.push("com.4D.HideRuntimeExplorerMenuItem")
 	End if 
@@ -1137,9 +1273,11 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 			
 			$ClientMacIconFor___Path:="ClientMacIconFor"+$platform+"Path"
 			
-			If ($BuildApp.SourcesFiles.CS[$ClientMacIconFor___Path]#Null:C1517) && ($BuildApp.SourcesFiles.CS[$ClientMacIconFor___Path]#"")
+			$ClientMacIconPath:=$CLI._getStringValue($BuildApp; "SourcesFiles.CS."+$ClientMacIconFor___Path)
+			
+			If ($ClientMacIconPath#"")
 				var $ClientIconFile : 4D:C1709.File
-				$ClientIconFile:=File:C1566($BuildApp.SourcesFiles.CS[$ClientMacIconFor___Path]; fk platform path:K87:2)
+				$ClientIconFile:=File:C1566($ClientMacIconPath; fk platform path:K87:2)
 				If ($ClientIconFile.exists)
 					If (Is macOS:C1572)
 						$targetIconFile:=$ClientIconFile.copyTo($targetRuntimeFolder.folder("Contents").folder("Resources"); fk overwrite:K87:5)
@@ -1163,9 +1301,11 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 			
 			$ClientWinIconFor___Path:="ClientWinIconFor"+$platform+"Path"
 			
-			If ($BuildApp.SourcesFiles.CS[$ClientWinIconFor___Path]#Null:C1517) && ($BuildApp.SourcesFiles.CS[$ClientWinIconFor___Path]#"")
+			$ClientWinIconPath:=$CLI._getStringValue($BuildApp; "SourcesFiles.CS."+$ClientWinIconFor___Path)
+			
+			If ($ClientWinIconPath#"")
 				var $ClientIconFile : 4D:C1709.File
-				$ClientIconFile:=File:C1566($BuildApp.SourcesFiles.CS[$ClientWinIconFor___Path]; fk platform path:K87:2)
+				$ClientIconFile:=File:C1566($ClientWinIconPath; fk platform path:K87:2)
 				If ($ClientIconFile.exists)
 					If (Is macOS:C1572)
 						$targetIconFile:=$ClientIconFile.copyTo($targetRuntimeFolder.folder("Contents").folder("Resources"); fk overwrite:K87:5)
@@ -1189,9 +1329,11 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 			
 			$ServerIcon___Path:="ServerIcon"+$platform+"Path"
 			
-			If ($BuildApp.SourcesFiles.CS[$ServerIcon___Path]#Null:C1517) && ($BuildApp.SourcesFiles.CS[$ServerIcon___Path]#"")
+			$ServerIconPath:=$CLI._getStringValue($BuildApp; "SourcesFiles.CS."+$ServerIcon___Path)
+			
+			If ($ServerIconPath#"")
 				var $ServerIconFile : 4D:C1709.File
-				$ServerIconFile:=File:C1566($BuildApp.SourcesFiles.CS[$ServerIcon___Path]; fk platform path:K87:2)
+				$ServerIconFile:=File:C1566($ServerIconPath; fk platform path:K87:2)
 				If ($ServerIconFile.exists)
 					If (Is macOS:C1572)
 						$targetIconFile:=$ServerIconFile.copyTo($targetRuntimeFolder.folder("Contents").folder("Resources"); fk overwrite:K87:5)
@@ -1215,9 +1357,11 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 			
 			$RuntimeVLIcon___Path:="RuntimeVLIcon"+$platform+"Path"
 			
-			If ($BuildApp.SourcesFiles.RuntimeVL[$RuntimeVLIcon___Path]#Null:C1517) && ($BuildApp.SourcesFiles.RuntimeVL[$RuntimeVLIcon___Path]#"")
+			$RuntimeVLIconPath:=$CLI._getStringValue($BuildApp; "RuntimeVLIcon."+$RuntimeVLIcon___Path)
+			
+			If ($RuntimeVLIconPath#"")
 				var $RuntimeVLIconFile : 4D:C1709.File
-				$RuntimeVLIconFile:=File:C1566($BuildApp.SourcesFiles.RuntimeVL[$RuntimeVLIcon___Path]; fk platform path:K87:2)
+				$RuntimeVLIconFile:=File:C1566($RuntimeVLIconPath; fk platform path:K87:2)
 				If ($RuntimeVLIconFile.exists)
 					If (Is macOS:C1572)
 						$targetIconFile:=$RuntimeVLIconFile.copyTo($targetRuntimeFolder.folder("Contents").folder("Resources"); fk overwrite:K87:5)
@@ -1379,8 +1523,8 @@ Function _getIntValue($BuildApp : cs:C1710.BuildApp; $path : Text)->$intValue : 
 		$settings:=$settings[$pathComponent]
 	End for each 
 	
-	If ($BuildApp#Null:C1517)
-		$intValue:=Int:C8(Num:C11($settings; "."))
+	If ($settings#Null:C1517)
+		$intValue:=Int:C8(Num:C11(String:C10($settings); "."))
 	End if 
 	
 Function _getBoolValue($BuildApp : cs:C1710.BuildApp; $path : Text)->$boolValue : Boolean
@@ -1397,7 +1541,7 @@ Function _getBoolValue($BuildApp : cs:C1710.BuildApp; $path : Text)->$boolValue 
 		$settings:=$settings[$pathComponent]
 	End for each 
 	
-	If ($BuildApp#Null:C1517)
+	If ($settings#Null:C1517)
 		$boolValue:=Bool:C1537($settings)
 	End if 
 	
@@ -1415,7 +1559,7 @@ Function _getStringValue($BuildApp : cs:C1710.BuildApp; $path : Text)->$stringVa
 		$settings:=$settings[$pathComponent]
 	End for each 
 	
-	If ($BuildApp#Null:C1517)
+	If ($settings#Null:C1517)
 		$stringValue:=String:C10($settings)
 	End if 
 	
