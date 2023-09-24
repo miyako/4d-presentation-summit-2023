@@ -18,6 +18,9 @@
 				"invisible": true
 			}
 		},
+		"TEST_build_cs_upgradable": {
+			"timeStamp": "2023-09-24T22:51:56Z"
+		},
 		"TEST_sign_async": {
 			"timeStamp": "2023-09-20T12:07:05Z",
 			"attributes": {
