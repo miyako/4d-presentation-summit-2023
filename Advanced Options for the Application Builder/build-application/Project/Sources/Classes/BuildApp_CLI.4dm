@@ -468,6 +468,37 @@ Function quickSign($RuntimeFolder : 4D:C1709.Folder)->$success : Boolean
 		
 	End if 
 	
+Function _createUpgradeClientManifest($BuildApp : cs:C1710.BuildApp; $BuildApplicationName)->$info : Object
+	
+	$CLI:=This:C1470
+	
+	$info:=New object:C1471
+	
+	$platform:=Is macOS:C1572 ? "Mac" : "Win"
+	
+	$Client___IconFor___Path:="Client"+$platform+"IconFor"+$platform+"Path"
+	$ClientIconPath:=$CLI._getStringValue($BuildApp; "SourcesFiles.CS."+$Client___IconFor___Path)
+	$o:=Path to object:C1547($ClientIconPath; Path is system:K24:25)
+	$icon:=$o.name+$o.extension
+	$platform:=Lowercase:C14($platform; *)
+	
+	$info.BuildName:=$BuildApplicationName
+	$info.BuildInfoVersion:=$CLI._getVersioning($BuildApp; "Version"; "Client")
+	$info.BuildHardLink:=""
+	$info.BuildCreator:=$CLI._getVersioning($BuildApp; "Creator"; "Client")
+	$info.BuildRangeVersMin:=$CLI._getIntValue($BuildApp; "CS.RangeVersMin")
+	$info.BuildRangeVersMax:=$CLI._getIntValue($BuildApp; "CS.BuildRangeVersMax")
+	$info.BuildCurrentVers:=$CLI._getIntValue($BuildApp; "CS.CurrentVers")
+	$info.ServerPlatform:=$platform
+	$info.Icon:=$icon
+	$info.IconFolder:="library"
+	$info.MacCertificate:=$CLI._getStringValue($BuildApp; "SignApplication.MacCertificate")
+	$info.MacSignature:=$CLI._getBoolValue($BuildApp; "SignApplication.MacSignature")
+	$info.macUpdate:="update."+$platform+".4darchive"
+	$info["com.4D.HideDataExplorerMenuItem"]:=$CLI._getBoolValue($BuildApp; "CS.HideDataExplorerMenuItem")
+	$info["com.4D.HideRuntimeExplorerMenuItem"]:=$CLI._getBoolValue($BuildApp; "CS.HideRuntimeExplorerMenuItem")
+	$info.BuildIPPort:=$CLI._getIntValue("CS.PortNumber")
+	
 Function _copyComponents($BuildApp : cs:C1710.BuildApp; \
 $RuntimeFolder : 4D:C1709.Folder; \
 $compileProject : 4D:C1709.File; $buildApplicationType : Text)
@@ -1019,29 +1050,21 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 		$keys.push("4D_SingleInstance")
 	End if 
 	
-	If ($BuildApp.CS.RangeVersMin#Null:C1517)
-		$RangeVersMin:=Num:C11($BuildApp.CS.RangeVersMin)
-		If ($RangeVersMin>1)
-			$info["BuildRangeVersMin"]:=String:C10(Int:C8($RangeVersMin))
-			$keys.push("BuildRangeVersMin")
-		End if 
-	End if 
+	$RangeVersMin:=$CLI._getIntValue($BuildApp; "CS.RangeVersMin")
 	
-	If ($BuildApp.CS.RangeVersMax#Null:C1517)
-		$RangeVersMax:=Num:C11($BuildApp.CS.RangeVersMax)
-		If ($RangeVersMax>1)
-			$info["BuildRangeVersMax"]:=String:C10(Int:C8($RangeVersMax))
-			$keys.push("BuildRangeVersMax")
-		End if 
-	End if 
+	$info["BuildRangeVersMin"]:=String:C10($RangeVersMin)
+	$keys.push("BuildRangeVersMin")
 	
-	If ($BuildApp.CS.CurrentVers#Null:C1517)
-		$CurrentVers:=Num:C11($BuildApp.CS.CurrentVers)
-		If ($CurrentVers>1)
-			$info["CurrentVers"]:=String:C10(Int:C8($CurrentVers))
-			$keys.push("CurrentVers")
-		End if 
-	End if 
+	$RangeVersMax:=$CLI._getIntValue($BuildApp; "CS.RangeVersMax")
+	
+	$info["BuildRangeVersMax"]:=String:C10($RangeVersMax)
+	$keys.push("BuildRangeVersMax")
+	
+	$CurrentVers:=$CLI._getIntValue($BuildApp; "CS.CurrentVers")
+	
+	$info["CurrentVers"]:=String:C10($CurrentVers)
+	$keys.push("CurrentVers")
+	
 	
 	Case of 
 		: ($buildApplicationType="Client@")
@@ -1075,16 +1098,6 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 				$keys.push("com.4d.ServerCacheFolderName")
 			End if 
 			
-			If ($BuildApp.CS.HideDataExplorerMenuItem)
-				$info["com.4D.HideDataExplorerMenuItem"]:="true"
-				$keys.push("com.4D.HideDataExplorerMenuItem")
-			End if 
-			
-			If ($BuildApp.CS.HideRuntimeExplorerMenuItem)
-				$info["com.4D.HideRuntimeExplorerMenuItem"]:="true"
-				$keys.push("com.4D.HideRuntimeExplorerMenuItem")
-			End if 
-			
 			If ($BuildApp.CS.ServerDataCollection)
 				$info["com.4d.dataCollection"]:="true"
 				$info["DataCollection"]:="true"
@@ -1104,6 +1117,16 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 			$info["com.4D.BuildApp.LastDataPathLookup"]:=$BuildApp.RuntimeVL.LastDataPathLookup
 			$keys.push("com.4D.BuildApp.LastDataPathLookup")
 	End case 
+	
+	If (Bool:C1537($BuildApp.CS.HideDataExplorerMenuItem))
+		$info["com.4D.HideDataExplorerMenuItem"]:="true"
+		$keys.push("com.4D.HideDataExplorerMenuItem")
+	End if 
+	
+	If (Bool:C1537($BuildApp.CS.HideRuntimeExplorerMenuItem))
+		$info["com.4D.HideRuntimeExplorerMenuItem"]:="true"
+		$keys.push("com.4D.HideRuntimeExplorerMenuItem")
+	End if 
 	
 	var $platform; $RuntimeVLIcon___Path : Text
 	
@@ -1341,6 +1364,60 @@ $sdi_application : Boolean; $buildApplicationType : Text)
 	$propertyListFile.setAppInfo($info)
 	
 	$CLI._updatePropertyStrings($BuildApp; $targetRuntimeFolder; $info)
+	
+Function _getIntValue($BuildApp : cs:C1710.BuildApp; $path : Text)->$intValue : Integer
+	
+	$CLI:=This:C1470
+	
+	var $settings : Variant
+	
+	$settings:=$BuildApp
+	
+	$pathComponents:=Split string:C1554($path; "."; sk ignore empty strings:K86:1 | sk trim spaces:K86:2)
+	
+	For each ($pathComponent; $pathComponents) Until ($settings=Null:C1517)
+		$settings:=$settings[$pathComponent]
+	End for each 
+	
+	If ($BuildApp#Null:C1517)
+		$intValue:=Int:C8(Num:C11($settings; "."))
+	End if 
+	
+Function _getBoolValue($BuildApp : cs:C1710.BuildApp; $path : Text)->$boolValue : Boolean
+	
+	$CLI:=This:C1470
+	
+	var $settings : Variant
+	
+	$settings:=$BuildApp
+	
+	$pathComponents:=Split string:C1554($path; "."; sk ignore empty strings:K86:1 | sk trim spaces:K86:2)
+	
+	For each ($pathComponent; $pathComponents) Until ($settings=Null:C1517)
+		$settings:=$settings[$pathComponent]
+	End for each 
+	
+	If ($BuildApp#Null:C1517)
+		$boolValue:=Bool:C1537($settings)
+	End if 
+	
+Function _getStringValue($BuildApp : cs:C1710.BuildApp; $path : Text)->$stringValue : Text
+	
+	$CLI:=This:C1470
+	
+	var $settings : Variant
+	
+	$settings:=$BuildApp
+	
+	$pathComponents:=Split string:C1554($path; "."; sk ignore empty strings:K86:1 | sk trim spaces:K86:2)
+	
+	For each ($pathComponent; $pathComponents) Until ($settings=Null:C1517)
+		$settings:=$settings[$pathComponent]
+	End for each 
+	
+	If ($BuildApp#Null:C1517)
+		$stringValue:=String:C10($settings)
+	End if 
 	
 Function _updatePropertyStrings($BuildApp : cs:C1710.BuildApp; \
 $targetFolder : 4D:C1709.Folder; $info : Object)
