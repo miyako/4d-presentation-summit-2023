@@ -500,30 +500,21 @@ Function _createUpgradeClientManifest($BuildApp : cs:C1710.BuildApp; $BuildAppli
 	
 	$info:=New object:C1471
 	
-	$platform:=Is macOS:C1572 ? "Mac" : "Win"
-	
-	$Client___IconFor___Path:="Client"+$platform+"IconFor"+$platform+"Path"
-	$ClientIconPath:=$CLI._getStringValue($BuildApp; "SourcesFiles.CS."+$Client___IconFor___Path)
-	$o:=Path to object:C1547($ClientIconPath; Path is system:K24:25)
-	$icon:=$o.name+$o.extension
-	$platform:=Lowercase:C14($platform; *)
-	
 	$info.BuildName:=$BuildApplicationName
 	$info.BuildInfoVersion:=$CLI._getVersioning($BuildApp; "Version"; "Client")
 	$info.BuildHardLink:=""
 	$info.BuildCreator:=$CLI._getVersioning($BuildApp; "Creator"; "Client")
 	$info.BuildRangeVersMin:=$CLI._getIntValue($BuildApp; "CS.RangeVersMin")
-	$info.BuildRangeVersMax:=$CLI._getIntValue($BuildApp; "CS.BuildRangeVersMax")
+	$info.BuildRangeVersMax:=$CLI._getIntValue($BuildApp; "CS.RangeVersMax")
 	$info.BuildCurrentVers:=$CLI._getIntValue($BuildApp; "CS.CurrentVers")
-	$info.ServerPlatform:=$platform
-	$info.Icon:=$icon
-	$info.IconFolder:="library"
 	$info.MacCertificate:=$CLI._getStringValue($BuildApp; "SignApplication.MacCertificate")
 	$info.MacSignature:=$CLI._getBoolValue($BuildApp; "SignApplication.MacSignature")
-	$info.macUpdate:="update."+$platform+".4darchive"
 	$info["com.4D.HideDataExplorerMenuItem"]:=$CLI._getBoolValue($BuildApp; "CS.HideDataExplorerMenuItem")
 	$info["com.4D.HideRuntimeExplorerMenuItem"]:=$CLI._getBoolValue($BuildApp; "CS.HideRuntimeExplorerMenuItem")
-	$info.BuildIPPort:=$CLI._getIntValue("CS.PortNumber")
+	$info.BuildIPPort:=$CLI._getIntValue($BuildApp; "CS.PortNumber")
+	$info.ServerPlatform:=Is macOS:C1572 ? "Mac" : "Win"
+	
+	//$info.IconFolder:="library" 
 	
 Function _copyComponents($BuildApp : cs:C1710.BuildApp; \
 $RuntimeFolder : 4D:C1709.Folder; \
@@ -723,7 +714,7 @@ $sourceProjectFile : 4D:C1709.File; $buildApplicationType : Text)
 				
 				If ($buildApplicationType="Server")
 					
-					$ServerEmbedsProjectDirectory:=$CLI._getStringValue($BuildApp; "CS.ServerEmbedsProjectDirectoryFile")
+					$ServerEmbedsProjectDirectory:=$CLI._getBoolValue($BuildApp; "CS.ServerEmbedsProjectDirectoryFile")
 					
 					If ($ServerEmbedsProjectDirectory)
 						$directoryFile:=$ProjectFolder.parent.folder("Settings").file("directory.json")
@@ -867,61 +858,92 @@ $sdi_application : Boolean; $buildApplicationType : Text)->$targetFolder : 4D:C1
 			If ($BuildCSUpgradeable)
 				
 				If (Is macOS:C1572)
-					$Client___Folder:="ClientMacFolderToMac"
-					$ClientFolderFile:="ClientWinFolderToMac"  //.4darchive
+					$Upgrade4DClientFolder:=$targetFolder.folder("Contents").folder("Upgrade4DClient")
 				Else 
-					$Client___Folder:="ClientWinFolderToWin"
-					$ClientFolderFile:="ClientMacFolderToWin"  //.4darchive
+					$Upgrade4DClientFolder:=$targetFolder.folder("Upgrade4DClient")
 				End if 
 				
-				If ($ClientFolderFile#"")
-					$ClientFile:=File:C1566($ClientFolderFile; fk platform path:K87:2)
-					$CLI._printTask("Check client archive folder")
+				$Upgrade4DClientFolder.create()
+				
+				$info:=$CLI._createUpgradeClientManifest($BuildApp; $BuildApplicationName)
+				
+				//opposite platform (.4darchive)
+				
+				$targetPlatform:=(Is macOS:C1572 ? "Win" : "Mac")
+				$hostPlatform:=(Is macOS:C1572 ? "Mac" : "Win")
+				
+				$Client___IncludeIt:=$CLI._getBoolValue($BuildApp; "SourcesFiles.CS.Client"+$targetPlatform+"IncludeIt")
+				$Client___FolderPath:=$CLI._getStringValue($BuildApp; "SourcesFiles.CS.Client"+$targetPlatform+"FolderTo"+$hostPlatform)
+				$Client___IconFor___Path:="Client"+$targetPlatform+"IconFor"+$hostPlatform+"Path"
+				$ClientIconPath:=$CLI._getStringValue($BuildApp; "SourcesFiles.CS."+$Client___IconFor___Path)
+				
+				If ($Client___IncludeIt) && ($Client___FolderPath#"")
+					
+					$ClientFile:=File:C1566($Client___FolderPath; fk platform path:K87:2)
+					$CLI._printTask("Check client file")
 					$CLI._printStatus($ClientFile.exists)
 					$CLI._printPath($ClientFile)
+					
 					If ($ClientFile.exists)
-						If (Is macOS:C1572)
-							$Upgrade4DClientFolder:=$BuildDestFolder.folder("Contents").folder("Upgrade4DClient")
-						Else 
-							$Upgrade4DClientFolder:=$BuildDestFolder.folder("Upgrade4DClient")
-						End if 
-						$ClientFile:=$ClientFile.copyTo($Upgrade4DClientFolder; "update."+(Is macOS:C1572 ? "mac" : "win")+".4darchive")
-						$CLI._printTask("Copy 4darchive file for "+(Is macOS:C1572 ? "macos" : "windows"))
-						$CLI._printStatus($ClientFile.exists)
-						$CLI._printPath($ClientFile)
+						
+						$_targetPlatform:=Lowercase:C14($targetPlatform; *)
+						
+						$info[$_targetPlatform+"Update"]:="update."+$_targetPlatform+".4darchive"
+						$targetClientFile:=$ClientFile.copyTo($Upgrade4DClientFolder; "update."+$_targetPlatform+".4darchive")
+						$CLI._printTask("Copy client file")
+						$CLI._printStatus($targetClientFile.exists)
+						$CLI._printPath($targetClientFile)
+						
+						//$o:=Path to object($ClientIconPath; Path is system)
+						//$icon:=$o.name+$o.extension
+						//$info.Icon:=$icon
+						
 					End if 
 				End if 
 				
-				$ClientFolderPath:=$CLI._getStringValue($BuildApp; "SourcesFiles.CS."+$Client___Folder)
+				//host platform (.exe or .app)
 				
-				If ($ClientFolderPath#"")
+				$Client___IncludeIt:=$CLI._getBoolValue($BuildApp; "SourcesFiles.CS.Client"+$hostPlatform+"IncludeIt")
+				$Client___FolderPath:=$CLI._getStringValue($BuildApp; "SourcesFiles.CS.Client"+$hostPlatform+"FolderTo"+$hostPlatform)
+				$Client___IconFor___Path:="Client"+$hostPlatform+"IconFor"+$hostPlatform+"Path"
+				$ClientIconPath:=$CLI._getStringValue($BuildApp; "SourcesFiles.CS."+$Client___IconFor___Path)
+				
+				If ($Client___IncludeIt) && ($Client___FolderPath#"")
 					
 					var $ClientFolder : 4D:C1709.Folder
-					$ClientFolder:=Folder:C1567($ClientFolderPath; fk platform path:K87:2)
+					$ClientFolder:=Folder:C1567($Client___FolderPath; fk platform path:K87:2)
 					
-					$CLI._printTask("Check client runtime folder")
+					$CLI._printTask("Check client folder")
 					$CLI._printStatus($ClientFolder.exists)
 					$CLI._printPath($ClientFolder)
 					
 					If ($ClientFolder.exists)
 						
+						$_hostPlatform:=Lowercase:C14($hostPlatform; *)
+						
+						$info[$_hostPlatform+"Update"]:="update."+$_hostPlatform+".4darchive"
+						
+						//$o:=Path to object($ClientIconPath; Path is system)
+						//$icon:=$o.name+$o.extension
+						//$info.Icon:=$icon
+						
 						$CLI._copyRuntime($BuildApp; $ClientFolder; $BuildDestFolder; $BuildApplicationName; $sdi_application; "Upgrade4DClient")
 						
 					End if 
+					
 				End if 
+				
+				$targetManifestFile:=$Upgrade4DClientFolder.file("info.json")
+				$targetManifestFile.setText(JSON Stringify:C1217($info; *))
+				
+				$CLI._printTask("Create info.json")
+				$CLI._printStatus($targetManifestFile.exists)
+				$CLI._printPath($targetManifestFile)
+				
 			End if 
 		End if 
 		
 		If ($buildApplicationType="Upgrade4DClient")
-			
-			$info:=$CLI._createUpgradeClientManifest($BuildApp; $BuildApplicationName)
-			
-			$targetManifestFile:=$targetFolder.file("info.json")
-			$targetManifestFile.setText($info)
-			
-			$CLI._printTask("Create info.json")
-			$CLI._printStatus($targetManifestFile.exists)
-			$CLI._printPath($targetManifestFile)
 			
 			$target:="Client"+(Is macOS:C1572 ? "Mac" : "Win")
 			
@@ -941,15 +963,23 @@ $sdi_application : Boolean; $buildApplicationType : Text)->$targetFolder : 4D:C1
 			$zip.files:=New collection:C1472($targetFolder)
 			$zip.encryption:=ZIP Encryption none:K91:3
 			
-			$Upgrade4DClientFolder:=$ContentsFolder.folder("Upgrade4DClient")
+			$targetServerName:=$BuildApplicationName+" Server"
+			
+			If (Is macOS:C1572)
+				$targetServerName:=$targetServerName+".app"
+			End if 
+			
+			$targetServerFolder:=$targetFolder.parent.folder($targetServerName)
+			
+			If (Is Windows:C1573)
+				$Upgrade4DClientFolder:=$targetServerFolder.folder("Upgrade4DClient")
+			Else 
+				$Upgrade4DClientFolder:=$targetServerFolder.folder("Contents").folder("Upgrade4DClient")
+			End if 
 			
 			$targetArchiveFile:=$Upgrade4DClientFolder.file("update."+(Is macOS:C1572 ? "mac" : "win")+".4darchive")
 			
 			$status:=ZIP Create archive:C1640($zip; $targetArchiveFile)
-			
-			If ($targetFolder.path#$localProjectFolder.path)
-				$targetFolder.delete(Delete with contents:K24:24)
-			End if 
 			
 			$CLI._printTask("Archive client")
 			$CLI._printStatus($status.success)
