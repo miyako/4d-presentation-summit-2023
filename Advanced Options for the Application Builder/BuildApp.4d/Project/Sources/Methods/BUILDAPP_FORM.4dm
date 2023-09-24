@@ -115,7 +115,7 @@ Case of
 		setup_components_list($BuildApp; $form)
 		setup_modules_list($BuildApp; $form)
 		
-		//drag and drop support
+		//drag and drop
 		
 		setup_destination_path($BuildApp; $form; "BuildDest")
 		setup_data_path_lookup($BuildApp; $form; "RuntimeVL")
