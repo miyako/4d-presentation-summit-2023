@@ -122,6 +122,44 @@ Function findLicenses($licenseTypes : Collection)->$BuildApp : cs:C1710.BuildApp
 	$isOEM:=($BuildApp.Licenses["ArrayLicense"+(Is macOS:C1572 ? "Mac" : "Win")].Item.includes("@4UOE@"))
 	$BuildApp.SourcesFiles.RuntimeVL.IsOEM:=$isOEM
 	
+Function findCertificates($queryString : Text)->$certificates : Collection
+	
+	$BuildApp:=This:C1470
+	
+	$certificates:=New collection:C1472
+	
+	If (Is macOS:C1572)
+		
+		C_BLOB:C604($stdIn; $stdOut; $stdErr)
+		C_LONGINT:C283($pid)
+		SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_BLOCKING_EXTERNAL_PROCESS"; "TRUE")
+		
+		LAUNCH EXTERNAL PROCESS:C811("security find-identity -p basic -v"; $stdIn; $stdOut; $stdErr; $pid)
+		
+		$info:=Convert to text:C1012($stdOut; "utf-8")
+		
+		ARRAY LONGINT:C221($pos; 0)
+		ARRAY LONGINT:C221($len; 0)
+		
+		C_LONGINT:C283($i)
+		
+		$i:=1
+		
+		While (Match regex:C1019("(?m)\\s+(\\d+\\))\\s+([:Hex_Digit:]+)\\s+\"([^\"]+)\"$"; $info; $i; $pos; $len))
+			$id:=Substring:C12($info; $pos{2}; $len{2})
+			$name:=Substring:C12($info; $pos{3}; $len{3})
+			$i:=$pos{3}+$len{3}
+			$certificate:=New object:C1471("id"; $id; "name"; $name)
+			If (Match regex:C1019("([^:]+):\\s*(.+?)\\s*\\(([:ascii:]+)\\)"; $name; 1; $pos; $len))
+				$certificate.kind:=Substring:C12($name; $pos{1}; $len{1})
+				$certificate.account:=Substring:C12($name; $pos{2}; $len{2})
+				$certificate.team:=Substring:C12($name; $pos{3}; $len{3})
+			End if 
+			$certificates.push($certificate)
+		End while 
+		
+	End if 
+	
 Function findPlugins($compileProject : 4D:C1709.File)->$plugins : Collection
 	
 	$PluginsFolder:=$compileProject.parent.parent.folder("Plugins")
@@ -727,10 +765,10 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 					$_BuildApp.AutoUpdate.CS.ClientUpdateWin.StartElevated:=$boolValue
 				End if 
 				
-				$ShareLocalResourcesOnWindowsCli:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/ShareLocalResourcesOnWindowsClient")
+				$ShareLocalResourcesOnClient:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/ShareLocalResourcesOnWindowsClient")
 				
 				If (OK=1)
-					DOM GET XML ELEMENT VALUE:C731($ShareLocalResourcesOnWindowsCli; $boolValue)
+					DOM GET XML ELEMENT VALUE:C731($ShareLocalResourcesOnClient; $boolValue)
 					$_BuildApp.CS.ShareLocalResourcesOnWindowsClient:=$boolValue
 				End if 
 				

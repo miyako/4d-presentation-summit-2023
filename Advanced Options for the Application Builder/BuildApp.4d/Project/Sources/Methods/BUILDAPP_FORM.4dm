@@ -47,6 +47,15 @@ Case of
 		$BuildApp.ArrayExcludedComponentName.Item[5]:="4D WritePro Interface"
 		$BuildApp.ArrayExcludedComponentName.Item[6]:="4D Widgets"
 		
+		$certificates:=$BuildApp.findCertificates()
+		$certificates:=$certificates.query("name == :1 and kind == :2"; "@miyako@"; "Developer ID Application")
+		
+		If ($certificates.length#0)
+			$BuildApp.SignApplication.AdHocSign:=False:C215
+			$BuildApp.SignApplication.MacSignature:=True:C214
+			$BuildApp.SignApplication.MacCertificate:=$certificates[0].name
+		End if 
+		
 		//$BuildApp.CS.DatabaseToEmbedInClientWinFolder:=System folder(Desktop)
 		//$BuildApp.CS.DatabaseToEmbedInClientMacFolder:=System folder(Desktop)
 		//$BuildApp.CS.MacCompiledDatabaseToWin:=System folder(Desktop)
