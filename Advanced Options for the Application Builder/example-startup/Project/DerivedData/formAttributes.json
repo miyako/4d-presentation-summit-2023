@@ -1,3 +1,8 @@
 {
-	"forms": {}
+	"forms": {
+		"ServerList": {
+			"timeStamp": "2023-09-25T17:30:48Z",
+			"destination": "detailScreen"
+		}
+	}
 }

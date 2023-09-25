@@ -1,0 +1,190 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "fixed",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 80,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"events": [
+		"onLoad",
+		"onCloseBox",
+		"onUnload"
+	],
+	"windowTitle": "window title",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {
+				"copy to pasteboard XML": {
+					"type": "button",
+					"text": "⌘⌥X",
+					"top": 20,
+					"left": 460,
+					"width": 120,
+					"height": 40,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"focusable": false,
+					"method": "ObjectMethods/copy to pasteboard XML.4dm",
+					"shortcutAccel": true,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": true,
+					"shortcutKey": "x",
+					"action": "showClipboard",
+					"fontWeight": "normal",
+					"stroke": "automatic",
+					"imageHugsTitle": false,
+					"sizingX": "move"
+				},
+				"Hint for Mac1": {
+					"type": "text",
+					"text": "⌘⌥X",
+					"top": 277,
+					"left": 120,
+					"width": 40,
+					"height": 16,
+					"fontWeight": "bold",
+					"textAlign": "right",
+					"sizingY": "move"
+				},
+				"Hint for Both1": {
+					"type": "text",
+					"text": "Preview XML",
+					"top": 277,
+					"left": 168,
+					"width": 80,
+					"height": 16,
+					"sizingY": "move"
+				},
+				"Hint for Win1": {
+					"type": "text",
+					"text": "⌃⎇X",
+					"top": 277,
+					"left": 120,
+					"width": 40,
+					"height": 16,
+					"fontWeight": "bold",
+					"textAlign": "right",
+					"sizingY": "move"
+				}
+			}
+		},
+		{
+			"objects": {
+				"Servers": {
+					"type": "listbox",
+					"left": 10,
+					"top": 10,
+					"width": 424,
+					"height": 258,
+					"events": [
+						"onDoubleClick",
+						"onSelectionChange"
+					],
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.servers.col",
+					"selectionMode": "single",
+					"horizontalLineStroke": "transparent",
+					"verticalLineStroke": "transparent",
+					"resizingMode": "legacy",
+					"scrollbarHorizontal": "hidden",
+					"alternateFill": "automaticAlternate",
+					"sortable": true,
+					"rowHeight": "48px",
+					"sizingY": "grow",
+					"currentItemSource": "Form:C1466.servers.item",
+					"currentItemPositionSource": "Form:C1466.servers.pos",
+					"method": "ObjectMethods/Servers.4dm",
+					"metaSource": "",
+					"columns": [
+						{
+							"header": {
+								"text": "",
+								"name": "Header1"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer1"
+							},
+							"resizable": false,
+							"enterable": false,
+							"truncateMode": "none",
+							"dataSourceTypeHint": "picture",
+							"dataSource": "This:C1470.icon",
+							"pictureFormat": "proportionalCenter"
+						},
+						{
+							"header": {
+								"name": "Header2",
+								"text": ""
+							},
+							"name": "Column2",
+							"enterable": false,
+							"resizable": false,
+							"truncateMode": "none",
+							"dataSource": "This:C1470.description",
+							"footer": {
+								"name": "Footer2"
+							},
+							"styledText": true,
+							"verticalAlign": "middle"
+						}
+					]
+				},
+				"btn.OK": {
+					"type": "button",
+					"top": 274,
+					"left": 344,
+					"width": 90,
+					"height": 22,
+					"text": "Connect",
+					"focusable": false,
+					"defaultButton": true,
+					"events": [
+						"onClick"
+					],
+					"sizingX": "fixed",
+					"sizingY": "move",
+					"action": "",
+					"method": "ObjectMethods/btn.OK.4dm"
+				},
+				"Timestamp": {
+					"type": "input",
+					"left": 10,
+					"top": 277,
+					"width": 113,
+					"height": 17,
+					"dataSource": "Form:C1466.timestamp",
+					"enterable": false,
+					"focusable": true,
+					"dragging": "none",
+					"dropping": "none",
+					"borderStyle": "none",
+					"fill": "transparent",
+					"contextMenu": "none",
+					"sizingY": "move"
+				}
+			}
+		}
+	],
+	"geometryStamp": 746,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"method": "method.4dm",
+	"menuBar": "Barre #1",
+	"rightMargin": 11,
+	"formSizeAnchor": "btn.OK",
+	"bottomMargin": 7
+}

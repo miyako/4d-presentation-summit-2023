@@ -1,3 +1,26 @@
 {
-	"methods": {}
+	"methods": {
+		"daemon": {
+			"timeStamp": "2023-09-25T17:48:24Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "capable"
+			}
+		},
+		"TEST": {
+			"timeStamp": "2023-09-25T17:12:19Z"
+		},
+		"dialog_generic_close": {
+			"timeStamp": "2023-09-25T16:34:22Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
+		"(meta_server_list)": {
+			"timeStamp": "2023-09-25T17:24:04Z",
+			"attributes": {
+				"invisible": true
+			}
+		}
+	}
 }

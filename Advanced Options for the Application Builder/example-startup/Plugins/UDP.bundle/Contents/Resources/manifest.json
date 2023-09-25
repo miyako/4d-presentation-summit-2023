@@ -1,0 +1,11 @@
+{
+    "name": "UDP",
+    "id": 20000,
+    "commands": [
+        {
+            "theme": "Client",
+            "syntax": "UDP Get server list(&J):C",
+            "threadSafe": true
+        }
+    ]
+}
