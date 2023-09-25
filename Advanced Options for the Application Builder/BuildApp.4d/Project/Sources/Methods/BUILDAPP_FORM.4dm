@@ -64,10 +64,10 @@ Case of
 		$BuildApp.CS.LastDataPathLookup:="ByAppName"
 		
 		If (Is macOS:C1572)
-			$RuntimeVLMac:=Folder:C1567(fk applications folder:K87:20).folder("4D v20.1").folder("4D Volume Desktop.app").platformPath
+			$RuntimeVLMac:=demo_runtimevl_path
 			$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLMacFolder:=$RuntimeVLMac
 		Else 
-			$RuntimeVLWin:=Folder:C1567(fk applications folder:K87:20).folder("4D v20.1").folder("4D Volume Desktop").platformPath
+			$RuntimeVLWin:=demo_runtimevl_path
 			$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLWinFolder:=$RuntimeVLWin
 		End if 
 		
@@ -84,9 +84,9 @@ Case of
 		$BuildApp.SourcesFiles.CS.ClientWinIconForWinPath:=$RuntimeVLIconWin
 		
 		If (Is macOS:C1572)
-			$ServerMac:=Folder:C1567(fk applications folder:K87:20).folder("4D v20.1").folder("4D Server.app").platformPath
+			$ServerMac:=demo_server_path
 		Else 
-			$ServerWin:=Folder:C1567(fk applications folder:K87:20).folder("4D v20.1").folder("4D Server").platformPath
+			$ServerWin:=demo_server_path
 		End if 
 		
 		$BuildApp.SourcesFiles.CS.ServerMacFolder:=$ServerMac

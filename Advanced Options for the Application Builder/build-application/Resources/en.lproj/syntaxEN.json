@@ -232,6 +232,33 @@
 			],
 			"Summary": ""
 		},
+		"loadFromHost()": {
+			"Syntax": "**.loadFromHost**()->BuildApp : cs.BuildApp.BuildApp",
+			"Params": [
+				[
+					"BuildApp",
+					"cs.BuildApp.BuildApp",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"findPluginsFolder()": {
+			"Syntax": "**.findPluginsFolder**( *compileProject* : 4D.File )->plugins : 4D.Folder",
+			"Params": [
+				[
+					"compileProject",
+					"4D.File",
+					"->"
+				],
+				[
+					"plugins",
+					"4D.Folder",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
 		"findPlugins()": {
 			"Syntax": "**.findPlugins**( *compileProject* : 4D.File )->plugins : Collection",
 			"Params": [
@@ -264,28 +291,17 @@
 			],
 			"Summary": ""
 		},
-		"loadFromHost()": {
-			"Syntax": "**.loadFromHost**()->BuildApp : cs.BuildApp.BuildApp",
+		"findCertificates()": {
+			"Syntax": "**.findCertificates**( *queryString* : Text )->certificates : Collection",
 			"Params": [
 				[
-					"BuildApp",
-					"cs.BuildApp.BuildApp",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"findPluginsFolder()": {
-			"Syntax": "**.findPluginsFolder**( *compileProject* : 4D.File )->plugins : 4D.Folder",
-			"Params": [
-				[
-					"compileProject",
-					"4D.File",
+					"queryString",
+					"Text",
 					"->"
 				],
 				[
-					"plugins",
-					"4D.Folder",
+					"certificates",
+					"Collection",
 					"<-"
 				]
 			],
@@ -441,8 +457,13 @@
 	},
 	"SignApp": {
 		"signAsync()": {
-			"Syntax": "**.signAsync**( *application* : 4D.Folder )->this : cs.BuildApp.SignApp",
+			"Syntax": "**.signAsync**( *BuildApp* : cs.BuildApp.BuildApp; *application* : 4D.Folder )->this : cs.BuildApp.SignApp",
 			"Params": [
+				[
+					"BuildApp",
+					"cs.BuildApp.BuildApp",
+					"->"
+				],
 				[
 					"application",
 					"4D.Folder",
@@ -476,6 +497,9 @@
 			"Syntax": "**.terminate**()",
 			"Params": [],
 			"Summary": ""
+		},
+		"logFile": {
+			"Syntax": "logFile : 4D.File"
 		},
 		"_inheritedFrom_": "_CLI"
 	},
@@ -786,8 +810,13 @@
 	},
 	"BuildApp_CLI": {
 		"quickSign()": {
-			"Syntax": "**.quickSign**( *RuntimeFolder* : 4D.Folder )->success : Boolean",
+			"Syntax": "**.quickSign**( *BuildApp* : cs.BuildApp.BuildApp; *RuntimeFolder* : 4D.Folder )->success : Boolean",
 			"Params": [
+				[
+					"BuildApp",
+					"cs.BuildApp.BuildApp",
+					"->"
+				],
 				[
 					"RuntimeFolder",
 					"4D.Folder",

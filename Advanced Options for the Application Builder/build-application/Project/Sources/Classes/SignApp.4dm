@@ -1,3 +1,5 @@
+property logFile : 4D:C1709.File
+
 Class extends _CLI
 
 Class constructor($controller : 4D:C1709.Class; $signal : 4D:C1709.Signal)
@@ -8,10 +10,11 @@ Class constructor($controller : 4D:C1709.Class; $signal : 4D:C1709.Signal)
 		This:C1470.controller.signal:=$signal
 	End if 
 	
+	This:C1470.logFile:=Null:C1517
+	
 Function terminate()
 	
 	This:C1470.controller.terminate()
-	
 	
 Function _sign($application : 4D:C1709.Folder; $useLog : Boolean; $certificateName : Text)->$this : cs:C1710.SignApp
 	
@@ -39,9 +42,16 @@ Function _sign($application : 4D:C1709.Folder; $useLog : Boolean; $certificateNa
 		If ($useLog)
 			
 			var $logFile : 4D:C1709.File
-			$logFile:=Folder:C1567(Temporary folder:C486; fk platform path:K87:2).file("SignApp-"+$timestamp+".log")
+			
+			$logFile:=File:C1566(File:C1566("/LOGS/SignApp-"+$timestamp+".log").platformPath; fk platform path:K87:2)
 			
 			$command:=$command+" "+This:C1470.escape($logFile.path)
+			
+			This:C1470.logFile:=$logFile
+			
+		Else 
+			
+			This:C1470.logFile:=Null:C1517
 			
 		End if 
 		

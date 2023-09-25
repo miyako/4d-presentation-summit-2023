@@ -20,5 +20,14 @@
 			"_XmlParser"
 		]
 	},
+	"Public": {
+		"classes": [
+			"BuildApp",
+			"BuildApp_CLI",
+			"CLI",
+			"SignApp",
+			"SignApp_Worker_Controller"
+		]
+	},
 	"trash": {}
 }

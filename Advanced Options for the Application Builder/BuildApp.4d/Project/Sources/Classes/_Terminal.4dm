@@ -68,10 +68,12 @@ Function _chmod($file : 4D:C1709.File)
 	
 Function launch($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)
 	
-	$tool4d:=Folder:C1567(fk applications folder:K87:20).folder("4D v20.1").folder("100755").folder("tool4d.app").folder("Contents").folder("MacOS").file("tool4d")
+	$tool4d:=demo_tool4d_file
+	
+	$project:=demo_project_path
 	
 	$command:=This:C1470.escape($tool4d.path)
-	$command:=$command+" /Users/miyako/Documents/GitHub/4d-presentation-summit-2023/Advanced\\ Options\\ for\\ the\\ Application\\ Builder/build-application/Project/build-application.4DProject"
+	$command:=$command+" "+This:C1470.escape($project)  //" /Users/miyako/Documents/GitHub/4d-presentation-summit-2023/Advanced\\ Options\\ for\\ the\\ Application\\ Builder/build-application/Project/build-application.4DProject"
 	$command:=$command+" "+This:C1470.escape($compileProject.path)
 	$command:=$command+" --startup-method=build"
 	$command:=$command+" --user-param="+This:C1470.escape($buildProject.path)+","+This:C1470.escape($compileProject.path)

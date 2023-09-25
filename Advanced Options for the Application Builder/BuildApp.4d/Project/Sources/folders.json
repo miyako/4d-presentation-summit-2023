@@ -31,6 +31,14 @@
 			"_Worker_Controller"
 		]
 	},
+	"Demo": {
+		"methods": [
+			"demo_project_path",
+			"demo_runtimevl_path",
+			"demo_server_path",
+			"demo_tool4d_file"
+		]
+	},
 	"Iconutil": {
 		"methods": [
 			"ICONUTIL_WORKER"
