@@ -16,6 +16,6 @@ Else
 	$application:=Folder:C1567("Macintosh HD:Users:miyako:Desktop:Final Application:TEST.app"; fk platform path:K87:2)
 	$SignApp:=cs:C1710.SignApp.new(cs:C1710.SignApp_Worker_Controller; $signal)
 	
-	$SignApp.signAsync($application)
+	$SignApp.signAsync(Null:C1517; $application)
 	
 End if 

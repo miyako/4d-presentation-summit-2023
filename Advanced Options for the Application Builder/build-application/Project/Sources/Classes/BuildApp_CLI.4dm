@@ -279,7 +279,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 								$CLI._generateLicense($BuildApp; $targetRuntimeVLFolder)
 							End if 
 							
-							$CLI.quickSign($targetRuntimeVLFolder)
+							$CLI.quickSign($BuildApp; $targetRuntimeVLFolder)
 							
 							$success:=True:C214
 							
@@ -335,7 +335,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 								$CLI._generateLicense($BuildApp; $targetServerFolder)
 							End if 
 							
-							$CLI.quickSign($targetServerFolder)
+							$CLI.quickSign($BuildApp; $targetServerFolder)
 							
 							$success:=True:C214
 							
@@ -378,7 +378,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 					
 					$CLI._copyComponents($BuildApp; $targetServerFolder; $compileProject; $target)
 					
-					$CLI.quickSign($targetFolder)
+					$CLI.quickSign($BuildApp; $targetFolder)
 					
 					$success:=True:C214
 					
@@ -413,7 +413,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 					
 					$CLI._copyDatabase($BuildApp; $targetPackage; $compileProject; $target)
 					
-					$CLI.quickSign($targetPackage)
+					$CLI.quickSign($BuildApp; $targetPackage)
 					
 					$success:=True:C214
 					
@@ -465,7 +465,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 								$CLI._generateLicense($BuildApp; $targetClientFolder)
 							End if 
 							
-							$CLI.quickSign($targetClientFolder)
+							$CLI.quickSign($BuildApp; $targetClientFolder)
 							
 							$success:=True:C214
 							
@@ -479,7 +479,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 		
 	End for each 
 	
-Function quickSign($RuntimeFolder : 4D:C1709.Folder)->$success : Boolean
+Function quickSign($BuildApp : cs:C1710.BuildApp; $RuntimeFolder : 4D:C1709.Folder)->$success : Boolean
 	
 	$CLI:=This:C1470
 	
@@ -488,7 +488,7 @@ Function quickSign($RuntimeFolder : 4D:C1709.Folder)->$success : Boolean
 		$CLI._printTask("Sign app")
 		$CLI._printPath($RuntimeFolder)
 		
-		quickSign($RuntimeFolder)
+		quickSign($BuildApp; $RuntimeFolder)
 		
 		$success:=True:C214
 		
@@ -957,7 +957,7 @@ $sdi_application : Boolean; $buildApplicationType : Text)->$targetFolder : 4D:C1
 				$CLI._generateLicense($BuildApp; $targetFolder)
 			End if 
 			
-			$CLI.quickSign($targetFolder)
+			$CLI.quickSign($BuildApp; $targetFolder)
 			
 			$zip:=New object:C1471
 			$zip.files:=New collection:C1472($targetFolder)

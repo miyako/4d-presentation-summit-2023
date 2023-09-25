@@ -12,7 +12,8 @@ Function terminate()
 	
 	This:C1470.controller.terminate()
 	
-Function _sign($application : 4D:C1709.Folder; $useLog : Boolean)->$this : cs:C1710.SignApp
+	
+Function _sign($application : 4D:C1709.Folder; $useLog : Boolean; $certificateName : Text)->$this : cs:C1710.SignApp
 	
 	$this:=This:C1470
 	
@@ -20,7 +21,9 @@ Function _sign($application : 4D:C1709.Folder; $useLog : Boolean)->$this : cs:C1
 		
 		$command:=This:C1470.escape(This:C1470.executablePath)
 		
-		$certificateName:="-"
+		If ($certificateName="")
+			$certificateName:="-"
+		End if 
 		
 		var $entitlementsFile : 4D:C1709.File
 		$entitlementsFile:=File:C1566(Folder:C1567(fk resources folder:K87:11).file("4D.entitlements").platformPath; fk platform path:K87:2)
@@ -46,9 +49,17 @@ Function _sign($application : 4D:C1709.Folder; $useLog : Boolean)->$this : cs:C1
 		
 	End if 
 	
-Function signAsync($application : 4D:C1709.Folder)->$this : cs:C1710.SignApp
+Function signAsync($BuildApp : cs:C1710.BuildApp; $application : 4D:C1709.Folder)->$this : cs:C1710.SignApp
 	
-	This:C1470._sign($application; False:C215)
+	var $certificateName : Text
+	
+	If ($BuildApp.SignApplication.MacSignature#Null:C1517) && ($BuildApp.SignApplication.MacCertificate#Null:C1517)
+		If (Bool:C1537($BuildApp.SignApplication.MacSignature))
+			$certificateName:=$BuildApp.SignApplication.MacCertificate
+		End if 
+	End if 
+	
+	This:C1470._sign($application; False:C215; $certificateName)
 	
 Function sign($application : 4D:C1709.Folder)->$this : cs:C1710.SignApp
 	
