@@ -520,86 +520,6 @@
 					"fontWeight": "normal",
 					"focusable": false
 				},
-				"ExcludeCEF": {
-					"type": "checkbox",
-					"text": "Exclude CEF",
-					"top": 285,
-					"left": 660,
-					"width": 152,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.ExcludeCEF",
-					"dataSourceTypeHint": "boolean",
-					"fontWeight": "normal",
-					"focusable": false,
-					"method": "ObjectMethods/ExcludeCEF.4dm"
-				},
-				"ExcludeMeCab": {
-					"type": "checkbox",
-					"text": "Exclude MeCab",
-					"top": 305,
-					"left": 660,
-					"width": 152,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.ExcludeMeCab",
-					"dataSourceTypeHint": "boolean",
-					"fontWeight": "normal",
-					"focusable": false,
-					"method": "ObjectMethods/ExcludeMeCab.4dm"
-				},
-				"ExcludePHP": {
-					"type": "checkbox",
-					"text": "Exclude PHP",
-					"top": 325,
-					"left": 660,
-					"width": 152,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.ExcludePHP",
-					"dataSourceTypeHint": "boolean",
-					"fontWeight": "normal",
-					"focusable": false,
-					"method": "ObjectMethods/ExcludePHP.4dm"
-				},
-				"ExcludeSpellChecker": {
-					"type": "checkbox",
-					"text": "Exclude SpellChecker",
-					"top": 345,
-					"left": 660,
-					"width": 152,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.ExcludeSpellChecker",
-					"dataSourceTypeHint": "boolean",
-					"fontWeight": "normal",
-					"focusable": false,
-					"method": "ObjectMethods/ExcludeSpellChecker.4dm"
-				},
-				"ExcludeUpdater": {
-					"type": "checkbox",
-					"text": "Exclude 4D Updater",
-					"top": 365,
-					"left": 660,
-					"width": 152,
-					"height": 21,
-					"events": [
-						"onClick"
-					],
-					"dataSource": "Form:C1466.ExcludeUpdater",
-					"dataSourceTypeHint": "boolean",
-					"fontWeight": "normal",
-					"focusable": false,
-					"method": "ObjectMethods/ExcludeUpdater.4dm"
-				},
 				"Plugins": {
 					"type": "listbox",
 					"left": 316,
@@ -812,13 +732,8 @@
 				"BuildApp.IncludeAssociatedFolders",
 				"BuildApp.BuildCompiled",
 				"BuildApp.BuildComponent",
-				"ExcludeCEF",
 				"Plugins",
 				"components",
-				"ExcludeMeCab",
-				"ExcludePHP",
-				"ExcludeSpellChecker",
-				"ExcludeUpdater",
 				"modules"
 			]
 		},
@@ -2834,7 +2749,7 @@
 			}
 		}
 	],
-	"geometryStamp": 2651,
+	"geometryStamp": 2652,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
