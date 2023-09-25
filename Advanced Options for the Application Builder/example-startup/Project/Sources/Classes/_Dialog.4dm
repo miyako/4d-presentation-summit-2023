@@ -1,21 +1,25 @@
 property _linkTemplate : Text
-property worker : Text
+property workerName : Text
+property workerFunction; workerCallbackFunction : 4D:C1709.Function
 property windowNumber : Integer
 property daemonParams : Object
 
-Class constructor($workerName : Text)
+Class constructor($workerFunction : 4D:C1709.Function; $workerCallbackFunction : 4D:C1709.Function)
 	
-	This:C1470.workerName:=$workerName
+	This:C1470.workerFunction:=$workerFunction
+	This:C1470.workerCallbackFunction:=$workerCallbackFunction
 	
 Function get formIdentifier()->$formIdentifier : Text
 	
 	var $table : Pointer
-	
-	$table:=Current form table:C627
-	
 	var $name : Text
 	
-	$name:=Current form name:C1298
+	If (Not:C34(This:C1470.processIsPreemtive()))
+		//%T-
+		$table:=Current form table:C627
+		$name:=Current form name:C1298
+		//%T+
+	End if 
 	
 	If (Is nil pointer:C315($table))
 		$formIdentifier:=$name
@@ -29,13 +33,13 @@ Function callWorker()->$this : cs:C1710._Dialog
 	
 	$this:=This:C1470
 	
-	$this.worker:=New collection:C1472(OB Class:C1730(This:C1470).name; "#"; $this.windowNumber).join("")
+	$this.workerName:=New collection:C1472(OB Class:C1730(This:C1470).name; "#"; $this.windowNumber).join("")
 	
 	$callback:=$this.update
 	
-	//starter must be a project method name, not function, to run preemptive
-	
-	CALL WORKER:C1389($this.worker; $this.workerName; $this.windowNumber; $this.daemonParams; $callback)
+	If (OB Instance of:C1731($this.workerFunction; 4D:C1709.Function)) && (OB Instance of:C1731($this.workerCallbackFunction; 4D:C1709.Function))
+		CALL WORKER:C1389($this.workerName; $this.workerFunction; $this.windowNumber; $this.daemonParams; $this.workerCallbackFunction)
+	End if 
 	
 Function killWorker()->$this : cs:C1710._Dialog
 	
@@ -235,18 +239,22 @@ Function _dialog($params : Object)
 	
 	$params.controller.daemonParams:=$params.daemonParams
 	
-	If ($formIdentifier.table="{projectForm}")
-		var $name : Text
-		$name:=$params.name
-		FORM GET PROPERTIES:C674($name; $width; $height)
-		$formRect:=$params.controller.getWindowBounds($params.name; $width; $height)
-		$params.controller.windowNumber:=$params.controller.openWindow($formRect; $windowType; $title)
-		DIALOG:C40($params.name; $params; *)
-	Else 
-		$formRect:=This:C1470.getWindowBounds($params.name)
-		$params.controller.windowNumber:=This:C1470.openWindow($formRect; $windowType; $title)
-		$table:=Table:C252($formIdentifier.tableNumber)
-		DIALOG:C40($table->; $formIdentifier.form; $params; *)
+	If (Not:C34($params.controller.processIsPreemtive()))
+		//%T-
+		If ($formIdentifier.table="{projectForm}")
+			var $name : Text
+			$name:=$params.name
+			FORM GET PROPERTIES:C674($name; $width; $height)
+			$formRect:=$params.controller.getWindowBounds($params.name; $width; $height)
+			$params.controller.windowNumber:=$params.controller.openWindow($formRect; $windowType; $title)
+			DIALOG:C40($params.name; $params; *)
+		Else 
+			$formRect:=$params.controller.getWindowBounds($params.name)
+			$params.controller.windowNumber:=This:C1470.openWindow($formRect; $windowType; $title)
+			$table:=Table:C252($formIdentifier.tableNumber)
+			DIALOG:C40($table->; $formIdentifier.form; $params; *)
+		End if 
+		//%T+
 	End if 
 	
 Function _findUserWindow()->$windowNumber : Integer
@@ -291,7 +299,13 @@ Function _parseFormIdentifier($formIdentifier : Text)->$status : Object
 		$status.table:=Substring:C12($formIdentifier; $pos{1}; $len{1})
 		$status.form:=Substring:C12($formIdentifier; $pos{2}; $len{2})
 		
-		$table:=Parse formula:C1576("["+$status.table+"]"; Formula out with tokens:K88:3)
+		var $table : Text
+		
+		If (Not:C34(This:C1470.processIsPreemtive()))
+			//%T-
+			$table:=Parse formula:C1576("["+$status.table+"]"; Formula out with tokens:K88:3)
+			//%T+
+		End if 
 		
 		If (Match regex:C1019("\\[[^:]+:(\\d+)\\]"; $table; 1; $pos; $len))
 			$status.tableNumber:=Num:C11(Substring:C12($table; $pos{1}; $len{1}))

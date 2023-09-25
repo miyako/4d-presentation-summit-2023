@@ -1,5 +1,18 @@
 {
 	"methods": {
+		"dialog_generic_close": {
+			"timeStamp": "2023-09-25T20:44:11Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "capable"
+			}
+		},
+		"daemon_callback": {
+			"timeStamp": "2023-09-25T20:56:48Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
 		"daemon": {
 			"timeStamp": "2023-09-25T17:48:24Z",
 			"attributes": {
@@ -7,14 +20,8 @@
 				"preemptive": "capable"
 			}
 		},
-		"TEST": {
+		"ServerList": {
 			"timeStamp": "2023-09-25T17:12:19Z"
-		},
-		"dialog_generic_close": {
-			"timeStamp": "2023-09-25T16:34:22Z",
-			"attributes": {
-				"invisible": true
-			}
 		}
 	}
 }
