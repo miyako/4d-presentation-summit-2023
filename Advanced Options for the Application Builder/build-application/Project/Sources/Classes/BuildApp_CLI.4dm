@@ -239,7 +239,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 		$publication_name:=$compileProject.name
 	End if 
 	
-	For each ($target; $targets)
+	For each ($target; $targets.orderBy(ck ascending:K85:9))
 		
 		Case of 
 			: ($target="Serialized") | ($target="Light")
@@ -579,12 +579,58 @@ $sourceProjectFile : 4D:C1709.File; $publication_name : Text; $buildApplicationT
 			$ContentsFolder:=$targetFolder.folder("Contents").folder("Database")
 	End case 
 	
-	If ($ContentsFolder#Null:C1517)
-		
-		$ContentsFolder.create()
-		
-		Case of 
-			: ($buildApplicationType="Client@") | ($buildApplicationType="Upgrade4DClient")
+	$ContentsFolder.create()
+	
+	var $targetEmbedProjectFile : 4D:C1709.File
+	
+	$platform:=(Is macOS:C1572 ? "Mac" : "Win")
+	$DatabaseToEmbedInClientFolder:="DatabaseToEmbedInClient"+$platform+"Folder"
+	
+	$DatabaseToEmbedInClient:=$CLI._getStringValue($BuildApp; "SourcesFiles.CS."+$DatabaseToEmbedInClientFolder)
+	
+	Case of 
+		: ($buildApplicationType="Client@") | ($buildApplicationType="Upgrade4DClient")
+			
+			If ($DatabaseToEmbedInClient#"")
+				
+				$embedProjectFile:=File:C1566($DatabaseToEmbedInClient; fk platform path:K87:2)
+				
+				$targetEmbedProjectFile:=$embedProjectFile.copyTo($ContentsFolder; fk overwrite:K87:5)
+				
+				$CLI._printTask("Copy startup project")
+				$CLI._printStatus($targetEmbedProjectFile.exists)
+				$CLI._printPath($targetEmbedProjectFile)
+				
+				$PluginsFolder:=$embedProjectFile.parent.folder("Plugins")
+				$bundles:=$PluginsFolder.folders(fk ignore invisible:K87:22).query("extension == :1"; ".bundle")
+				
+				If ($bundles.length#0)
+					
+					$targetPluginsFolder:=$ContentsFolder.parent.folder("Plugins")
+					$targetPluginsFolder.create()
+					
+					$CLI._printTask("Copy startup plugins").LF()
+					
+					For each ($bundle; $bundles)
+						$CLI._printPath($bundle.copyTo($targetPluginsFolder; fk overwrite:K87:5))
+					End for each 
+					
+				End if 
+				
+				$folders:=$embedProjectFile.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Resources"; "Libraries"; "Documentation"; "Extras"))
+				
+				If ($folders.length#0)
+					
+					$CLI._printTask("Copy database folders").LF()
+					For each ($folder; $folders)
+						$CLI._printPath($folder.copyTo($ContentsFolder; fk overwrite:K87:5))
+					End for each 
+					
+				End if 
+				
+				$CLI.quickSign($BuildApp; $ContentsFolder)
+				
+			Else 
 				
 				var $EnginedServer : Text
 				$database_shortcut:=DOM Create XML Ref:C861("database_shortcut")
@@ -616,99 +662,109 @@ $sourceProjectFile : 4D:C1709.File; $publication_name : Text; $buildApplicationT
 					DOM SET XML ATTRIBUTE:C866($database_shortcut; "server_database_name"; $ServerStructureFolderName)
 				End if 
 				
-				DOM EXPORT TO FILE:C862($database_shortcut; $ContentsFolder.file("EnginedServer.4Dlink").platformPath)
+				$linkFile:=$ContentsFolder.file("EnginedServer.4Dlink")
+				
+				DOM EXPORT TO FILE:C862($database_shortcut; $linkFile.platformPath)
 				DOM CLOSE XML:C722($database_shortcut)
 				
-			Else 
+				$CLI._printTask("Create link file")
+				$CLI._printStatus($linkFile.exists)
+				$CLI._printPath($linkFile)
 				
-				$targetProjectFolder:=$ProjectFolder.copyTo($ContentsFolder)
+			End if 
+			
+		Else 
+			
+			$targetProjectFolder:=$ProjectFolder.copyTo($ContentsFolder)
+			
+			$CLI._printTask("Set database folder")
+			$CLI._printStatus($targetProjectFolder.exists)
+			$CLI._printPath($targetProjectFolder)
+			
+			$localProjectFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent
+			
+			If ($targetProjectFolder.path#($localProjectFolder.path+"@"))
 				
-				$CLI._printTask("Set database folder")
-				$CLI._printStatus($targetProjectFolder.exists)
-				$CLI._printPath($targetProjectFolder)
+				$folders:=New collection:C1472($targetProjectFolder.folder("Trash"))
+				$folders.push($targetProjectFolder.folder("Sources").folder("DatabaseMethods"))
+				$folders.push($targetProjectFolder.folder("Sources").folder("TableForms"))
+				$folders.push($targetProjectFolder.folder("Sources").folder("Triggers"))
+				$folders.push($targetProjectFolder.folder("Sources").folder("Classes"))
+				$folders.push($targetProjectFolder.folder("Sources").folder("Methods"))
+				$folders.push($targetProjectFolder.folder("Sources").folder("Forms"))
 				
-				$localProjectFolder:=File:C1566(Structure file:C489; fk platform path:K87:2).parent
+				$files:=New collection:C1472
 				
-				If ($targetProjectFolder.path#($localProjectFolder.path+"@"))
+				For each ($folder; $folders)
+					$files.combine($folder.files(fk ignore invisible:K87:22).query("extension == :1"; ".4dm"))
+				End for each 
+				
+				For each ($file; $files)
+					$file.delete()
+				End for each 
+				
+				$Forms:=$folders.pop()
+				
+				For each ($folder; $folders)
+					$folder.delete()
+				End for each 
+				
+			End if 
+			
+			$files:=$ContentsFolder.folder("Project").files(fk ignore invisible:K87:22).query("extension == :1"; ".4DProject")
+			
+			If ($files.length#0)
+				
+				$targetProjectFile:=$files[0]
+				
+				$PortNumber:=$CLI._getIntValue($BuildApp; "CS.PortNumber")
+				
+				If ($PortNumber>0)
 					
-					$folders:=New collection:C1472($targetProjectFolder.folder("Trash"))
-					$folders.push($targetProjectFolder.folder("Sources").folder("DatabaseMethods"))
-					$folders.push($targetProjectFolder.folder("Sources").folder("TableForms"))
-					$folders.push($targetProjectFolder.folder("Sources").folder("Triggers"))
-					$folders.push($targetProjectFolder.folder("Sources").folder("Classes"))
-					$folders.push($targetProjectFolder.folder("Sources").folder("Methods"))
-					$folders.push($targetProjectFolder.folder("Sources").folder("Forms"))
+					var $xmlParser : cs:C1710._SettingsXmlParser
 					
-					$files:=New collection:C1472
+					$xmlParser:=cs:C1710._SettingsXmlParser.new()
 					
-					For each ($folder; $folders)
-						$files.combine($folder.files(fk ignore invisible:K87:22).query("extension == :1"; ".4dm"))
-					End for each 
+					$xmlParser.setPortNumber($targetProjectFile; $PortNumber)
 					
-					For each ($file; $files)
-						$file.delete()
-					End for each 
+					$CLI._printTask("Rename project")
+					$targetProjectFile:=$targetProjectFile.rename($BuildApp.BuildApplicationName+".4DProject")
+					$CLI._printStatus($targetProjectFile.exists)
+					$CLI._printPath($targetProjectFile)
+				End if 
+				
+				$PackProject:=$CLI._getBoolValue($BuildApp; "PackProject")
+				
+				If ($PackProject)
 					
-					$Forms:=$folders.pop()
+					$zip:=New object:C1471
+					$zip.files:=New collection:C1472($targetProjectFolder)
 					
-					For each ($folder; $folders)
-						$folder.delete()
-					End for each 
+					$UseStandardZipFormat:=$CLI._getBoolValue($BuildApp; "UseStandardZipFormat")
+					
+					If ($UseStandardZipFormat)
+						$zip.encryption:=ZIP Encryption none:K91:3
+					Else 
+						$zip.encryption:=-1
+					End if 
+					
+					$targetProjectFile:=$ContentsFolder.file($BuildApp.BuildApplicationName+".4DZ")
+					
+					$status:=ZIP Create archive:C1640($zip; $targetProjectFile)
+					
+					$CLI._printTask("Archive project folder")
+					$CLI._printStatus($status.success)
+					$CLI._printPath($targetProjectFile)
+					
+					If ($targetProjectFolder.path#$localProjectFolder.path)
+						$targetProjectFolder.delete(Delete with contents:K24:24)
+					End if 
 					
 				End if 
 				
-				$files:=$ContentsFolder.folder("Project").files(fk ignore invisible:K87:22).query("extension == :1"; ".4DProject")
+				$folders:=$ProjectFolder.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Resources"; "Libraries"; "Documentation"; "Default Data"; "Extras"))
 				
-				If ($files.length#0)
-					
-					$targetProjectFile:=$files[0]
-					
-					$PortNumber:=$CLI._getIntValue($BuildApp; "CS.PortNumber")
-					
-					If ($PortNumber>0)
-						
-						var $xmlParser : cs:C1710._SettingsXmlParser
-						
-						$xmlParser:=cs:C1710._SettingsXmlParser.new()
-						
-						$xmlParser.setPortNumber($targetProjectFile; $PortNumber)
-						
-						$CLI._printTask("Rename project")
-						$targetProjectFile:=$targetProjectFile.rename($BuildApp.BuildApplicationName+".4DProject")
-						$CLI._printStatus($targetProjectFile.exists)
-						$CLI._printPath($targetProjectFile)
-					End if 
-					
-					$PackProject:=$CLI._getBoolValue($BuildApp; "PackProject")
-					
-					If ($PackProject)
-						
-						$zip:=New object:C1471
-						$zip.files:=New collection:C1472($targetProjectFolder)
-						
-						$UseStandardZipFormat:=$CLI._getBoolValue($BuildApp; "UseStandardZipFormat")
-						
-						If ($UseStandardZipFormat)
-							$zip.encryption:=ZIP Encryption none:K91:3
-						Else 
-							$zip.encryption:=-1
-						End if 
-						
-						$targetProjectFile:=$ContentsFolder.file($BuildApp.BuildApplicationName+".4DZ")
-						
-						$status:=ZIP Create archive:C1640($zip; $targetProjectFile)
-						
-						$CLI._printTask("Archive project folder")
-						$CLI._printStatus($status.success)
-						$CLI._printPath($targetProjectFile)
-						
-						If ($targetProjectFolder.path#$localProjectFolder.path)
-							$targetProjectFolder.delete(Delete with contents:K24:24)
-						End if 
-						
-					End if 
-					
-					$folders:=$ProjectFolder.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Resources"; "Libraries"; "Documentation"; "Default Data"; "Extras"))
+				If ($folders.length#0)
 					
 					$CLI._printTask("Copy database folders").LF()
 					For each ($folder; $folders)
@@ -717,28 +773,28 @@ $sourceProjectFile : 4D:C1709.File; $publication_name : Text; $buildApplicationT
 					
 				End if 
 				
-		End case 
-		
-		Case of 
-			: ($buildApplicationType="Server")
-				
-				$ServerEmbedsProjectDirectory:=$CLI._getBoolValue($BuildApp; "CS.ServerEmbedsProjectDirectoryFile")
-				
-				If ($ServerEmbedsProjectDirectory)
-					$directoryFile:=$ProjectFolder.parent.folder("Settings").file("directory.json")
-					If ($directoryFile.exists)
-						$targetDirectoryFile:=$directoryFile.copyTo($targetProjectFolder.parent.folder("Settings"))
-						
-						$CLI._printTask("Copy directory file")
-						$CLI._printStatus($targetDirectoryFile.exists)
-						$CLI._printPath($targetDirectoryFile)
-						
-					End if 
+			End if 
+			
+	End case 
+	
+	Case of 
+		: ($buildApplicationType="Server")
+			
+			$ServerEmbedsProjectDirectory:=$CLI._getBoolValue($BuildApp; "CS.ServerEmbedsProjectDirectoryFile")
+			
+			If ($ServerEmbedsProjectDirectory)
+				$directoryFile:=$ProjectFolder.parent.folder("Settings").file("directory.json")
+				If ($directoryFile.exists)
+					$targetDirectoryFile:=$directoryFile.copyTo($targetProjectFolder.parent.folder("Settings"))
+					
+					$CLI._printTask("Copy directory file")
+					$CLI._printStatus($targetDirectoryFile.exists)
+					$CLI._printPath($targetDirectoryFile)
+					
 				End if 
-				
-		End case 
-		
-	End if 
+			End if 
+			
+	End case 
 	
 Function _copyPlugins($BuildApp : cs:C1710.BuildApp; \
 $RuntimeFolder : 4D:C1709.Folder; \
@@ -786,10 +842,11 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	
 	$CLI:=This:C1470
 	
+	$BuildCSUpgradeable:=$CLI._getBoolValue($BuildApp; "CS.BuildCSUpgradeable")
+	
 	Case of 
 		: ($buildApplicationType="Server")
 			$targetName:=$BuildApplicationName+" Server"
-			$BuildCSUpgradeable:=$CLI._getBoolValue($BuildApp; "CS.BuildCSUpgradeable")
 		: ($buildApplicationType="Client@") | ($buildApplicationType="Upgrade4DClient")
 			$targetName:=$BuildApplicationName+" Client"
 		Else 
@@ -864,8 +921,6 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 		
 		Case of 
 			: ($buildApplicationType="Server")
-				
-				$BuildCSUpgradeable:=$CLI._getBoolValue($BuildApp; "CS.BuildCSUpgradeable")
 				
 				If ($BuildCSUpgradeable)
 					
@@ -1238,8 +1293,15 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	Case of 
 		: ($buildApplicationType="Client@")
 			
-			$info.PublishName:=$publication_name
-			$keys.push("PublishName")  //this forces connection to server
+			$platform:=(Is macOS:C1572 ? "Mac" : "Win")
+			$DatabaseToEmbedInClientFolder:="DatabaseToEmbedInClient"+$platform+"Folder"
+			
+			$DatabaseToEmbedInClient:=$CLI._getStringValue($BuildApp; "SourcesFiles.CS."+$DatabaseToEmbedInClientFolder)
+			
+			If ($DatabaseToEmbedInClient="")
+				$info.PublishName:=$publication_name
+				$keys.push("PublishName")  //this forces connection to server
+			End if 
 			
 			$info["com.4d.BuildApp.dataless"]:="true"
 			$keys.push("com.4d.BuildApp.dataless")

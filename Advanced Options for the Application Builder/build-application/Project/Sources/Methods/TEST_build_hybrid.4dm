@@ -1,5 +1,5 @@
 //%attributes = {}
-$buildProject:=Folder:C1567(fk database folder:K87:14).file("tests/BuildCSUpgradeable.4DSettings")
+$buildProject:=Folder:C1567(fk database folder:K87:14).file("tests/DatabaseToEmbedInClient.4DSettings")
 $compileProject:=File:C1566(Structure file:C489; fk platform path:K87:2).parent.parent.parent.parent.file("Advanced Options for the Application Builder/example/Project/example.4DProject")
 
 If (True:C214)
@@ -37,6 +37,10 @@ If (True:C214)
 	
 	$ClientIncludeIt:="Client"+$platform+"IncludeIt"
 	$BuildApp.SourcesFiles.CS[$ClientIncludeIt]:=True:C214
+	
+	$DatabaseToEmbedInClient:="DatabaseToEmbedInClient"+$platform+"Folder"
+	$DatabaseToEmbed:=File:C1566(Structure file:C489; fk platform path:K87:2).parent.parent.parent.file("Compiled Database/example-startup/example-startup.4DZ").platformPath
+	$BuildApp.SourcesFiles.CS[$DatabaseToEmbedInClient]:=$DatabaseToEmbed
 	
 	$fileName:="BuildApp-"+Replace string:C233(String:C10(Current date:C33; ISO date:K1:8; Current time:C178); ":"; "-"; *)+".4DSettings"
 	
