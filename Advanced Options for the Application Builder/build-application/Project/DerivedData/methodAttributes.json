@@ -1,5 +1,8 @@
 {
 	"methods": {
+		"TEST_build_sign": {
+			"timeStamp": "2023-09-24T23:56:48Z"
+		},
 		"TEST_sign_sync": {
 			"timeStamp": "2023-09-20T12:06:08Z",
 			"attributes": {
@@ -19,7 +22,7 @@
 			}
 		},
 		"TEST_build_cs_upgradable": {
-			"timeStamp": "2023-09-24T22:51:56Z"
+			"timeStamp": "2023-09-25T00:06:23Z"
 		},
 		"TEST_sign_async": {
 			"timeStamp": "2023-09-20T12:07:05Z",
