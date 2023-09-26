@@ -1,9 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><preferences stamp="4">
+<?xml version="1.0" encoding="UTF-8"?><preferences stamp="5">
 	<com.4d>
 		<compiler>
 			<typage default_for_button="2" default_for_numeric="1"/>
-			<options symbol_file="true" syntax_file="true" target="all"/>
+			<options error_file="true" symbol_file="true" syntax_file="true" target="all"/>
 		</compiler>
 		<general component_classStore_name="ServerList"/>
+		<interface>
+			<user flush_window="false" print_progress="false" splash_screen="false"/>
+		</interface>
 	</com.4d>
 </preferences>
