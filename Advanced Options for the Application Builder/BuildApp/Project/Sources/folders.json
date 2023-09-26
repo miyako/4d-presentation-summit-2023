@@ -33,9 +33,12 @@
 	},
 	"Demo": {
 		"methods": [
+			"demo_certificate_path",
+			"demo_compiled_mac_project",
 			"demo_project_path",
 			"demo_runtimevl_path",
 			"demo_server_path",
+			"demo_startup_project_path",
 			"demo_tool4d_file"
 		]
 	},

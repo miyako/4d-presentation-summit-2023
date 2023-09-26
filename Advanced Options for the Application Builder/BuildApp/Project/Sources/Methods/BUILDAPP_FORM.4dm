@@ -83,12 +83,21 @@ Case of
 		$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIconMacPath:=$RuntimeVLIconMac
 		$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIconWinPath:=$RuntimeVLIconWin
 		
+		$BuildApp.SourcesFiles.CS.ServerIncludeIt:=True:C214
+		
+		If (Is macOS:C1572)
+			$BuildApp.SourcesFiles.CS.ClientMacIncludeIt:=True:C214
+		Else 
+			$BuildApp.SourcesFiles.CS.ClientWinIncludeIt:=True:C214
+		End if 
 		$BuildApp.SourcesFiles.CS.ServerIconMacPath:=$RuntimeVLIconMac
 		$BuildApp.SourcesFiles.CS.ServerIconWinPath:=$RuntimeVLIconWin
 		$BuildApp.SourcesFiles.CS.ClientMacIconForMacPath:=$RuntimeVLIconMac
 		$BuildApp.SourcesFiles.CS.ClientWinIconForMacPath:=$RuntimeVLIconWin
 		$BuildApp.SourcesFiles.CS.ClientMacIconForWinPath:=$RuntimeVLIconMac
 		$BuildApp.SourcesFiles.CS.ClientWinIconForWinPath:=$RuntimeVLIconWin
+		$BuildApp.CS.BuildServerApplication:=True:C214
+		$BuildApp.CS.BuildCSUpgradeable:=True:C214
 		
 		If (Is macOS:C1572)
 			$ServerMac:=demo_server_path

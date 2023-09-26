@@ -784,9 +784,13 @@ $sourceProjectFile : 4D:C1709.File; $BuildApplicationName : Text; $publication_n
 						
 						$targetProjectFile:=$ContentsFolder.file($BuildApp.BuildApplicationName+".4DZ")
 						
-						$status:=ZIP Create archive:C1640($zip; $targetProjectFile)
+						$zip.callback:=$CLI._zipCallback2
 						
 						$CLI._printTask("Archive project folder")
+						
+						$status:=ZIP Create archive:C1640($zip; $targetProjectFile)
+						
+						$CLI.CR()._printTask("Archive project folder")
 						$CLI._printStatus($status.success)
 						$CLI._printPath($targetProjectFile)
 						
@@ -831,6 +835,16 @@ $sourceProjectFile : 4D:C1709.File; $BuildApplicationName : Text; $publication_n
 			End if 
 			
 	End case 
+	
+Function _zipCallback1($progress : Integer)
+	
+	$CLI:=cs:C1710.CLI.new()
+	$CLI.CR().print("Archive client"; "bold").print("…").print(String:C10($progress; "^^0%%"); "226")
+	
+Function _zipCallback2($progress : Integer)
+	
+	$CLI:=cs:C1710.CLI.new()
+	$CLI.CR().print("Archive project folder"; "bold").print(String:C10($progress; "^^0%%"); "226")
 	
 Function _copyPlugins($BuildApp : cs:C1710.BuildApp; \
 $RuntimeFolder : 4D:C1709.Folder; \
@@ -925,6 +939,12 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	
 	If ($targetFolder.exists)
 		
+		If (Is Windows:C1573)
+			$ContentsFolder:=$targetFolder
+		Else 
+			$ContentsFolder:=$targetFolder.folder("Contents")
+		End if 
+		
 		Case of 
 			: ($buildApplicationType="Server")
 				$RuntimeExecutableName:="4D Server"
@@ -940,7 +960,7 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 		End case 
 		
 		If (Is macOS:C1572)
-			$executableFile:=$targetFolder.folder("Contents").folder("MacOS").file($RuntimeExecutableName)
+			$executableFile:=$ContentsFolder.folder("MacOS").file($RuntimeExecutableName)
 		Else 
 			$executableName:=$executableName+".exe"
 			Case of 
@@ -964,10 +984,10 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 			//keep it
 		Else 
 			If (Is Windows:C1573)
-				$resourceFile:=$targetFolder.file($RuntimeExecutableName+".rsr")
+				$resourceFile:=$ContentsFolder.file($RuntimeExecutableName+".rsr")
 				$targetResourceFile:=$resourceFile.rename($BuildApplicationName+".rsr")
 			Else 
-				$resourceFile:=$targetFolder.folder("Contents").folder("Resources").file($RuntimeExecutableName+".rsrc")
+				$resourceFile:=$ContentsFolder.folder("Resources").file($RuntimeExecutableName+".rsrc")
 				$targetResourceFile:=$resourceFile.rename($BuildApplicationName+".rsrc")
 			End if 
 			$CLI._printTask("Rename resource file")
@@ -980,11 +1000,7 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 				
 				If ($BuildCSUpgradeable)
 					
-					If (Is macOS:C1572)
-						$Upgrade4DClientFolder:=$targetFolder.folder("Contents").folder("Upgrade4DClient")
-					Else 
-						$Upgrade4DClientFolder:=$targetFolder.folder("Upgrade4DClient")
-					End if 
+					$Upgrade4DClientFolder:=$ContentsFolder.folder("Upgrade4DClient")
 					
 					$Upgrade4DClientFolder.create()
 					
@@ -1042,7 +1058,6 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 							
 							$info[$_hostPlatform+"Update"]:="update."+$_hostPlatform+".4darchive"
 							
-							
 							$CLI._copyRuntime($BuildApp; $ClientFolder; $BuildDestFolder; $compileProject; $BuildApplicationName; $sdi_application; $publication_name; "Upgrade4DClient")
 							
 						End if 
@@ -1094,9 +1109,13 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 				
 				$targetArchiveFile:=$Upgrade4DClientFolder.file("update."+(Is macOS:C1572 ? "mac" : "win")+".4darchive")
 				
-				$status:=ZIP Create archive:C1640($zip; $targetArchiveFile)
+				$zip.callback:=$CLI._zipCallback1
 				
 				$CLI._printTask("Archive client")
+				
+				$status:=ZIP Create archive:C1640($zip; $targetArchiveFile)
+				
+				$CLI.CR()._printTask("Archive client")
 				$CLI._printStatus($status.success)
 				$CLI._printPath($targetArchiveFile)
 				
@@ -1106,7 +1125,7 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	
 	If ($BuildApp.ArrayExcludedModuleName.Item.includes("PHP"))
 		
-		$moduleFolder:=$targetFolder.folder("Contents").folder("Resources").folder("php")
+		$moduleFolder:=$ContentsFolder.folder("Resources").folder("php")
 		
 		If ($moduleFolder.exists)
 			
@@ -1122,7 +1141,7 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	
 	If ($BuildApp.ArrayExcludedModuleName.Item.includes("MeCab"))
 		
-		$moduleFolder:=$targetFolder.folder("Contents").folder("Resources").folder("mecab")
+		$moduleFolder:=$ContentsFolder.folder("Resources").folder("mecab")
 		
 		If ($moduleFolder.exists)
 			
@@ -1138,7 +1157,7 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	
 	If ($BuildApp.ArrayExcludedModuleName.Item.includes("4D Updater"))
 		
-		$moduleFolder:=$targetFolder.folder("Contents").folder("Resources").folder("Updater")
+		$moduleFolder:=$ContentsFolder.folder("Resources").folder("Updater")
 		
 		If ($moduleFolder.exists)
 			
@@ -1154,7 +1173,7 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	
 	If ($BuildApp.ArrayExcludedModuleName.Item.includes("SpellChecker"))
 		
-		$moduleFolder:=$targetFolder.folder("Contents").folder("Resources").folder("Spellcheck")
+		$moduleFolder:=$ContentsFolder.folder("Resources").folder("Spellcheck")
 		
 		If ($moduleFolder.exists)  //does not exist for server
 			
@@ -1170,7 +1189,7 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	
 	If ($BuildApp.ArrayExcludedModuleName.Item.includes("CEF"))
 		
-		$moduleFolder:=$targetFolder.folder("Contents").folder("Native Components").folder("WebViewerCEF.bundle")
+		$moduleFolder:=$ContentsFolder.folder("Native Components").folder("WebViewerCEF.bundle")
 		
 		If ($moduleFolder.exists)
 			
@@ -1180,10 +1199,14 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 			
 			$moduleFolder.delete(Delete with contents:K24:24)
 			
-			//symlink
-			$file:=$targetFolder.folder("Contents").folder("Frameworks").file("Chromium Embedded Framework.framework")
-			$CLI._printPath($file)
-			$file.delete()
+			If (Is macOS:C1572)
+				//symlink
+				$file:=$ContentsFolder.folder("Frameworks").file("Chromium Embedded Framework.framework")
+				$CLI._printPath($file)
+				$file.delete()
+			Else 
+				//
+			End if 
 			
 		End if 
 		
@@ -1248,13 +1271,15 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	
 	$CLI:=This:C1470
 	
+	If (Is Windows:C1573)
+		$ContentsFolder:=$targetRuntimeFolder.folder("Resources")
+	Else 
+		$ContentsFolder:=$targetRuntimeFolder.folder("Contents")
+	End if 
+	
 	var $propertyListFile : 4D:C1709.File
 	
-	If (Is macOS:C1572)
-		$propertyListFile:=$targetRuntimeFolder.folder("Contents").file("Info.plist")
-	Else 
-		$propertyListFile:=$targetRuntimeFolder.folder("Resources").file("Info.plist")
-	End if 
+	$propertyListFile:=$ContentsFolder.file("Info.plist")
 	
 	$keys:=New collection:C1472
 	
@@ -1296,8 +1321,8 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	Else 
 		$info.OriginalFilename:=$BuildApplicationName+".exe"
 		$info.ProductName:=$BuildApplicationName
-		$keys.push("OriginalFilename")
-		$keys.push("ProductName")
+		$winInfo.push("OriginalFilename")
+		$winInfo.push("ProductName")
 	End if 
 	
 	Case of 
@@ -1582,6 +1607,12 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 		$info.CFBundleShortVersionString:=$info.CFBundleVersion
 		$keys.push("CFBundleVersion")
 		$keys.push("CFBundleShortVersionString")
+		If (Is Windows:C1573)
+			$winInfo.ProductVersion:=$Version
+			$winInfo.FileVersion:=$winInfo.ProductVersion
+			$keys.push("ProductVersion")
+			$keys.push("FileVersion")
+		End if 
 	End if 
 	
 	If ($Copyright#"")
@@ -1589,6 +1620,10 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 		$info.NSHumanReadableCopyright:=$info.CFBundleGetInfoString
 		$keys.push("CFBundleVersion")
 		$keys.push("CFBundleShortVersionString")
+		If (Is Windows:C1573)
+			$winInfo.LegalCopyright:=$Copyright
+			$keys.push("LegalCopyright")
+		End if 
 	End if 
 	
 	If ($Creator#"")
@@ -1600,14 +1635,17 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	End if 
 	
 	If ($CompanyName#"")
+		$winInfo.CompanyName:=$CompanyName
 		$keys.push("CompanyName")
 	End if 
 	
 	If ($FileDescription#"")
+		$winInfo.FileDescription:=$FileDescription
 		$keys.push("FileDescription")
 	End if 
 	
 	If ($FileInternalName#"")
+		$winInfo.InternalName:=$FileInternalName
 		$keys.push("FileInternalName")
 	End if 
 	
