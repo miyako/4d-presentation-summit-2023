@@ -239,7 +239,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 		$publication_name:=$compileProject.name
 	End if 
 	
-	For each ($target; $targets.orderBy(ck ascending:K85:9))
+	For each ($target; $targets.orderBy(ck descending:K85:8))
 		
 		Case of 
 			: ($target="Serialized") | ($target="Light")
@@ -272,7 +272,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 						
 						If ($RuntimeVLFolder.exists)
 							
-							$targetRuntimeVLFolder:=$CLI._copyRuntime($BuildApp; $RuntimeVLFolder; $BuildDestFolder; $BuildApplicationName; $sdi_application; $publication_name)
+							$targetRuntimeVLFolder:=$CLI._copyRuntime($BuildApp; $RuntimeVLFolder; $BuildDestFolder; $compileProject; $BuildApplicationName; $sdi_application; $publication_name)
 							
 							$CLI._copyPlugins($BuildApp; $targetRuntimeVLFolder; $compileProject; $target)
 							
@@ -280,7 +280,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 							
 							$CLI._updateProperty($BuildApp; $targetRuntimeVLFolder; $CompanyName; $BuildApplicationName; $sdi_application; $publication_name)
 							
-							$CLI._copyDatabase($BuildApp; $targetRuntimeVLFolder; $compileProject; $publication_name; $target)
+							$CLI._copyDatabase($BuildApp; $targetRuntimeVLFolder; $compileProject; $BuildApplicationName; $publication_name; $target)
 							
 							If ($target="Serialized")
 								$CLI._generateLicense($BuildApp; $targetRuntimeVLFolder)
@@ -326,7 +326,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 						
 						If ($ServerFolder.exists)
 							
-							$targetServerFolder:=$CLI._copyRuntime($BuildApp; $ServerFolder; $BuildDestFolder; $BuildApplicationName; $sdi_application; $publication_name; $target)
+							$targetServerFolder:=$CLI._copyRuntime($BuildApp; $ServerFolder; $BuildDestFolder; $compileProject; $BuildApplicationName; $sdi_application; $publication_name; $target)
 							
 							$CLI._copyPlugins($BuildApp; $targetServerFolder; $compileProject; $target)
 							
@@ -334,7 +334,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 							
 							$CLI._updateProperty($BuildApp; $targetServerFolder; $CompanyName; $BuildApplicationName; $sdi_application; $publication_name; $target)
 							
-							$CLI._copyDatabase($BuildApp; $targetServerFolder; $compileProject; $publication_name; $target)
+							$CLI._copyDatabase($BuildApp; $targetServerFolder; $compileProject; $BuildApplicationName; $publication_name; $target)
 							
 							$IsOEM:=$CLI._getBoolValue($BuildApp; "SourcesFiles.CS.IsOEM")
 							
@@ -379,7 +379,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 					$CLI._printStatus($targetFolder.exists)
 					$CLI._printPath($targetFolder)
 					
-					$CLI._copyDatabase($BuildApp; $targetFolder; $compileProject; $publication_name; $target)
+					$CLI._copyDatabase($BuildApp; $targetFolder; $compileProject; $BuildApplicationName; $publication_name; $target)
 					
 					$CLI._copyPlugins($BuildApp; $targetFolder; $compileProject; $target)
 					
@@ -418,7 +418,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 					$CLI._printStatus($targetPackage.exists)
 					$CLI._printPath($targetPackage)
 					
-					$CLI._copyDatabase($BuildApp; $targetPackage; $compileProject; $publication_name; $target)
+					$CLI._copyDatabase($BuildApp; $targetPackage; $compileProject; $BuildApplicationName; $publication_name; $target)
 					
 					$CLI.quickSign($BuildApp; $targetPackage)
 					
@@ -460,11 +460,11 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 						
 						If ($ClientFolder.exists)
 							
-							$targetClientFolder:=$CLI._copyRuntime($BuildApp; $ClientFolder; $BuildDestFolder; $BuildApplicationName; $sdi_application; $publication_name; $target)
+							$targetClientFolder:=$CLI._copyRuntime($BuildApp; $ClientFolder; $BuildDestFolder; $compileProject; $BuildApplicationName; $sdi_application; $publication_name; $target)
 							
 							$CLI._updateProperty($BuildApp; $targetClientFolder; $CompanyName; $BuildApplicationName; $sdi_application; $publication_name; $target)
 							
-							$CLI._copyDatabase($BuildApp; $targetClientFolder; $compileProject; $publication_name; $target)
+							$CLI._copyDatabase($BuildApp; $targetClientFolder; $compileProject; $BuildApplicationName; $publication_name; $target)
 							
 							$IsOEM:=$CLI._getBoolValue($BuildApp; "SourcesFiles.CS.IsOEM")
 							
@@ -560,7 +560,7 @@ $compileProject : 4D:C1709.File; $buildApplicationType : Text)
 	
 Function _copyDatabase($BuildApp : cs:C1710.BuildApp; \
 $targetFolder : 4D:C1709.Folder; \
-$sourceProjectFile : 4D:C1709.File; $publication_name : Text; $buildApplicationType : Text)
+$sourceProjectFile : 4D:C1709.File; $BuildApplicationName : Text; $publication_name : Text; $buildApplicationType : Text)
 	
 	$CLI:=This:C1470
 	
@@ -593,9 +593,11 @@ $sourceProjectFile : 4D:C1709.File; $publication_name : Text; $buildApplicationT
 			
 			If ($DatabaseToEmbedInClient#"")
 				
+				$targetName:=$BuildApplicationName+" Client"
+				
 				$embedProjectFile:=File:C1566($DatabaseToEmbedInClient; fk platform path:K87:2)
 				
-				$targetEmbedProjectFile:=$embedProjectFile.copyTo($ContentsFolder; fk overwrite:K87:5)
+				$targetEmbedProjectFile:=$embedProjectFile.copyTo($ContentsFolder; $targetName+".4DZ"; fk overwrite:K87:5)
 				
 				$CLI._printTask("Copy startup project")
 				$CLI._printStatus($targetEmbedProjectFile.exists)
@@ -617,7 +619,7 @@ $sourceProjectFile : 4D:C1709.File; $publication_name : Text; $buildApplicationT
 					
 				End if 
 				
-				$folders:=$embedProjectFile.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Resources"; "Libraries"; "Documentation"; "Extras"))
+				$folders:=$embedProjectFile.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Components"; "Resources"; "Libraries"; "Documentation"; "Extras"))
 				
 				If ($folders.length#0)
 					
@@ -640,13 +642,18 @@ $sourceProjectFile : 4D:C1709.File; $publication_name : Text; $buildApplicationT
 				$IPAddress:=$CLI._getStringValue($BuildApp; "CS.IPAddress")
 				$PortNumber:=$CLI._getIntValue($BuildApp; "CS.PortNumber")
 				
+				var $server_path : Text
+				
 				If ($IPAddress#"")
 					$server_path:=$IPAddress
-					If ($PortNumber>0)
-						$server_path:=$server_path+":"+String:C10($PortNumber)
-					Else 
-						$server_path:=$server_path+":19813"
-					End if 
+				End if 
+				If ($PortNumber>0)
+					$server_path:=$server_path+":"+String:C10($PortNumber)
+				Else 
+					$server_path:=$server_path+":19813"
+				End if 
+				
+				If ($server_path#"")
 					DOM SET XML ATTRIBUTE:C866($database_shortcut; "server_path"; $server_path)
 				End if 
 				
@@ -837,7 +844,7 @@ $compileProject : 4D:C1709.File; $buildApplicationType : Text)
 	
 Function _copyRuntime($BuildApp : cs:C1710.BuildApp; \
 $RuntimeFolder : 4D:C1709.Folder; \
-$BuildDestFolder : 4D:C1709.Folder; $BuildApplicationName : Text; \
+$BuildDestFolder : 4D:C1709.Folder; $compileProject : 4D:C1709.File; $BuildApplicationName : Text; \
 $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Text)->$targetFolder : 4D:C1709.Folder
 	
 	$CLI:=This:C1470
@@ -863,15 +870,23 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	
 	If ($targetFolder.exists)
 		If ($targetFolder.path#($localProjectFolder.path+"@"))
-			$targetFolder.delete(Delete with contents:K24:24)
+			
+			If ($buildApplicationType="Client@") && ($BuildCSUpgradeable)
+				//keep it
+			Else 
+				$targetFolder.delete(Delete with contents:K24:24)
+			End if 
 		End if 
 	End if 
 	
-	$targetFolder:=$RuntimeFolder.copyTo($BuildDestFolder; $targetName; fk overwrite:K87:5)
-	
-	$CLI._printTask("Copy runtime folder")
-	$CLI._printStatus($targetFolder.exists)
-	$CLI._printPath($targetFolder)
+	If ($buildApplicationType="Client@") && ($BuildCSUpgradeable)
+		$targetFolder:=$BuildDestFolder.folder($targetName)
+	Else 
+		$targetFolder:=$RuntimeFolder.copyTo($BuildDestFolder; $targetName; fk overwrite:K87:5)
+		$CLI._printTask("Copy runtime folder")
+		$CLI._printStatus($targetFolder.exists)
+		$CLI._printPath($targetFolder)
+	End if 
 	
 	If ($targetFolder.exists)
 		
@@ -901,23 +916,29 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 			End case 
 		End if 
 		
-		$targetExecutableFile:=$executableFile.rename($executableName)
-		
-		$CLI._printTask("Rename executable file")
-		$CLI._printStatus($targetExecutableFile.exists)
-		$CLI._printPath($targetExecutableFile)
-		
-		If (Is Windows:C1573)
-			$resourceFile:=$targetFolder.file($RuntimeExecutableName+".rsr")
-			$targetResourceFile:=$resourceFile.rename($BuildApplicationName+".rsr")
+		If ($buildApplicationType="Client@") && ($BuildCSUpgradeable)
+			//keep it
 		Else 
-			$resourceFile:=$targetFolder.folder("Contents").folder("Resources").file($RuntimeExecutableName+".rsrc")
-			$targetResourceFile:=$resourceFile.rename($BuildApplicationName+".rsrc")
+			$targetExecutableFile:=$executableFile.rename($executableName)
+			$CLI._printTask("Rename executable file")
+			$CLI._printStatus($targetExecutableFile.exists)
+			$CLI._printPath($targetExecutableFile)
 		End if 
 		
-		$CLI._printTask("Rename resource file")
-		$CLI._printStatus($targetResourceFile.exists)
-		$CLI._printPath($targetResourceFile)
+		If ($buildApplicationType="Client@") && ($BuildCSUpgradeable)
+			//keep it
+		Else 
+			If (Is Windows:C1573)
+				$resourceFile:=$targetFolder.file($RuntimeExecutableName+".rsr")
+				$targetResourceFile:=$resourceFile.rename($BuildApplicationName+".rsr")
+			Else 
+				$resourceFile:=$targetFolder.folder("Contents").folder("Resources").file($RuntimeExecutableName+".rsrc")
+				$targetResourceFile:=$resourceFile.rename($BuildApplicationName+".rsrc")
+			End if 
+			$CLI._printTask("Rename resource file")
+			$CLI._printStatus($targetResourceFile.exists)
+			$CLI._printPath($targetResourceFile)
+		End if 
 		
 		Case of 
 			: ($buildApplicationType="Server")
@@ -994,7 +1015,7 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 							//$icon:=$o.name+$o.extension
 							//$info.Icon:=$icon
 							
-							$CLI._copyRuntime($BuildApp; $ClientFolder; $BuildDestFolder; $BuildApplicationName; $sdi_application; $publication_name; "Upgrade4DClient")
+							$CLI._copyRuntime($BuildApp; $ClientFolder; $BuildDestFolder; $compileProject; $BuildApplicationName; $sdi_application; $publication_name; "Upgrade4DClient")
 							
 						End if 
 						
@@ -1009,13 +1030,13 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 					
 				End if 
 				
-			: ($buildApplicationType="Client@") | ($buildApplicationType="Upgrade4DClient")
+			: (($buildApplicationType="Client@") && (Not:C34($BuildCSUpgradeable))) || ($buildApplicationType="Upgrade4DClient")
 				
 				$target:="Client"+(Is macOS:C1572 ? "Mac" : "Win")
 				
 				$CLI._updateProperty($BuildApp; $targetFolder; $CompanyName; $BuildApplicationName; $sdi_application; $publication_name; $target)
 				
-				$CLI._copyDatabase($BuildApp; $targetFolder; $compileProject; $publication_name; $target)
+				$CLI._copyDatabase($BuildApp; $targetFolder; $compileProject; $BuildApplicationName; $publication_name; $target)
 				
 				$IsOEM:=$CLI._getBoolValue($BuildApp; "SourcesFiles.CS.IsOEM")
 				

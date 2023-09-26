@@ -108,6 +108,12 @@
 				"invisible": true
 			}
 		},
+		"Compiler_Methods": {
+			"timeStamp": "2023-09-25T23:40:16Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
 		"update_icon_path": {
 			"timeStamp": "2023-09-18T13:23:11Z",
 			"attributes": {
@@ -143,12 +149,6 @@
 		},
 		"(patch_correct_nulls)": {
 			"timeStamp": "2023-09-23T04:44:51Z",
-			"attributes": {
-				"invisible": true
-			}
-		},
-		"Compiler_Methods": {
-			"timeStamp": "2023-09-25T23:40:16Z",
 			"attributes": {
 				"invisible": true
 			}

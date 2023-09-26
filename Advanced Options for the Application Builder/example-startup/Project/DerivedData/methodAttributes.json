@@ -1,17 +1,13 @@
 {
 	"methods": {
-		"dialog_generic_close": {
-			"timeStamp": "2023-09-25T20:44:11Z",
-			"attributes": {
-				"invisible": true,
-				"preemptive": "capable"
-			}
-		},
 		"daemon_callback": {
-			"timeStamp": "2023-09-25T20:56:48Z",
+			"timeStamp": "2023-09-25T20:56:49Z",
 			"attributes": {
 				"invisible": true
 			}
+		},
+		"ServerList": {
+			"timeStamp": "2023-09-25T17:12:19Z"
 		},
 		"daemon": {
 			"timeStamp": "2023-09-25T17:48:24Z",
@@ -20,8 +16,12 @@
 				"preemptive": "capable"
 			}
 		},
-		"ServerList": {
-			"timeStamp": "2023-09-25T17:12:19Z"
+		"dialog_generic_close": {
+			"timeStamp": "2023-09-25T20:44:11Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "capable"
+			}
 		}
 	}
 }
