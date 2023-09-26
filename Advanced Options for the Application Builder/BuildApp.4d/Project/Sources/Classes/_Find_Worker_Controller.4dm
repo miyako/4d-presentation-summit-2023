@@ -81,7 +81,7 @@ Function _reducePaths($param : Object)->$files : Collection
 		: ($path="@.project")
 		: ($path="@/LICENSE")
 		: ($path="@/PkgInfo")
-		: ($path="@/php-fcgi-4d")  //Mach-O 64-bit executable x86_64
+			//: ($path="@/php-fcgi-4d")  //Mach-O 64-bit executable x86_64
 		: ($path="@/_CodeSignature/CodeResources")
 		: ($path="@/Info.plist")
 		: ($path="@.npmignore")
