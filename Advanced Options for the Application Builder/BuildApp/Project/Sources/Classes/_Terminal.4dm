@@ -95,7 +95,7 @@ Function launch($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)
 		
 		$folder:=Folder:C1567(fk desktop folder:K87:19)
 		
-		$command:=This:C1470.escape("C:\\Program Files (Arm)\\Windows Terminal\\WindowsTerminal.exe")
+		$command:=""
 		$command:=$command+" "+This:C1470.escape($tool4d.platformPath)
 		$command:=$command+" "+This:C1470.escape($project.platformPath)
 		$command:=$command+" "+This:C1470.escape($compileProject.platformPath)
@@ -106,8 +106,12 @@ Function launch($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)
 		$file:=$folder.file("tool4d.bat")
 		$file.setText($command)
 		
-		//SET ENVIRONMENT VARIABLE("_4D_OPTION_HIDE_CONSOLE"; "true")
-		//SET ENVIRONMENT VARIABLE("_4D_OPTION_BLOCKING_EXTERNAL_PROCESS"; "true")
-		//LAUNCH EXTERNAL PROCESS(This.escape($file.platformPath))
+/*
+VirtualTerminalLevel:1 is enabled for this demo
+Adminstration Language is set to UTF-8 for this demo 
+*/
+		
+		SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_BLOCKING_EXTERNAL_PROCESS"; "true")
+		LAUNCH EXTERNAL PROCESS:C811("cmd.exe /k "+This:C1470.escape($file.platformPath))
 		
 	End if 
