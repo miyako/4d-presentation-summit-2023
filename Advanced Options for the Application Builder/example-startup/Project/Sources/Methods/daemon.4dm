@@ -9,18 +9,18 @@ $servers:=New collection:C1472
 
 If ($daemonParams.ports#Null:C1517) && (Value type:C1509($daemonParams.ports)=Is collection:K8:32)
 	
-	var $wait : Real
 	var $port : Integer
 	
 	If ($daemonParams.ports.length#0)
-		$wait:=1/$daemonParams.ports.length
 		For each ($port; $daemonParams.ports)
-			$options:=New object:C1471("wait"; $wait; "port"; $port)
-			$list:=UDP Get server list($options)
-			For each ($item; $list)
-				$item.port:=$port
-			End for each 
-			$servers.combine($list)
+			If (Is macOS:C1572)
+				$options:=New object:C1471("wait"; 1; "port"; $port)
+				$list:=UDP Get server list($options)
+				For each ($item; $list)
+					$item.port:=$port
+				End for each 
+				$servers.combine($list)
+			End if 
 		End for each 
 	End if 
 End if 
