@@ -47,7 +47,7 @@
 					"type": "text",
 					"text": "⌘⌥X",
 					"top": 277,
-					"left": 120,
+					"left": 220,
 					"width": 40,
 					"height": 16,
 					"fontWeight": "bold",
@@ -58,7 +58,7 @@
 					"type": "text",
 					"text": "Preview XML",
 					"top": 277,
-					"left": 168,
+					"left": 268,
 					"width": 80,
 					"height": 16,
 					"sizingY": "move"
@@ -67,7 +67,7 @@
 					"type": "text",
 					"text": "⌃⎇X",
 					"top": 277,
-					"left": 120,
+					"left": 220,
 					"width": 40,
 					"height": 16,
 					"fontWeight": "bold",
@@ -103,6 +103,7 @@
 					"currentItemPositionSource": "Form:C1466.servers.pos",
 					"method": "ObjectMethods/Servers.4dm",
 					"metaSource": "",
+					"showHeaders": false,
 					"columns": [
 						{
 							"header": {
@@ -159,9 +160,25 @@
 					"type": "input",
 					"left": 10,
 					"top": 277,
-					"width": 113,
+					"width": 73,
 					"height": 17,
 					"dataSource": "Form:C1466.timestamp",
+					"enterable": false,
+					"focusable": true,
+					"dragging": "none",
+					"dropping": "none",
+					"borderStyle": "none",
+					"fill": "transparent",
+					"contextMenu": "none",
+					"sizingY": "move"
+				},
+				"Ports": {
+					"type": "input",
+					"left": 95,
+					"top": 277,
+					"width": 113,
+					"height": 17,
+					"dataSource": "Form:C1466.ports",
 					"enterable": false,
 					"focusable": true,
 					"dragging": "none",
@@ -174,7 +191,7 @@
 			}
 		}
 	],
-	"geometryStamp": 746,
+	"geometryStamp": 787,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

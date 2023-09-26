@@ -25,6 +25,7 @@ If ($current#"")
 	LISTBOX SELECT ROW:C912(*; "Servers"; $col.indexOf($col.query("id == :1"; $current)[0])+1; lk replace selection:K53:1)
 End if 
 
+Form:C1466.ports:="ports: "+$params.ports.join(", ")
 Form:C1466.timestamp:=String:C10(Current time:C178; HH MM SS:K7:1)
 
 Form:C1466.controller.callWorker()

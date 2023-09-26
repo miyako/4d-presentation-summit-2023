@@ -13,19 +13,18 @@ If ($daemonParams.ports#Null:C1517) && (Value type:C1509($daemonParams.ports)=Is
 	
 	If ($daemonParams.ports.length#0)
 		For each ($port; $daemonParams.ports)
-			If (Is macOS:C1572)
-				$options:=New object:C1471("wait"; 1; "port"; $port)
-				$list:=UDP Get server list($options)
-				For each ($item; $list)
-					$item.port:=$port
-				End for each 
-				$servers.combine($list)
-			End if 
+			$options:=New object:C1471("wait"; 1; "port"; $port)
+			$list:=UDP Get server list($options)
+			For each ($item; $list)
+				$item.port:=$port
+			End for each 
+			$servers.combine($list)
 		End for each 
 	End if 
 End if 
 
 $params.servers:=$servers
+$params.ports:=$daemonParams.ports
 
 CALL FORM:C1391($windowNumber; $callback; $params)
 

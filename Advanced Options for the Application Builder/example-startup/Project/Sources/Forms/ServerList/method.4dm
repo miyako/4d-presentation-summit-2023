@@ -10,7 +10,7 @@ Case of
 		If (Is macOS:C1572)
 			READ PICTURE FILE:C678(File:C1566("/RESOURCES/BuildApp.icns").platformPath; $icon)
 		Else 
-			READ PICTURE FILE:C678(File:C1566("/RESOURCES/BuildApp.ico").platformPath; $icon)
+			READ PICTURE FILE:C678(File:C1566("/RESOURCES/BuildApp.png").platformPath; $icon)
 		End if 
 		
 		OBJECT SET VISIBLE:C603(*; "Hint for Mac@"; Is macOS:C1572)
