@@ -45,6 +45,12 @@
 				"invisible": true
 			}
 		},
+		"demo_compiled_mac_project": {
+			"timeStamp": "2023-09-26T06:21:07Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
 		"setup_components_list": {
 			"timeStamp": "2023-09-22T04:04:31Z",
 			"attributes": {
@@ -59,6 +65,12 @@
 		},
 		"TEST_BUILDAPP": {
 			"timeStamp": "2023-09-25T11:46:21Z"
+		},
+		"demo_startup_project_path": {
+			"timeStamp": "2023-09-26T06:15:40Z",
+			"attributes": {
+				"invisible": true
+			}
 		},
 		"PNG2ICO_WORKER": {
 			"timeStamp": "2023-09-18T03:48:37Z",
@@ -114,6 +126,12 @@
 				"invisible": true
 			}
 		},
+		"demo_certificate_path": {
+			"timeStamp": "2023-09-26T06:14:23Z",
+			"attributes": {
+				"invisible": true
+			}
+		},
 		"update_icon_path": {
 			"timeStamp": "2023-09-18T13:23:11Z",
 			"attributes": {
@@ -145,7 +163,7 @@
 			}
 		},
 		"BUILDAPP_FORM": {
-			"timeStamp": "2023-09-25T11:49:35Z"
+			"timeStamp": "2023-09-26T06:21:03Z"
 		},
 		"(patch_correct_nulls)": {
 			"timeStamp": "2023-09-23T04:44:51Z",

@@ -47,18 +47,25 @@ Case of
 		$BuildApp.ArrayExcludedComponentName.Item[5]:="4D WritePro Interface"
 		$BuildApp.ArrayExcludedComponentName.Item[6]:="4D Widgets"
 		
-		$certificates:=$BuildApp.findCertificates()
-		$certificates:=$certificates.query("name == :1 and kind == :2"; "@miyako@"; "Developer ID Application")
+		$path:=demo_certificate_path($BuildApp)
 		
-		If ($certificates.length#0)
+		If ($path#"")
 			$BuildApp.SignApplication.AdHocSign:=False:C215
 			$BuildApp.SignApplication.MacSignature:=True:C214
-			$BuildApp.SignApplication.MacCertificate:=$certificates[0].name
+			$BuildApp.SignApplication.MacCertificate:=$path
+		Else 
+			$BuildApp.SignApplication.AdHocSign:=True:C214
+			$BuildApp.SignApplication.MacSignature:=False:C215
+			$BuildApp.SignApplication.MacCertificate:=""
 		End if 
 		
-		//$BuildApp.CS.DatabaseToEmbedInClientWinFolder:=System folder(Desktop)
-		//$BuildApp.CS.DatabaseToEmbedInClientMacFolder:=System folder(Desktop)
-		//$BuildApp.CS.MacCompiledDatabaseToWin:=System folder(Desktop)
+		If (Is macOS:C1572)
+			$BuildApp.CS.DatabaseToEmbedInClientMacFolder:=demo_startup_project_path
+		Else 
+			$BuildApp.CS.DatabaseToEmbedInClientWinFolder:=demo_startup_project_path
+		End if 
+		
+		$BuildApp.CS.MacCompiledDatabaseToWin:=demo_compiled_mac_project
 		
 		$BuildApp.RuntimeVL.LastDataPathLookup:="ByAppName"
 		$BuildApp.CS.LastDataPathLookup:="ByAppName"
