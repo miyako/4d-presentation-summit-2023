@@ -529,11 +529,17 @@ $compileProject : 4D:C1709.File; $buildApplicationType : Text)
 	
 	$components:=$BuildApp.findComponents($compileProject)
 	
+	If (Is Windows:C1573)
+		$ContentsFolder:=$RuntimeFolder
+	Else 
+		$ContentsFolder:=$RuntimeFolder.folder("Contents")
+	End if 
+	
 	Case of 
 		: ($buildApplicationType="Compiled")
-			$targetComponentsFolder:=$RuntimeFolder.folder("Components")
+			$targetComponentsFolder:=$RuntimeFolder.parent.folder("Components")
 		Else 
-			$targetComponentsFolder:=$RuntimeFolder.folder("Contents").folder("Components")
+			$targetComponentsFolder:=$ContentsFolder.folder("Components")
 	End case 
 	
 	var $component : Object
@@ -568,15 +574,21 @@ $sourceProjectFile : 4D:C1709.File; $BuildApplicationName : Text; $publication_n
 	
 	var $ContentsFolder : 4D:C1709.Folder
 	
+	If (Is Windows:C1573)
+		$ContentsFolder:=$targetFolder
+	Else 
+		$ContentsFolder:=$targetFolder.folder("Contents")
+	End if 
+	
 	Case of 
 		: ($buildApplicationType="Compiled")
 			$ContentsFolder:=$targetFolder
 		: ($buildApplicationType="Component")
 			$ContentsFolder:=$targetFolder
 		: ($buildApplicationType="Server")
-			$ContentsFolder:=$targetFolder.folder("Contents").folder("Server Database")
+			$ContentsFolder:=$ContentsFolder.folder("Server Database")
 		Else 
-			$ContentsFolder:=$targetFolder.folder("Contents").folder("Database")
+			$ContentsFolder:=$ContentsFolder.folder("Database")
 	End case 
 	
 	$ContentsFolder.create()
@@ -830,11 +842,17 @@ $compileProject : 4D:C1709.File; $buildApplicationType : Text)
 	
 	$plugins:=$BuildApp.findPlugins($compileProject)
 	
+	If (Is Windows:C1573)
+		$ContentsFolder:=$RuntimeFolder
+	Else 
+		$ContentsFolder:=$RuntimeFolder.folder("Contents")
+	End if 
+	
 	Case of 
 		: ($buildApplicationType="Compiled")
-			$targetPluginsFolder:=$RuntimeFolder.folder("Plugins")
+			$targetPluginsFolder:=$ContentsFolder.parent.folder("Plugins")
 		Else 
-			$targetPluginsFolder:=$RuntimeFolder.folder("Contents").folder("Plugins")
+			$targetPluginsFolder:=$ContentsFolder.folder("Plugins")
 	End case 
 	
 	var $plugin : Object
@@ -1024,9 +1042,6 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 							
 							$info[$_hostPlatform+"Update"]:="update."+$_hostPlatform+".4darchive"
 							
-							//$o:=Path to object($ClientIconPath; Path is system)
-							//$icon:=$o.name+$o.extension
-							//$info.Icon:=$icon
 							
 							$CLI._copyRuntime($BuildApp; $ClientFolder; $BuildDestFolder; $compileProject; $BuildApplicationName; $sdi_application; $publication_name; "Upgrade4DClient")
 							
@@ -1244,6 +1259,7 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	$keys:=New collection:C1472
 	
 	$info:=New object:C1471
+	$winInfo:=New object:C1471
 	
 	$info.BuildName:=$BuildApplicationName
 	$keys.push("BuildName")
@@ -1426,10 +1442,10 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 						$CLI._printTask("Copy icon file")
 						$CLI._printStatus($targetIconFile.exists)
 						$CLI._printPath($targetIconFile)
-						$info.CFBundleIconFile:=$ClientIconFile.fullName
+						$info.CFBundleIconFile:=$targetIconFile.fullName
 						$keys.push("CFBundleIconFile")
 					Else 
-						$info.WinIcon:=$ServerIconFile.platformPath
+						$winInfo.WinIcon:=$ClientIconFile.path
 						$keys.push("WinIcon")
 					End if 
 				End if 
@@ -1454,10 +1470,10 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 						$CLI._printTask("Copy icon file")
 						$CLI._printStatus($targetIconFile.exists)
 						$CLI._printPath($targetIconFile)
-						$info.CFBundleIconFile:=$ClientIconFile.fullName
+						$info.CFBundleIconFile:=$targetIconFile.fullName
 						$keys.push("CFBundleIconFile")
 					Else 
-						$info.WinIcon:=$ServerIconFile.platformPath
+						$winInfo.WinIcon:=$ClientIconFile.path
 						$keys.push("WinIcon")
 					End if 
 				End if 
@@ -1482,10 +1498,10 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 						$CLI._printTask("Copy icon file")
 						$CLI._printStatus($targetIconFile.exists)
 						$CLI._printPath($targetIconFile)
-						$info.CFBundleIconFile:=$ServerIconFile.fullName
+						$info.CFBundleIconFile:=$targetIconFile.fullName
 						$keys.push("CFBundleIconFile")
 					Else 
-						$info.WinIcon:=$ServerIconFile.platformPath
+						$winInfo.WinIcon:=$ServerIconFile.path
 						$keys.push("WinIcon")
 					End if 
 				End if 
@@ -1510,10 +1526,10 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 						$CLI._printTask("Copy icon file")
 						$CLI._printStatus($targetIconFile.exists)
 						$CLI._printPath($targetIconFile)
-						$info.CFBundleIconFile:=$RuntimeVLIconFile.fullName
+						$info.CFBundleIconFile:=$targetIconFile.fullName
 						$keys.push("CFBundleIconFile")
 					Else 
-						$info.WinIcon:=$RuntimeVLIconFile.platformPath
+						$winInfo.WinIcon:=$RuntimeVLIconFile.path
 						$keys.push("WinIcon")
 					End if 
 				End if 
@@ -1644,6 +1660,10 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	$CLI._printPath($propertyListFile)
 	
 	$propertyListFile.setAppInfo($info)
+	
+	If (Is Windows:C1573)
+		$targetRuntimeFolder.file($BuildApplicationName+".exe").setAppInfo($winInfo)
+	End if 
 	
 	$CLI._updatePropertyStrings($BuildApp; $targetRuntimeFolder; $info)
 	

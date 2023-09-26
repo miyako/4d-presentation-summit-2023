@@ -21,7 +21,7 @@ If (True:C214)
 	$BuildDestFolder:="Build"+$platform+"DestFolder"
 	$BuildApp[$BuildDestFolder]:=Folder:C1567(fk desktop folder:K87:19).platformPath
 	
-	$platformIcon:=File:C1566(Structure file:C489; fk platform path:K87:2).parent.parent.parent.file("BuildApp.4d/Resources/BuildApp"+$iconExtension).platformPath
+	$platformIcon:=File:C1566(Structure file:C489; fk platform path:K87:2).parent.parent.parent.file("BuildApp/Resources/BuildApp"+$iconExtension).platformPath
 	
 	$RuntimeVLFolder:="RuntimeVL"+$platform+"Folder"
 	$BuildApp.SourcesFiles.RuntimeVL[$RuntimeVLFolder]:=Folder:C1567(fk applications folder:K87:20).file("4D v20.1/4D Volume Desktop"+$appExtension).platformPath

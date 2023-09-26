@@ -367,7 +367,7 @@
 					"textAlign": "right",
 					"sizingY": "move"
 				},
-				"Hint for Mac3": {
+				"Hint for Both": {
 					"type": "text",
 					"text": "Run in Terminal",
 					"top": 622,
@@ -454,6 +454,17 @@
 					"stroke": "automatic",
 					"imageHugsTitle": false,
 					"sizingX": "move"
+				},
+				"Hint for Win3": {
+					"type": "text",
+					"text": "⌃⎇T",
+					"top": 622,
+					"left": 160,
+					"width": 40,
+					"height": 16,
+					"fontWeight": "bold",
+					"textAlign": "right",
+					"sizingY": "move"
 				}
 			},
 			"entryOrder": [
@@ -2749,7 +2760,7 @@
 			}
 		}
 	],
-	"geometryStamp": 2652,
+	"geometryStamp": 2657,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

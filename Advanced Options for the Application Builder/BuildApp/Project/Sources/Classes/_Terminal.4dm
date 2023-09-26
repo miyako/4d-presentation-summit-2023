@@ -72,21 +72,42 @@ Function launch($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)
 	
 	$project:=demo_project_path
 	
-	$command:=This:C1470.escape($tool4d.path)
-	$command:=$command+" "+This:C1470.escape($project)  //" /Users/miyako/Documents/GitHub/4d-presentation-summit-2023/Advanced\\ Options\\ for\\ the\\ Application\\ Builder/build-application/Project/build-application.4DProject"
-	$command:=$command+" "+This:C1470.escape($compileProject.path)
-	$command:=$command+" --startup-method=build"
-	$command:=$command+" --user-param="+This:C1470.escape($buildProject.path)+","+This:C1470.escape($compileProject.path)
-	
-	$command:="osascript"+" -e 'tell application \"Terminal\" to activate\r' -e 'tell application \"Terminal\" to do script \""+Replace string:C233($command; "\\"; "\\\\"; *)+"\"'"
-	
 	$folder:=Folder:C1567(Temporary folder:C486; fk platform path:K87:2).folder(Generate UUID:C1066)
 	$folder.create()
 	
-	$folder:=Folder:C1567(fk desktop folder:K87:19)
-	
-	$file:=$folder.file("tool4d.sh")
-	$file.setText($command)
-	
-	LAUNCH EXTERNAL PROCESS:C811("/bin/sh "+This:C1470.escape($file.path))
-	
+	If (Is macOS:C1572)
+		
+		$command:=This:C1470.escape($tool4d.path)
+		$command:=$command+" "+This:C1470.escape($project.path)
+		$command:=$command+" "+This:C1470.escape($compileProject.path)
+		$command:=$command+" --startup-method=build"
+		$command:=$command+" --user-param="+This:C1470.escape($buildProject.path)+","+This:C1470.escape($compileProject.path)
+		$command:=$command+" --dataless"
+		
+		$command:="osascript"+" -e 'tell application \"Terminal\" to activate\r' -e 'tell application \"Terminal\" to do script \""+Replace string:C233($command; "\\"; "\\\\"; *)+"\"'"
+		
+		$file:=$folder.file("tool4d.sh")
+		$file.setText($command)
+		
+		LAUNCH EXTERNAL PROCESS:C811("/bin/sh "+This:C1470.escape($file.path))
+		
+	Else 
+		
+		$folder:=Folder:C1567(fk desktop folder:K87:19)
+		
+		$command:=This:C1470.escape("C:\\Program Files (Arm)\\Windows Terminal\\WindowsTerminal.exe")
+		$command:=$command+" "+This:C1470.escape($tool4d.platformPath)
+		$command:=$command+" "+This:C1470.escape($project.platformPath)
+		$command:=$command+" "+This:C1470.escape($compileProject.platformPath)
+		$command:=$command+" --startup-method=build"
+		$command:=$command+" --user-param="+This:C1470.escape($buildProject.path+","+$compileProject.path)
+		$command:=$command+" --dataless"
+		
+		$file:=$folder.file("tool4d.bat")
+		$file.setText($command)
+		
+		//SET ENVIRONMENT VARIABLE("_4D_OPTION_HIDE_CONSOLE"; "true")
+		//SET ENVIRONMENT VARIABLE("_4D_OPTION_BLOCKING_EXTERNAL_PROCESS"; "true")
+		//LAUNCH EXTERNAL PROCESS(This.escape($file.platformPath))
+		
+	End if 

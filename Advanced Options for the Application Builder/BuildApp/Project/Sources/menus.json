@@ -22,6 +22,10 @@
 			"title": ":xliff:CommonMenuFile",
 			"items": [
 				{
+					"title": "DEMO",
+					"method": "BUILDAPP_FORM"
+				},
+				{
 					"title": ":xliff:CommonMenuItemQuit",
 					"shortcutAccel": true,
 					"shortcutKey": "Q",
