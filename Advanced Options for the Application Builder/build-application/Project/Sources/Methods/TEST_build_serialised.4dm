@@ -10,6 +10,12 @@ If (True:C214)
 	$appExtension:=(Is macOS:C1572 ? ".app" : "")
 	$iconExtension:=(Is macOS:C1572 ? ".icns" : ".ico")
 	
+	If (Is Windows:C1573)
+		$appFolder:=Folder:C1567(fk applications folder:K87:20).parent.folder("Program Files").folder("4D")
+	Else 
+		$appFolder:=Folder:C1567(fk applications folder:K87:20)
+	End if 
+	
 	var $CLI : cs:C1710.BuildApp_CLI
 	
 	$CLI:=cs:C1710.BuildApp_CLI.new()
@@ -24,11 +30,9 @@ If (True:C214)
 	$platformIcon:=File:C1566(Structure file:C489; fk platform path:K87:2).parent.parent.parent.file("BuildApp/Resources/BuildApp"+$iconExtension).platformPath
 	
 	$RuntimeVLFolder:="RuntimeVL"+$platform+"Folder"
-	If (Is macOS:C1572)
-		$BuildApp.SourcesFiles.RuntimeVL[$RuntimeVLFolder]:=Folder:C1567(fk applications folder:K87:20).file("4D v20.1/4D Volume Desktop"+$appExtension).platformPath
-	Else 
-		$BuildApp.SourcesFiles.RuntimeVL[$RuntimeVLFolder]:=Folder:C1567(fk applications folder:K87:20).parent.folder("Program Files").file("4D/4D v20.1/4D Volume Desktop"+$appExtension).platformPath
-	End if 
+	
+	$BuildApp.SourcesFiles.RuntimeVL[$RuntimeVLFolder]:=$appFolder.file("4D v20.1/4D Volume Desktop"+$appExtension).platformPath
+	
 	$RuntimeVLIconFolder:="RuntimeVLIcon"+$platform+"Path"
 	$BuildApp.SourcesFiles.RuntimeVL[$RuntimeVLIconFolder]:=$platformIcon
 	
