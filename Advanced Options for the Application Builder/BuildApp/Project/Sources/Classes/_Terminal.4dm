@@ -93,7 +93,8 @@ Function launch($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)
 		
 	Else 
 		
-		$folder:=Folder:C1567(fk desktop folder:K87:19)
+		$folder:=Folder:C1567(Temporary folder:C486; fk platform path:K87:2).folder(Generate UUID:C1066)
+		$folder.create()
 		
 		$command:=""
 		$command:=$command+" "+This:C1470.escape($tool4d.platformPath)
