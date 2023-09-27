@@ -12,12 +12,12 @@ Case of
 		$BuildApp.BuildCompiled:=False:C215
 		$BuildApp.IncludeAssociatedFolders:=True:C214
 		$BuildApp.BuildComponent:=False:C215
-		$BuildApp.BuildApplicationSerialized:=True:C214
+		$BuildApp.BuildApplicationSerialized:=False:C215
 		$BuildApp.PackProject:=True:C214
 		$BuildApp.UseStandardZipFormat:=True:C214
 		
-		$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIncludeIt:=True:C214
-		$BuildApp.SourcesFiles.RuntimeVL.IsOEM:=True:C214
+		$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIncludeIt:=False:C215
+		$BuildApp.SourcesFiles.RuntimeVL.IsOEM:=False:C215
 		
 		$BuildApp.CS.ServerSelectionAllowed:=True:C214
 		$BuildApp.CS.ClientWinSingleInstance:=True:C214
@@ -33,6 +33,10 @@ Case of
 		$BuildApp.AutoUpdate.RuntimeVL.StartElevated:=True:C214
 		$BuildApp.AutoUpdate.CS.Client.StartElevated:=True:C214
 		$BuildApp.AutoUpdate.CS.Server.StartElevated:=True:C214
+		
+		$BuildApp.Versioning.Common.CommonFileDescription:="TEST"
+		$BuildApp.Versioning.Server.ServerFileDescription:="TEST Server"
+		$BuildApp.Versioning.Client.ClientFileDescription:="TEST Client"
 		
 		//$BuildApp.ArrayExcludedModuleName.Item[0]:="CEF"
 		//$BuildApp.ArrayExcludedModuleName.Item[1]:="MeCab"
@@ -61,8 +65,8 @@ Case of
 			$BuildApp.SignApplication.MacCertificate:=""
 		End if 
 		
-		$BuildApp.CS.DatabaseToEmbedInClientMacFolder:=demo_startup_project_path
-		$BuildApp.CS.DatabaseToEmbedInClientWinFolder:=demo_startup_project_path
+		$BuildApp.SourcesFiles.CS.DatabaseToEmbedInClientMacFolder:=demo_startup_project_path
+		$BuildApp.SourcesFiles.CS.DatabaseToEmbedInClientWinFolder:=demo_startup_project_path
 		
 		$BuildApp.CS.MacCompiledDatabaseToWin:=demo_compiled_mac_project
 		
@@ -82,7 +86,7 @@ Case of
 		$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIconMacPath:=$RuntimeVLIconMac
 		$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIconWinPath:=$RuntimeVLIconWin
 		
-		$BuildApp.SourcesFiles.CS.ServerIncludeIt:=True:C214
+		$BuildApp.SourcesFiles.CS.ServerIncludeIt:=False:C215
 		
 		If (Is macOS:C1572)
 			$BuildApp.SourcesFiles.CS.ClientMacIncludeIt:=True:C214
@@ -96,7 +100,7 @@ Case of
 		$BuildApp.SourcesFiles.CS.ClientMacIconForWinPath:=$RuntimeVLIconMac
 		$BuildApp.SourcesFiles.CS.ClientWinIconForWinPath:=$RuntimeVLIconWin
 		$BuildApp.CS.BuildServerApplication:=True:C214
-		$BuildApp.CS.BuildCSUpgradeable:=True:C214
+		$BuildApp.CS.BuildCSUpgradeable:=False:C215
 		
 		If (Is macOS:C1572)
 			$ServerMac:=demo_server_path

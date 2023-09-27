@@ -29,7 +29,7 @@ Case of
 		
 		Form:C1466.controller.killWorker().setWindowBounds(Form:C1466.controller.formIdentifier)
 		
-		If (Is Windows:C1573)
+		If (Version type:C495 ?? Merged application:K5:28) && (Is Windows:C1573) && (Get application info:C1599.SDIMode)
 			QUIT 4D:C291
 		End if 
 		
