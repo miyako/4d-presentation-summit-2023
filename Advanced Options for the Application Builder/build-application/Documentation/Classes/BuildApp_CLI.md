@@ -4,12 +4,24 @@
 
 ## .build() 
 
-**.build**($buildProject : 4D.File; $compileProject : 4D.File) : Boolean
+**.build**($buildProject : 4D.File; $compileProject : 4D.File) : cs.BuildApp_CLI
 
 Build a project.
 
+## .clean() 
+
+**.clean**($compileProject : 4D.File) : cs.BuildApp_CLI
+
+Delete derived data and compiler intermediate files.
+
 ## .compile() 
 
-**.compile**($compileProject : 4D.File) : Boolean
+**.compile**($compileProject : 4D.File) : cs.BuildApp_CLI
 
 Compile a project.
+
+## .quickSign()
+
+**.quickSign**($BuildApp : cs.BuildApp; $RuntimeFolder : 4D.Folder) : cs.BuildApp_CLI
+
+Sign an app using the `SignApp.sh` script file. Internally launches a worker and waits for its completion.

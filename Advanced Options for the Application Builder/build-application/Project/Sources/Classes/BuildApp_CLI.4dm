@@ -1,163 +1,8 @@
 Class extends CLI
 
-Function clean($compileProject : 4D:C1709.File)
-	
-	$CLI:=This:C1470
-	
-	$packageFolder:=$compileProject.parent.parent
-	
-	$folders:=New collection:C1472
-	
-	For each ($folder; $packageFolder.folders(fk ignore invisible:K87:22))
-		If ($folder.fullName="userPreferences.@")
-			$_folder:=$folder.folder("CompilerIntermediateFiles")
-			If ($_folder.exists)
-				$folders.push($_folder)
-			End if 
-		End if 
-	End for each 
-	
-	If ($folders.length#0)
-		$CLI._printTask("Delete compiler intermediate files").LF()
-		For each ($folder; $folders)
-			$CLI._printPath($folder)
-			$folder.delete(Delete with contents:K24:24)
-		End for each 
-	End if 
-	
-	$DerivedDataFolder:=$packageFolder.folder("Project").folder("DerivedData")
-	If ($DerivedDataFolder.exists)
-		$CLI._printTask("Delete derived data").LF()
-		$CLI._printPath($DerivedDataFolder)
-		$DerivedDataFolder.delete(Delete with contents:K24:24)
-	End if 
-	
-Function _getVersioning($BuildApp : cs:C1710.BuildApp; $key : Text; $domain : Text)->$value : Text
-	
-	If ($domain#"")
-		If ($BuildApp.Versioning[$domain][$domain+$key]#Null:C1517)
-			If ($BuildApp.Versioning[$domain][$domain+$key]#"")
-				$value:=$BuildApp.Versioning[$domain][$domain+$key]
-			End if 
-		End if 
-	End if 
-	
-	If ($value="")
-		If ($BuildApp.Versioning.Common["Common"+$key]#Null:C1517)
-			If ($BuildApp.Versioning.Common["Common"+$key]#"")
-				$value:=$BuildApp.Versioning.Common["Common"+$key]
-			End if 
-		End if 
-	End if 
-	
-Function _printItem($item : Text)->$CLI : cs:C1710.BuildApp_CLI
-	
-	$CLI:=This:C1470
-	
-	$CLI.print($item; "39").LF()
-	
-Function _printItemToList($item : Text; $count : Integer)->$CLI : cs:C1710.BuildApp_CLI
-	
-	If ($count#0)
-		$CLI.print(","+$item; "39")
-	Else 
-		$CLI.print($item; "39")
-	End if 
-	
-Function _printList($list : Collection)->$CLI : cs:C1710.BuildApp_CLI
-	
-	$CLI:=This:C1470
-	
-	$CLI.print($list.join(","); "39").LF()
-	
-Function _printPath($path : Object)->$CLI : cs:C1710.BuildApp_CLI
-	
-	$CLI:=This:C1470
-	
-	If (OB Instance of:C1731($path; 4D:C1709.File) || OB Instance of:C1731($path; 4D:C1709.Folder))
-		$CLI.print($path.path; "244").LF()
-	End if 
-	
-Function _printStatus($success : Boolean)->$CLI : cs:C1710.BuildApp_CLI
-	
-	$CLI:=This:C1470
-	
-	If ($success)
-		$CLI.print("success"; "82;bold").LF()
-	Else 
-		$CLI.print("failure"; "196;bold").LF()
-	End if 
-	
-Function _printTask($task : Text)->$CLI : cs:C1710.BuildApp_CLI
-	
-	$CLI:=This:C1470
-	
-	$CLI.print($task; "bold").print("…")
-	
-Function compile($compileProject : 4D:C1709.File)->$success : Boolean
-	
-	$CLI:=This:C1470
-	
-	$localProjectFile:=File:C1566(Structure file:C489; fk platform path:K87:2)
-	
-	If ($compileProject.path=$localProjectFile.path) && (Is compiled mode:C492)
-		
-		$success:=True:C214  //skip compilation
-		
-	Else 
-		
-		$options:=New object:C1471
-		$options.generateSymbols:=False:C215
-		$options.generateSyntaxFile:=True:C214
-		
-		$BuildApp:=cs:C1710.BuildApp.new()
-		
-		$options.plugins:=$BuildApp.findPluginsFolder($compileProject)
-		
-		If ($options.plugins#Null:C1517)
-			$CLI._printTask("Use plugins")
-			$plugins:=$BuildApp.findPlugins($compileProject)
-			$CLI._printList($plugins.extract("folder.name"))
-			$CLI._printPath($options.plugins)
-		End if 
-		
-		$options.components:=$BuildApp.findComponents($compileProject; True:C214)
-		
-		If ($options.components.length#0)
-			$CLI._printTask("Use components")
-			$CLI._printList($options.components.extract("name"))
-			For each ($component; $BuildApp.findComponents($compileProject))
-				$CLI._printPath($component)
-			End for each 
-		End if 
-		
-		If (Is macOS:C1572)
-			$options.targets:=New collection:C1472("arm64_macOS_lib"; "x86_64_generic")
-		End if 
-		
-		$CLI._printTask("Compile project")
-		
-		$status:=Compile project:C1760($compileProject; $options)
-		
-		$success:=$status.success
-		
-		For each ($error; $status.errors)
-			If ($error.isError)
-				$CLI.print($error.message; "177;bold")
-			Else 
-				$CLI.print($error.message; "166;bold")
-			End if 
-			If ($error.code#Null:C1517)
-				$CLI.print("…").print($error.code.path+"#"+String:C10($error.lineInFile); "244").LF()
-			End if 
-		End for each 
-		
-	End if 
-	
-	$CLI._printStatus($success)
-	$CLI._printPath($compileProject)
-	
-Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->$success : Boolean
+//MARK:-public methods
+
+Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->$CLI : cs:C1710.BuildApp_CLI
 	
 	$CLI:=This:C1470
 	
@@ -287,8 +132,6 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 							End if 
 							
 							$CLI.quickSign($BuildApp; $targetRuntimeVLFolder)
-							
-							$success:=True:C214
 							
 						End if 
 						
@@ -486,7 +329,100 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 		
 	End for each 
 	
-Function quickSign($BuildApp : cs:C1710.BuildApp; $RuntimeFolder : 4D:C1709.Folder)->$success : Boolean
+Function clean($compileProject : 4D:C1709.File)->$CLI : cs:C1710.BuildApp_CLI
+	
+	$CLI:=This:C1470
+	
+	$packageFolder:=$compileProject.parent.parent
+	
+	$folders:=New collection:C1472
+	
+	For each ($folder; $packageFolder.folders(fk ignore invisible:K87:22))
+		If ($folder.fullName="userPreferences.@")
+			$_folder:=$folder.folder("CompilerIntermediateFiles")
+			If ($_folder.exists)
+				$folders.push($_folder)
+			End if 
+		End if 
+	End for each 
+	
+	If ($folders.length#0)
+		$CLI._printTask("Delete compiler intermediate files").LF()
+		For each ($folder; $folders)
+			$CLI._printPath($folder)
+			$folder.delete(Delete with contents:K24:24)
+		End for each 
+	End if 
+	
+	$DerivedDataFolder:=$packageFolder.folder("Project").folder("DerivedData")
+	If ($DerivedDataFolder.exists)
+		$CLI._printTask("Delete derived data").LF()
+		$CLI._printPath($DerivedDataFolder)
+		$DerivedDataFolder.delete(Delete with contents:K24:24)
+	End if 
+	
+Function compile($compileProject : 4D:C1709.File)->$CLI : cs:C1710.BuildApp_CLI
+	
+	$CLI:=This:C1470
+	
+	$localProjectFile:=File:C1566(Structure file:C489; fk platform path:K87:2)
+	
+	If ($compileProject.path=$localProjectFile.path) && (Is compiled mode:C492)
+		
+		//skip
+		
+	Else 
+		
+		$options:=New object:C1471
+		$options.generateSymbols:=False:C215
+		$options.generateSyntaxFile:=True:C214
+		
+		$BuildApp:=cs:C1710.BuildApp.new()
+		
+		$options.plugins:=$BuildApp.findPluginsFolder($compileProject)
+		
+		If ($options.plugins#Null:C1517)
+			$CLI._printTask("Use plugins")
+			$plugins:=$BuildApp.findPlugins($compileProject)
+			$CLI._printList($plugins.extract("folder.name"))
+			$CLI._printPath($options.plugins)
+		End if 
+		
+		$options.components:=$BuildApp.findComponents($compileProject; True:C214)
+		
+		If ($options.components.length#0)
+			$CLI._printTask("Use components")
+			$CLI._printList($options.components.extract("name"))
+			For each ($component; $BuildApp.findComponents($compileProject))
+				$CLI._printPath($component)
+			End for each 
+		End if 
+		
+		If (Is macOS:C1572)
+			$options.targets:=New collection:C1472("arm64_macOS_lib"; "x86_64_generic")
+		End if 
+		
+		$CLI._printTask("Compile project")
+		
+		$status:=Compile project:C1760($compileProject; $options)
+		
+		$CLI._printStatus($status.success)
+		$CLI._printPath($compileProject)
+		
+		For each ($error; $status.errors)
+			If ($error.isError)
+				$CLI.print($error.message; "177;bold")
+			Else 
+				$CLI.print($error.message; "166;bold")
+			End if 
+			If ($error.code#Null:C1517)
+				$CLI.print("…").print($error.code.path+"#"+String:C10($error.lineInFile); "244").LF()
+			End if 
+		End for each 
+		
+	End if 
+	
+Function quickSign($BuildApp : cs:C1710.BuildApp; $RuntimeFolder : 4D:C1709.Folder)->$CLI : cs:C1710.BuildApp_CLI
 	
 	$CLI:=This:C1470
 	
@@ -497,29 +433,9 @@ Function quickSign($BuildApp : cs:C1710.BuildApp; $RuntimeFolder : 4D:C1709.Fold
 		
 		quickSign($BuildApp; $RuntimeFolder)
 		
-		$success:=True:C214
-		
 	End if 
 	
-Function _createUpgradeClientManifest($BuildApp : cs:C1710.BuildApp; $BuildApplicationName)->$info : Object
-	
-	$CLI:=This:C1470
-	
-	$info:=New object:C1471
-	
-	$info.BuildName:=$BuildApplicationName
-	$info.BuildInfoVersion:=$CLI._getVersioning($BuildApp; "Version"; "Client")
-	$info.BuildHardLink:=""
-	$info.BuildCreator:=$CLI._getVersioning($BuildApp; "Creator"; "Client")
-	$info.BuildRangeVersMin:=$CLI._getIntValue($BuildApp; "CS.RangeVersMin")
-	$info.BuildRangeVersMax:=$CLI._getIntValue($BuildApp; "CS.RangeVersMax")
-	$info.BuildCurrentVers:=$CLI._getIntValue($BuildApp; "CS.CurrentVers")
-	$info.MacCertificate:=$CLI._getStringValue($BuildApp; "SignApplication.MacCertificate")
-	$info.MacSignature:=$CLI._getBoolValue($BuildApp; "SignApplication.MacSignature")
-	$info["com.4D.HideDataExplorerMenuItem"]:=$CLI._getBoolValue($BuildApp; "CS.HideDataExplorerMenuItem")
-	$info["com.4D.HideRuntimeExplorerMenuItem"]:=$CLI._getBoolValue($BuildApp; "CS.HideRuntimeExplorerMenuItem")
-	$info.BuildIPPort:=$CLI._getIntValue($BuildApp; "CS.PortNumber")
-	$info.ServerPlatform:=Is macOS:C1572 ? "Mac" : "Win"
+	//MARK:-private methods
 	
 Function _copyComponents($BuildApp : cs:C1710.BuildApp; \
 $RuntimeFolder : 4D:C1709.Folder; \
@@ -835,16 +751,6 @@ $sourceProjectFile : 4D:C1709.File; $BuildApplicationName : Text; $publication_n
 			End if 
 			
 	End case 
-	
-Function _zipCallback1($progress : Integer)
-	
-	$CLI:=cs:C1710.CLI.new()
-	$CLI.CR().print("Archive client"; "bold").print("…").print(String:C10($progress; "^^0%%"); "226")
-	
-Function _zipCallback2($progress : Integer)
-	
-	$CLI:=cs:C1710.CLI.new()
-	$CLI.CR().print("Archive project folder"; "bold").print(String:C10($progress; "^^0%%"); "226")
 	
 Function _copyPlugins($BuildApp : cs:C1710.BuildApp; \
 $RuntimeFolder : 4D:C1709.Folder; \
@@ -1212,6 +1118,26 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 		
 	End if 
 	
+Function _createUpgradeClientManifest($BuildApp : cs:C1710.BuildApp; $BuildApplicationName)->$info : Object
+	
+	$CLI:=This:C1470
+	
+	$info:=New object:C1471
+	
+	$info.BuildName:=$BuildApplicationName
+	$info.BuildInfoVersion:=$CLI._getVersioning($BuildApp; "Version"; "Client")
+	$info.BuildHardLink:=""
+	$info.BuildCreator:=$CLI._getVersioning($BuildApp; "Creator"; "Client")
+	$info.BuildRangeVersMin:=$CLI._getIntValue($BuildApp; "CS.RangeVersMin")
+	$info.BuildRangeVersMax:=$CLI._getIntValue($BuildApp; "CS.RangeVersMax")
+	$info.BuildCurrentVers:=$CLI._getIntValue($BuildApp; "CS.CurrentVers")
+	$info.MacCertificate:=$CLI._getStringValue($BuildApp; "SignApplication.MacCertificate")
+	$info.MacSignature:=$CLI._getBoolValue($BuildApp; "SignApplication.MacSignature")
+	$info["com.4D.HideDataExplorerMenuItem"]:=$CLI._getBoolValue($BuildApp; "CS.HideDataExplorerMenuItem")
+	$info["com.4D.HideRuntimeExplorerMenuItem"]:=$CLI._getBoolValue($BuildApp; "CS.HideRuntimeExplorerMenuItem")
+	$info.BuildIPPort:=$CLI._getIntValue($BuildApp; "CS.PortNumber")
+	$info.ServerPlatform:=Is macOS:C1572 ? "Mac" : "Win"
+	
 Function _generateLicense($BuildApp : cs:C1710.BuildApp; $targetFolder : 4D:C1709.Folder; $buildApplicationType : Text)
 	
 	$CLI:=This:C1470
@@ -1262,6 +1188,122 @@ Function _generateLicense($BuildApp : cs:C1710.BuildApp; $targetFolder : 4D:C170
 			$CLI.print($error.message; "177;bold")
 		End for each 
 	End if 
+	
+Function _getBoolValue($BuildApp : cs:C1710.BuildApp; $path : Text)->$boolValue : Boolean
+	
+	$CLI:=This:C1470
+	
+	var $settings : Variant
+	
+	$settings:=$BuildApp
+	
+	$pathComponents:=Split string:C1554($path; "."; sk ignore empty strings:K86:1 | sk trim spaces:K86:2)
+	
+	For each ($pathComponent; $pathComponents) Until ($settings=Null:C1517)
+		$settings:=$settings[$pathComponent]
+	End for each 
+	
+	If ($settings#Null:C1517)
+		$boolValue:=Bool:C1537($settings)
+	End if 
+	
+Function _getIntValue($BuildApp : cs:C1710.BuildApp; $path : Text)->$intValue : Integer
+	
+	$CLI:=This:C1470
+	
+	var $settings : Variant
+	
+	$settings:=$BuildApp
+	
+	$pathComponents:=Split string:C1554($path; "."; sk ignore empty strings:K86:1 | sk trim spaces:K86:2)
+	
+	For each ($pathComponent; $pathComponents) Until ($settings=Null:C1517)
+		$settings:=$settings[$pathComponent]
+	End for each 
+	
+	If ($settings#Null:C1517)
+		$intValue:=Int:C8(Num:C11(String:C10($settings); "."))
+	End if 
+	
+Function _getStringValue($BuildApp : cs:C1710.BuildApp; $path : Text)->$stringValue : Text
+	
+	$CLI:=This:C1470
+	
+	var $settings : Variant
+	
+	$settings:=$BuildApp
+	
+	$pathComponents:=Split string:C1554($path; "."; sk ignore empty strings:K86:1 | sk trim spaces:K86:2)
+	
+	For each ($pathComponent; $pathComponents) Until ($settings=Null:C1517)
+		$settings:=$settings[$pathComponent]
+	End for each 
+	
+	If ($settings#Null:C1517)
+		$stringValue:=String:C10($settings)
+	End if 
+	
+Function _getVersioning($BuildApp : cs:C1710.BuildApp; $key : Text; $domain : Text)->$value : Text
+	
+	If ($domain#"")
+		If ($BuildApp.Versioning[$domain][$domain+$key]#Null:C1517)
+			If ($BuildApp.Versioning[$domain][$domain+$key]#"")
+				$value:=$BuildApp.Versioning[$domain][$domain+$key]
+			End if 
+		End if 
+	End if 
+	
+	If ($value="")
+		If ($BuildApp.Versioning.Common["Common"+$key]#Null:C1517)
+			If ($BuildApp.Versioning.Common["Common"+$key]#"")
+				$value:=$BuildApp.Versioning.Common["Common"+$key]
+			End if 
+		End if 
+	End if 
+	
+Function _printItem($item : Text)->$CLI : cs:C1710.BuildApp_CLI
+	
+	$CLI:=This:C1470
+	
+	$CLI.print($item; "39").LF()
+	
+Function _printItemToList($item : Text; $count : Integer)->$CLI : cs:C1710.BuildApp_CLI
+	
+	If ($count#0)
+		$CLI.print(","+$item; "39")
+	Else 
+		$CLI.print($item; "39")
+	End if 
+	
+Function _printList($list : Collection)->$CLI : cs:C1710.BuildApp_CLI
+	
+	$CLI:=This:C1470
+	
+	$CLI.print($list.join(","); "39").LF()
+	
+Function _printPath($path : Object)->$CLI : cs:C1710.BuildApp_CLI
+	
+	$CLI:=This:C1470
+	
+	If (OB Instance of:C1731($path; 4D:C1709.File) || OB Instance of:C1731($path; 4D:C1709.Folder))
+		$CLI.print($path.path; "244").LF()
+	End if 
+	
+Function _printStatus($success : Boolean)->$CLI : cs:C1710.BuildApp_CLI
+	
+	$CLI:=This:C1470
+	
+	If ($success)
+		$CLI.print("success"; "82;bold").LF()
+	Else 
+		$CLI.print("failure"; "196;bold").LF()
+	End if 
+	
+Function _printTask($task : Text)->$CLI : cs:C1710.BuildApp_CLI
+	
+	$CLI:=This:C1470
+	
+	$CLI.print($task; "bold").print("…")
 	
 Function _updateProperty($BuildApp : cs:C1710.BuildApp; \
 $targetRuntimeFolder : 4D:C1709.Folder; \
@@ -1705,60 +1747,6 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	
 	$CLI._updatePropertyStrings($BuildApp; $targetRuntimeFolder; $info)
 	
-Function _getIntValue($BuildApp : cs:C1710.BuildApp; $path : Text)->$intValue : Integer
-	
-	$CLI:=This:C1470
-	
-	var $settings : Variant
-	
-	$settings:=$BuildApp
-	
-	$pathComponents:=Split string:C1554($path; "."; sk ignore empty strings:K86:1 | sk trim spaces:K86:2)
-	
-	For each ($pathComponent; $pathComponents) Until ($settings=Null:C1517)
-		$settings:=$settings[$pathComponent]
-	End for each 
-	
-	If ($settings#Null:C1517)
-		$intValue:=Int:C8(Num:C11(String:C10($settings); "."))
-	End if 
-	
-Function _getBoolValue($BuildApp : cs:C1710.BuildApp; $path : Text)->$boolValue : Boolean
-	
-	$CLI:=This:C1470
-	
-	var $settings : Variant
-	
-	$settings:=$BuildApp
-	
-	$pathComponents:=Split string:C1554($path; "."; sk ignore empty strings:K86:1 | sk trim spaces:K86:2)
-	
-	For each ($pathComponent; $pathComponents) Until ($settings=Null:C1517)
-		$settings:=$settings[$pathComponent]
-	End for each 
-	
-	If ($settings#Null:C1517)
-		$boolValue:=Bool:C1537($settings)
-	End if 
-	
-Function _getStringValue($BuildApp : cs:C1710.BuildApp; $path : Text)->$stringValue : Text
-	
-	$CLI:=This:C1470
-	
-	var $settings : Variant
-	
-	$settings:=$BuildApp
-	
-	$pathComponents:=Split string:C1554($path; "."; sk ignore empty strings:K86:1 | sk trim spaces:K86:2)
-	
-	For each ($pathComponent; $pathComponents) Until ($settings=Null:C1517)
-		$settings:=$settings[$pathComponent]
-	End for each 
-	
-	If ($settings#Null:C1517)
-		$stringValue:=String:C10($settings)
-	End if 
-	
 Function _updatePropertyStrings($BuildApp : cs:C1710.BuildApp; \
 $targetFolder : 4D:C1709.Folder; $info : Object)
 	
@@ -1812,4 +1800,13 @@ $targetFolder : 4D:C1709.Folder; $info : Object)
 		End for each 
 	End if 
 	
+Function _zipCallback1($progress : Integer)
+	
+	$CLI:=cs:C1710.CLI.new()
+	$CLI.CR().print("Archive client"; "bold").print("…").print(String:C10($progress; "^^0%%"); "226")
+	
+Function _zipCallback2($progress : Integer)
+	
+	$CLI:=cs:C1710.CLI.new()
+	$CLI.CR().print("Archive project folder"; "bold").print(String:C10($progress; "^^0%%"); "226")
 	

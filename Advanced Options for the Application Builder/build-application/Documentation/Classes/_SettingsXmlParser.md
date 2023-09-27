@@ -12,3 +12,9 @@ The returned object contains the following properties:
 |:-|:-|:-|
 |sdi_application|Boolean||
 |allow_user_settings|Boolean||
+
+## .setPortNumber() 
+
+**.setPortNumber**($projectFile : 4D.File; $portNumber : Integer) 
+
+Locates the `/SOURCES/settings.4DSettings` file related to the specified project and changes the application server port number.
