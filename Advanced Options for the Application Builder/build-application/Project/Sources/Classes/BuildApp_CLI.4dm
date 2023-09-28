@@ -889,7 +889,12 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 			//keep it
 		Else 
 			If (Is Windows:C1573)
-				$resourceFile:=$ContentsFolder.file($RuntimeExecutableName+".rsr")
+				Case of 
+					: ($buildApplicationType="Server")
+						$resourceFile:=$ContentsFolder.folder("Resources").file($RuntimeExecutableName+".rsr")
+					Else 
+						$resourceFile:=$ContentsFolder.file($RuntimeExecutableName+".rsr")
+				End case 
 				$targetResourceFile:=$resourceFile.rename($BuildApplicationName+".rsr")
 			Else 
 				$resourceFile:=$ContentsFolder.folder("Resources").file($RuntimeExecutableName+".rsrc")
