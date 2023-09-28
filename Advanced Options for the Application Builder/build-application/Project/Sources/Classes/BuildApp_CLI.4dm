@@ -1704,36 +1704,40 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	
 	If (Is Windows:C1573)
 		
-		$targetUpdatorFolder:=$targetRuntimeFolder.folder("Resources").folder("Updater")
-		$elevatedManifestFile:=$targetUpdatorFolder.file("elevated.manifest")
-		$normalManifestFile:=$targetUpdatorFolder.file("normal.manifest")
-		
-		var $targetMaifestFile : 4D:C1709.File
-		
-		Case of 
-			: ($buildApplicationType="Client@")
-				
-				If (Bool:C1537($BuildApp.AutoUpdate.CS.Client.StartElevated)) || (Bool:C1537($BuildApp.AutoUpdate.CS.ClientUpdateWin.StartElevated))
-					$targetMaifestFile:=$elevatedManifestFile.copyTo($targetUpdatorFolder; "Updater.exe.manifest"; fk overwrite:K87:5)
-				End if 
-				
-			: ($buildApplicationType="Server")
-				
-				If (Bool:C1537($BuildApp.AutoUpdate.CS.Server.StartElevated)) || (Bool:C1537($BuildApp.AutoUpdate.CS.Server.StartElevated))
-					$targetMaifestFile:=$elevatedManifestFile.copyTo($targetUpdatorFolder; "Updater.exe.manifest"; fk overwrite:K87:5)
-				End if 
-				
-			Else 
-				
-				If (Bool:C1537($BuildApp.AutoUpdate.RuntimeVL.StartElevated))
-					$targetMaifestFile:=$elevatedManifestFile.copyTo($targetUpdatorFolder; "Updater.exe.manifest"; fk overwrite:K87:5)
-				End if 
-				
-		End case 
-		
-		If ($targetMaifestFile#Null:C1517)
-			$CLI._printTask("Set updater manifest")
-			$CLI._printPath($targetMaifestFile)
+		If (Not:C34($BuildApp.ArrayExcludedModuleName.Item.includes("4D Updater")))
+			
+			$targetUpdatorFolder:=$targetRuntimeFolder.folder("Resources").folder("Updater")
+			$elevatedManifestFile:=$targetUpdatorFolder.file("elevated.manifest")
+			$normalManifestFile:=$targetUpdatorFolder.file("normal.manifest")
+			
+			var $targetMaifestFile : 4D:C1709.File
+			
+			Case of 
+				: ($buildApplicationType="Client@")
+					
+					If (Bool:C1537($BuildApp.AutoUpdate.CS.Client.StartElevated)) || (Bool:C1537($BuildApp.AutoUpdate.CS.ClientUpdateWin.StartElevated))
+						$targetMaifestFile:=$elevatedManifestFile.copyTo($targetUpdatorFolder; "Updater.exe.manifest"; fk overwrite:K87:5)
+					End if 
+					
+				: ($buildApplicationType="Server")
+					
+					If (Bool:C1537($BuildApp.AutoUpdate.CS.Server.StartElevated)) || (Bool:C1537($BuildApp.AutoUpdate.CS.Server.StartElevated))
+						$targetMaifestFile:=$elevatedManifestFile.copyTo($targetUpdatorFolder; "Updater.exe.manifest"; fk overwrite:K87:5)
+					End if 
+					
+				Else 
+					
+					If (Bool:C1537($BuildApp.AutoUpdate.RuntimeVL.StartElevated))
+						$targetMaifestFile:=$elevatedManifestFile.copyTo($targetUpdatorFolder; "Updater.exe.manifest"; fk overwrite:K87:5)
+					End if 
+					
+			End case 
+			
+			If ($targetMaifestFile#Null:C1517)
+				$CLI._printTask("Set updater manifest")
+				$CLI._printPath($targetMaifestFile)
+			End if 
+			
 		End if 
 		
 	End if 
