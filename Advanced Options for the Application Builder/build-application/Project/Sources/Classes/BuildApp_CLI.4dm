@@ -1360,10 +1360,10 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 		$keys.push("CFBundleDisplayName")
 		$keys.push("CFBundleExecutable")
 	Else 
-		$info.OriginalFilename:=$BuildApplicationName+".exe"
-		$info.ProductName:=$BuildApplicationName
-		$winInfo.push("OriginalFilename")
-		$winInfo.push("ProductName")
+		$winInfo.OriginalFilename:=$BuildApplicationName+".exe"
+		$winInfo.ProductName:=$BuildApplicationName
+		$keys.push("OriginalFilename")
+		$keys.push("ProductName")
 	End if 
 	
 	Case of 
