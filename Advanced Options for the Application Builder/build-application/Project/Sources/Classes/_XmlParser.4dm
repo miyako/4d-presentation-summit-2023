@@ -29,11 +29,20 @@ Function getBoolValue($dom : Text; $path : Text)->$boolValue : Variant
 	
 	If ($nodes.length>1)
 		
-		$attribute:=DOM Find XML element:C864($dom; $nodes[0]+"[@"+$nodes[1]+"]")
-		
-		If (OK=1)
+		If (Is macOS:C1572)
+			$attribute:=DOM Find XML element:C864($dom; $nodes[0]+"[@"+$nodes[1]+"]")
+			If (OK=1)
+				DOM GET XML ATTRIBUTE BY NAME:C728($attribute; $nodes[1]; $stringValue)
+				$boolValue:=($stringValue="true")
+			End if 
+		Else 
+			ON ERR CALL:C155(Formula:C1597(generic_error_handler).source)
+			$attribute:=DOM Find XML element:C864($dom; $nodes[0])
 			DOM GET XML ATTRIBUTE BY NAME:C728($attribute; $nodes[1]; $stringValue)
-			$boolValue:=($stringValue="true")
+			ON ERR CALL:C155("")
+			If (OK=1)
+				$boolValue:=($stringValue="true")
+			End if 
 		End if 
 		
 	End if 
