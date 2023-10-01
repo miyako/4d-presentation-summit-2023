@@ -1505,12 +1505,12 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 						$CLI._printTask("Copy icon file")
 						$CLI._printStatus($targetIconFile.exists)
 						$CLI._printPath($targetIconFile)
+						$info.CFBundleIconFile:=$targetIconFile.fullName
+						$keys.push("CFBundleIconFile")
 						$targetIconFile:=$ClientIconFile.copyTo($targetRuntimeFolder.folder("Contents").folder("Resources").folder("Images").folder("WindowIcons"); "windowIcon_205.icns"; fk overwrite:K87:5)
 						$CLI._printTask("Copy icon file")
 						$CLI._printStatus($targetIconFile.exists)
 						$CLI._printPath($targetIconFile)
-						$info.CFBundleIconFile:=$targetIconFile.fullName
-						$keys.push("CFBundleIconFile")
 					Else 
 						$winInfo.WinIcon:=$ClientIconFile.path
 						$keys.push("WinIcon")
@@ -1533,12 +1533,12 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 						$CLI._printTask("Copy icon file")
 						$CLI._printStatus($targetIconFile.exists)
 						$CLI._printPath($targetIconFile)
+						$info.CFBundleIconFile:=$targetIconFile.fullName
+						$keys.push("CFBundleIconFile")
 						$targetIconFile:=$ClientIconFile.copyTo($targetRuntimeFolder.folder("Contents").folder("Resources").folder("Images").folder("WindowIcons"); "windowIcon_205.icns"; fk overwrite:K87:5)
 						$CLI._printTask("Copy icon file")
 						$CLI._printStatus($targetIconFile.exists)
 						$CLI._printPath($targetIconFile)
-						$info.CFBundleIconFile:=$targetIconFile.fullName
-						$keys.push("CFBundleIconFile")
 					Else 
 						$winInfo.WinIcon:=$ClientIconFile.path
 						$keys.push("WinIcon")
@@ -1561,12 +1561,12 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 						$CLI._printTask("Copy icon file")
 						$CLI._printStatus($targetIconFile.exists)
 						$CLI._printPath($targetIconFile)
+						$info.CFBundleIconFile:=$targetIconFile.fullName
+						$keys.push("CFBundleIconFile")
 						$targetIconFile:=$ServerIconFile.copyTo($targetRuntimeFolder.folder("Contents").folder("Resources").folder("Images").folder("WindowIcons"); "windowIcon_205.icns"; fk overwrite:K87:5)
 						$CLI._printTask("Copy icon file")
 						$CLI._printStatus($targetIconFile.exists)
 						$CLI._printPath($targetIconFile)
-						$info.CFBundleIconFile:=$targetIconFile.fullName
-						$keys.push("CFBundleIconFile")
 					Else 
 						$winInfo.WinIcon:=$ServerIconFile.path
 						$keys.push("WinIcon")
@@ -1589,12 +1589,12 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 						$CLI._printTask("Copy icon file")
 						$CLI._printStatus($targetIconFile.exists)
 						$CLI._printPath($targetIconFile)
+						$info.CFBundleIconFile:=$targetIconFile.fullName
+						$keys.push("CFBundleIconFile")
 						$targetIconFile:=$RuntimeVLIconFile.copyTo($targetRuntimeFolder.folder("Contents").folder("Resources").folder("Images").folder("WindowIcons"); "windowIcon_205.icns"; fk overwrite:K87:5)
 						$CLI._printTask("Copy icon file")
 						$CLI._printStatus($targetIconFile.exists)
 						$CLI._printPath($targetIconFile)
-						$info.CFBundleIconFile:=$targetIconFile.fullName
-						$keys.push("CFBundleIconFile")
 					Else 
 						$winInfo.WinIcon:=$RuntimeVLIconFile.path
 						$keys.push("WinIcon")
