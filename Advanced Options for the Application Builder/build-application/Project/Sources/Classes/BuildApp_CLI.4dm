@@ -84,6 +84,11 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 		$publication_name:=$compileProject.name
 	End if 
 	
+	$BuildCSUpgradeable:=$CLI._getBoolValue($BuildApp; "CS.BuildCSUpgradeable")
+	If (Not:C34($targets.includes("Server")))
+		$BuildApp.CS.BuildCSUpgradeable:=False:C215
+	End if 
+	
 	For each ($target; $targets.orderBy(ck descending:K85:8))
 		
 		Case of 
@@ -269,7 +274,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 					
 				End if 
 				
-			: ($target="ClientMac") | ($target="ClientWin")
+			: (($target="ClientMac") | ($target="ClientWin")) && (Not:C34($BuildCSUpgradeable))
 				
 				$BuildDestFolderPath:=$CLI._getStringValue($BuildApp; $Build___DestFolder)
 				
@@ -973,7 +978,7 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 					
 				End if 
 				
-			: (($buildApplicationType="Client@") && (Not:C34($BuildCSUpgradeable))) || ($buildApplicationType="Upgrade4DClient")
+			: ($buildApplicationType="Upgrade4DClient")
 				
 				$target:="Client"+(Is macOS:C1572 ? "Mac" : "Win")
 				
