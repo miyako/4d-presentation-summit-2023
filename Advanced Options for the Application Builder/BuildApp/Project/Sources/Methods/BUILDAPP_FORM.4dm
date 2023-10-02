@@ -34,18 +34,20 @@ Case of
 		$BuildApp.AutoUpdate.CS.Client.StartElevated:=True:C214
 		$BuildApp.AutoUpdate.CS.Server.StartElevated:=True:C214
 		
-		$BuildApp.ArrayExcludedModuleName.Item[0]:="CEF"
-		$BuildApp.ArrayExcludedModuleName.Item[1]:="MeCab"
-		$BuildApp.ArrayExcludedModuleName.Item[2]:="PHP"
-		$BuildApp.ArrayExcludedModuleName.Item[3]:="SpellChecker"
-		$BuildApp.ArrayExcludedModuleName.Item[4]:="4D Updater"
+		//$BuildApp.ArrayExcludedModuleName.Item[0]:="CEF"
+		//$BuildApp.ArrayExcludedModuleName.Item[1]:="MeCab"
+		//$BuildApp.ArrayExcludedModuleName.Item[2]:="PHP"
+		//$BuildApp.ArrayExcludedModuleName.Item[3]:="SpellChecker"
+		//$BuildApp.ArrayExcludedModuleName.Item[4]:="4D Updater"
 		
-		$BuildApp.ArrayExcludedComponentName.Item[0]:="4D SVG"
-		$BuildApp.ArrayExcludedComponentName.Item[1]:="4D Progress"
-		$BuildApp.ArrayExcludedComponentName.Item[2]:="4D ViewPro"
-		$BuildApp.ArrayExcludedComponentName.Item[3]:="4D NetKit"
-		$BuildApp.ArrayExcludedComponentName.Item[5]:="4D WritePro Interface"
-		$BuildApp.ArrayExcludedComponentName.Item[6]:="4D Widgets"
+		//$BuildApp.ArrayExcludedComponentName.Item[0]:="4D SVG"
+		//$BuildApp.ArrayExcludedComponentName.Item[1]:="4D Progress"
+		//$BuildApp.ArrayExcludedComponentName.Item[2]:="4D ViewPro"
+		//$BuildApp.ArrayExcludedComponentName.Item[3]:="4D NetKit"
+		//$BuildApp.ArrayExcludedComponentName.Item[5]:="4D WritePro Interface"
+		//$BuildApp.ArrayExcludedComponentName.Item[6]:="4D Widgets"
+		
+		$BuildApp.DataFilePath:=""
 		
 		$path:=demo_certificate_path($BuildApp)
 		
@@ -59,11 +61,8 @@ Case of
 			$BuildApp.SignApplication.MacCertificate:=""
 		End if 
 		
-		If (Is macOS:C1572)
-			$BuildApp.CS.DatabaseToEmbedInClientMacFolder:=demo_startup_project_path
-		Else 
-			$BuildApp.CS.DatabaseToEmbedInClientWinFolder:=demo_startup_project_path
-		End if 
+		$BuildApp.CS.DatabaseToEmbedInClientMacFolder:=demo_startup_project_path
+		$BuildApp.CS.DatabaseToEmbedInClientWinFolder:=demo_startup_project_path
 		
 		$BuildApp.CS.MacCompiledDatabaseToWin:=demo_compiled_mac_project
 		
@@ -79,7 +78,6 @@ Case of
 		End if 
 		
 		$RuntimeVLIconMac:=Folder:C1567(fk resources folder:K87:11).file("BuildApp.icns").platformPath
-		$RuntimeVLIconMac:=Folder:C1567(fk resources folder:K87:11).file("4D-volume-exe.icns").platformPath
 		$RuntimeVLIconWin:=Folder:C1567(fk resources folder:K87:11).file("BuildApp.ico").platformPath
 		$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIconMacPath:=$RuntimeVLIconMac
 		$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIconWinPath:=$RuntimeVLIconWin

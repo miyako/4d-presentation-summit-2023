@@ -5,8 +5,8 @@ $path:=Get file from pasteboard:C976(1)
 
 Case of 
 	: ($name="ClientMac") || ($name="ClientWin")
-		$form.BuildApp.SourcesFiles.CS[$name+"IconForMac"]:=$path
-		$form.BuildApp.SourcesFiles.CS[$name+"IconForWin"]:=$path
+		$form.BuildApp.SourcesFiles.CS[$name+"IconForMacPath"]:=$path
+		$form.BuildApp.SourcesFiles.CS[$name+"IconForWinPath"]:=$path
 	: ($name="Server")
 		$form.BuildApp.SourcesFiles.CS[$name+"Icon"+(Is macOS:C1572 ? "Mac" : "Win")+"Path"]:=$path
 	Else 

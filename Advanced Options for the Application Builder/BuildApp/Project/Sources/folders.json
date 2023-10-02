@@ -20,6 +20,7 @@
 			"TEST-BuildApp"
 		],
 		"classes": [
+			"_Terminal",
 			"BuildApp"
 		]
 	},

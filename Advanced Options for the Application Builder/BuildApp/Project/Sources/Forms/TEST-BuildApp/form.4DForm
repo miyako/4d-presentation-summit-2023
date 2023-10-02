@@ -2756,11 +2756,30 @@
 					"height": 16,
 					"textAlign": "right",
 					"fontWeight": "normal"
+				},
+				"DataFilePath": {
+					"type": "text",
+					"text": "Data File Path:",
+					"top": 330,
+					"left": 280,
+					"width": 110,
+					"height": 16,
+					"textAlign": "right",
+					"fontWeight": "normal"
+				},
+				"BuildApp.DataFilePath": {
+					"type": "input",
+					"left": 400,
+					"top": 329,
+					"width": 224,
+					"height": 17,
+					"dataSource": "Form:C1466.BuildApp.DataFilePath",
+					"multiline": "no"
 				}
 			}
 		}
 	],
-	"geometryStamp": 2657,
+	"geometryStamp": 2673,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
