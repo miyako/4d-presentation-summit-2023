@@ -716,6 +716,20 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 					$_BuildApp.CS.ServerSelectionAllowed:=$boolValue
 				End if 
 				
+				$ServerStructureFolderName:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/ServerStructureFolderName")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($ServerStructureFolderName; $stringValue)
+					$_BuildApp.CS.ServerStructureFolderName:=$stringValue
+				End if 
+				
+				$ClientServerSystemFolderName:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/ClientServerSystemFolderName")
+				
+				If (OK=1)
+					DOM GET XML ELEMENT VALUE:C731($ClientServerSystemFolderName; $stringValue)
+					$_BuildApp.CS.ClientServerSystemFolderName:=$stringValue
+				End if 
+				
 				$MacCompiledDatabaseToWin:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/CS/MacCompiledDatabaseToWin")
 				
 				If (OK=1)
@@ -813,14 +827,6 @@ Function parseFile($settingsFile : 4D:C1709.File)->$BuildApp : cs:C1710.BuildApp
 					DOM GET XML ELEMENT VALUE:C731($ClientWinSingleInstance; $boolValue)
 					$_BuildApp.CS.ClientWinSingleInstance:=$boolValue
 				End if 
-				
-				
-				
-				
-				
-				
-				
-				
 				
 				$MacSignature:=DOM Find XML element:C864($dom; "/Preferences4D/BuildApp/SignApplication/MacSignature")
 				

@@ -589,13 +589,7 @@ $sourceProjectFile : 4D:C1709.File; $BuildApplicationName : Text; $publication_n
 					DOM SET XML ATTRIBUTE:C866($database_shortcut; "cache_folder_name"; $ClientServerSystemFolderName)
 				End if 
 				
-				$ServerStructureFolderName:=$CLI._getStringValue($BuildApp; "CS.ServerStructureFolderName")
-				
-				If ($ServerStructureFolderName#"")
-					DOM SET XML ATTRIBUTE:C866($database_shortcut; "server_database_name"; $ServerStructureFolderName)
-				End if 
-				
-				$linkFile:=$ContentsFolder.file("EnginedServer.4Dlink")
+				$linkFile:=$ContentsFolder.file("EnginedServer.4DLink")
 				
 				DOM EXPORT TO FILE:C862($database_shortcut; $linkFile.platformPath)
 				DOM CLOSE XML:C722($database_shortcut)
@@ -1405,8 +1399,6 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	$info["CurrentVers"]:=String:C10($CurrentVers)
 	$keys.push("CurrentVers")
 	
-	$ClientServerSystemFolderName:=$CLI._getStringValue($BuildApp; "CS.ClientServerSystemFolderName")
-	
 	Case of 
 		: ($buildApplicationType="Client@")
 			
@@ -1423,8 +1415,12 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 			$info["com.4d.BuildApp.dataless"]:="true"
 			$keys.push("com.4d.BuildApp.dataless")
 			
-			$info["BuildCacheFolderNameClient"]:=$cache_folder_name
-			$keys.push("BuildCacheFolderNameClient")
+			$ClientServerSystemFolderName:=$CLI._getStringValue($BuildApp; "CS.ClientServerSystemFolderName")
+			
+			If ($ClientServerSystemFolderName#"")
+				$info["BuildCacheFolderNameClient"]:=$ClientServerSystemFolderName
+				$keys.push("BuildCacheFolderNameClient")
+			End if 
 			
 			$ServerSelectionAllowed:=$CLI._getBoolValue($BuildApp; "CS.ServerSelectionAllowed")
 			$info["com.4D.BuildApp.ServerSelectionAllowed"]:=$ServerSelectionAllowed ? "true" : "false"
@@ -1440,8 +1436,10 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 			
 		: ($buildApplicationType="Server")
 			
-			If ($ClientServerSystemFolderName#"")
-				$info["com.4d.ServerCacheFolderName"]:=$cache_folder_name
+			$ServerStructureFolderName:=$CLI._getStringValue($BuildApp; "CS.ServerStructureFolderName")
+			
+			If ($ServerStructureFolderName#"")
+				$info["com.4d.ServerCacheFolderName"]:=$ServerStructureFolderName
 				$keys.push("com.4d.ServerCacheFolderName")
 			End if 
 			

@@ -38,6 +38,9 @@ If (True:C214)
 	$ClientIncludeIt:="Client"+$platform+"IncludeIt"
 	$BuildApp.SourcesFiles.CS[$ClientIncludeIt]:=True:C214
 	
+	$BuildApp.CS.ServerStructureFolderName:="GEORGIA"
+	$BuildApp.CS.ClientServerSystemFolderName:="ATLANTA"
+	
 	$fileName:="BuildApp-"+Replace string:C233(String:C10(Current date:C33; ISO date:K1:8; Current time:C178); ":"; "-"; *)+".4DSettings"
 	
 	$buildProject:=Folder:C1567("/LOGS/").file($fileName)
