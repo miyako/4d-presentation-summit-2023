@@ -1835,7 +1835,9 @@
 					"height": 17,
 					"dataSource": "Form:C1466.BuildApp.SignApplication.MacCertificate",
 					"multiline": "no",
-					"events": []
+					"events": [],
+					"enterable": true,
+					"focusable": false
 				},
 				"Text62": {
 					"type": "text",
@@ -2776,7 +2778,11 @@
 					"dataSource": "Form:C1466.BuildApp.DataFilePath",
 					"multiline": "no"
 				}
-			}
+			},
+			"entryOrder": [
+				"BuildApp.DataFilePath",
+				"BuildApp.CS.HardLink"
+			]
 		}
 	],
 	"geometryStamp": 2673,

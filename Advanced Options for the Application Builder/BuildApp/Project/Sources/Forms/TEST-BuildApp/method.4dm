@@ -17,6 +17,8 @@ Case of
 		OBJECT SET VISIBLE:C603(*; "Hint for Mac@"; Is macOS:C1572)
 		OBJECT SET VISIBLE:C603(*; "Hint for Win@"; Is Windows:C1573)
 		
+		Form:C1466.BuildApp.SignApplication.AdHocSign:=Not:C34(Bool:C1537(Form:C1466.BuildApp.SignApplication.MacSignature))
+		
 		//mutually exclusive
 		
 		OBJECT SET ENABLED:C1123(*; "BuildApp.UseStandardZipFormat"; Bool:C1537(Form:C1466.BuildApp.PackProject))
