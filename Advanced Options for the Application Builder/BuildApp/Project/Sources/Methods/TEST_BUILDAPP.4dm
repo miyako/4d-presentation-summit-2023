@@ -1,4 +1,4 @@
-//%attributes = {}
+//%attributes = {"invisible":true}
 var $BuildApp : cs:C1710.BuildApp
 
 $BuildApp:=cs:C1710.BuildApp.new()
