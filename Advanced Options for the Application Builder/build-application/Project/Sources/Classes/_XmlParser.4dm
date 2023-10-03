@@ -8,7 +8,7 @@ Function setIntValue($dom : Text; $path : Text; $intValue : Integer)
 	
 	If ($nodes.length>1)
 		
-		$attribute:=DOM Find XML element:C864($dom; $nodes[0]+"[@"+$nodes[1]+"]")
+		$attribute:=DOM Find XML element:C864($dom; $nodes[0])
 		
 		If (OK=0)
 			$attribute:=DOM Create XML element:C865($dom; $nodes[0])
@@ -29,15 +29,18 @@ Function getBoolValue($dom : Text; $path : Text)->$boolValue : Variant
 	
 	If ($nodes.length>1)
 		
-		If (Is macOS:C1572)
+		If (False:C215)
+			//this syntax only works on mac
 			$attribute:=DOM Find XML element:C864($dom; $nodes[0]+"[@"+$nodes[1]+"]")
 			If (OK=1)
 				DOM GET XML ATTRIBUTE BY NAME:C728($attribute; $nodes[1]; $stringValue)
 				$boolValue:=($stringValue="true")
 			End if 
-		Else 
+		End if 
+		
+		$attribute:=DOM Find XML element:C864($dom; $nodes[0])
+		If (OK=1)
 			ON ERR CALL:C155(Formula:C1597(generic_error_handler).source)
-			$attribute:=DOM Find XML element:C864($dom; $nodes[0])
 			DOM GET XML ATTRIBUTE BY NAME:C728($attribute; $nodes[1]; $stringValue)
 			ON ERR CALL:C155("")
 			If (OK=1)
@@ -56,11 +59,24 @@ Function getStringValue($dom : Text; $path : Text)->$stringValue : Variant
 	
 	If ($nodes.length>1)
 		
-		$attribute:=DOM Find XML element:C864($dom; $nodes[0]+"[@"+$nodes[1]+"]")
+		If (False:C215)
+			//this syntax only works on mac
+			$attribute:=DOM Find XML element:C864($dom; $nodes[0]+"[@"+$nodes[1]+"]")
+			
+			If (OK=1)
+				DOM GET XML ATTRIBUTE BY NAME:C728($attribute; $nodes[1]; $value)
+				$stringValue:=$value
+			End if 
+		End if 
 		
+		$attribute:=DOM Find XML element:C864($dom; $nodes[0])
 		If (OK=1)
-			DOM GET XML ATTRIBUTE BY NAME:C728($attribute; $nodes[1]; $value)
-			$stringValue:=$value
+			ON ERR CALL:C155(Formula:C1597(generic_error_handler).source)
+			DOM GET XML ATTRIBUTE BY NAME:C728($attribute; $nodes[1]; $stringValue)
+			ON ERR CALL:C155("")
+			If (OK=1)
+				$stringValue:=$value
+			End if 
 		End if 
 		
 	End if 
