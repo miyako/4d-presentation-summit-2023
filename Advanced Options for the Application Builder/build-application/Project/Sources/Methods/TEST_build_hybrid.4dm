@@ -48,6 +48,9 @@ If (True:C214)
 	$DatabaseToEmbed:=File:C1566(Structure file:C489; fk platform path:K87:2).parent.parent.parent.file("Compiled Database/example-startup/example-startup.4DZ").platformPath
 	$BuildApp.SourcesFiles.CS[$DatabaseToEmbedInClient]:=$DatabaseToEmbed
 	
+	$BuildApp.CS.MacCompiledDatabaseToWinIncludeIt:=True:C214
+	$BuildApp.CS.MacCompiledDatabaseToWin:=File:C1566(Structure file:C489; fk platform path:K87:2).parent.parent.parent.folder("Compiled Database/example").platformPath
+	
 	$fileName:="BuildApp-"+Replace string:C233(String:C10(Current date:C33; ISO date:K1:8; Current time:C178); ":"; "-"; *)+".4DSettings"
 	
 	$buildProject:=Folder:C1567("/LOGS/").file($fileName)

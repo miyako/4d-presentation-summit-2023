@@ -1,0 +1,11 @@
+{
+    "name": "Control Color",
+    "id": 20000,
+    "commands": [
+        {
+            "theme": "Control Color",
+            "syntax": "Get control color:J",
+            "threadSafe": true
+        }
+    ]
+}

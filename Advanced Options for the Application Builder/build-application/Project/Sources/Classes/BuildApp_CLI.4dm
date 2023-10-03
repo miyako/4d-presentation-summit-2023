@@ -616,11 +616,24 @@ $sourceProjectFile : 4D:C1709.File; $BuildApplicationName : Text; $publication_n
 				
 				$MacProjectFolder:=Folder:C1567($CompiledDatabaseToInclude; fk platform path:K87:2)
 				
-				$targetProjectFolder:=$MacProjectFolder.copyTo($ContentsFolder)
-				
-				$CLI._printTask("Set database folder")
-				$CLI._printStatus($targetProjectFolder.exists)
-				$CLI._printPath($targetProjectFolder)
+				If ($MacProjectFolder.exists)
+					
+					$CLI._printTask("Copy compiled mac project").LF()
+					
+					For each ($folder; $MacProjectFolder.folders(fk ignore invisible:K87:22))
+						$targetProjectFolder:=$folder.copyTo($ContentsFolder)
+						$CLI._printPath($targetProjectFolder)
+					End for each 
+					
+					For each ($file; $MacProjectFolder.files(fk ignore invisible:K87:22))
+						$targetProjectFile:=$file.copyTo($ContentsFolder)
+						If ($targetProjectFile.extension=".4DZ")
+							$targetProjectFile.rename($BuildApplicationName+".4DZ")
+						End if 
+						$CLI._printPath($targetProjectFile)
+					End for each 
+					
+				End if 
 				
 			Else 
 				
@@ -676,11 +689,12 @@ $sourceProjectFile : 4D:C1709.File; $BuildApplicationName : Text; $publication_n
 						
 						$xmlParser.setPortNumber($targetProjectFile; $PortNumber)
 						
-						$CLI._printTask("Rename project")
-						$targetProjectFile:=$targetProjectFile.rename($BuildApp.BuildApplicationName+".4DProject")
-						$CLI._printStatus($targetProjectFile.exists)
-						$CLI._printPath($targetProjectFile)
 					End if 
+					
+					$CLI._printTask("Rename project")
+					$targetProjectFile:=$targetProjectFile.rename($BuildApp.BuildApplicationName+".4DProject")
+					$CLI._printStatus($targetProjectFile.exists)
+					$CLI._printPath($targetProjectFile)
 					
 					$PackProject:=$CLI._getBoolValue($BuildApp; "PackProject")
 					
