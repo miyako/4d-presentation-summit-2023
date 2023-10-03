@@ -528,19 +528,30 @@ $sourceProjectFile : 4D:C1709.File; $BuildApplicationName : Text; $publication_n
 				
 				$targetName:=$BuildApplicationName+" Client"
 				
-				$embedProjectFile:=File:C1566($DatabaseToEmbedInClient; fk platform path:K87:2)
+				$startupProjectFolder:=Folder:C1567($DatabaseToEmbedInClient; fk platform path:K87:2)
 				
-				If ($embedProjectFile.exists)
+				If ($startupProjectFolder.exists)
 					
-					$targetEmbedProjectFile:=$embedProjectFile.copyTo($ContentsFolder; $targetName+$embedProjectFile.extension; fk overwrite:K87:5)
+					$CLI._printTask("Copy startup project").LF()
 					
-					$CLI._printTask("Copy startup project")
-					$CLI._printStatus($targetEmbedProjectFile.exists)
-					$CLI._printPath($targetEmbedProjectFile)
+					$folders:=$startupProjectFolder.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Components"; "Resources"; "Libraries"; "Documentation"; "Extras"))
+					
+					For each ($folder; $folders)
+						$targetProjectFolder:=$folder.copyTo($ContentsFolder)
+						$CLI._printPath($targetProjectFolder)
+					End for each 
+					
+					For each ($file; $startupProjectFolder.files(fk ignore invisible:K87:22))
+						$targetProjectFile:=$file.copyTo($ContentsFolder)
+						If ($targetProjectFile.extension=".4DZ")
+							$targetProjectFile.rename($targetName+".4DZ")
+						End if 
+						$CLI._printPath($targetProjectFile)
+					End for each 
 					
 				End if 
 				
-				$PluginsFolder:=$embedProjectFile.parent.folder("Plugins")
+				$PluginsFolder:=$startupProjectFolder.folder("Plugins")
 				$bundles:=$PluginsFolder.folders(fk ignore invisible:K87:22).query("extension == :1"; ".bundle")
 				
 				If ($bundles.length#0)
@@ -552,17 +563,6 @@ $sourceProjectFile : 4D:C1709.File; $BuildApplicationName : Text; $publication_n
 					
 					For each ($bundle; $bundles)
 						$CLI._printPath($bundle.copyTo($targetPluginsFolder; fk overwrite:K87:5))
-					End for each 
-					
-				End if 
-				
-				$folders:=$embedProjectFile.parent.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Components"; "Resources"; "Libraries"; "Documentation"; "Extras"))
-				
-				If ($folders.length#0)
-					
-					$CLI._printTask("Copy database folders").LF()
-					For each ($folder; $folders)
-						$CLI._printPath($folder.copyTo($ContentsFolder; fk overwrite:K87:5))
 					End for each 
 					
 				End if 
@@ -624,7 +624,9 @@ $sourceProjectFile : 4D:C1709.File; $BuildApplicationName : Text; $publication_n
 					
 					$CLI._printTask("Copy compiled mac project").LF()
 					
-					For each ($folder; $MacProjectFolder.folders(fk ignore invisible:K87:22))
+					$folders:=$MacProjectFolder.folders(fk ignore invisible:K87:22).query("name in :1"; New collection:C1472("Components"; "Resources"; "Libraries"; "Documentation"; "Extras"))
+					
+					For each ($folder; $folders)
 						$targetProjectFolder:=$folder.copyTo($ContentsFolder)
 						$CLI._printPath($targetProjectFolder)
 					End for each 

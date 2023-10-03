@@ -24,13 +24,8 @@ End case
 var $icon : Picture
 $form[$name][$name+"Folder"]:=New object:C1471
 
-If (Value type:C1509($path)=Is text:K8:3) && ($path#"") && (Test path name:C476($path)>=0)
-	Case of 
-		: (Test path name:C476($path)=Is a folder:K24:2)
-			$icon:=Folder:C1567($path; fk platform path:K87:2).getIcon()
-		: (Test path name:C476($path)=Is a document:K24:1)
-			$icon:=File:C1566($path; fk platform path:K87:2).getIcon()
-	End case 
+If (Value type:C1509($path)=Is text:K8:3) && ($path#"") && (Test path name:C476($path)=Is a folder:K24:2)
+	$icon:=Folder:C1567($path; fk platform path:K87:2).getIcon()
 	$form[$name][$name+"Folder"].values:=Split string:C1554($path; Folder separator:K24:12; sk ignore empty strings:K86:1).reverse()
 Else 
 	$form[$name][$name+"Folder"].values:=New collection:C1472

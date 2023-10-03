@@ -45,7 +45,7 @@ If (True:C214)
 	$BuildApp.SourcesFiles.CS[$ClientIncludeIt]:=True:C214
 	
 	$DatabaseToEmbedInClient:="DatabaseToEmbedInClient"+$platform+"Folder"
-	$DatabaseToEmbed:=File:C1566(Structure file:C489; fk platform path:K87:2).parent.parent.parent.file("Compiled Database/example-startup/example-startup.4DZ").platformPath
+	$DatabaseToEmbed:=File:C1566(Structure file:C489; fk platform path:K87:2).parent.parent.parent.file("Compiled Database/example-startup").platformPath
 	$BuildApp.SourcesFiles.CS[$DatabaseToEmbedInClient]:=$DatabaseToEmbed
 	
 	//$BuildApp.CS.MacCompiledDatabaseToWinIncludeIt:=True
