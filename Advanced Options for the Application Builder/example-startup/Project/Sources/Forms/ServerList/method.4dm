@@ -29,4 +29,8 @@ Case of
 		
 		Form:C1466.controller.killWorker().setWindowBounds(Form:C1466.controller.formIdentifier)
 		
+		If (Is Windows:C1573)
+			QUIT 4D:C291
+		End if 
+		
 End case 

@@ -1373,7 +1373,7 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	
 	Case of 
 		: ($buildApplicationType="Server")
-			$BuildApplicationName:=$BuildApplicationName+" Server"
+			$BuildApplicationName:=$BuildApplicationName
 	End case 
 	
 	$info.DataFileConversionMode:="0"
