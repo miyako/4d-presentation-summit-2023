@@ -128,7 +128,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 							
 							$CLI._copyComponents($BuildApp; $targetRuntimeVLFolder; $compileProject; $target)
 							
-							$CLI._updateProperty($BuildApp; $targetRuntimeVLFolder; $CompanyName; $BuildApplicationName; $sdi_application; $publication_name; $target)
+							$CLI._updateProperty($BuildApp; $targetRuntimeVLFolder; $CompanyName; $BuildApplicationName; $sdi_application; $publication_name)
 							
 							$CLI._copyDatabase($BuildApp; $targetRuntimeVLFolder; $compileProject; $BuildApplicationName; $publication_name; $target)
 							
@@ -889,7 +889,12 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 			//keep it
 		Else 
 			If (Is Windows:C1573)
-				$resourceFile:=$ContentsFolder.file($RuntimeExecutableName+".rsr")
+				Case of 
+					: ($buildApplicationType="Server")
+						$resourceFile:=$ContentsFolder.folder("Resources").file($RuntimeExecutableName+".rsr")
+					Else 
+						$resourceFile:=$ContentsFolder.file($RuntimeExecutableName+".rsr")
+				End case 
 				$targetResourceFile:=$resourceFile.rename($BuildApplicationName+".rsr")
 			Else 
 				$resourceFile:=$ContentsFolder.folder("Resources").file($RuntimeExecutableName+".rsrc")

@@ -89,7 +89,6 @@ Function launch($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)
 		$file:=$folder.file("tool4d.sh")
 		$file.setText($command)
 		
-		SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_BLOCKING_EXTERNAL_PROCESS"; "false")
 		LAUNCH EXTERNAL PROCESS:C811("/bin/sh "+This:C1470.escape($file.path))
 		
 	Else 
@@ -112,7 +111,7 @@ VirtualTerminalLevel:1 is enabled for this demo
 Adminstration Language is set to UTF-8 for this demo 
 */
 		
-		SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_BLOCKING_EXTERNAL_PROCESS"; "false")
+		SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_BLOCKING_EXTERNAL_PROCESS"; "true")
 		LAUNCH EXTERNAL PROCESS:C811("cmd.exe /k "+This:C1470.escape($file.platformPath))
 		
 	End if 

@@ -65,7 +65,7 @@ Function parse($projectFile : 4D:C1709.File)->$status : Object
 			
 			$userSettingsFile:=$projectFile.parent.parent.folder("Settings").file("settings.4DSettings")
 			
-			$userStatus:=This:C1470._parse($projectSettingsFile)
+			$userStatus:=This:C1470._parse($userSettingsFile)
 			
 			If ($userStatus.sdi_application#Null:C1517)
 				$status.sdi_application:=$userStatus.sdi_application
