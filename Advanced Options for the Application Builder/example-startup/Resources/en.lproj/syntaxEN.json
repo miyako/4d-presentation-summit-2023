@@ -1,6 +1,13 @@
 {
 	"_method_": {},
 	"cs.ServerList": {
+		"ServerList_Dialog": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
 		"_Dialog": {
 			"new()": {
 				"Syntax": "**.new**( *workerFunction* : 4D.Function; *workerCallbackFunction* : 4D.Function )",
@@ -18,22 +25,130 @@
 				],
 				"Summary": ""
 			}
-		},
-		"ServerList_Dialog": {
-			"new()": {
-				"Syntax": "**.new**()",
-				"Params": [],
-				"Summary": ""
-			}
 		}
 	},
+	"ServerList_Dialog": {
+		"linkForServer()": {
+			"Syntax": "**.linkForServer**( *name* : Text; *addr* : Text; *port* : Integer )->linkForServer : Text",
+			"Params": [
+				[
+					"name",
+					"Text",
+					"->"
+				],
+				[
+					"addr",
+					"Text",
+					"->"
+				],
+				[
+					"port",
+					"Integer",
+					"->"
+				],
+				[
+					"linkForServer",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"connect()": {
+			"Syntax": "**.connect**( *link* : Text )",
+			"Params": [
+				[
+					"link",
+					"Text",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"run()": {
+			"Syntax": "**.run**( *ports* : Collection )",
+			"Params": [
+				[
+					"ports",
+					"Collection",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"_inheritedFrom_": "_Dialog"
+	},
 	"_Dialog": {
+		"openWindow()": {
+			"Syntax": "**.openWindow**( *formRect* : Object; *windowType* : Integer; *title* : Text )->windowNumber : Integer",
+			"Params": [
+				[
+					"formRect",
+					"Object",
+					"->"
+				],
+				[
+					"windowType",
+					"Integer",
+					"->"
+				],
+				[
+					"title",
+					"Text",
+					"->"
+				],
+				[
+					"windowNumber",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get formIdentifier()": {
+			"Syntax": "**.get formIdentifier**()->formIdentifier : Text",
+			"Params": [
+				[
+					"formIdentifier",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"killWorker()": {
+			"Syntax": "**.killWorker**()->this : cs.ServerList._Dialog",
+			"Params": [
+				[
+					"this",
+					"cs.ServerList._Dialog",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
 		"callWorker()": {
 			"Syntax": "**.callWorker**()->this : cs.ServerList._Dialog",
 			"Params": [
 				[
 					"this",
 					"cs.ServerList._Dialog",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"processIsPreemtive()": {
+			"Syntax": "**.processIsPreemtive**( *process* : Integer )->processIsPreemtive : Boolean",
+			"Params": [
+				[
+					"process",
+					"Integer",
+					"->"
+				],
+				[
+					"processIsPreemtive",
+					"Boolean",
 					"<-"
 				]
 			],
@@ -81,135 +196,20 @@
 			],
 			"Summary": ""
 		},
-		"processIsPreemtive()": {
-			"Syntax": "**.processIsPreemtive**( *process* : Integer )->processIsPreemtive : Boolean",
-			"Params": [
-				[
-					"process",
-					"Integer",
-					"->"
-				],
-				[
-					"processIsPreemtive",
-					"Boolean",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"openWindow()": {
-			"Syntax": "**.openWindow**( *formRect* : Object; *windowType* : Integer; *title* : Text )->windowNumber : Integer",
-			"Params": [
-				[
-					"formRect",
-					"Object",
-					"->"
-				],
-				[
-					"windowType",
-					"Integer",
-					"->"
-				],
-				[
-					"title",
-					"Text",
-					"->"
-				],
-				[
-					"windowNumber",
-					"Integer",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"killWorker()": {
-			"Syntax": "**.killWorker**()->this : cs.ServerList._Dialog",
-			"Params": [
-				[
-					"this",
-					"cs.ServerList._Dialog",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get formIdentifier()": {
-			"Syntax": "**.get formIdentifier**()->formIdentifier : Text",
-			"Params": [
-				[
-					"formIdentifier",
-					"Text",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"daemonParams": {
-			"Syntax": "daemonParams : Object"
-		},
 		"workerFunction": {
 			"Syntax": "workerFunction : 4D.Function"
 		},
-		"workerCallbackFunction": {
-			"Syntax": "workerCallbackFunction : 4D.Function"
+		"windowNumber": {
+			"Syntax": "windowNumber : Integer"
 		},
 		"workerName": {
 			"Syntax": "workerName : Text"
 		},
-		"windowNumber": {
-			"Syntax": "windowNumber : Integer"
+		"workerCallbackFunction": {
+			"Syntax": "workerCallbackFunction : 4D.Function"
+		},
+		"daemonParams": {
+			"Syntax": "daemonParams : Object"
 		}
-	},
-	"ServerList_Dialog": {
-		"run()": {
-			"Syntax": "**.run**( *ports* : Collection )",
-			"Params": [
-				[
-					"ports",
-					"Collection",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"linkForServer()": {
-			"Syntax": "**.linkForServer**( *name* : Text; *addr* : Text; *port* : Integer )->linkForServer : Text",
-			"Params": [
-				[
-					"name",
-					"Text",
-					"->"
-				],
-				[
-					"addr",
-					"Text",
-					"->"
-				],
-				[
-					"port",
-					"Integer",
-					"->"
-				],
-				[
-					"linkForServer",
-					"Text",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"connect()": {
-			"Syntax": "**.connect**( *link* : Text )",
-			"Params": [
-				[
-					"link",
-					"Text",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"_inheritedFrom_": "_Dialog"
 	}
 }

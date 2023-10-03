@@ -1,4 +1,4 @@
 //%attributes = {"invisible":true}
 #DECLARE()->$path : Text
 
-$path:=File:C1566(Structure file:C489; fk platform path:K87:2).parent.parent.parent.folder("Compiled Database/example-startup").platformPath
+$path:=File:C1566(Structure file:C489; fk platform path:K87:2).parent.parent.parent.file("Compiled Database/example-startup/example-startup.4DZ").platformPath

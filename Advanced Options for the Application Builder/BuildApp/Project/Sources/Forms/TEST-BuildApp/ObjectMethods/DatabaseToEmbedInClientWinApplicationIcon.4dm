@@ -10,7 +10,7 @@ Case of
 		Case of 
 			: ($path="")
 				//
-			: (Test path name:C476($path)=Is a folder:K24:2)
+			: (Test path name:C476($path)=Is a document:K24:1) && (Path to object:C1547($path).extension=".4DZ")
 				$0:=0
 		End case 
 		

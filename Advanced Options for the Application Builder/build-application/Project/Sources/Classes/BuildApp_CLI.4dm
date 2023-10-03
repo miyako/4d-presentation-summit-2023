@@ -530,11 +530,15 @@ $sourceProjectFile : 4D:C1709.File; $BuildApplicationName : Text; $publication_n
 				
 				$embedProjectFile:=File:C1566($DatabaseToEmbedInClient; fk platform path:K87:2)
 				
-				$targetEmbedProjectFile:=$embedProjectFile.copyTo($ContentsFolder; $targetName+".4DZ"; fk overwrite:K87:5)
-				
-				$CLI._printTask("Copy startup project")
-				$CLI._printStatus($targetEmbedProjectFile.exists)
-				$CLI._printPath($targetEmbedProjectFile)
+				If ($embedProjectFile.exists)
+					
+					$targetEmbedProjectFile:=$embedProjectFile.copyTo($ContentsFolder; $targetName+$embedProjectFile.extension; fk overwrite:K87:5)
+					
+					$CLI._printTask("Copy startup project")
+					$CLI._printStatus($targetEmbedProjectFile.exists)
+					$CLI._printPath($targetEmbedProjectFile)
+					
+				End if 
 				
 				$PluginsFolder:=$embedProjectFile.parent.folder("Plugins")
 				$bundles:=$PluginsFolder.folders(fk ignore invisible:K87:22).query("extension == :1"; ".bundle")
