@@ -2060,6 +2060,15 @@
 					"width": 464,
 					"height": 16,
 					"fontWeight": "normal"
+				},
+				"Text72": {
+					"type": "text",
+					"text": "File Description is displayed in Task Manager.",
+					"top": 460,
+					"left": 160,
+					"width": 464,
+					"height": 16,
+					"fontWeight": "normal"
 				}
 			},
 			"entryOrder": [
@@ -2266,6 +2275,24 @@
 					"height": 16,
 					"textAlign": "right",
 					"fontWeight": "normal"
+				},
+				"Text71": {
+					"type": "text",
+					"text": "File Description is displayed in Task Manager.",
+					"top": 440,
+					"left": 160,
+					"width": 464,
+					"height": 16,
+					"fontWeight": "normal"
+				},
+				"Text73": {
+					"type": "text",
+					"text": "Hint",
+					"top": 420,
+					"left": 160,
+					"width": 152,
+					"height": 16,
+					"fontWeight": "bold"
 				}
 			},
 			"entryOrder": [
@@ -2472,6 +2499,24 @@
 					"height": 16,
 					"textAlign": "right",
 					"fontWeight": "normal"
+				},
+				"Text70": {
+					"type": "text",
+					"text": "File Description is displayed in Task Manager.",
+					"top": 440,
+					"left": 160,
+					"width": 464,
+					"height": 16,
+					"fontWeight": "normal"
+				},
+				"Text74": {
+					"type": "text",
+					"text": "Hint",
+					"top": 420,
+					"left": 160,
+					"width": 152,
+					"height": 16,
+					"fontWeight": "bold"
 				}
 			},
 			"entryOrder": [
@@ -2678,6 +2723,24 @@
 					"height": 16,
 					"textAlign": "right",
 					"fontWeight": "normal"
+				},
+				"Text68": {
+					"type": "text",
+					"text": "Hint",
+					"top": 420,
+					"left": 160,
+					"width": 152,
+					"height": 16,
+					"fontWeight": "bold"
+				},
+				"Text69": {
+					"type": "text",
+					"text": "File Description is displayed in Task Manager.",
+					"top": 440,
+					"left": 160,
+					"width": 464,
+					"height": 16,
+					"fontWeight": "normal"
 				}
 			},
 			"entryOrder": [
@@ -2785,7 +2848,7 @@
 			]
 		}
 	],
-	"geometryStamp": 2673,
+	"geometryStamp": 2680,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
