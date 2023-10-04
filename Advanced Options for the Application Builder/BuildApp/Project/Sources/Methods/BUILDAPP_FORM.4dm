@@ -93,6 +93,7 @@ Case of
 		Else 
 			$BuildApp.SourcesFiles.CS.ClientWinIncludeIt:=True:C214
 		End if 
+		
 		$BuildApp.SourcesFiles.CS.ServerIconMacPath:=$RuntimeVLIconMac
 		$BuildApp.SourcesFiles.CS.ServerIconWinPath:=$RuntimeVLIconWin
 		$BuildApp.SourcesFiles.CS.ClientMacIconForMacPath:=$RuntimeVLIconMac

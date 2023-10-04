@@ -36,6 +36,8 @@ If (True:C214)
 	$RuntimeVLIconFolder:="RuntimeVLIcon"+$platform+"Path"
 	$BuildApp.SourcesFiles.RuntimeVL[$RuntimeVLIconFolder]:=$platformIcon
 	
+	$BuildApp.PackProject:=False:C215
+	
 	$fileName:="BuildApp-"+Replace string:C233(String:C10(Current date:C33; ISO date:K1:8; Current time:C178); ":"; "-"; *)+".4DSettings"
 	
 	$buildProject:=Folder:C1567("/LOGS/").file($fileName)
