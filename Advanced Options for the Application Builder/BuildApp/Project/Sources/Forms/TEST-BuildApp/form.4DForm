@@ -490,7 +490,7 @@
 					"type": "checkbox",
 					"text": "Build Component",
 					"top": 165,
-					"left": 420,
+					"left": 160,
 					"width": 192,
 					"height": 21,
 					"events": [
@@ -505,7 +505,7 @@
 					"type": "checkbox",
 					"text": "Build Compiled",
 					"top": 145,
-					"left": 420,
+					"left": 160,
 					"width": 192,
 					"height": 21,
 					"events": [
@@ -520,7 +520,7 @@
 					"type": "checkbox",
 					"text": "Include Associated Folders",
 					"top": 145,
-					"left": 160,
+					"left": 420,
 					"width": 192,
 					"height": 21,
 					"events": [
@@ -754,7 +754,7 @@
 					"type": "checkbox",
 					"text": "RuntimeVL Include It",
 					"top": 145,
-					"left": 160,
+					"left": 420,
 					"width": 192,
 					"height": 21,
 					"events": [
@@ -763,12 +763,13 @@
 					"dataSource": "Form:C1466.BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIncludeIt",
 					"dataSourceTypeHint": "boolean",
 					"fontWeight": "normal",
-					"focusable": false
+					"focusable": false,
+					"method": "ObjectMethods/BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIncludeIt.4dm"
 				},
 				"BuildApp.SourcesFiles.RuntimeVL.IsOEM": {
 					"type": "checkbox",
 					"text": "Is OEM",
-					"top": 165,
+					"top": 185,
 					"left": 160,
 					"width": 192,
 					"height": 21,
@@ -809,7 +810,7 @@
 					"type": "checkbox",
 					"text": "Build Application Serialized",
 					"top": 145,
-					"left": 420,
+					"left": 160,
 					"width": 192,
 					"height": 21,
 					"events": [
@@ -818,7 +819,8 @@
 					"dataSource": "Form:C1466.BuildApp.BuildApplicationSerialized",
 					"dataSourceTypeHint": "boolean",
 					"fontWeight": "normal",
-					"focusable": false
+					"focusable": false,
+					"method": "ObjectMethods/BuildApp.BuildApplicationSerialized.4dm"
 				},
 				"Text43": {
 					"type": "text",
@@ -916,7 +918,7 @@
 					"type": "checkbox",
 					"text": "Start Elevated",
 					"top": 165,
-					"left": 420,
+					"left": 160,
 					"width": 192,
 					"height": 21,
 					"events": [
@@ -946,7 +948,7 @@
 					"type": "checkbox",
 					"text": "Build Server Application",
 					"top": 145,
-					"left": 420,
+					"left": 160,
 					"width": 192,
 					"height": 21,
 					"events": [
@@ -961,7 +963,7 @@
 					"type": "checkbox",
 					"text": "Server Include It",
 					"top": 145,
-					"left": 160,
+					"left": 420,
 					"width": 192,
 					"height": 21,
 					"events": [
@@ -975,7 +977,7 @@
 				"BuildApp.SourcesFiles.CS.IsOEM": {
 					"type": "checkbox",
 					"text": "IsOEM",
-					"top": 165,
+					"top": 185,
 					"left": 160,
 					"width": 192,
 					"height": 21,
@@ -1273,7 +1275,7 @@
 					"type": "checkbox",
 					"text": "Start Elevated",
 					"top": 165,
-					"left": 420,
+					"left": 160,
 					"width": 192,
 					"height": 21,
 					"events": [
@@ -1312,8 +1314,8 @@
 				"BuildApp.CS.BuildCSUpgradeable": {
 					"type": "checkbox",
 					"text": "Build CS Upgradeable",
-					"top": 145,
-					"left": 420,
+					"top": 185,
+					"left": 160,
 					"width": 192,
 					"height": 21,
 					"events": [
@@ -1328,7 +1330,7 @@
 					"type": "checkbox",
 					"text": "Client Win Single Instance",
 					"top": 185,
-					"left": 160,
+					"left": 420,
 					"width": 192,
 					"height": 21,
 					"events": [
@@ -1342,7 +1344,7 @@
 				"BuildApp.CS.ClientUserPreferencesFolderByPath": {
 					"type": "checkbox",
 					"text": "Client User Preferences Folder By Path",
-					"top": 205,
+					"top": 355,
 					"left": 160,
 					"width": 272,
 					"height": 21,
@@ -1357,7 +1359,7 @@
 				"BuildApp.CS.ShareLocalResourcesOnWindowsClient": {
 					"type": "checkbox",
 					"text": "Share Local Resources On Windows Client",
-					"top": 365,
+					"top": 375,
 					"left": 160,
 					"width": 312,
 					"height": 21,
@@ -1372,7 +1374,7 @@
 				"BuildApp.CS.MacCompiledDatabaseToWinIncludeIt": {
 					"type": "checkbox",
 					"text": "Mac Compiled Database To Win Include It",
-					"top": 385,
+					"top": 395,
 					"left": 160,
 					"width": 312,
 					"height": 21,
@@ -1388,7 +1390,7 @@
 					"type": "checkbox",
 					"text": "Client Mac Include It",
 					"top": 145,
-					"left": 160,
+					"left": 420,
 					"width": 192,
 					"height": 21,
 					"events": [
@@ -1403,7 +1405,7 @@
 					"type": "checkbox",
 					"text": "Client Win Include It",
 					"top": 165,
-					"left": 160,
+					"left": 420,
 					"width": 192,
 					"height": 21,
 					"events": [
@@ -1755,13 +1757,28 @@
 					"type": "checkbox",
 					"text": "Start Elevated",
 					"top": 165,
-					"left": 420,
+					"left": 160,
 					"width": 192,
 					"height": 21,
 					"events": [
 						"onClick"
 					],
 					"dataSource": "Form:C1466.BuildApp.AutoUpdate.CS.Client.StartElevated",
+					"dataSourceTypeHint": "boolean",
+					"fontWeight": "normal",
+					"focusable": false
+				},
+				"BuildApp.CS.BuildServerApplication1": {
+					"type": "checkbox",
+					"text": "Build Server Application",
+					"top": 145,
+					"left": 160,
+					"width": 192,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "Form:C1466.BuildApp.CS.BuildServerApplication",
 					"dataSourceTypeHint": "boolean",
 					"fontWeight": "normal",
 					"focusable": false
@@ -1790,7 +1807,8 @@
 				"MacCompiledDatabaseToWinApplicationIcon",
 				"DatabaseToEmbedInClientMacApplicationIcon",
 				"DatabaseToEmbedInClientWinApplicationIcon",
-				"BuildApp.AutoUpdate.CS.Client.StartElevated"
+				"BuildApp.AutoUpdate.CS.Client.StartElevated",
+				"BuildApp.CS.BuildServerApplication1"
 			]
 		},
 		{
@@ -2848,7 +2866,7 @@
 			]
 		}
 	],
-	"geometryStamp": 2680,
+	"geometryStamp": 2915,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

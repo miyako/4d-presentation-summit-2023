@@ -65,6 +65,8 @@ Case of
 			$BuildApp.SignApplication.MacCertificate:=""
 		End if 
 		
+		$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIncludeIt:=(Bool:C1537($BuildApp.BuildApplicationSerialized))
+		
 		$BuildApp.SourcesFiles.CS.DatabaseToEmbedInClientMacFolder:=demo_startup_project_path
 		$BuildApp.SourcesFiles.CS.DatabaseToEmbedInClientWinFolder:=demo_startup_project_path
 		
