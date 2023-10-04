@@ -122,7 +122,7 @@ Function findLicenses($licenseTypes : Collection)->$BuildApp : cs:C1710.BuildApp
 	$isOEM:=($BuildApp.Licenses["ArrayLicense"+(Is macOS:C1572 ? "Mac" : "Win")].Item.includes("@4UOE@"))
 	$BuildApp.SourcesFiles.RuntimeVL.IsOEM:=$isOEM
 	
-Function findCertificates($queryString : Text)->$certificates : Collection
+Function findCertificates()->$certificates : Collection
 	
 	$BuildApp:=This:C1470
 	
@@ -157,6 +157,15 @@ Function findCertificates($queryString : Text)->$certificates : Collection
 			End if 
 			$certificates.push($certificate)
 		End while 
+		
+		C_TEXT:C284(${1})
+		
+		If (Count parameters:C259#0)
+			$certificates:=$certificates.query.apply($certificates; Copy parameters:C1790)
+			If ($certificates.length#0)
+				$BuildApp.SignApplication.MacCertificate:=$certificates[0].name
+			End if 
+		End if 
 		
 	End if 
 	

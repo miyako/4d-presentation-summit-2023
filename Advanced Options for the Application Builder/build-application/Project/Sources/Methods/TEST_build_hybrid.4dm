@@ -51,6 +51,10 @@ If (True:C214)
 	//$BuildApp.CS.MacCompiledDatabaseToWinIncludeIt:=True
 	//$BuildApp.CS.MacCompiledDatabaseToWin:=File(Structure file; fk platform path).parent.parent.parent.folder("Compiled Database/example").platformPath
 	
+	$BuildApp.findCertificates("name == :1 and kind == :2"; "@miyako@"; "Developer ID Application")
+	$BuildApp.SignApplication.MacSignature:=True:C214
+	$BuildApp.AdHocSign:=False:C215
+	
 	$fileName:="BuildApp-"+Replace string:C233(String:C10(Current date:C33; ISO date:K1:8; Current time:C178); ":"; "-"; *)+".4DSettings"
 	
 	$buildProject:=Folder:C1567("/LOGS/").file($fileName)

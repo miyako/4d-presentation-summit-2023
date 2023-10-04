@@ -1395,6 +1395,37 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 		$keys.push("ProductName")
 	End if 
 	
+	If (Is macOS:C1572)
+		$info.NSDesktopFolderUsageDescription:=""
+		$info.NSDocumentsFolderUsageDescription:=""
+		$info.NSDownloadsFolderUsageDescription:=""
+		$info.NSNetworkVolumesUsageDescription:=""
+		$info.NSRemovableVolumesUsageDescription:=""
+		$info.NSAppleEventsUsageDescription:=""
+		$info.NSCalendarsUsageDescription:=""
+		$info.NSCameraUsageDescription:=""
+		$info.NSContactsUsageDescription:=""
+		$info.NSLocationUsageDescription:=""
+		$info.NSSystemAdministrationUsageDescription:=""
+		$info.NSPhotoLibraryUsageDescription:=""
+		$info.NSRemindersUsageDescription:=""
+		$info.NSMicrophoneUsageDescription:=""
+		$keys.push("NSAppleEventsUsageDescription")
+		$keys.push("NSCalendarsUsageDescription")
+		$keys.push("NSCameraUsageDescription")
+		$keys.push("NSContactsUsageDescription")
+		$keys.push("NSLocationUsageDescription")
+		$keys.push("NSMicrophoneUsageDescription")
+		$keys.push("NSPhotoLibraryUsageDescription")
+		$keys.push("NSRemindersUsageDescription")
+		$keys.push("NSSystemAdministrationUsageDescription")
+		$keys.push("NSDesktopFolderUsageDescription")
+		$keys.push("NSDocumentsFolderUsageDescription")
+		$keys.push("NSDownloadsFolderUsageDescription")
+		$keys.push("NSNetworkVolumesUsageDescription")
+		$keys.push("NSRemovableVolumesUsageDescription")
+	End if 
+	
 	Case of 
 		: ($buildApplicationType="Server")
 			$BuildApplicationName:=$BuildApplicationName

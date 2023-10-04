@@ -53,17 +53,9 @@ Case of
 		
 		$BuildApp.DataFilePath:=""
 		
-		$path:=demo_certificate_path($BuildApp)
-		
-		If ($path#"")
-			$BuildApp.SignApplication.AdHocSign:=False:C215
-			$BuildApp.SignApplication.MacSignature:=True:C214
-			$BuildApp.SignApplication.MacCertificate:=$path
-		Else 
-			$BuildApp.SignApplication.AdHocSign:=True:C214
-			$BuildApp.SignApplication.MacSignature:=False:C215
-			$BuildApp.SignApplication.MacCertificate:=""
-		End if 
+		$BuildApp.findCertificates("name == :1 and kind == :2"; "@miyako@"; "Developer ID Application")
+		$BuildApp.SignApplication.MacSignature:=True:C214
+		$BuildApp.AdHocSign:=False:C215
 		
 		$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIncludeIt:=(Bool:C1537($BuildApp.BuildApplicationSerialized))
 		

@@ -47,6 +47,10 @@ If (True:C214)
 	$BuildApp.CS.ServerStructureFolderName:="GEORGIA"
 	$BuildApp.CS.ClientServerSystemFolderName:="ATLANTA"
 	
+	$BuildApp.findCertificates("name == :1 and kind == :2"; "@miyako@"; "Developer ID Application")
+	$BuildApp.SignApplication.MacSignature:=True:C214
+	$BuildApp.AdHocSign:=False:C215
+	
 	$fileName:="BuildApp-"+Replace string:C233(String:C10(Current date:C33; ISO date:K1:8; Current time:C178); ":"; "-"; *)+".4DSettings"
 	
 	$buildProject:=Folder:C1567("/LOGS/").file($fileName)

@@ -36,7 +36,11 @@ If (True:C214)
 	$RuntimeVLIconFolder:="RuntimeVLIcon"+$platform+"Path"
 	$BuildApp.SourcesFiles.RuntimeVL[$RuntimeVLIconFolder]:=$platformIcon
 	
-	$BuildApp.PackProject:=False:C215
+	$BuildApp.PackProject:=True:C214
+	
+	$BuildApp.findCertificates("name == :1 and kind == :2"; "@miyako@"; "Developer ID Application")
+	$BuildApp.SignApplication.MacSignature:=True:C214
+	$BuildApp.AdHocSign:=False:C215
 	
 	$fileName:="BuildApp-"+Replace string:C233(String:C10(Current date:C33; ISO date:K1:8; Current time:C178); ":"; "-"; *)+".4DSettings"
 	
