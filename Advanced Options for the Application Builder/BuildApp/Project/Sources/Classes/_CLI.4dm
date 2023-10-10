@@ -137,9 +137,9 @@ Function quote($in : Text)->$out : Text
 Function _chmod()
 	
 	If (Is macOS:C1572)
-		If (Application type:C494=4D Remote mode:K5:5)
-			SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_CURRENT_DIRECTORY"; This:C1470.currentDirectory.platformPath)
-			SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_BLOCKING_EXTERNAL_PROCESS"; "true")
-			LAUNCH EXTERNAL PROCESS:C811("chmod +x "+This:C1470.executableName)
-		End if 
+		//If (Application type=4D Remote mode)
+		SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_CURRENT_DIRECTORY"; This:C1470.currentDirectory.platformPath)
+		SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_BLOCKING_EXTERNAL_PROCESS"; "true")
+		LAUNCH EXTERNAL PROCESS:C811("chmod +x "+This:C1470.executableName)
+		//End if 
 	End if 
