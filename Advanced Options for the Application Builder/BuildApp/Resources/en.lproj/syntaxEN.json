@@ -221,13 +221,8 @@
 			"Summary": ""
 		},
 		"findCertificates()": {
-			"Syntax": "**.findCertificates**( *queryString* : Text )->certificates : Collection",
+			"Syntax": "**.findCertificates**()->certificates : Collection",
 			"Params": [
-				[
-					"queryString",
-					"Text",
-					"->"
-				],
 				[
 					"certificates",
 					"Collection",
