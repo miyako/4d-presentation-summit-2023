@@ -59,8 +59,8 @@ Case of
 		
 		$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIncludeIt:=(Bool:C1537($BuildApp.BuildApplicationSerialized))
 		
-		$BuildApp.SourcesFiles.CS.DatabaseToEmbedInClientMacFolder:=demo_startup_project_path
-		$BuildApp.SourcesFiles.CS.DatabaseToEmbedInClientWinFolder:=demo_startup_project_path
+		//$BuildApp.SourcesFiles.CS.DatabaseToEmbedInClientMacFolder:=demo_startup_project_path
+		//$BuildApp.SourcesFiles.CS.DatabaseToEmbedInClientWinFolder:=demo_startup_project_path
 		
 		$BuildApp.CS.MacCompiledDatabaseToWin:=demo_compiled_mac_project
 		
