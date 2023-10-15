@@ -95,7 +95,7 @@ Case of
 		$BuildApp.SourcesFiles.CS.ClientMacIconForWinPath:=$RuntimeVLIconMac
 		$BuildApp.SourcesFiles.CS.ClientWinIconForWinPath:=$RuntimeVLIconWin
 		$BuildApp.CS.BuildServerApplication:=True:C214
-		$BuildApp.CS.BuildCSUpgradeable:=False:C215
+		$BuildApp.CS.BuildCSUpgradeable:=True:C214
 		
 		If (Is macOS:C1572)
 			$ServerMac:=demo_server_path
