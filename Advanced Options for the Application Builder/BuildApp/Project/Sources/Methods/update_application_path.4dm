@@ -5,7 +5,7 @@ $path:=Get file from pasteboard:C976(1)
 
 Case of 
 	: ($name="DatabaseToEmbedInClientMac") || ($name="DatabaseToEmbedInClientWin")
-		$form.BuildApp.CS[$name+"Folder"]:=$path
+		$form.BuildApp.SourcesFiles.CS[$name+"Folder"]:=$path
 	: ($name="MacCompiledDatabaseToWin")
 		$form.BuildApp.CS[$name]:=$path
 	: ($name="Server")
