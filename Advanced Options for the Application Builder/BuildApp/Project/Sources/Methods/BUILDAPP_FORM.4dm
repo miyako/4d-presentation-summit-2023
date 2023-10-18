@@ -80,7 +80,7 @@ Case of
 		$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIconMacPath:=$RuntimeVLIconMac
 		$BuildApp.SourcesFiles.RuntimeVL.RuntimeVLIconWinPath:=$RuntimeVLIconWin
 		
-		$BuildApp.SourcesFiles.CS.ServerIncludeIt:=False:C215
+		$BuildApp.SourcesFiles.CS.ServerIncludeIt:=True:C214
 		
 		If (Is macOS:C1572)
 			$BuildApp.SourcesFiles.CS.ClientMacIncludeIt:=True:C214
@@ -95,7 +95,7 @@ Case of
 		$BuildApp.SourcesFiles.CS.ClientMacIconForWinPath:=$RuntimeVLIconMac
 		$BuildApp.SourcesFiles.CS.ClientWinIconForWinPath:=$RuntimeVLIconWin
 		$BuildApp.CS.BuildServerApplication:=True:C214
-		$BuildApp.CS.BuildCSUpgradeable:=False:C215
+		$BuildApp.CS.BuildCSUpgradeable:=True:C214
 		
 		If (Is macOS:C1572)
 			$ServerMac:=demo_server_path
