@@ -79,7 +79,6 @@ Function launch($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)
 		
 		$command:=This:C1470.escape($tool4d.path)
 		$command:=$command+" "+This:C1470.escape($project.path)
-		$command:=$command+" "+This:C1470.escape($compileProject.path)
 		$command:=$command+" --startup-method=build"
 		$command:=$command+" --user-param="+This:C1470.escape($buildProject.path)+","+This:C1470.escape($compileProject.path)
 		$command:=$command+" --dataless"
@@ -98,7 +97,6 @@ Function launch($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)
 		
 		$command:=""
 		$command:=$command+" "+This:C1470.escape($tool4d.platformPath)
-		$command:=$command+" "+This:C1470.escape($project.platformPath)
 		$command:=$command+" "+This:C1470.escape($compileProject.platformPath)
 		$command:=$command+" --startup-method=build"
 		$command:=$command+" --user-param="+This:C1470.escape($buildProject.path+","+$compileProject.path)
