@@ -1,7 +1,5 @@
 Class extends CLI
 
-//MARK:-public methods
-
 Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->$CLI : cs:C1710.BuildApp_CLI
 	
 	$CLI:=This:C1470
@@ -89,6 +87,8 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 		$BuildApp.CS.BuildCSUpgradeable:=False:C215
 	End if 
 	
+	var $BuildDestFolder : 4D:C1709.Folder
+	
 	For each ($target; $targets.orderBy(ck descending:K85:8))
 		
 		Case of 
@@ -97,8 +97,6 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 				$BuildDestFolderPath:=$CLI._getStringValue($BuildApp; $Build___DestFolder)
 				
 				If ($BuildDestFolderPath#"")
-					
-					var $BuildDestFolder : 4D:C1709.Folder
 					
 					$BuildDestFolder:=Folder:C1567($BuildApp[$Build___DestFolder]; fk platform path:K87:2).folder("Final Application")
 					$BuildDestFolder.create()
@@ -133,7 +131,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 							$CLI._copyDatabase($BuildApp; $targetRuntimeVLFolder; $compileProject; $BuildApplicationName; $publication_name; $target)
 							
 							If ($target="Serialized")
-								$CLI._generateLicense($BuildApp; $targetRuntimeVLFolder)
+								$CLI._generateLicense($BuildApp; $targetRuntimeVLFolder; $buildApplicationType)
 							End if 
 							
 							$CLI.quickSign($BuildApp; $targetRuntimeVLFolder)
@@ -149,8 +147,6 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 				$BuildDestFolderPath:=$CLI._getStringValue($BuildApp; $Build___DestFolder)
 				
 				If ($BuildDestFolderPath#"")
-					
-					var $BuildDestFolder : 4D:C1709.Folder
 					
 					$BuildDestFolder:=Folder:C1567($BuildDestFolderPath; fk platform path:K87:2).folder("Client Server executable")
 					$BuildDestFolder.create()
@@ -187,7 +183,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 							$IsOEM:=$CLI._getBoolValue($BuildApp; "SourcesFiles.CS.IsOEM")
 							
 							If ($IsOEM)
-								$CLI._generateLicense($BuildApp; $targetServerFolder)
+								$CLI._generateLicense($BuildApp; $targetServerFolder; $buildApplicationType)
 							End if 
 							
 							$CLI.quickSign($BuildApp; $targetServerFolder)
@@ -205,8 +201,6 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 				$BuildDestFolderPath:=$CLI._getStringValue($BuildApp; $Build___DestFolder)
 				
 				If ($BuildDestFolderPath#"")
-					
-					var $BuildDestFolder : 4D:C1709.Folder
 					
 					$BuildDestFolder:=Folder:C1567($BuildDestFolderPath; fk platform path:K87:2).folder("Compiled Database")
 					$BuildDestFolder.create()
@@ -240,8 +234,6 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 				End if 
 				
 			: ($target="Component")
-				
-				var $BuildDestFolder : 4D:C1709.Folder
 				
 				$BuildDestFolderPath:=$CLI._getStringValue($BuildApp; $Build___DestFolder)
 				
@@ -280,8 +272,6 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 				
 				If ($BuildDestFolderPath#"")
 					
-					var $BuildDestFolder : 4D:C1709.Folder
-					
 					$BuildDestFolder:=Folder:C1567($BuildDestFolderPath; fk platform path:K87:2).folder("Client Server executable")
 					$BuildDestFolder.create()
 					
@@ -317,7 +307,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 							$IsOEM:=$CLI._getBoolValue($BuildApp; "SourcesFiles.CS.IsOEM")
 							
 							If ($IsOEM)
-								$CLI._generateLicense($BuildApp; $targetClientFolder)
+								$CLI._generateLicense($BuildApp; $targetClientFolder; $buildApplicationType)
 							End if 
 							
 							$CLI.quickSign($BuildApp; $targetClientFolder)
@@ -421,7 +411,7 @@ Function compile($compileProject : 4D:C1709.File)->$CLI : cs:C1710.BuildApp_CLI
 				$CLI.print($error.message; "166;bold")
 			End if 
 			If ($error.code#Null:C1517)
-				$CLI.print("…").print($error.code.path+"#"+String:C10($error.lineInFile); "244").LF()
+				$CLI.print("...").print($error.code.path+"#"+String:C10($error.lineInFile); "244").LF()
 			End if 
 		End for each 
 		
@@ -436,11 +426,9 @@ Function quickSign($BuildApp : cs:C1710.BuildApp; $RuntimeFolder : 4D:C1709.Fold
 		$CLI._printTask("Sign app")
 		$CLI._printPath($RuntimeFolder)
 		
-		quickSign($BuildApp; $RuntimeFolder)
+		sign($BuildApp; $RuntimeFolder)
 		
 	End if 
-	
-	//MARK:-private methods
 	
 Function _copyComponents($BuildApp : cs:C1710.BuildApp; \
 $RuntimeFolder : 4D:C1709.Folder; \
@@ -1018,7 +1006,7 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 				$IsOEM:=$CLI._getBoolValue($BuildApp; "SourcesFiles.CS.IsOEM")
 				
 				If ($IsOEM)
-					$CLI._generateLicense($BuildApp; $targetFolder)
+					$CLI._generateLicense($BuildApp; $targetFolder; $buildApplicationType)
 				End if 
 				
 				$CLI.quickSign($BuildApp; $targetFolder)
@@ -1331,7 +1319,7 @@ Function _printTask($task : Text)->$CLI : cs:C1710.BuildApp_CLI
 	
 	$CLI:=This:C1470
 	
-	$CLI.print($task; "bold").print("…")
+	$CLI.print($task; "bold").print("...")
 	
 Function _updateProperty($BuildApp : cs:C1710.BuildApp; \
 $targetRuntimeFolder : 4D:C1709.Folder; \
@@ -1552,6 +1540,8 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 	
 	$platform:=(Is macOS:C1572 ? "Mac" : "Win")
 	
+	var $ClientIconFile : 4D:C1709.File
+	
 	Case of 
 		: ($buildApplicationType="ClientMac")
 			
@@ -1560,7 +1550,6 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 			$ClientMacIconPath:=$CLI._getStringValue($BuildApp; "SourcesFiles.CS."+$ClientMacIconFor___Path)
 			
 			If ($ClientMacIconPath#"")
-				var $ClientIconFile : 4D:C1709.File
 				$ClientIconFile:=File:C1566($ClientMacIconPath; fk platform path:K87:2)
 				If ($ClientIconFile.exists)
 					If (Is macOS:C1572)
@@ -1588,7 +1577,6 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 			$ClientWinIconPath:=$CLI._getStringValue($BuildApp; "SourcesFiles.CS."+$ClientWinIconFor___Path)
 			
 			If ($ClientWinIconPath#"")
-				var $ClientIconFile : 4D:C1709.File
 				$ClientIconFile:=File:C1566($ClientWinIconPath; fk platform path:K87:2)
 				If ($ClientIconFile.exists)
 					If (Is macOS:C1572)
@@ -1870,7 +1858,7 @@ $targetFolder : 4D:C1709.Folder; $info : Object)
 Function _zipCallback1($progress : Integer)
 	
 	$CLI:=cs:C1710.CLI.new()
-	$CLI.CR().print("Archive client"; "bold").print("…").print(String:C10($progress; "^^0%%"); "226")
+	$CLI.CR().print("Archive client"; "bold").print("...").print(String:C10($progress; "^^0%%"); "226")
 	
 Function _zipCallback2($progress : Integer)
 	
