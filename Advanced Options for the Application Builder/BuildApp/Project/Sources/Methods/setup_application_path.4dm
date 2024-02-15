@@ -21,7 +21,6 @@ Case of
 		End if 
 End case 
 
-var $icon : Picture
 $form[$name][$name+"Folder"]:=New object:C1471
 
 If (Value type:C1509($path)=Is text:K8:3) && ($path#"") && (Test path name:C476($path)=Is a folder:K24:2)

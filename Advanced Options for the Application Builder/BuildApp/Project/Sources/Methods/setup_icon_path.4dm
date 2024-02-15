@@ -12,7 +12,6 @@ Case of
 		$path:=$BuildApp.SourcesFiles[$name][$name+"Icon"+(Is macOS:C1572 ? "Mac" : "Win")+"Path"]
 End case 
 
-var $icon : Picture
 $form[$name][$name+"IconPath"]:=New object:C1471
 
 If (Value type:C1509($path)=Is text:K8:3) && ($path#"")
