@@ -131,7 +131,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 							$CLI._copyDatabase($BuildApp; $targetRuntimeVLFolder; $compileProject; $BuildApplicationName; $publication_name; $target)
 							
 							If ($target="Serialized")
-								$CLI._generateLicense($BuildApp; $targetRuntimeVLFolder; $target)
+								$CLI._generateLicense($BuildApp; $targetRuntimeVLFolder; $buildApplicationType)
 							End if 
 							
 							$CLI.quickSign($BuildApp; $targetRuntimeVLFolder)
@@ -183,7 +183,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 							$IsOEM:=$CLI._getBoolValue($BuildApp; "SourcesFiles.CS.IsOEM")
 							
 							If ($IsOEM)
-								$CLI._generateLicense($BuildApp; $targetServerFolder; $target)
+								$CLI._generateLicense($BuildApp; $targetServerFolder; $buildApplicationType)
 							End if 
 							
 							$CLI.quickSign($BuildApp; $targetServerFolder)
@@ -307,7 +307,7 @@ Function build($buildProject : 4D:C1709.File; $compileProject : 4D:C1709.File)->
 							$IsOEM:=$CLI._getBoolValue($BuildApp; "SourcesFiles.CS.IsOEM")
 							
 							If ($IsOEM)
-								$CLI._generateLicense($BuildApp; $targetClientFolder; $target)
+								$CLI._generateLicense($BuildApp; $targetClientFolder; $buildApplicationType)
 							End if 
 							
 							$CLI.quickSign($BuildApp; $targetClientFolder)
@@ -1006,7 +1006,7 @@ $sdi_application : Boolean; $publication_name : Text; $buildApplicationType : Te
 				$IsOEM:=$CLI._getBoolValue($BuildApp; "SourcesFiles.CS.IsOEM")
 				
 				If ($IsOEM)
-					$CLI._generateLicense($BuildApp; $targetFolder; $target)
+					$CLI._generateLicense($BuildApp; $targetFolder; $buildApplicationType)
 				End if 
 				
 				$CLI.quickSign($BuildApp; $targetFolder)
@@ -1174,8 +1174,6 @@ Function _generateLicense($BuildApp : cs:C1710.BuildApp; $targetFolder : 4D:C170
 	var $status : Object
 	
 	Case of 
-		: ($buildApplicationType="Client@")
-			
 		: ($buildApplicationType="Server") && ($DOMs.length#0) && ($UOSs.length#0)
 			
 			$status:=Create deployment license:C1811($targetFolder; File:C1566($UOSs[0]; fk platform path:K87:2); File:C1566($DOMs[0]; fk platform path:K87:2))
@@ -1203,7 +1201,7 @@ Function _generateLicense($BuildApp : cs:C1710.BuildApp; $targetFolder : 4D:C170
 			$CLI._printPath(File:C1566($status.file))
 		End if 
 		For each ($error; $status.errors)
-			$CLI.print($error.message; "177;bold").LF()
+			$CLI.print($error.message; "177;bold")
 		End for each 
 	End if 
 	
@@ -1860,22 +1858,10 @@ $targetFolder : 4D:C1709.Folder; $info : Object)
 Function _zipCallback1($progress : Integer)
 	
 	$CLI:=cs:C1710.CLI.new()
-	
-	$value:=String:C10($progress)
-	$value:=Substring:C12("   "+$value; Length:C16($value)+1)
-	
-	$value+="%%"
-	
-	$CLI.CR().print("Archive client"; "bold").print("...").print($value; "226")
+	$CLI.CR().print("Archive client"; "bold").print("...").print(String:C10($progress; "^^0%%"); "226")
 	
 Function _zipCallback2($progress : Integer)
 	
 	$CLI:=cs:C1710.CLI.new()
-	
-	$value:=String:C10($progress)
-	$value:=Substring:C12("   "+$value; Length:C16($value)+1)
-	
-	$value+="%%"
-	
-	$CLI.CR().print("Archive project folder"; "bold").print($value; "226")
+	$CLI.CR().print("Archive project folder"; "bold").print(String:C10($progress; "^^0%%"); "226")
 	
